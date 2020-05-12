@@ -21,9 +21,22 @@ export default {
       antd: false,
       dva: true,
       dynamicImport: { webpackChunkName: true },
-      title: 'ants-mobile',
-      dll: false,
-      
+      title: '盎司一起',
+      dll: true,
+
+      pwa: {
+        manifestOptions: {
+          srcPath: './public/manifest.json',
+        },
+        workboxPluginMode: 'GenerateSW',
+        // workboxPluginMode: 'InjectManifest',
+        workboxOptions: {
+          importWorkboxFrom: 'local',
+          // swSrc: 'src/service-worker.js',
+          swDest: 'sw.js',
+        },
+      },
+
       routes: {
         exclude: [
           /models\//,
