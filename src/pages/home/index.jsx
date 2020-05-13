@@ -1,10 +1,34 @@
 import React from 'react';
-import styles from './index.less';
+import styles from './style/index.less';
+import { connect } from 'dva';
 
-export default () => {
+function Home ({ dispatch }) {
+  const clickHandler = () => {
+    dispatch({
+      type: 'home/setState',
+      payload: '123123323',
+    });
+  }
   return (
     <div>
-      <h1 className={styles.title}>Page index</h1>
+      <div>asdfasd</div>
+      <h1 
+        className={styles.title}
+        onClick={clickHandler}
+      >Page index</h1>
     </div>
   );  
 }
+
+const mapStateToProps = state => ({
+  user: state.user
+})
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changeSex: (url) => dispatch({
+      type: 'home/setState',
+      payload: '11111111',
+    })
+  }
+}
+export default connect(mapStateToProps)(Home)
