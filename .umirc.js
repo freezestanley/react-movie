@@ -69,4 +69,16 @@ export default {
       },
     }],
   ],
+  proxy: {
+    '/api': {
+      // target: 'https://vip-gateway-test.zhongan.io',
+      // target: 'http://tech-ants-web-gateway.pre.za-tech.net',
+      // target: 'https://vip-pre.zhongan.io/api',
+      // target: 'https://vip-pre.zhongan.io/api',
+      target: 'https://vip-test.zhongan.io/api',
+      changeOrigin: true,
+      secure: false,
+      pathRewrite: { '^/api': '' },
+    },
+  }
 }

@@ -2,8 +2,8 @@
   "name": "ants-app",
   "private": true,
   "scripts": {
-    "start": "umi dev",
-    "mock": "MOCK=true umi dev",
+    "start": "PORT=10087 umi dev",
+    "mock": "MOCK=true PORT=10087 umi dev",
     "build": "umi build",
     "test": "umi test",
     "lint": "eslint {src,mock,tests}/**/*.{js,jsx} --fix",

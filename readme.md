@@ -11,10 +11,10 @@
     ├── pages/                     // 页面目录，里面的文件即路由
         ├── document.ejs           // HTML 模板
         ├── 404.js                 // 404 页面
-        ├── pageA                  // A页面                  
+        ├── pageA                  // A页面
             ├── components         // 私有组件
             ├── img                // 私有图片
-            ├── style              // 页面样式    
+            ├── style              // 页面样式
             ├── index.jsx          // 页面文件
         └── page2.js               // 页面 2，任意命名
     ├── less
@@ -36,7 +36,7 @@
 # httpRequest
 > 1.src/services/user.js
 
-```
+```jsx
 import request from '@/utils/request';  //引入请求
 
 export function login(data) {           //发起post请求
@@ -50,7 +50,7 @@ export function login(data) {           //发起post请求
 
 2.src/models/user.js
 
-```
+```jsx
 import * as services from '@/services/user'; // 引入请求
 
 export default {
@@ -63,7 +63,7 @@ export default {
   },
   effects: {
     // 定义了fetch 获取数据后 put 触发reducers
-    *fetch({ payload: { page } }, { call, put }) {      
+    *fetch({ payload: { page } }, { call, put }) {
       const { data, headers } = yield call(usersService.fetch, { page });
       yield put({ type: 'save', payload: { data, total: headers['x-total-count'] } });
     },
@@ -79,10 +79,12 @@ export default {
   }
 };
 ```
+
 3.connect 链接起来
 接受dispatch
 method 触发 dispatch namespace/reducers|fetch
-```
+
+```jsx
 import React from 'react';
 import { connect } from 'dva';
 import ProductList from '../components/ProductList';
