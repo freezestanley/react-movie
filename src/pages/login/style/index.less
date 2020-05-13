@@ -1,16 +1,13 @@
-.login-page {
-  .za-input {
-    position: relative;
-    // background: #fff;
-    padding-left: 30px;
-    margin-bottom: 0.2rem;
-    width: 100%;
-    height: 40px;
-    border: none;
-    border-bottom: solid 1px rgba(255, 255, 255, 0.1);
-    background: transparent;
-    input {
+.loginPage {
+  :global {
+    .za-input {
+      position: relative;
+      // background: #fff;
+      padding-left: 30px;
+      margin-bottom: 0.2rem;
+      width: 100%;
       height: 40px;
+<<<<<<< HEAD:src/pages/login/style/index.less
       color: var(--t3);
       padding-top: 2px;
     }
@@ -28,26 +25,57 @@
         background-size: 15px;
         margin-top: 8px;
         margin-left: 3px;
+=======
+      border: none;
+      border-bottom: var(--border);
+      background: transparent;
+      input {
+        height: 40px;
+        color: var(--t3);
+        padding-top: 2px;
+>>>>>>> a89d76bac601df44c81baca36fcf20c9d20dfa11:src/pages/login/index.less
       }
-    }
-    &.code {
-      padding-right: 90px;
       &::before {
+<<<<<<< HEAD:src/pages/login/style/index.less
         background: url('../img/code.svg') no-repeat;
         background-size: 20px;
         margin-top: 8px;
+=======
+        position: absolute;
+        display: inline-block;
+        content: '';
+        width: 30px;
+        height: 30px;
+        left: 0;
+      }
+      &.phone {
+        &::before {
+          background: url('./img/phone.svg') no-repeat;
+          background-size: 15px;
+          margin-top: 8px;
+          margin-left: 3px;
+        }
+      }
+      &.code {
+        padding-right: 90px;
+        &::before {
+          background: url('./img/code.svg') no-repeat;
+          background-size: 20px;
+          margin-top: 8px;
+        }
+>>>>>>> a89d76bac601df44c81baca36fcf20c9d20dfa11:src/pages/login/index.less
       }
     }
-  }
-  .code-control {
-    position: relative;
-    .send-code {
-      position: absolute;
-      top: 2px;
-      right: 0;
-      background: transparent;
-      border: none;
-      color: var(--green);
+    .code-control {
+      position: relative;
+      .send-code {
+        position: absolute;
+        top: 2px;
+        right: 0;
+        background: transparent;
+        border: none;
+        color: var(--green);
+      }
     }
   }
 }

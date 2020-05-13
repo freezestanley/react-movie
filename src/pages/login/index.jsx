@@ -1,6 +1,9 @@
 import React from 'react';
 import { Input, Button, Toast } from 'zarm';
 import { connect } from 'dva';
+import cns from 'classnames';
+import router from 'umi/router';
+import { wxClass } from '@/utils/tools';
 
 import useStore from '@/hooks/useStore';
 import SendCode from '@/components/SendCode';
@@ -8,9 +11,8 @@ import { isPhone } from '@/utils/tools';
 
 import './style/index.less';
 
-function LoginPage() {
+function LoginPage(props) {
   const { state, set } = useStore({
-    loading: false,
     form: {
       phone: '',
       verificationCode: '',
@@ -41,12 +43,17 @@ function LoginPage() {
     set({ loading: true });
 
     // TODO: login api
-    setTimeout(() => {
-      set({ loading: false });
-    }, 2000);
+    props.dispatch({
+      type: 'user/login',
+      payload: state.form,
+    }).then(isOk => {
+      if (isOk) {
+        router.push('/');
+      }
+    })
   }
   return (
-    <div className="login-page">
+    <div className={cns(styles.loginPage, wxClass('head'))}>
       <Input
         type="tel"
         className="phone"
@@ -59,15 +66,17 @@ function LoginPage() {
           type="tel"
           className="code"
           placeholder="请输入验证码"
-          pattern="[0-9]*"
+          // pattern="[0-9]*"
           onChange={e => handleInput(e, 'verificationCode')}
           maxLength={6}
         />
         <SendCode duration={60} onSend={handleSend} />
       </div>
-      <Button onClick={handleLogin}>{state.loading ? '登录中...' : '登录'}</Button>
+      <Button onClick={handleLogin}>{props.loading ? '登录中...' : '登录'}</Button>
     </div>
   )
 }
 
-export default connect(state => state.user)(LoginPage)
+export default connect(state => ({
+  loading: state.loading.effects['user/login']
+}))(LoginPage)

@@ -1,14 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import cns from 'classnames';
-import 'zarm/dist/zarm.min.css';
+import { connect } from 'dva';
+import { wxClass } from '@/utils/tools';
 
 import './index.less';
 
-export default function Layout({ className, hasNav, children, ...rest }) {
+function Layout(props) {
+  // useEffect(() => {
+  //   props.dispatch({
+  //     type: 'global/setState',
+  //     payload: {
+  //       title: 'xxxa',
+  //     }
+  //   })
+  // // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [])
   return (
-    <div className={cns('z-layout', className)}>
-      <div className='z-container'>{children}</div>
-      {hasNav && <div className='z-navbar'></div>}
+    <div className={cns('z_main_layout', wxClass('head'))}>
+      <div className='z-container'>{props.children}</div>
     </div>
   )
 }
+
+export default connect(state => state)(Layout)

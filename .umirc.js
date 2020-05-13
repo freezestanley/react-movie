@@ -1,3 +1,4 @@
+import px2rem from 'postcss-plugin-px2rem';
 
 // ref: https://umijs.org/config/
 export default {
@@ -6,14 +7,22 @@ export default {
     '@': 'src'
   },
   routes: [
-    { path: '/login', component: '../pages/login' },
     {
-      path: '/',
-      component: '../layouts/main',
+       path: '/',
+      component: '../layouts/common',
       routes: [
-        { path: '/', component: '../pages/home' },
+        { path: '/login', component: '../pages/login', title: '盎司登陆' },
+        {
+          path: '/',
+          component: '../layouts/tabBar',
+          routes: [
+            { path: '/', component: '../pages/home', title: '首页' },
+            { path: '/vip', component: '../pages/vip', title: 'VIP' },
+            { path: '/my', component: '../pages/my', title: '我的' },
+          ],
+        },
       ],
-    },
+    }
   ],
   plugins: [
     // ref: https://umijs.org/plugin/umi-plugin-react.html
@@ -21,9 +30,34 @@ export default {
       antd: false,
       dva: true,
       dynamicImport: { webpackChunkName: true },
-      title: 'ants-mobile',
-      dll: false,
-      
+      title: '盎司一起',
+      dll: true,
+      hd: {
+        theme: {
+          // antd-mobile 高清方案
+          '@hd': '2px',
+        },
+        // more: https://github.com/pigcan/postcss-plugin-px2rem#configuration
+        px2rem: {
+          rootValue: 50,
+          minPixelValue: 2,
+          selectorBlackList: ['ex_'], //以包含ex_的class不需要转换
+        },
+      },
+
+      pwa: {
+        manifestOptions: {
+          srcPath: './public/manifest.json',
+        },
+        workboxPluginMode: 'GenerateSW',
+        // workboxPluginMode: 'InjectManifest',
+        workboxOptions: {
+          importWorkboxFrom: 'local',
+          // swSrc: 'src/service-worker.js',
+          swDest: 'sw.js',
+        },
+      },
+
       routes: {
         exclude: [
           /models\//,
