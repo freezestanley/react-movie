@@ -1,7 +1,9 @@
 import React from 'react';
 import { Input, Button, Toast } from 'zarm';
 import { connect } from 'dva';
+import cns from 'classnames';
 import router from 'umi/router';
+import { wxClass } from '@/utils/tools';
 
 import useStore from '@/hooks/useStore';
 import SendCode from '@/components/SendCode';
@@ -51,7 +53,7 @@ function LoginPage(props) {
     })
   }
   return (
-    <div className={styles.loginPage}>
+    <div className={cns(styles.loginPage, wxClass('head'))}>
       <Input
         type="tel"
         className="phone"

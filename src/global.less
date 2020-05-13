@@ -1,5 +1,6 @@
 :root {
   --theme-primary: #07C160;
+  --border: 1px solid #aaa;
 }
 
 html, body, #root {
@@ -21,8 +22,15 @@ body {
 }
 
 .ex_root {
-  width: 750px;
-  max-width: 750px;
+  // width: 750px;
+  // max-width: 750px;
   margin: 0 auto;
   height: 100%;
+}
+
+.wx__head {
+  padding-top: 40px;
+  .z_bar_cont {
+    height: calc(100vh - 100px) !important;
+  }
 }

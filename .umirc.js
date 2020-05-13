@@ -7,14 +7,20 @@ export default {
     '@': 'src'
   },
   routes: [
-    { path: '/login', component: '../pages/login', title: '登陆' },
     {
-      path: '/',
-      component: '../layouts/tabBar',
+       path: '/',
+      component: '../layouts/common',
       routes: [
-        { path: '/', component: '../pages/home' },
+        { path: '/login', component: '../pages/login', title: '登陆' },
+        {
+          path: '/',
+          component: '../layouts/tabBar',
+          routes: [
+            { path: '/', component: '../pages/home' },
+          ],
+        },
       ],
-    },
+    }
   ],
   plugins: [
     // ref: https://umijs.org/plugin/umi-plugin-react.html
