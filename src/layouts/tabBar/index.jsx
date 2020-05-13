@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import 'zarm/dist/zarm.min.css';
 import cns from 'classnames';
 import router from 'umi/router';
+import { connect } from 'dva';
 import { wxClass } from '@/utils/tools';
 
 import './index.less';
@@ -22,7 +23,16 @@ function TabItem({ icon, title, path }) {
   )
 }
 
-export default function Layout(props) {
+function Layout(props) {
+  // useEffect(() => {
+  //   props.dispatch({
+  //     type: 'global/setState',
+  //     payload: {
+  //       title: 'xxxa',
+  //     }
+  //   })
+  // // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [])
   return (
     <div className={cns('z_bar_layout', wxClass('head'))}>
       <div className="z_bar_cont">
@@ -36,3 +46,5 @@ export default function Layout(props) {
     </div>
   )
 }
+
+export default connect(state => state)(Layout)

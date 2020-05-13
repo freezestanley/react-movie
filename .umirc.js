@@ -11,12 +11,14 @@ export default {
        path: '/',
       component: '../layouts/common',
       routes: [
-        { path: '/login', component: '../pages/login', title: '登陆' },
+        { path: '/login', component: '../pages/login', title: '盎司登陆' },
         {
           path: '/',
           component: '../layouts/tabBar',
           routes: [
-            { path: '/', component: '../pages/home' },
+            { path: '/', component: '../pages/home', title: '首页' },
+            { path: '/vip', component: '../pages/vip', title: 'VIP' },
+            { path: '/my', component: '../pages/my', title: '我的' },
           ],
         },
       ],
