@@ -7,10 +7,10 @@ export default {
     '@': 'src'
   },
   routes: [
-    { path: '/login', component: '../pages/login' },
+    { path: '/login', component: '../pages/login', title: '登陆' },
     {
       path: '/',
-      component: '../layouts/main',
+      component: '../layouts/tabBar',
       routes: [
         { path: '/', component: '../pages/home' },
       ],

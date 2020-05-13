@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Toast } from 'zarm';
 
 
 // create an axios instance
@@ -51,12 +52,12 @@ service.interceptors.response.use(
    * You can also judge the status by HTTP Status Code
    */
   response => {
-    // const res = response.data || {};
-    // const msg = res.respMsg;
-    // const code = res.respCode;
+    // console.log('[55] request.js: ', response);
+    const res = response.data || {};
+    // const msg = res.msg;
+    // const code = res.code;
 
-    // if (code !== 0) {
-    //   // con;
+    // if (code !== '0000') {
     //   Toast.show(msg);
     // }
 

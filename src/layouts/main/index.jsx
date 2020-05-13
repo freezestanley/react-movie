@@ -1,14 +1,12 @@
 import React from 'react';
-import cns from 'classnames';
 import 'zarm/dist/zarm.min.css';
 
 import styles from './index.less';
 
-export default function Layout({ className, hasNav, children, ...rest }) {
+export default function Layout(props) {
   return (
-    <div className={cns(styles.zLayout, className)}>
-      <div className='z-container'>{children}</div>
-      {hasNav && <div className='z-navbar'></div>}
+    <div className={styles.zLayout}>
+      <div className='z-container'>{props.children}</div>
     </div>
   )
 }
