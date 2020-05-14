@@ -1,13 +1,14 @@
-import Taro from '@tarojs/taro';
+import router from 'umi/router';
+import { Loading } from 'zarm';
 import { PAY_TYPE, BUY_MEMBER } from '@utils/constant';
-import { getStore } from '@utils/tools';
+import { Store } from '@utils/tools';
 import { wechatPay, randomStr } from '@utils/wechatPay';
 
 export default ({ dispatch, data, payType = PAY_TYPE.wechat, onSuccessCb }) => {
   // console.log('pay data: ', payload);
   // if the order is created successfully
-  const userInfo = getStore('userInfo') || {};
-  Taro.showLoading();
+  const userInfo = Store.get('userInfo') || {};
+  Loading.show();
   dispatch({
     type: 'charge/weChatPayStart',
     payload: {
@@ -30,13 +31,13 @@ export default ({ dispatch, data, payType = PAY_TYPE.wechat, onSuccessCb }) => {
             type: 'charge/weChatPaySign',
             payload: { ...params, orderId: data.orderId },
           })) || {};
-          Taro.hideLoading();
+          Loading.hide();
           return _d;
         },
         // success callback
         () => {
           onSuccessCb && onSuccessCb();
-          Taro.navigateTo({ url: `/topup/result?out_trade_no=${data.orderId}` })
+          router.push(`/topup/result?out_trade_no=${data.orderId}`)
         },
       );
     }
