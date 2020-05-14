@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import 'zarm/dist/zarm.min.css';
 import cns from 'classnames';
 import router from 'umi/router';

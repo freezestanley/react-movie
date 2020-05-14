@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import cns from 'classnames';
 import { connect } from 'dva';
 import { wxClass } from '@/utils/tools';

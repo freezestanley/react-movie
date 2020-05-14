@@ -1,6 +1,7 @@
 
 import { Toast } from 'zarm';
 import * as services from '@/services/user';
+import cookie from '@/utils/cookie';
 
 export default {
   namespace: 'user',
@@ -13,7 +14,18 @@ export default {
     },
   },
   effects: {
-    // login
+    // 微信登录
+    *wxLogin({ payload }, { put, call }) {
+      const res = yield call(services.wxLogin, payload);
+      const { code, data } = res || {};
+      if (code === '0000') {
+        cookie.set('token', data);
+        return true;
+      }
+      return false;
+    },
+
+    // 手机验证码登录
     *login({ payload }, { put, call }) {
       const res = yield call(services.login, payload);
       if (res.code === '0000') {

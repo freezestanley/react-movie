@@ -1,6 +1,15 @@
 import axios from 'axios';
 import { Toast } from 'zarm';
 
+export const apiPrefix = {
+  ance: '/api/ants_user/v1/ance',
+  user: '/api/ants_user/v1/user',
+  banner: '/api/ants_product/v1/banner',
+  seckill: '/api/ants_product/v1/seckill',
+  charge: '/api/ants_charge/v1/charge',
+  pay: '/api/ants_charge/v1/pay',
+  product: '/api/ants_product/v1/product',
+}
 
 // create an axios instance
 const service = axios.create({
@@ -24,6 +33,10 @@ service.interceptors.request.use(
     //     config.params.hackuid = uid;
     //   }
     // }
+
+    if (config.serve) {
+      config.url = apiPrefix[config.serve] + config.url;
+    }
 
     if (config.method === 'GET') {
       config.params = config.data;
