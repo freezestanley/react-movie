@@ -1,5 +1,5 @@
 export default {
-  'POST /api/login': (req, res) => {
+  'POST /login': (req, res) => {
     // 添加跨域请求头
     res.setHeader('Access-Control-Allow-Origin', '*');
     const isOk = req.body.verificationCode === '666666';

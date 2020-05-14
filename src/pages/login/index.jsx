@@ -26,6 +26,10 @@ function LoginPage(props) {
       return;
     }
     // TODO: get code...
+    props.dispatch({
+      type: 'user/sendCode',
+      payload: state.form.phone,
+    })
     return true;
   }
   const handleLogin = () => {
@@ -45,7 +49,10 @@ function LoginPage(props) {
     // TODO: login api
     props.dispatch({
       type: 'user/login',
-      payload: state.form,
+      payload: {
+        userName: state.form.phone,
+        verifyCode: state.form.verificationCode,
+      },
     }).then(isOk => {
       if (isOk) {
         router.push('/');

@@ -42,5 +42,10 @@ export default {
         return false;
       }
     },
+
+    // 发送验证码
+    *sendCode({ payload }, { put, call }) {
+      yield call(services.sendCode, payload);
+    },
   },
 };
