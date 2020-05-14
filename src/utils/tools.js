@@ -100,3 +100,25 @@ export const BrowserInfo = {
 };
 
 export const wxClass = name => !BrowserInfo.isWeixin ? `wx__${name}` : '';
+
+export const textURL = (str, text) => str ? str.replace(/((https?|http|ftp|file):\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|])/g, `<a class="text__url" href="$1">${text || '$1'}</a>`) : '';
+
+export const isHttpText = (value) => /((https?|http|ftp|file):\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|])/g.test(value);
+
+export const getOffsetTop = (targetEl) => {
+  let offsetTop = 0
+  while (targetEl) {
+    offsetTop += targetEl.offsetTop
+    targetEl = targetEl.offsetParent
+  }
+  return offsetTop
+}
+
+export const getOffsetTopBy = (targetEl, parentEl) => {
+  let offsetTop = 0
+  while (targetEl !== parentEl) {
+    offsetTop += targetEl.offsetTop
+    targetEl = targetEl.offsetParent
+  }
+  return offsetTop
+}
