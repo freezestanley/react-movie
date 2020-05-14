@@ -18,7 +18,13 @@ function Layout(props) {
   if (!BrowserInfo.isPhone) return '请使用手机进行访问';
   return (
     <React.Fragment>
-      {!isWx && <div className="z_layout_header">{store.title || document.title}</div>}
+      {!isWx && (
+        <div id="wx_head" className="z_layout_header">
+          <div className="header_before"></div>
+          <div className="z_layout_header_title">{store.title || document.title}</div>
+          <div className="header_after"></div>
+        </div>
+      )}
       {props.children}
     </React.Fragment>
   )

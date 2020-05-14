@@ -1,5 +1,4 @@
-import React from 'react';
-import 'zarm/dist/zarm.min.css';
+import React, { useEffect } from 'react';
 import cns from 'classnames';
 import router from 'umi/router';
 import { connect } from 'dva';
@@ -23,25 +22,27 @@ function TabItem({ icon, title, path }) {
   )
 }
 
+const navMenu = {
+  '/': '首页',
+  '/vip': '会员',
+  '/my': '我的',
+}
+
 function Layout(props) {
-  // useEffect(() => {
-  //   props.dispatch({
-  //     type: 'global/setState',
-  //     payload: {
-  //       title: 'xxxa',
-  //     }
-  //   })
-  // // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [])
+  const pathname = window.location.pathname;
+  useEffect(() => {
+    props.dispatch({ type: 'global/title', payload: navMenu[pathname] });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname])
   return (
     <div className={cns('z_bar_layout', wxClass('head'))}>
       <div className="z_bar_cont">
         {props.children}
       </div>
       <div className="z_bar_nav">
-        <TabItem icon="1" title="首页" path="/" />
-        <TabItem icon="2" title="会员" path="/vip" />
-        <TabItem icon="3" title="我的" path="/my" />
+        {Object.keys(navMenu).map((path, idx) => (
+          <TabItem key={idx} icon={idx+1} title={navMenu[path]} path={path} />
+        ))}
       </div>
     </div>
   )

@@ -1,6 +1,8 @@
 import React from 'react';
-import styles from './style/index.less';
 import { connect } from 'dva';
+import Portal from '@/components/Portal';
+
+import styles from './style/index.less';
 
 function Home ({ dispatch }) {
   // const clickHandler = () => {
@@ -11,6 +13,9 @@ function Home ({ dispatch }) {
   // }
   return (
     <div className={styles.homePage}>
+      <Portal node="#wx_head .header_before">
+        <span onClick={() => console.log('click')}>{'back'}</span>
+      </Portal>
       {new Array(50).fill(1).map((i, idx) => <p key={idx}>盎司一起测试滚动区域</p>)}
     </div>
   );
