@@ -1,7 +1,7 @@
 
 import { Toast } from 'zarm';
 import * as services from '@/services/user';
-import cookie from '@/utils/cookie';
+import { Store, cookie } from '@/utils/tools';
 
 export default {
   namespace: 'user',
@@ -35,7 +35,7 @@ export default {
             userInfo: res.data
           }
         })
-        localStorage.setItem('userInfo', JSON.stringify(res.data));
+        Store.set('userInfo', res.data);
         return true;
       } else {
         Toast.show(res.msg);

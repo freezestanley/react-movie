@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import 'zarm/dist/zarm.min.css';
 import { connect } from 'dva';
-import { BrowserInfo } from '@/utils/tools';
+import { BrowserInfo, cookie } from '@/utils/tools';
 import weChatAuth from '@/utils/weChatAuth';
-import cookie from '@/utils/cookie';
 
 import './index.less';
 
