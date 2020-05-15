@@ -69,7 +69,7 @@ function Layout(props) {
 
   if (!BrowserInfo.isPhone) return '请使用手机进行访问';
   return (
-    <div className={cns('z_layout', `z${_classname}`, { z_navbar_layout: hasNavBar })}>
+    <div className={cns('z_layout', `z${_classname}_page`, { z_navbar_layout: hasNavBar })}>
       {!isWx && (
         <div id="wx_head" className="z_layout_header">
           <div className="header_before"></div>
@@ -79,7 +79,7 @@ function Layout(props) {
       )}
       <div className="z_layout_cont">
         <div className="z_layout_box">{props.children}</div>
-        {(currPage.footer || currPage.footer === null) && (
+        {(currPage.footer || currPage.footer === undefined) && (
           <div className="za-footer">
             <img src={require('@/assets/footer-bg.png')} alt="" />
           </div>
