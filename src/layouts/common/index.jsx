@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
-import 'zarm/dist/zarm.min.css';
 import { connect } from 'dva';
 import cns from 'classnames';
-import { BrowserInfo, wxClass, cookie } from '@/utils/tools';
+import 'zarm/dist/zarm.min.css';
+import { BrowserInfo, cookie } from '@/utils/tools';
 import weChatAuth from '@/utils/weChatAuth';
-import TabNavItem from './TabNavItem';
 
+import TabNavItem from './TabNavItem';
 import './index.less';
 
 function mapRouter(oData) {
@@ -60,10 +60,12 @@ function Layout(props) {
     props.dispatch({ type: 'global/setState', payload: { navBar: _nav }})
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [window.location.href, store.routesMap])
-  if (!BrowserInfo.isPhone) return '请使用手机进行访问';
+
   const currPage = store.currRoute;
   const hasNavBar = currPage.type === 'navBar';
-  console.log('[65] index.jsx: ', currPage);
+  // console.log('[65] index.jsx: ', currPage);
+
+  if (!BrowserInfo.isPhone) return '请使用手机进行访问';
   return (
     <div className={cns('z_layout', { z_navbar_layout: hasNavBar })}>
       {!isWx && (
