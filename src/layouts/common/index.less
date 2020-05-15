@@ -4,76 +4,40 @@
     flex-direction: column;
     height: 100%;
   }
-  .z_layout_header, .z_layout_navbar {
+  .z_layout_header,
+  .z_layout_navbar {
     flex: none;
-    background: #fca;
   }
   .z_layout_cont {
     flex: 1;
     overflow-y: scroll;
   }
-  // .z_layout {
-  //   box-sizing: border-box;
-  //   .z_cont {
-  //     height: 100vh;
-  //   }
-  // }
-  // .z_layout_header {
-  //   position: fixed;
-  //   height: var(--wx-head);
-  //   background: #fff;
-  //   width: 100%;
-  //   z-index: 2;
-  //   top: 0;
-  // }
-  // .wx__head {
-  //   padding-top: 40px;
-  //   .z_cont {
-  //     height: calc(100vh - var(--wx-head) - 1px) !important;
-  //   }
-  //   &.z_navbar_layout {
-  //     .z_cont {
-  //       height: calc(100vh - var(--wx-head) - var(--navbar)) !important;
-  //     }
-  //   }
-  // }
-  // navbar layout
-  // .z_layout.z_navbar_layout {
-  //   background: #eea;
-  //   overflow: hidden;
-  //   height: 100%;
-  //   box-sizing: border-box;
 
-  //   .z_cont {
-  //     height: calc(100vh - var(--navbar));
-  //     overflow: hidden;
-  //     > div {
-  //       height: 100%;
-  //       overflow-y: auto;
-  //     }
-  //   }
+  .z_layout_header {
+    background: #fea;
+  }
 
-  //   .z_bar_nav {
-  //     width: 100%;
-  //     height: var(--navbar);
-  //     background: #fff;
-  //     border-top: var(--border);
-  //     display: flex;
-  //     .z_tab_item {
-  //       flex: 1;
-  //       display: flex;
-  //       justify-content: center;
-  //       align-items: center;
-  //       text-align: center;
-  //       font-size: 14px;
-  //       img {
-  //         width: 26px;
-  //         height: 26px;
-  //       }
-  //       &.active {
-  //         color: var(--theme-primary);
-  //       }
-  //     }
-  //   }
-  // }
+  .z_layout_navbar {
+    width: 100%;
+    height: var(--navbar);
+    padding: 5px 0;
+    background: #fff;
+    border-top: var(--border);
+    display: flex;
+    .z_tab_item {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      font-size: 14px;
+      img {
+        width: 26px;
+        height: 26px;
+      }
+      &.active {
+        color: var(--theme-primary);
+      }
+    }
+  }
 }
