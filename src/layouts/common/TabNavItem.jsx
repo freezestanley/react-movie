@@ -11,8 +11,12 @@ export default function TabNavItem({ icon, title, path }) {
   return (
     <div className={cns('z_tab_item', { active })} onClick={handleTab}>
       <div>
-        <img src={require(`./icon/${icon}${active ? '-active' : ''}.png`)} alt="" />
-        <div>{title}</div>
+        <span className="navbar-ico-box">
+          <span className="navbar-ico">
+            <img src={require(`./icon/${icon}${active ? '-active' : ''}.svg`)} alt="" />
+          </span>
+        </span>
+        <div className="navbar-txt">{title}</div>
       </div>
     </div>
   )

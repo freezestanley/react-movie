@@ -8,7 +8,7 @@ export default {
   },
   routes: [
     {
-       path: '/',
+      path: '/',
       component: '../layouts/common',
       routes: [
         { path: '/login', component: '../pages/login', title: '盎司登陆' },

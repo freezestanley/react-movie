@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="30px" height="30px" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 61.2 (89653) - https://sketch.com -->
+    <title>Group</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <radialGradient cx="95.1005363%" cy="87.5716654%" fx="95.1005363%" fy="87.5716654%" r="139.490169%" id="radialGradient-1">
+            <stop stop-color="#A67C38" offset="0%"></stop>
+            <stop stop-color="#FFF5DB" offset="100%"></stop>
+        </radialGradient>
+    </defs>
+    <g id="5.12" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="我的" transform="translate(-298.000000, -738.000000)" fill-rule="nonzero">
+            <g id="编组-2" transform="translate(0.000000, 735.000000)">
+                <g id="Group" transform="translate(298.000000, 3.000000)">
+                    <circle id="椭圆形" fill="url(#radialGradient-1)" cx="15" cy="15" r="15"></circle>
+                    <g id="编组" transform="translate(7.000000, 6.000000)" fill="#050505">
+                        <path d="M7.99999807,8.94736842 C10.4545964,8.94736842 12.4444414,6.94443178 12.4444414,4.47368421 C12.4444414,2.00293665 10.4545964,0 7.99999807,0 C5.54539978,0 3.5555547,2.00293665 3.5555547,4.47368421 C3.5555547,6.94443178 5.54539978,8.94736842 7.99999807,8.94736842 Z M3.49975053,10.0418233 L12.5002471,10.0418233 C14.4329431,10.0418233 16.0000019,11.5996241 16.0000019,13.5209117 L16.0000019,14.0182096 C16.0000019,15.6658835 14.6559464,17 13.0004979,17 L2.99949971,17 C1.34204219,17 1.92590888e-06,15.6638863 1.92590888e-06,14.0182096 L1.92590888e-06,13.5209117 C-0.0020051839,11.5996241 1.56504556,10.0418233 3.49975053,10.0418233 L3.49975053,10.0418233 Z" id="形状"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
