@@ -3,6 +3,9 @@ export default {
   namespace: 'global',
   state: {
     title: '',
+    routesMap: [],
+    navBar: [],
+    currRoute: {},
   },
   reducers: {
     setState(state, { payload }) {

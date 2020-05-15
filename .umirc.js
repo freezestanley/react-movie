@@ -12,15 +12,18 @@ export default {
       component: '../layouts/common',
       routes: [
         { path: '/login', component: '../pages/login', title: '盎司登陆' },
-        {
-          path: '/',
-          component: '../layouts/tabBar',
-          routes: [
-            { path: '/', component: '../pages/home', title: '首页' },
-            { path: '/vip', component: '../pages/vip', title: 'VIP' },
-            { path: '/my', component: '../pages/my', title: '我的' },
-          ],
-        },
+        { path: '/', type: 'navBar', component: '../pages/home', title: '首页' },
+        { path: '/vip', type: 'navBar', component: '../pages/vip', title: 'VIP' },
+        { path: '/my', type: 'navBar', component: '../pages/my', title: '我的' },
+        // {
+        //   path: '/',
+        //   component: '../layouts/tabBar',
+        //   routes: [
+        //     { path: '/', type: 'tabNav', component: '../pages/home', title: '首页' },
+        //     { path: '/vip', type: 'tabNav', component: '../pages/vip', title: 'VIP' },
+        //     { path: '/my', type: 'tabNav', component: '../pages/my', title: '我的' },
+        //   ],
+        // },
       ],
     }
   ],
