@@ -63,11 +63,13 @@ function Layout(props) {
 
   const currPage = store.currRoute;
   const hasNavBar = currPage.type === 'navBar';
+  const _reg = (currPage.path || '').replace('/', '_');
+  const _classname = _reg === '_' ? '_home' : _reg;
   // console.log('[65] index.jsx: ', currPage);
 
   if (!BrowserInfo.isPhone) return '请使用手机进行访问';
   return (
-    <div className={cns('z_layout', { z_navbar_layout: hasNavBar })}>
+    <div className={cns('z_layout', `z${_classname}`, { z_navbar_layout: hasNavBar })}>
       {!isWx && (
         <div id="wx_head" className="z_layout_header">
           <div className="header_before"></div>
@@ -76,7 +78,12 @@ function Layout(props) {
         </div>
       )}
       <div className="z_layout_cont">
-        {props.children}
+        <div className="z_layout_box">{props.children}</div>
+        {(currPage.footer || currPage.footer === null) && (
+          <div className="za-footer">
+            <img src={require('@/assets/footer-bg.png')} alt="" />
+          </div>
+        )}
       </div>
       {hasNavBar && (
         <div className="z_layout_navbar">

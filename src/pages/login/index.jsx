@@ -1,66 +1,71 @@
-import React from 'react';
+import React, { useEffect, useReducer } from 'react';
 import { Input, Button, Toast } from 'zarm';
 import { connect } from 'dva';
 import cns from 'classnames';
 import router from 'umi/router';
-import { wxClass } from '@/utils/tools';
 
-import useStore from '@/hooks/useStore';
 import SendCode from '@/components/SendCode';
 import { isPhone } from '@/utils/tools';
 
-import styles from './style/index.less';
+import styles from './index.less';
 
 function LoginPage(props) {
-  const { state, set } = useStore({
-    form: {
-      phone: '',
-      verificationCode: '',
+  const [state, setState] = useReducer((o, n) => ({ ...o, ...n }), {
+    disabled: true,
+    phone: '',
+    verificationCode: '',
+  });
+  useEffect(() => {
+    if (state.phone && state.verificationCode) {
+      setState({ disabled: false });
+    } else {
+      setState({ disabled: true });
     }
-  })
+  }, [state.phone, state.verificationCode]);
   const handleInput = (e, field) => {
-    set(`form.[${field}]`, e);
-  }
+    setState({ [field]: e });
+  };
   const handleSend = async () => {
-    if (!isPhone(state.form.phone)) {
+    if (!isPhone(state.phone)) {
       return;
     }
     // TODO: get code...
     props.dispatch({
       type: 'user/sendCode',
-      payload: state.form.phone,
-    })
+      payload: state.phone,
+    });
     return true;
-  }
+  };
   const handleLogin = () => {
-    if (!state.form.phone) {
-       Toast.show('请输入手机号');
-       return;
-    }
-    if (!isPhone(state.form.phone)) {
+    if (!state.phone) {
+      Toast.show('请输入手机号');
       return;
     }
-    if (!state.form.verificationCode) {
-       Toast.show('请输入验证码');
-       return;
+    if (!isPhone(state.phone)) {
+      return;
     }
-    set({ loading: true });
+    if (!state.verificationCode) {
+      Toast.show('请输入验证码');
+      return;
+    }
 
     // TODO: login api
-    props.dispatch({
-      type: 'user/login',
-      payload: {
-        userName: state.form.phone,
-        verifyCode: state.form.verificationCode,
-      },
-    }).then(isOk => {
-      if (isOk) {
-        router.push('/');
-      }
-    })
-  }
+    props
+      .dispatch({
+        type: 'user/login',
+        payload: {
+          userName: state.phone,
+          verifyCode: state.verificationCode,
+        },
+      })
+      .then(isOk => {
+        if (isOk) {
+          router.push('/');
+        }
+      });
+  };
   return (
-    <div className={cns(styles.loginPage, wxClass('head'))}>
+    <div className={cns(styles.loginPage)}>
       <Input
         type="tel"
         className="phone"
@@ -79,11 +84,13 @@ function LoginPage(props) {
         />
         <SendCode duration={60} onSend={handleSend} />
       </div>
-      <Button onClick={handleLogin}>{props.loading ? '登录中...' : '登录'}</Button>
+      <Button block className="login-btn" disabled={state.disabled} onClick={handleLogin}>
+        {props.loading ? '登录中...' : '登录'}
+      </Button>
     </div>
-  )
+  );
 }
 
 export default connect(state => ({
-  loading: state.loading.effects['user/login']
-}))(LoginPage)
+  loading: state.loading.effects['user/login'],
+}))(LoginPage);

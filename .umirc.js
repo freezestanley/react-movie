@@ -11,6 +11,8 @@ export default {
       path: '/',
       component: '../layouts/common',
       routes: [
+        // footer: 是否显示footer图片，默认true
+        // type: navBar(导航)
         { path: '/login', component: '../pages/login', title: '盎司登陆' },
         { path: '/', type: 'navBar', component: '../pages/home', title: '首页' },
         { path: '/vip', type: 'navBar', component: '../pages/vip', title: 'VIP' },
