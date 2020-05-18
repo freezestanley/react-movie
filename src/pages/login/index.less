@@ -46,10 +46,25 @@
       }
       &.code {
         padding-right: 90px;
+        margin-bottom: 5px;
         &::before {
           background: url('./img/code.svg') no-repeat 0 center;
           background-size: 16px;
         }
+      }
+    }
+    .phone-control {
+      position: relative;
+      .za-input__clear {
+        display: none;
+      }
+      .phone-clear {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        width: 20px;
+        height: 20px;
+        margin-top: -10px;
       }
     }
     .code-control {
@@ -63,6 +78,12 @@
         color: var(--gold);
         padding-right: 0;
       }
+    }
+    .login-tip {
+      color: var(--gray2);
+      font-size: 12px;
+      text-align: right;
+      margin-top: 0;
     }
     .login-btn {
       margin-top: 40px;

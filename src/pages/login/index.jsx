@@ -11,6 +11,7 @@ import styles from './index.less';
 
 function LoginPage(props) {
   const [state, setState] = useReducer((o, n) => ({ ...o, ...n }), {
+    isRegistered: true,
     disabled: true,
     phone: '',
     verificationCode: '',
@@ -24,6 +25,20 @@ function LoginPage(props) {
   }, [state.phone, state.verificationCode]);
   const handleInput = (e, field) => {
     setState({ [field]: e });
+    if (field === 'phone') {
+      if (e.length === 11) {
+        // console.log('[29] index.jsx: ', 11111);
+        // TODO: check registered
+        props.dispatch({
+          type: 'user/checkRegistered',
+          payload: state.phone,
+        }).then(hasAccount => {
+          if (!hasAccount) setState({ isRegistered: false })
+        })
+      } else {
+        setState({ isRegistered: true })
+      }
+    }
   };
   const handleSend = async () => {
     if (!isPhone(state.phone)) {
@@ -66,13 +81,24 @@ function LoginPage(props) {
   };
   return (
     <div className={cns(styles.loginPage)}>
-      <Input
-        type="tel"
-        className="phone"
-        placeholder="请输入手机号"
-        maxLength={11}
-        onChange={e => handleInput(e, 'phone')}
-      />
+      <div className="phone-control">
+        <Input
+          type="tel"
+          value={state.phone}
+          className="phone"
+          placeholder="请输入手机号"
+          maxLength={11}
+          onChange={e => handleInput(e, 'phone')}
+        />
+        {state.phone && (
+          <img
+            className="phone-clear"
+            src={require('./img/clear.svg')}
+            onClick={() => setState({ phone: '' })}
+            alt=""
+          />
+        )}
+      </div>
       <div className="code-control">
         <Input
           type="tel"
@@ -84,6 +110,7 @@ function LoginPage(props) {
         />
         <SendCode duration={60} onSend={handleSend} />
       </div>
+      {!state.isRegistered && <p className="login-tip">未注册的手机号，验证通过后将自动注册</p>}
       <Button block className="login-btn" disabled={state.disabled} onClick={handleLogin}>
         {props.loading ? '登录中...' : '登录'}
       </Button>

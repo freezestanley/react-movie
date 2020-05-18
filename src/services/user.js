@@ -20,10 +20,20 @@ export function login(data) {
   });
 }
 
+// 发送验证码
 export function sendCode(data) {
   return request({
     url: `/sms/send/${data}`,
     method: 'POST',
+    serve: 'user',
+  });
+}
+
+// 发送验证码
+export function checkRegistered(data) {
+  return request({
+    url: `/sms/check/${data}`,
+    method: 'GET',
     serve: 'user',
   });
 }

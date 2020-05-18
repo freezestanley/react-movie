@@ -1,4 +1,3 @@
-
 import { Toast } from 'zarm';
 import * as services from '@/services/user';
 import { Store, cookie } from '@/utils/tools';
@@ -46,6 +45,13 @@ export default {
     // 发送验证码
     *sendCode({ payload }, { put, call }) {
       yield call(services.sendCode, payload);
+    },
+
+    // 是否注册过手机号
+    // eslint-disable-next-line require-yield
+    *checkRegistered({ payload }, { put, call }) {
+      // yield call(services.checkRegistered, payload);
+      return Math.random() > 0.5 ? true : false;
     },
   },
 };
