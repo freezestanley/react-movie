@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { connect } from 'dva';
 import Banner from '@/components/Home/Banner';
+import ShortCut from '@/components/Home/ShortCut';
+import Belt from '@/components/Home/Belt';
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -15,6 +17,14 @@ function Home ({ dispatch }) {
   return (
     <div className={styles.homePage}>
       <Banner />
+      <ShortCut />
+      <Belt />
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
     </div>
   );
 }
