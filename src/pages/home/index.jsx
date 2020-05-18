@@ -1,22 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'dva';
-import Portal from '@/components/Portal';
+import Banner from '@/components/Home/Banner';
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 import styles from './style/index.less';
 
+
 function Home ({ dispatch }) {
-  // const clickHandler = () => {
-  //   dispatch({
-  //     type: 'home/setState',
-  //     payload: '123123323',
-  //   });
-  // }
+  useEffect(() => {
+    dispatch({ type: 'banner/getBanner', payload: {} });
+  }, [dispatch]);
   return (
     <div className={styles.homePage}>
-      <Portal node="#wx_head .header_before">
-        <span onClick={() => console.log('click')}>{'back'}</span>
-      </Portal>
-      {new Array(50).fill(1).map((i, idx) => <p key={idx}>盎司一起测试滚动区域</p>)}
+      <Banner />
     </div>
   );
 }
@@ -24,12 +22,4 @@ function Home ({ dispatch }) {
 const mapStateToProps = state => ({
   user: state.user
 })
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     changeSex: (url) => dispatch({
-//       type: 'home/setState',
-//       payload: '11111111',
-//     })
-//   }
-// }
 export default connect(mapStateToProps)(Home)

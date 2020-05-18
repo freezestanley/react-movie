@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'dva';
 import cns from 'classnames';
-import isEmpty from 'lodash/isEmpty';
 import 'zarm/dist/zarm.min.css';
 import { BrowserInfo, Store } from '@/utils/tools';
 import weChatAuth from '@/utils/weChatAuth';
@@ -86,7 +85,9 @@ function Layout(props) {
         </div>
       )}
       <div className="z_layout_cont">
-        <div className="z_layout_box">{props.children}</div>
+        <div className="z_layout_box">
+          {props.children}
+        </div>
         {(footer || footer === undefined) && (
           <div className="za-footer">
             <img src={require('@/assets/footer-bg.png')} alt="" />

@@ -10,11 +10,15 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
+    "classnames": "^2.2.6",
     "dva": "^2.6.0-beta.6",
+    "jquery": "^3.5.1",
     "numeral": "^2.0.6",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-helmet": "^6.0.0",
+    "react-slick": "^0.26.1",
+    "slick-carousel": "^1.8.1",
     "zarm": "^2.2.0"
   },
   "devDependencies": {
