@@ -59,7 +59,7 @@ function Layout(props) {
   useEffect(() => {
     let _nav = [];
     routesMap.forEach(item => {
-      if (item.type === 'tabbar') {
+      if (item.type === 'tabBar') {
         _nav.push(item);
       }
       if (window.location.pathname === item.path) {
@@ -72,6 +72,7 @@ function Layout(props) {
 
   const _reg = (currRoute.path || '').replace('/', '_');
   const _classname = _reg === '_' ? '_home' : _reg;
+  const hasTabBar = currRoute.type === 'tabBar';
   // console.log('[65] index.jsx: ', currPage);
 
   if (!BrowserInfo.isPhone) return '请使用手机进行访问';
@@ -92,7 +93,7 @@ function Layout(props) {
           </div>
         )}
       </div>
-      {!isEmpty(tabPageList) && (
+      {hasTabBar && (
         <div className="z_layout_navbar">
           {tabPageList.map((item, idx) => (
             <TabNavItem key={idx} icon={idx+1} title={item.title} path={item.path} />
