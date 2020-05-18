@@ -26,13 +26,12 @@ export default class Banner extends React.Component {
       slidesToShow: 1,
       slidesToScroll: 1,
       afterChange(index) {
-        console.log('-----activeIndex', index);
         self.setState({ activeIndex: index });
       }
     };
     return (
       <Slider className={styles.homeBanner} {...settings}>
-        {map([1,2,3], (item, idx) => (<div key={idx} className={styles.item}>{item}</div>))}
+        {map([1,2,3], (item, idx) => (<div key={idx} className={styles.item}>头部封面{item}</div>))}
       </Slider>
     );
   }

@@ -31,7 +31,7 @@ export default class Banner extends React.Component {
     };
     return (
       <Slider className={styles.beltContainer} {...settings}>
-        {map([1,2,3], (item, idx) => (<div key={idx} className={styles.item}>{item}</div>))}
+        {map([1,2,3], (item, idx) => (<div key={idx} className={styles.item}>腰部封面{item}</div>))}
       </Slider>
     );
   }

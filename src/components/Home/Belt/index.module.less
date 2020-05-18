@@ -1,8 +1,7 @@
 @import '~@/less/variable.less';
 .beltContainer{
-  background-color: @blue;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   .item{
     height: 63px;
     text-align: center;
@@ -18,6 +17,9 @@
     margin-right: 3px;
     &.active{
       background-color: @black;
+    }
+    &:last-child{
+      margin-right: 0;
     }
   }
   .beltDots{
