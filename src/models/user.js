@@ -1,6 +1,6 @@
 import { Toast } from 'zarm';
 import * as services from '@/services/user';
-import { Store, cookie } from '@/utils/tools';
+import { Store } from '@/utils/tools';
 
 export default {
   namespace: 'user',
@@ -18,7 +18,7 @@ export default {
       const res = yield call(services.wxLogin, payload);
       const { code, data } = res || {};
       if (code === '0000') {
-        cookie.set('token', data);
+        Store.set('openId', data);
         return true;
       }
       return false;

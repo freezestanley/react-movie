@@ -5,7 +5,7 @@ import cns from 'classnames';
 import router from 'umi/router';
 
 import SendCode from '@/components/SendCode';
-import { isPhone } from '@/utils/tools';
+import { isPhone, Store } from '@/utils/tools';
 
 import styles from './index.less';
 
@@ -64,14 +64,20 @@ function LoginPage(props) {
       return;
     }
 
+    const oid = Store.get('openId');
+    const _data = {
+      userName: state.phone,
+      verifyCode: state.verificationCode,
+    }
+    if (oid) {
+      _data.openId = oid;
+    }
+
     // TODO: login api
     props
       .dispatch({
         type: 'user/login',
-        payload: {
-          userName: state.phone,
-          verifyCode: state.verificationCode,
-        },
+        payload: _data,
       })
       .then(isOk => {
         if (isOk) {
@@ -112,7 +118,7 @@ function LoginPage(props) {
       </div>
       {!state.isRegistered && <p className="login-tip">未注册的手机号，验证通过后将自动注册</p>}
       <Button block className="login-btn" disabled={state.disabled} onClick={handleLogin}>
-        {props.loading ? '登录中...' : '登录'}
+        {props.loading ? '登录中' : '登录'}
       </Button>
     </div>
   );

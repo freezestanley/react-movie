@@ -1,4 +1,15 @@
 import { Toast } from 'zarm';
+import numeral from 'numeral';
+
+export const fmtPrice = (data, type) => {
+  // if (data < 0 || !/[\d.]/.test(data)) {
+  //   return `¥0`;
+  // }
+  const price = numeral(data).format('0.00').replace(/.00$/, '');
+  return type === 'tag'
+    ? `<i>¥</i><span>${price}</span>`
+    : `¥${price}`;
+}
 
 export function isJSON(obj) {
   try {

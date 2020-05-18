@@ -1,5 +1,4 @@
 import px2rem from 'postcss-plugin-px2rem';
-
 // ref: https://umijs.org/config/
 export default {
   treeShaking: true,
@@ -14,9 +13,10 @@ export default {
         // footer: 是否显示footer图片，默认true
         // type: navBar(导航)
         { path: '/login', component: '../pages/login', title: '盎司登陆' },
-        { path: '/', type: 'navBar', component: '../pages/home', title: '首页' },
-        { path: '/vip', type: 'navBar', component: '../pages/vip', title: 'VIP' },
-        { path: '/my', type: 'navBar', component: '../pages/my', title: '我的' },
+        { path: '/topup', component: '../pages/topup' },
+        { path: '/', type: 'tabBar', component: '../pages/home', title: '首页', hasNavBar: false },
+        { path: '/vip', type: 'tabBar', component: '../pages/vip', title: 'VIP' },
+        { path: '/my', type: 'tabBar', component: '../pages/my', title: '我的' },
       ],
     }
   ],

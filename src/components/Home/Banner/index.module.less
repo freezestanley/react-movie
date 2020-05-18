@@ -1,0 +1,31 @@
+@import '~@/less/variable.less';
+.homeBanner{
+  background-color: @blue;
+  overflow: hidden;
+  position: relative;
+  .item{
+    height: 193px;
+    text-align: center;
+    line-height: 193px;
+  }
+  .pageItem{
+    display: inline-block;
+    width: 10px;
+    height: 3px;
+    border-radius: 2px;
+    background-color: fade(@white, 40);
+    margin-right: 3px;
+    &.active{
+      background-color: @white;
+    }
+  }
+  .dotsContainer{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    white-space: nowrap;
+    >li{
+      display: inline-block;
+    }
+  }
+}
