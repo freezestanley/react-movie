@@ -42,7 +42,7 @@
         "git add"
       ]
     },
-    "ignore": ["**/dist/*.*"]
+    "ignore": ["dist/**/*.js"]
   },
   "engines": {
     "node": ">=8.0.0"
