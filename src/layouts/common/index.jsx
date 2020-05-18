@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'dva';
 import cns from 'classnames';
+import isEmpty from 'lodash/isEmpty';
 import 'zarm/dist/zarm.min.css';
 import { BrowserInfo, cookie } from '@/utils/tools';
 import weChatAuth from '@/utils/weChatAuth';
@@ -36,12 +37,20 @@ function mapRouter(oData) {
 
 function Layout(props) {
   const isWx = BrowserInfo.isWeixin;
-  const store = props.global;
+  // const store = props.global;
+  const { global: {
+    currRoute,
+    routesMap,
+    title,
+    tabPageList=[]
+  } } =props;
+  const { hasNavBar = true, footer } = currRoute;
+  
   useEffect(() => {
     if (isWx && !cookie.get('token')) {
       weChatAuth(code => props.dispatch({ type: 'user/wxLogin', payload: { code }}))
     }
-    if (store.routesMap.length === 0) {
+    if (routesMap.length === 0) {
       const _routes = mapRouter(props.route.routes);
       props.dispatch({ type: 'global/setState', payload: { routesMap: _routes }})
     }
@@ -49,7 +58,7 @@ function Layout(props) {
   }, [])
   useEffect(() => {
     let _nav = [];
-    store.routesMap.forEach(item => {
+    routesMap.forEach(item => {
       if (item.type === 'navBar') {
         _nav.push(item);
       }
@@ -57,37 +66,35 @@ function Layout(props) {
         props.dispatch({ type: 'global/setState', payload: { currRoute: item, title: item.title }})
       }
     })
-    props.dispatch({ type: 'global/setState', payload: { navBar: _nav }})
+    props.dispatch({ type: 'global/setState', payload: { tabPageList: _nav }})
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [window.location.href, store.routesMap])
+  }, [window.location.href, routesMap])
 
-  const currPage = store.currRoute;
-  const hasNavBar = currPage.type === 'navBar';
-  const _reg = (currPage.path || '').replace('/', '_');
+  const _reg = (currRoute.path || '').replace('/', '_');
   const _classname = _reg === '_' ? '_home' : _reg;
   // console.log('[65] index.jsx: ', currPage);
 
   if (!BrowserInfo.isPhone) return '请使用手机进行访问';
   return (
-    <div className={cns('z_layout', `z${_classname}_page`, { z_navbar_layout: hasNavBar })}>
-      {!isWx && (
+    <div className={cns('z_layout', `z${_classname}_page`)}>
+      {!isWx && hasNavBar && (
         <div id="wx_head" className="z_layout_header">
           <div className="header_before"></div>
-          <div className="z_layout_header_title">{store.title || document.title}</div>
+          <div className="z_layout_header_title">{title || document.title}</div>
           <div className="header_after"></div>
         </div>
       )}
       <div className="z_layout_cont">
         <div className="z_layout_box">{props.children}</div>
-        {(currPage.footer || currPage.footer === undefined) && (
+        {(footer || footer === undefined) && (
           <div className="za-footer">
             <img src={require('@/assets/footer-bg.png')} alt="" />
           </div>
         )}
       </div>
-      {hasNavBar && (
+      {!isEmpty(tabPageList) && (
         <div className="z_layout_navbar">
-          {store.navBar.map((item, idx) => (
+          {tabPageList.map((item, idx) => (
             <TabNavItem key={idx} icon={idx+1} title={item.title} path={item.path} />
           ))}
         </div>

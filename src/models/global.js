@@ -4,7 +4,7 @@ export default {
   state: {
     title: '',
     routesMap: [],
-    navBar: [],
+    tabPageList: [],
     currRoute: {},
   },
   reducers: {
