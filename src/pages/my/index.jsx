@@ -1,12 +1,13 @@
 import React from 'react';
 import { connect } from 'dva';
+import router from 'umi/router';
 import styles from './index.less';
 
 
 function my(props){
-  
+
   console.log(props)
-  
+
   return (
     <div className={styles.myPage}>
       <div className='me_avatar'>
@@ -24,7 +25,7 @@ function my(props){
           <li className='me_container-service'>联系客服  </li>
         </ul>
       </div>
-      
+      <button onClick={() => router.push('/login')}>登录</button>
     </div>
   );
 }
