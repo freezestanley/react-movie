@@ -1,10 +1,10 @@
 import React from 'react';
 import SpecGroup from '@/components/SpecGroup';
 
-export default function DirectPage() {
+export default function CardPage() {
   return (
     <div>
-      DirectPage
+      CardPage
       <SpecGroup />
     </div>
   );

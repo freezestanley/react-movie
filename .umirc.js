@@ -13,9 +13,10 @@ export default {
         // footer: 是否显示footer图片，默认true
         // type: navBar(导航)
         { path: '/login', component: '../pages/login', title: '盎司登陆' },
-        { path: '/', type: 'navBar', component: '../pages/home', title: '首页', hasNavBar: false },
-        { path: '/vip', type: 'navBar', component: '../pages/vip', title: 'VIP' },
-        { path: '/my', type: 'navBar', component: '../pages/my', title: '我的' },
+        { path: '/', type: 'tabbar', component: '../pages/home', title: '首页', hasNavBar: false },
+        { path: '/vip', type: 'tabbar', component: '../pages/vip', title: 'VIP' },
+        { path: '/my', type: 'tabbar', component: '../pages/my', title: '我的' },
+        { path: '/topup', component: '../pages/topup' },
       ],
     }
   ],

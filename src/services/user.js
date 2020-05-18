@@ -3,9 +3,9 @@ import request from '@/utils/request';
 // 微信登录
 export function wxLogin(data) {
   return request({
-    url: '/userLogin',
+    url: '/getOpenId',
     method: 'POST',
-    serve: 'ance',
+    serve: 'user',
     data,
   });
 }

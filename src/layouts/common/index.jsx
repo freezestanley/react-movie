@@ -3,7 +3,7 @@ import { connect } from 'dva';
 import cns from 'classnames';
 import isEmpty from 'lodash/isEmpty';
 import 'zarm/dist/zarm.min.css';
-import { BrowserInfo, cookie } from '@/utils/tools';
+import { BrowserInfo, Store } from '@/utils/tools';
 import weChatAuth from '@/utils/weChatAuth';
 
 import TabNavItem from './TabNavItem';
@@ -45,9 +45,9 @@ function Layout(props) {
     tabPageList=[]
   } } =props;
   const { hasNavBar = true, footer } = currRoute;
-  
+
   useEffect(() => {
-    if (isWx && !cookie.get('token')) {
+    if (isWx && !Store.get('openId')) {
       weChatAuth(code => props.dispatch({ type: 'user/wxLogin', payload: { code }}))
     }
     if (routesMap.length === 0) {
@@ -59,7 +59,7 @@ function Layout(props) {
   useEffect(() => {
     let _nav = [];
     routesMap.forEach(item => {
-      if (item.type === 'navBar') {
+      if (item.type === 'tabbar') {
         _nav.push(item);
       }
       if (window.location.pathname === item.path) {
