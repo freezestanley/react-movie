@@ -4,6 +4,10 @@ import { Popup } from 'zarm';
 import { fmtPrice } from '@/utils/tools';
 import styles from './index.module.less';
 import zaLogo from './img/za-logo.png';
+import { ReactComponent as HomeSvg } from './img/home.svg';
+import { ReactComponent as CloseSvg } from './img/close.svg';
+import { ReactComponent as PromptSvg } from './img/prompt.svg';
+import { ReactComponent as SafeSvg } from './img/safe.svg';
 
 export default function() {
   const [visible, setVisible]=useState(false);
@@ -13,12 +17,13 @@ export default function() {
   return ([<div className={styles.buyFooter} key='footer'>
     <dl className={styles.home}>
       <dt className={styles.homeIcon}>
+        <HomeSvg />
       </dt>
       <dd>首页</dd>
     </dl>
     <div className={styles.content}>
       <div className={styles.total}>合计<i>¥</i><span>10</span></div>
-      <div className={styles.saleDetail} onClick={toggleFn.bind(null, true)}>优惠明细<i className={styles.questionIcon}></i></div>
+      <div className={styles.saleDetail} onClick={toggleFn.bind(null, true)}>优惠明细<PromptSvg className={styles.questionIcon} /></div>
     </div>
     <div className={styles.btn}>立即支付</div>
   </div>, <Popup
@@ -28,6 +33,7 @@ export default function() {
     onMaskClick={toggleFn.bind(null, false)}
   >
     <div className={styles.payInfoBox}>
+      <CloseSvg className={styles.closeIcon} onClick={toggleFn.bind(null, false)}/>
       <h2>优惠明细</h2>
       <div className={styles.infoItem}>
         <div className={styles.label}>产品规格</div>
@@ -55,7 +61,7 @@ export default function() {
         </div>
       </div>
       <div className={styles.reminderTip}>
-        <img className={styles.small} alt='' src="#" />
+        <SafeSvg className={styles.small} />
         <span>蜜蜂充值平台商品真实有效性由</span>
         <img className={styles.logo} alt='' src={zaLogo} />
         <span>承保</span>

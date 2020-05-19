@@ -7,8 +7,8 @@ export const fmtPrice = (data, type) => {
   // }
   const price = numeral(data).format('0.00').replace(/(\.00?)?0?$/, '');
   return type === 'tag'
-    ? `<i class="money-symbol">¥</i><span>${price}</span>`
-    : `¥${price}`;
+    ? `${price<0 ? '-': ''}<i class="money-symbol">¥</i><span>${Math.abs(price)}</span>`
+    : (price < 0 ? `-¥${Math.abs(price)}` : `¥${price}`);
 }
 
 export function isJSON(obj) {
