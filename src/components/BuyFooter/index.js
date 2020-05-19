@@ -3,6 +3,7 @@ import '@/assets/svgIcon/home.svg';
 import { Popup } from 'zarm';
 import { fmtPrice } from '@/utils/tools';
 import styles from './index.module.less';
+import zaLogo from './img/za-logo.png';
 
 export default function() {
   const [visible, setVisible]=useState(false);
@@ -56,7 +57,7 @@ export default function() {
       <div className={styles.reminderTip}>
         <img className={styles.small} alt='' src="#" />
         <span>蜜蜂充值平台商品真实有效性由</span>
-        <img className={styles.logo} alt='' src="#" />
+        <img className={styles.logo} alt='' src={zaLogo} />
         <span>承保</span>
       </div>
     </div>
