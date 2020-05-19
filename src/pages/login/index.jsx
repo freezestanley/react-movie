@@ -9,7 +9,7 @@ import useStore from '@/hooks/useStore';
 import SendCode from '@/components/SendCode';
 import { isPhone } from '@/utils/tools';
 
-import './style/index.less';
+import styles from './style/index.less';
 
 function LoginPage(props) {
   const { state, set } = useStore({
