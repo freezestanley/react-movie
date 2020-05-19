@@ -3,6 +3,8 @@ import { connect } from 'dva';
 import Portal from '@/components/Portal';
 import HotRecommend from '@/components/HotRecommend'
 import Banner from '@/components/Home/Banner';
+import ShortCut from '@/components/Home/ShortCut';
+import Belt from '@/components/Home/Belt';
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -58,6 +60,14 @@ function Home ({ dispatch }) {
       <Banner />
       <HotRecommend list={imgList} />
       <ActivityCard data={data} />
+      <ShortCut />
+      <Belt />
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
     </div>
   );
 }

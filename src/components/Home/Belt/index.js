@@ -17,11 +17,11 @@ export default class Banner extends React.Component {
     var settings = {
       dots: true,
       customPaging(idx) {
-        return (<span className={cns(styles.pageItem, idx === activeIndex ? styles.active : '')}></span>);
+        return (<span className={cns(styles.pItem, idx === activeIndex ? styles.active : '')}></span>);
       },
       autoplay: true,
       infinite: true,
-      dotsClass: `${styles.dotsContainer}`,
+      dotsClass: `${styles.beltDots}`,
       speed: 500,
       slidesToShow: 1,
       slidesToScroll: 1,
@@ -30,8 +30,8 @@ export default class Banner extends React.Component {
       }
     };
     return (
-      <Slider className={styles.homeBanner} {...settings}>
-        {map([1,2,3], (item, idx) => (<div key={idx} className={styles.item}>头部封面{item}</div>))}
+      <Slider className={styles.beltContainer} {...settings}>
+        {map([1,2,3], (item, idx) => (<div key={idx} className={styles.item}>腰部封面{item}</div>))}
       </Slider>
     );
   }
