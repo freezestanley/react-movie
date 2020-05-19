@@ -1,10 +1,10 @@
 @import '~@/less/variable.less';
 .buyFooter{
-  z-index: 2;
+  z-index: 1001;
   bottom: 0;
   left: 0;
   position: absolute;
-  height: 67px;
+  height: 67px;  
   width: 100%;
   background-color: @white;
   padding-right: 162px;
@@ -87,5 +87,74 @@
       color: @golden;
     }
 
+  }
+}
+.payInfoBox{
+  padding: 0 15px 91px 15px;
+  background-color: @white;
+  font-weight:400;
+  border-radius:5px 5px 0px 0px;
+  >h2{
+    padding: 19px 0;
+    font-size: 17px;
+    font-weight: 500;
+    text-align: center;
+  }
+  .infoItem{
+    padding: 4px 0;
+    font-size:15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    .label{
+      color:fade(@black, 50);
+      line-height:21px;
+    }
+    .valueBox{
+      color:fade(@black, 100);
+      line-height:21px;
+      .prompt{
+        display: inline-block;
+        height: 13px;
+        line-height: 13px;
+        vertical-align: middle;
+        font-size: 10px;
+        color: @golden-4f;
+        background-color: fade(@golden-4f, 10);
+        border-radius: 9px;
+        margin-right: 9px;
+        padding: 0 6px;
+      }
+      .value{
+        display: inline-block;
+        vertical-align: middle;
+        >i{
+          font-size: 10px;
+        }
+        font-size: 15px;
+      }
+    }
+  }
+  .reminderTip{
+    margin: 20px 0;
+    background-color: fade(@golden-4f, 10);
+    height: 26px;
+    border-radius: 15px;
+    line-height: 26px;
+    font-size: 11px;
+    color: @grey-99;
+    text-align: center;
+    .small{
+      display: inline-block;
+      width: 13px;
+      height: 13px;
+      vertical-align: middle;
+    }
+    .logo{
+      display: inline-block;
+      height: 13px;
+      vertical-align: middle;
+    }
   }
 }
