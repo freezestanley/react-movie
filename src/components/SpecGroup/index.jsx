@@ -6,12 +6,13 @@ import './index.less';
 export default function SpecGroup(props) {
   const data = [{
     name: 'VIP月卡',
-    cornerMark: '5-10元可提现红包',
+    cornerMark: '5-10元',
     price: 15,
     membershipPrice: 12,
   }, {
     name: 'VIP季卡',
-    cornerMark: '8-10元可提现红包',
+    // cornerMark: '8-10元可提现红包',
+    cornerMark: '8-10元红包',
     price: 45,
     membershipPrice: 36.55,
   }, {

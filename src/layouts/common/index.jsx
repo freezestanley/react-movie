@@ -73,10 +73,11 @@ function Layout(props) {
   const _classname = _reg === '_' ? '_home' : _reg;
   const hasTabBar = currRoute.type === 'tabBar';
   // console.log('[65] index.jsx: ', currPage);
+  const isGray = currRoute.backgroundColor === 'gray';
 
   if (!BrowserInfo.isPhone) return '请使用手机进行访问';
   return (
-    <div className={cns('z_layout', `z${_classname}_page`)}>
+    <div className={cns('z_layout', `z${_classname}_page`)} style={{ backgroundColor: isGray ? 'var(--layout-bg)' : '#fff' }}>
       <div className='z_header_box'>
         {!isWx && hasNavBar && (
           <div id="wx_head" className="z_layout_header">
@@ -86,14 +87,14 @@ function Layout(props) {
           </div>
         )}
       </div>
-      
+
       <div className="z_layout_cont">
         <div className="z_layout_box">
           {props.children}
         </div>
         {(footer || footer === undefined) && (
           <div className="za-footer">
-            <img src={require('@/assets/footer-bg.png')} alt="" />
+            <img src={require(`@/assets/footer-bg${isGray ? '-gray' : ''}.png`)} alt="" />
           </div>
         )}
       </div>
@@ -106,7 +107,7 @@ function Layout(props) {
           </div>
         )}
       </div>
-      
+
     </div>
   )
 }

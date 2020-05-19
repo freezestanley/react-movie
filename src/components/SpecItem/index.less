@@ -28,8 +28,10 @@
         background: linear-gradient(180deg,rgba(243,202,135,0.12) 0%,rgba(226,154,79,0.12) 100%);
         border-color: var(--dark);
         .spec-item-tag {
-          background: var(--dark);
-          color: #EAD195;
+          > span {
+            background: var(--dark);
+            color: #EAD195;
+          }
         }
       }
     }
@@ -61,17 +63,20 @@
       .spec-item-original {
         color: var(--gray2);
         font-size: 12px;
+        text-decoration: line-through;
       }
       .spec-item-tag {
-        background: rgba(178, 142, 80, 0.08);
-        color: #E29A4FFF;
-        border-radius: 12px;
-        height: 25px;
-        font-size: 12px;
-        line-height: 25px;
-        margin-top: 5px;
-        display: inline-block;
-        padding: 0 15px;
+        >span {
+          background: rgba(178, 142, 80, 0.08);
+          color: #E29A4FFF;
+          border-radius: 12px;
+          height: 25px;
+          font-size: 12px;
+          line-height: 25px;
+          margin-top: 5px;
+          display: inline-block;
+          padding: 0 12px;
+        }
       }
       .spec-item-check-ico {
         position: absolute;

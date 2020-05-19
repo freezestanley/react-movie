@@ -17,7 +17,7 @@ export default function SpecItem(props) {
         <div className="spec-item-name">{props.name}</div>
         <div className="spec-item-price" dangerouslySetInnerHTML={{ __html: fmtPrice(props.payPrice, 'tag') }} />
         {props.price && <div className="spec-item-original">原价 {fmtPrice(props.price)}</div>}
-        {props.subText && <div className="spec-item-tag">{props.subText}</div>}
+        {props.subText && <div className="spec-item-tag"><span>{props.subText}</span></div>}
         {props.active && <img className="spec-item-check-ico" src={require('./check-ico.svg')} alt="" />}
       </div>
     </div>

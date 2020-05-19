@@ -1,11 +1,20 @@
 import React from 'react';
-import SpecGroup from '@/components/SpecGroup';
+import SpecAndVIP from '@/components/SpecAndVIP';
+import ProductSpecGroup from '@/components/ProductSpecGroup';
 
 export default function DirectPage() {
   return (
     <div>
-      DirectPage
-      <SpecGroup />
+      <ProductSpecGroup>
+        {(tabKey) => {
+          return (
+            <div>
+              DirectPage-{tabKey}
+              <SpecAndVIP />
+            </div>
+          )
+        }}
+      </ProductSpecGroup>
     </div>
   );
 }

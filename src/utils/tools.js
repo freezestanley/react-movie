@@ -5,9 +5,9 @@ export const fmtPrice = (data, type) => {
   // if (data < 0 || !/[\d.]/.test(data)) {
   //   return `¥0`;
   // }
-  const price = numeral(data).format('0.00').replace(/.00$/, '');
+  const price = numeral(data).format('0.00').replace(/(\.00?)?0?$/, '');
   return type === 'tag'
-    ? `<i>¥</i><span>${price}</span>`
+    ? `<i class="money-symbol">¥</i><span>${price}</span>`
     : `¥${price}`;
 }
 
