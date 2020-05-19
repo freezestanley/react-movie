@@ -1,0 +1,44 @@
+@import '~@/less/variable.less';
+.shortCut{
+  padding: 15px 0px;
+  overflow: hidden;
+  overflow-y: auto;
+  font-size: 0;
+  .inner{
+    margin: 0 -10px;
+  }
+  dl.item{
+    margin-bottom: 10px;
+    width: 25%;
+    display: inline-block;
+    dt{
+      margin: 0 auto;
+      width: 43px;
+      height: 43px;
+      border-radius: 50%;
+      background-color: @blue;
+    }
+    dd{
+      h2{
+        margin-top: 7px;
+        height:13px;
+        font-size:12px;
+        font-family:PingFangSC-Regular,PingFang SC;
+        font-weight:400;
+        color:@black-2b;
+        line-height:13px;
+        text-align: center;
+      }
+      .subTitle{
+        margin-top: 3px;
+        height:13px;
+        font-size:10px;
+        font-family:PingFangSC-Regular,PingFang SC;
+        font-weight:400;
+        color: fade(@black, 40);
+        line-height:13px;
+        text-align: center;
+      }
+    }
+  }
+}

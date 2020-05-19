@@ -12,7 +12,8 @@ export default ({ className, onSend, duration = 30 }) => {
 
   useInterval(
     () => {
-      setTxt(`${count - 1}s后重新发送`);
+      // setTxt(`${count - 1}s后重新发送`);
+      setTxt(`${count - 1}s`);
       setCount(count - 1);
       setDisabled(true);
       if (count === 1) {
@@ -28,7 +29,8 @@ export default ({ className, onSend, duration = 30 }) => {
     onSend &&
       onSend().then(isOk => {
         if (isOk) {
-          setTxt(`${duration}s后重新发送`);
+          // setTxt(`${duration}s后重新发送`);
+          setTxt(`${duration}s`);
           setDisabled(true);
           setIsRunning(true);
           setCount(duration);

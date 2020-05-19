@@ -1,45 +1,107 @@
-import React from 'react';
-import 'zarm/dist/zarm.min.css';
+import React, { useEffect } from 'react';
 import { connect } from 'dva';
-import { BrowserInfo, Query } from '@/utils/tools';
+import cns from 'classnames';
+import 'zarm/dist/zarm.min.css';
+import { BrowserInfo, Store } from '@/utils/tools';
+import weChatAuth from '@/utils/weChatAuth';
 
+import TabNavItem from './TabNavItem';
 import './index.less';
 
-async function wxLogin() {
-  if (BrowserInfo.isWeixin && !/(open\.weixin\.qq\.com)|(code\=)/.test(window.location.href)) {
-    const uri = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxef6a2198a1d0c3b4&redirect_uri=${encodeURIComponent(
-      window.location.href,
-    )}&response_type=code&scope=snsapi_base#wechat_redirect`;
-    window.location.href = uri;
-    return;
+function mapRouter(oData) {
+  const _routes = [];
+  function _mapRouter(data) {
+    // console.log('[12] index.jsx: ', data);
+    if (Array.isArray(data)) {
+      data.forEach(item => {
+        if (item.path) {
+          if (item.routes && Array.isArray(item.routes)) {
+            item.routes.forEach((item2) => {
+              if (item2.path && !item2.routes) {
+                _routes.push(item2);
+              } else {
+                _mapRouter(item2);
+              }
+            })
+          } else {
+            _routes.push(item);
+          }
+        }
+      })
+    }
   }
-  const code = Query.get('code');
-  // let token = '';
-  if (code) {
-    // await store.dispatch({ type: 'global/login', payload: { code } });
-    // const { global } = store.getState()
-    // token = global.token;
-    // Taro.setStorageSync('token', token);
-    // getData();
-    // // 去除code和state等参数
-    // const queryParams = Query.parse();
-    // delete queryParams.code;
-    // delete queryParams.state;
-    // const pureSearchStr = Query.stringify(queryParams)
-    // window.history.replaceState(null, '盎司充值', `${window.location.pathname}${pureSearchStr ? `?${pureSearchStr}` : ''}`);
-  }
+  _mapRouter(oData);
+  return _routes;
 }
 
 function Layout(props) {
   const isWx = BrowserInfo.isWeixin;
-  const store = props.global;
+  // const store = props.global;
+  const { global: {
+    currRoute,
+    routesMap,
+    title,
+    tabPageList=[]
+  } } =props;
+  const { hasNavBar = true, footer } = currRoute;
+
+  useEffect(() => {
+    if (isWx && !Store.get('openId')) {
+      weChatAuth(code => props.dispatch({ type: 'user/wxLogin', payload: { code }}))
+    }
+    if (routesMap.length === 0) {
+      const _routes = mapRouter(props.route.routes);
+      props.dispatch({ type: 'global/setState', payload: { routesMap: _routes }})
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+  useEffect(() => {
+    let _nav = [];
+    routesMap.forEach(item => {
+      if (item.type === 'tabBar') {
+        _nav.push(item);
+      }
+      if (window.location.pathname === item.path) {
+        props.dispatch({ type: 'global/setState', payload: { currRoute: item, title: item.title }})
+      }
+    })
+    props.dispatch({ type: 'global/setState', payload: { tabPageList: _nav }})
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [window.location.href, routesMap])
+
+  const _reg = (currRoute.path || '').replace('/', '_');
+  const _classname = _reg === '_' ? '_home' : _reg;
+  const hasTabBar = currRoute.type === 'tabBar';
+  // console.log('[65] index.jsx: ', currPage);
+
   if (!BrowserInfo.isPhone) return '请使用手机进行访问';
-  console.log('[37] index.jsx: ', 222);
   return (
-    <React.Fragment>
-      {!isWx && <div className="z_layout_header">{store.title || document.title}</div>}
-      {props.children}
-    </React.Fragment>
+    <div className={cns('z_layout', `z${_classname}_page`)}>
+      {!isWx && hasNavBar && (
+        <div id="wx_head" className="z_layout_header">
+          <div className="header_before"></div>
+          <div className="z_layout_header_title">{title || document.title}</div>
+          <div className="header_after"></div>
+        </div>
+      )}
+      <div className="z_layout_cont">
+        <div className="z_layout_box">
+          {props.children}
+        </div>
+        {(footer || footer === undefined) && (
+          <div className="za-footer">
+            <img src={require('@/assets/footer-bg.png')} alt="" />
+          </div>
+        )}
+      </div>
+      {hasTabBar && (
+        <div className="z_layout_navbar">
+          {tabPageList.map((item, idx) => (
+            <TabNavItem key={idx} icon={idx+1} title={item.title} path={item.path} />
+          ))}
+        </div>
+      )}
+    </div>
   )
 }
 

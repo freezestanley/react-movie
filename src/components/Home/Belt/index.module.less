@@ -1,0 +1,35 @@
+@import '~@/less/variable.less';
+.beltContainer{
+  position: relative;
+  overflow: visible;
+  .item{
+    height: 63px;
+    text-align: center;
+    line-height: 63px;
+    background-color: @blue;
+  }
+  .pItem{
+    display: inline-block;
+    width: 10px;
+    height: 3px;
+    border-radius: 2px;
+    background-color: #F5F7FF;
+    margin-right: 3px;
+    &.active{
+      background-color: @black;
+    }
+    &:last-child{
+      margin-right: 0;
+    }
+  }
+  .beltDots{
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    >li{
+      display: inline-block;
+    }
+  }
+}

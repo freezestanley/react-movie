@@ -1,8 +1,55 @@
-@import "./less/index.less";
-html, body, #root {
-  height: 100%;
+:root {
+  --theme-primary: #07C160;
+  --border: 1px solid #D8D8D8;
+  --navbar-shadow: rgba(52, 52, 52, 0.14) 0 -4px 12px 0;
+
+  --dark: #12182B;
+  --gray: #BCBCBC;
+  --gray2: rgba(0, 0, 0, 0.4);
+  --gold: #AB8442;
+  --gold2: rgba(171, 132, 66, 0.4);
+  --btn-bg: linear-gradient(309deg,rgba(166,124,56,1) 0%,rgba(234,209,149,1) 100%);
+  --button-disabled-opacity: 0.4 !important;
+
+  // layout
+  --navbar: 60px;
+  // --wx-head: 40px;
 }
 
-body {
+html, body, #root {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-size: 16px;
+  overflow: hidden;
+  font-family: Chinese Quote, -apple-system, PingFang SC, Microsoft YaHei, Helvetica, Arial,
+    sans-serif;
+}
+
+html {
+  line-height: inherit !important;
+}
+
+div {
+  box-sizing: border-box;
+}
+html,body,div,p,a,li,ol,ul,h1,h2,h3,dl,dt,dd{
+  list-style: none;
+  padding: 0;
   margin: 0;
 }
+
+// #root {
+//   // padding-top: 1px;
+//   // position: relative;
+//   background: #eee;
+//   box-sizing: border-box;
+// }
+
+// .ex_root {
+//   // width: 750px;
+//   // max-width: 750px;
+//   margin: 0 auto;
+//   height: 100%;
+// }

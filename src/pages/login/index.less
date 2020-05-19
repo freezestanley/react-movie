@@ -1,0 +1,97 @@
+.loginPage {
+  padding: 20px;
+  :global {
+    .za-input {
+      position: relative;
+      // background: #fff;
+      padding-left: 30px;
+      margin-bottom: 0.2rem;
+      width: 100%;
+      height: 40px;
+      border: none;
+      border-bottom: var(--border);
+      background: transparent;
+      input {
+        position: relative;
+        height: 40px;
+        color: var(--t3);
+        padding-top: 2px;
+        padding-left: 18px;
+        font-size: 14px;
+      }
+      &::before {
+        position: absolute;
+        display: inline-block;
+        content: '';
+        width: 20px;
+        height: 40px;
+        left: 0;
+      }
+      &::after {
+        position: absolute;
+        display: inline-block;
+        content: '';
+        // width: 1px;
+        height: 18px;
+        border-left: var(--border);
+        left: 34px;
+        top: 11px;
+      }
+      &.phone {
+        &::before {
+          background: url('./img/phone.svg') no-repeat 0 center;
+          background-size: 13px;
+          margin-left: 3px;
+        }
+      }
+      &.code {
+        padding-right: 90px;
+        margin-bottom: 5px;
+        &::before {
+          background: url('./img/code.svg') no-repeat 0 center;
+          background-size: 16px;
+        }
+      }
+    }
+    .phone-control {
+      position: relative;
+      .za-input__clear {
+        display: none;
+      }
+      .phone-clear {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        width: 20px;
+        height: 20px;
+        margin-top: -10px;
+      }
+    }
+    .code-control {
+      position: relative;
+      .send-code {
+        position: absolute;
+        top: 2px;
+        right: 0;
+        background: transparent;
+        border: none;
+        color: var(--gold);
+        padding-right: 0;
+      }
+    }
+    .login-tip {
+      color: var(--gray2);
+      font-size: 12px;
+      text-align: right;
+      margin-top: 0;
+    }
+    .login-btn {
+      margin-top: 40px;
+      color: #fff;
+      background: var(--btn-bg);
+      &.za-button--disabled {
+        background: var(--gold);
+      }
+    }
+  }
+}

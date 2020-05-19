@@ -12,9 +12,9 @@ export default {
   effects: {
     // login
     *login({ payload }, { put, call }) {
-    //   const res = yield call(services.login, payload);
-    //   return res;
-        yield put({ type: 'setState', payload: { data: '123123' } });
+      const res = yield call(services.login, payload);
+      return res;
+      // yield put({ type: 'setState', payload: { data: '123123' } });
     },
   },
   subscriptions: {

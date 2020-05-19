@@ -1,5 +1,4 @@
 import px2rem from 'postcss-plugin-px2rem';
-
 // ref: https://umijs.org/config/
 export default {
   treeShaking: true,
@@ -8,19 +7,16 @@ export default {
   },
   routes: [
     {
-       path: '/',
+      path: '/',
       component: '../layouts/common',
       routes: [
+        // footer: 是否显示footer图片，默认true
+        // type: navBar(导航)
         { path: '/login', component: '../pages/login', title: '盎司登陆' },
-        {
-          path: '/',
-          component: '../layouts/tabBar',
-          routes: [
-            { path: '/', component: '../pages/home', title: '首页' },
-            { path: '/vip', component: '../pages/vip', title: 'VIP' },
-            { path: '/my', component: '../pages/my', title: '我的' },
-          ],
-        },
+        { path: '/topup', component: '../pages/topup' },
+        { path: '/', type: 'tabBar', component: '../pages/home', title: '首页', hasNavBar: false },
+        { path: '/vip', type: 'tabBar', component: '../pages/vip', title: 'VIP' },
+        { path: '/my', type: 'tabBar', component: '../pages/my', title: '我的' },
       ],
     }
   ],
@@ -69,4 +65,16 @@ export default {
       },
     }],
   ],
+  proxy: {
+    '/api': {
+      // target: 'https://vip-gateway-test.zhongan.io',
+      // target: 'http://tech-ants-web-gateway.pre.za-tech.net',
+      // target: 'https://vip-pre.zhongan.io/api',
+      // target: 'https://vip-pre.zhongan.io/api',
+      target: 'https://vip-test.zhongan.io/api',
+      changeOrigin: true,
+      secure: false,
+      pathRewrite: { '^/api': '' },
+    },
+  }
 }
