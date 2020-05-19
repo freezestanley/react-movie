@@ -58,10 +58,10 @@ function Home ({ dispatch }) {
   return (
     <div className={styles.homePage}>
       <Banner />
-      <HotRecommend list={imgList} />
-      <ActivityCard data={data} />
       <ShortCut />
       <Belt />
+      <HotRecommend list={imgList} />
+      <ActivityCard data={data} />
       <br/>
       <br/>
       <br/>

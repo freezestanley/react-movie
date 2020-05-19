@@ -77,13 +77,16 @@ function Layout(props) {
   if (!BrowserInfo.isPhone) return '请使用手机进行访问';
   return (
     <div className={cns('z_layout', `z${_classname}_page`)}>
-      {!isWx && hasNavBar && (
-        <div id="wx_head" className="z_layout_header">
-          <div className="header_before"></div>
-          <div className="z_layout_header_title">{title || document.title}</div>
-          <div className="header_after"></div>
-        </div>
-      )}
+      <div className='z_header_box'>
+        {!isWx && hasNavBar && (
+          <div id="wx_head" className="z_layout_header">
+            <div className="header_before"></div>
+            <div className="z_layout_header_title">{title || document.title}</div>
+            <div className="header_after"></div>
+          </div>
+        )}
+      </div>
+      
       <div className="z_layout_cont">
         <div className="z_layout_box">
           {props.children}
@@ -94,13 +97,16 @@ function Layout(props) {
           </div>
         )}
       </div>
-      {hasTabBar && (
-        <div className="z_layout_navbar">
-          {tabPageList.map((item, idx) => (
-            <TabNavItem key={idx} icon={idx+1} title={item.title} path={item.path} />
-          ))}
-        </div>
-      )}
+      <div className="z_footer_box">
+        {hasTabBar && (
+          <div className="z_layout_navbar">
+            {tabPageList.map((item, idx) => (
+              <TabNavItem key={idx} icon={idx+1} title={item.title} path={item.path} />
+            ))}
+          </div>
+        )}
+      </div>
+      
     </div>
   )
 }
