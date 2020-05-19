@@ -1,0 +1,90 @@
+@import '~@/less/variable.less';
+.buyFooter{
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  height: 67px;
+  width: 100%;
+  background-color: @white;
+  padding-right: 162px;
+  box-shadow:0px -4px 12px 0px rgba(0,0,0,0.16),0px -4px 16px 0px rgba(0,33,69,0.16);
+  .btn{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width:162px;
+    height:77px;
+    background:linear-gradient(322deg,rgba(166,124,56,1) 0%,rgba(234,209,149,1) 100%);
+    box-shadow:0px -4px 12px 0px rgba(0,0,0,0.16),0px -4px 16px 0px rgba(0,33,69,0.16);
+    border-radius:24px 0px 0px 0px;
+    font-size: 19px;
+    text-align: center;
+    line-height: 67px;
+    color: @black;
+  }
+  .content{
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    .total{
+      font-size: 12px;
+      line-height: 23px;
+      color: fade(@black, 40);
+      text-shadow:0px -4px 12px fade(@black, 16);
+      >i{
+        margin-left: 5px;
+        vertical-align: middle;
+        color: @black;
+        font-style: normal;
+      }
+      >span{
+        margin-left: 5px;
+        font-size: 23px;
+        color: @black;
+        vertical-align: middle;
+      }
+    }
+    .saleDetail{
+      height:12px;
+      font-size:10px;
+      font-weight:400;
+      color:rgba(18,24,43,1);
+      line-height:14px;
+      text-shadow:0px -4px 12px rgba(0,0,0,0.16);
+      >i{
+        display: inline-block;
+        vertical-align: middle;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        margin: 0 5px;
+        background-color: fade(@black, 40);;
+      }
+    }
+  }
+  .home{
+    position: absolute;
+    left: 15px;
+    top: -9px;
+    width: 26px;
+    border-top-left-radius: 13px;
+    border-top-right-radius: 13px;
+    background-color: @white;
+    padding-top: 4px;
+    .homeIcon{
+      margin: 0 auto;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background-color: fade(@black, 40);
+    }
+    >dd{
+      margin-top: 12px;;
+      font-size: 12px;
+      color: @golden;
+    }
+
+  }
+}

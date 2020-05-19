@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { connect } from 'dva';
-import Portal from '@/components/Portal';
 import HotRecommend from '@/components/HotRecommend'
 import Banner from '@/components/Home/Banner';
 import ShortCut from '@/components/Home/ShortCut';
@@ -60,13 +59,11 @@ function Home ({ dispatch }) {
   return (
     <div className={styles.homePage}>
       <Banner />
-      <HotRecommend list={imgList} />
-      <ActivityCard data={data} />
-      <TimeLimitSlider />
       <ShortCut />
       <Belt />
       <HotRecommend list={imgList} />
       <ActivityCard data={data} />
+      <TimeLimitSlider />
       <br/>
       <br/>
       <br/>

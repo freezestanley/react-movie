@@ -6,3 +6,8 @@ export const dva = {
     },
   },
 };
+
+// 路由变化钩子
+export function onRouteChange({ location, routes, action }) {
+  // console.log('-----location', location);
+}
