@@ -11,10 +11,11 @@ export default {
       component: '../layouts/common',
       routes: [
         // footer: 是否显示footer图片，默认true
-        // type: navBar(导航)
+        // type: tabBar(是否作为tab页面)
         // backgroundColor: layout背景色,默认白色, `gray`为灰色
+        // hasNavBar: 是否显示头部导航
         { path: '/login', component: '../pages/login', title: '盎司登陆' },
-        { path: '/topup', component: '../pages/topup', backgroundColor: 'gray' },
+        { path: '/topup', component: '../pages/topup', backgroundColor: 'gray', hasNavBar: false },
         { path: '/', type: 'tabBar', component: '../pages/home', title: '首页', hasNavBar: false },
         { path: '/vip', type: 'tabBar', component: '../pages/vip', title: 'VIP' },
         { path: '/my', type: 'tabBar', component: '../pages/my', title: '我的' },
