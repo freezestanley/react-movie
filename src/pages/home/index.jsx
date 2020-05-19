@@ -65,6 +65,8 @@ function Home ({ dispatch }) {
       <TimeLimitSlider />
       <ShortCut />
       <Belt />
+      <HotRecommend list={imgList} />
+      <ActivityCard data={data} />
       <br/>
       <br/>
       <br/>
