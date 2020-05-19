@@ -1,14 +1,16 @@
 import React from 'react'
 
 import styles from './index.less'
-
+import brand from '@/assets/brand.png'
 const ActivityCard = props => {
   return (
     <div className={styles['acitivity-card']}>
       <div className={styles['main-part']}>
         <div className={styles['right-top']}></div>
-        <div className={styles['card-title']}>Q币限时秒杀</div>
-        <div className={styles['card-description']}>5折特惠秒杀，限时专享</div>
+        <img src={brand} className={styles['brand']} />
+
+        <div className={styles['card-title']}>{props.data.activityName}</div>
+        <div className={styles['card-description']}>{props.data.description}</div>
         <div className={styles['price-box']}>
           <div className={styles['now-price']}><span className={styles['yuan']}>￥</span>274</div>
           <div className={styles['origin-price']}>￥498</div>

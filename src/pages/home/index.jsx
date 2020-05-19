@@ -43,7 +43,9 @@ const imgList = [
   },
 ];
 const data = {
-  percent:'0.3'
+  percent:'0.3',
+  activityName:'Q币限时秒杀',
+  description:'5折特惠秒杀，限时专享'
 }
 
 
