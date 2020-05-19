@@ -4,6 +4,7 @@ import cns from 'classnames';
 import 'zarm/dist/zarm.min.css';
 import { BrowserInfo, Store } from '@/utils/tools';
 import weChatAuth from '@/utils/weChatAuth';
+import BuyFooter from '@/components/BuyFooter';
 
 import TabNavItem from './TabNavItem';
 import './index.less';
@@ -43,7 +44,7 @@ function Layout(props) {
     title,
     tabPageList=[]
   } } =props;
-  const { hasNavBar = true, footer } = currRoute;
+  const { hasNavBar = true, footer, hasBuyFooter=false } = currRoute;
 
   useEffect(() => {
     if (isWx && !Store.get('openId')) {
@@ -106,6 +107,7 @@ function Layout(props) {
             ))}
           </div>
         )}
+        { hasBuyFooter && <BuyFooter /> }
       </div>
 
     </div>
