@@ -44,7 +44,7 @@ function Layout(props) {
     title,
     tabPageList=[]
   } } =props;
-  const { hasNavBar = true, footer, hasBuyFooter=false } = currRoute;
+  const { hasNavBar = false, footer, hasBuyFooter=false } = currRoute;
 
   useEffect(() => {
     if (isWx && !Store.get('openId')) {
