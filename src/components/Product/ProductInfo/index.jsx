@@ -4,7 +4,7 @@ import Corner from '@/components/Corner';
 import './index.less';
 
 export default function ProductInfo({ title, desc, imgUrl, corner }) {
-  const img = imgUrl ? require(imgUrl) : require('@/assets/logo.png');
+  const img = imgUrl ? imgUrl : require('@/assets/logo.png');
   return (
     <div className="product_info_p1">
       <div className="product_info_p1_img">
