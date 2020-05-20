@@ -24,7 +24,7 @@ export default {
         { path: '/charge', component: '../pages/charge', backgroundColor:'gray',title: '充值成功' },
         { path: '/orderdetail', component: '../pages/orderdetail', backgroundColor:'gray',title: '订单详情' },
         { path: '/phone', component: '../pages/phone', backgroundColor:'gray',title: '话费充值', hasBuyFooter: true },
-        { path: '/test', component: '../pages/test' },
+        // { path: '/test', component: '../pages/test' },
       ],
     }
   ],
