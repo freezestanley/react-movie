@@ -7,7 +7,7 @@ import router from 'umi/router';
 import SendCode from '@/components/SendCode';
 import { isPhone, Store } from '@/utils/tools';
 
-import styles from './style/index.less';
+import styles from './index.less';
 
 function LoginPage(props) {
   const [state, setState] = useReducer((o, n) => ({ ...o, ...n }), {

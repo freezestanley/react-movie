@@ -55,7 +55,12 @@ export default function SwitchAccount(props) {
     <div className="z_switch_account">
       <div className="z_switch_head">
         <div>充值账号</div>
-        <div className="z_qq_info">xxxx</div>
+        {isQQ(state.accountType) && (
+          <div className="z_qq_info">
+            <img src={require('@/assets/logo.png')} alt="" />
+            <span>xxxx</span>
+          </div>
+        )}
       </div>
       <div className="z_switch_account_input">
         <Input value={state.account} onChange={handleInput} />
