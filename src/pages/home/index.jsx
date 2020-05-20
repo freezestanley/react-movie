@@ -56,15 +56,7 @@ function Home ({ dispatch }) {
       <ShortCut />
       <Belt />
       <TimeLimitSlider />
-
       <HotRecommend list={imgList} />
-      
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
     </div>
   );
 }
