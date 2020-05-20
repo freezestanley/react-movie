@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import withRouter from 'umi/withRouter';
 import '@/assets/svgIcon/home.svg';
 import { Popup } from 'zarm';
 import { fmtPrice } from '@/utils/tools';
@@ -9,13 +10,17 @@ import { ReactComponent as CloseSvg } from './img/close.svg';
 import { ReactComponent as PromptSvg } from './img/prompt.svg';
 import { ReactComponent as SafeSvg } from './img/safe.svg';
 
-export default function() {
+export default withRouter(function(props) {
+  const { history } = props;
   const [visible, setVisible]=useState(false);
   const toggleFn = (val) =>{
     setVisible(val);
   };
+  const goToHome = () => {
+    history.push('/');
+  };
   return ([<div className={styles.buyFooter} key='footer'>
-    <dl className={styles.home}>
+    <dl className={styles.home} onClick={goToHome}>
       <dt className={styles.homeIcon}>
         <HomeSvg />
       </dt>
@@ -68,4 +73,4 @@ export default function() {
       </div>
     </div>
   </Popup>]);
-}
+})
