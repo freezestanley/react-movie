@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './index.less'
 import router from 'umi/router';
-import Order from './../../components/OrderList/index'
+import Order from '@/components/OrderItem'
 export default()=>{
   return(
 
