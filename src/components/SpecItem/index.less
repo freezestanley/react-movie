@@ -1,28 +1,8 @@
 :global {
   .spec-item {
-    padding: 5px;
-    &.u-1of2 {
-      flex: 0 0 50%;
-      // &:nth-child(2n+1) {
-      //   > div {
-      //     margin-left: 0;
-      //   }
-      // }
-      // &:nth-child(2n) {
-      //   > div {
-      //     margin-right: 0;
-      //   }
-      // }
-    }
-
-    &.u-1of3 {
-      flex: 0 0 33.3333%;
-    }
-
-    &.u-1of4 {
-      flex: 0 0 25%;
-    }
-
+    display: inline-block;
+    margin-right: 2%;
+    margin-bottom: 13px;
     &.active {
       >div {
         background: linear-gradient(180deg,rgba(243,202,135,0.12) 0%,rgba(226,154,79,0.12) 100%);
@@ -35,7 +15,6 @@
         }
       }
     }
-
     >div {
       position: relative;
       background: rgba(206, 197, 188, 0.12);

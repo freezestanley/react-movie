@@ -18,7 +18,7 @@ export default function(props) {
       <h2>手机话费</h2>
       <Input placeholder="请输入手机号" className={styles.phoneInput} />
       <div className={styles.phoneItemList}>
-        { map(phoneItemList, (item, idx) => <SpecItem key={idx} {...item} />) }
+        { map(phoneItemList, (item, idx) => <SpecItem key={idx} {...item} column={3} index={idx} />) }
       </div>
     </div>
   </div>);
