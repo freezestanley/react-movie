@@ -1,0 +1,51 @@
+.orderdetail{
+  margin: 5px 10px 5px 10px ;
+  position: relative;
+  // width: 100%;
+  height: 306px;
+  background:rgba(255,255,255,1);
+  border-radius:8px;
+  .orderdetail_title {
+    position: absolute;
+    top: 17px;
+    left: 18px;
+    width:205px;
+    height:14px;
+    font-size:15px;
+    font-family:PingFangSC-Medium,PingFang SC;
+    font-weight:500;
+    color:rgba(0,0,0,1);
+    line-height:14px;
+   
+  }
+  .orderdetail_container{
+    display: flex;
+    flex-flow: row wrap;
+     align-content: flex-start;
+    position: absolute;
+    top:44px;
+    left: 18px;
+    padding-right: 28px;;
+    >div{
+     flex :0 ,0, 100%;
+      display: flex;
+       width:100%;
+      justify-content: space-between;
+      height: 30px;
+      font-size:15px;
+      font-family:PingFangSC-Regular,PingFang SC;
+      font-weight:400;
+      color:rgba(0,0,0,0.5);
+      line-height:30px;
+      span:last-child{
+        font-size:15px;
+        font-family:PingFangSC-Regular,PingFang SC;
+        font-weight:400;
+        color:rgba(0,0,0,1);
+        line-height:30px;
+      }
+    }
+
+  }
+
+}

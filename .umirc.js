@@ -20,6 +20,9 @@ export default {
         { path: '/', type: 'tabBar', component: '../pages/home', title: '首页', hasNavBar: false },
         { path: '/vip', type: 'tabBar', component: '../pages/vip', title: 'VIP' },
         { path: '/my', type: 'tabBar', component: '../pages/my', title: '我的' },
+        { path: '/myorder', component: '../pages/myorder', backgroundColor:'gray',title: '我的订单' },
+        { path: '/charge', component: '../pages/charge', backgroundColor:'gray',title: '充值成功' },
+        { path: '/orderdetail', component: '../pages/orderdetail', backgroundColor:'gray',title: '订单详情' },
       ],
     }
   ],
