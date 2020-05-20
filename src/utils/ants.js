@@ -99,6 +99,8 @@ export const formatAccountStr = (account, type) => {
   }
 };
 
+export const isQQ = type => type === 1;
+
 export const getStatusClassName = (status) => {
   let result = '';
   switch (status) {

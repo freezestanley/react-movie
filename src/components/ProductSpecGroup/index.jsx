@@ -1,4 +1,6 @@
 import React, { useReducer } from 'react';
+import cns from 'classnames';
+import { ProductInfo } from '../Product';
 
 import './index.less';
 
@@ -11,13 +13,16 @@ export default function ProductSpecGroup(props) {
     setState({ tab: key })
   }
   return (
-    <div className="product_spec_group">
+    <div className={cns('product_spec_group', props.className)}>
       <div className="product_spec_prodinfo">
         <img className="product_spec_bg" src={require('@/assets/product-bg.png')} alt="" />
         <div className="prod_info">
           {/* TODO: product info */}
-          <p>腾讯视频蜜蜂会员七五折起</p>
-          <p>不负好时光，月卡年卡任你挑</p>
+          <ProductInfo
+            corner="95折起"
+            title="腾讯视频蜜蜂会员七五折起"
+            desc="不负好时光，月卡年卡任你挑"
+          />
         </div>
       </div>
       <div className="product_spec_box">

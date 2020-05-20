@@ -1,6 +1,6 @@
 import React, { useEffect, useReducer } from 'react';
 import { Input } from 'zarm';
-import  { formatAccountStr } from '@/utils/ants';
+import  { formatAccountStr, isQQ } from '@/utils/ants';
 
 
 import './index.less';
@@ -53,9 +53,9 @@ export default function SwitchAccount(props) {
 
   return (
     <div className="z_switch_account">
-      <div>
+      <div className="z_switch_head">
         <div>充值账号</div>
-        <div></div>
+        <div className="z_qq_info">xxxx</div>
       </div>
       <div className="z_switch_account_input">
         <Input value={state.account} onChange={handleInput} />
@@ -66,6 +66,7 @@ export default function SwitchAccount(props) {
           </div>
         )}
       </div>
+      {isQQ(state.accountType) && <div className="z_tip">为防止充值错误，已为您开启昵称校验</div>}
     </div>
   )
 }
