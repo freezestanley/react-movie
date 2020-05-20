@@ -29,6 +29,7 @@ function LoginPage(props) {
       if (e.length === 11) {
         // console.log('[29] index.jsx: ', 11111);
         // TODO: check registered
+
         props.dispatch({
           type: 'user/checkRegistered',
           payload: state.phone,

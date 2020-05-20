@@ -7,7 +7,7 @@ const ActivityCard = props => {
     <div className={styles['acitivity-card']}>
       <div className={styles['main-part']}>
         <div className={styles['right-top']}></div>
-        <img src={brand} className={styles['brand']} />
+        <img src={brand} className={styles['brand']} alt="" />
 
         <div className={styles['card-title']}>{props.data.activityName}</div>
         <div className={styles['card-description']}>{props.data.description}</div>
