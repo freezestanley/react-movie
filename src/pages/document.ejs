@@ -5,7 +5,10 @@
 	<meta charset="utf-8" />
 	<meta name="viewport"
 		content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" />
-	<title><%= context.title %></title>
+  <title><%= context.title %></title>
+  <script>(window.onresize = window.__setFontSize__  = function(){
+    document.documentElement.style.fontSize = Math.min(750, Math.max(document.documentElement.clientWidth, 320) ) / 375 * 14 + 'px'}
+  )()</script>
 </head>
 <body>
 	<div id="root"></div>

@@ -42,8 +42,8 @@ export default {
         },
         // more: https://github.com/pigcan/postcss-plugin-px2rem#configuration
         px2rem: {
-          rootValue: 50,
-          minPixelValue: 2,
+          rootValue: 14,
+          remUnit: 28,
           selectorBlackList: ['ex_'], //以包含ex_的class不需要转换
         },
       },
