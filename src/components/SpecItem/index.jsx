@@ -5,7 +5,7 @@ import { fmtPrice } from '@/utils/tools';
 import './index.less';
 
 export default function SpecItem(props) {
-  const { column=2, index, onChange } = props;
+  const { column=2, index, onChange, active } = props;
   const handleChange = () => {
     onChange && onChange(index);
   }
@@ -17,7 +17,7 @@ export default function SpecItem(props) {
   }
   return (
     <div
-      className={cns('spec-item', { active: props.active })}
+      className={cns('spec-item', { active })}
       onClick={handleChange}
       style={extraStyle}
     >
