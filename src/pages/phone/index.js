@@ -4,6 +4,8 @@ import map from 'lodash/map';
 import styles from './index.module.less';
 import SpecItem from '@/components/SpecItem'
 import AttachItem from '@/components/Phone/AttachItem';
+import { ProductHead } from '@/components/Product';
+
 
 const phoneItemList = [
   { price: 20, payPrice: 10 },
@@ -19,8 +21,11 @@ const attachList = [
 
 export default function(props) {
   return (<div className={styles.phonePage}>
-    <div className={styles.header}>
-    </div>
+    <ProductHead
+      corner="95折起"
+      title="腾讯视频蜜蜂会员七五折起"
+      desc="不负好时光，月卡年卡任你挑"
+    />
     <div className={styles.group}>
       <h2>手机话费</h2>
       <Input placeholder="请输入手机号" className={styles.phoneInput} />

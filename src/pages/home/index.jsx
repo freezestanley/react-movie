@@ -10,7 +10,6 @@ import "slick-carousel/slick/slick-theme.css";
 
 import styles from './style/index.less';
 import sample from '@/assets/sample.png';
-import ActivityCard from '@/components/ActivityCard'
 import TimeLimitSlider from '@/components/TimeLimitSlider';
 
 const imgList = [
