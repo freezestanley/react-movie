@@ -34,9 +34,9 @@ export default class AsNavFor extends Component {
           ref={slider => (this.slider1 = slider)}
         >
           {
-            (this.props.list || []).map(item => {
+            (this.props.list || []).map((item,index) => {
               return (
-                <div className={styles['main-image']} onClick={() => this.gotoDetail(item)}>
+                <div key={index} className={styles['main-image']} onClick={() => this.gotoDetail(item)}>
                   <img src={item.image} alt="" />
 
                 </div>
@@ -53,9 +53,9 @@ export default class AsNavFor extends Component {
           focusOnSelect={true}
         >
            {
-            (this.props.list || []).map(item => {
+            (this.props.list || []).map((item,index) => {
               return (
-                <div className={styles['thumbnail']}>
+                <div key={index} className={styles['thumbnail']}>
                 <img src={item.thumbnail} alt="" />
 
                 </div>

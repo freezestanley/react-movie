@@ -45,12 +45,6 @@ const imgList = [
     link:'www.baidu.com'
   },
 ];
-const data = {
-  percent:'0.3',
-  activityName:'Q币限时秒杀',
-  description:'5折特惠秒杀，限时专享'
-}
-
 
 function Home ({ dispatch }) {
   useEffect(() => {
@@ -61,9 +55,10 @@ function Home ({ dispatch }) {
       <Banner />
       <ShortCut />
       <Belt />
-      <HotRecommend list={imgList} />
-      <ActivityCard data={data} />
       <TimeLimitSlider />
+
+      <HotRecommend list={imgList} />
+      
       <br/>
       <br/>
       <br/>
