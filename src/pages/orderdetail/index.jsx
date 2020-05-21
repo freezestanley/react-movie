@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './index.less'
-import CardCharge from './../../components/CardCharge'
-import OrderDetails from '../../components/OrderDetails/index';
+import CardCharge from '@/components/CardCharge'
+import OrderDetails from '@/components/OrderDetails';
 
 export default()=>{
   return(

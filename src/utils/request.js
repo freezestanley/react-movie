@@ -24,7 +24,7 @@ const service = axios.create({
 service.interceptors.request.use(
   config => {
     const token = Store.get('token');
-    token && (config.headers.Authorization = token);
+    token && (config.headers.token = token);
     // 浏览器环境
     config.headers.source = source;
     return config;

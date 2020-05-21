@@ -1,7 +1,8 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { useEffect, useReducer, useCallback } from 'react';
 import { Input } from 'zarm';
+import debounce from 'lodash/debounce';
 import  { formatAccountStr, isQQ } from '@/utils/ants';
-
+import { getQQInfo } from '@/services/user';
 
 import './index.less';
 
@@ -19,8 +20,10 @@ export default function SwitchAccount(props) {
     accountType: null,
     index: 0,
     account: '',
+    QQInfo: {},
+    onInput: true,
   })
-  const accountTypeList = [1, 2];
+  const accountTypeList = props.accountTypeList;
 
   useEffect(() => {
     if (accountTypeList && accountTypeList.length > 0) {
@@ -44,12 +47,30 @@ export default function SwitchAccount(props) {
       accountType: _record.value,
       accountTypeName: _record.label,
       account: '',
+      QQInfo: {},
     })
   }
 
   const handleInput = e => {
     setState({ account: e })
+    handleQQInfo(e, state);
   }
+
+  const handleQQInfo = useCallback(debounce((val, state) => {
+    if (!isQQ(state.accountType) || !val) {
+      setState({ QQInfo: {} });
+      return;
+    }
+
+    getQQInfo(val)
+      .then(res => {
+        if (res.code === '0000') {
+          setState({ QQInfo: res.data })
+        } else {
+          setState({ QQInfo: {} });
+        }
+      })
+  }, 500, { leading: false, trailing: true }), [])
 
   return (
     <div className="z_switch_account">
@@ -57,13 +78,19 @@ export default function SwitchAccount(props) {
         <div>充值账号</div>
         {isQQ(state.accountType) && (
           <div className="z_qq_info">
-            <img src={require('@/assets/logo.png')} alt="" />
-            <span>xxxx</span>
+            <img src={state.QQInfo.avatar} alt="" />
+            <span>{state.QQInfo.nickname}</span>
           </div>
         )}
       </div>
       <div className="z_switch_account_input">
-        <Input value={state.account} onChange={handleInput} />
+        <Input
+          placeholder={`请输入${state.accountTypeName}`}
+          value={state.account}
+          onChange={handleInput}
+          // onFocus={() => setState({ onInput: true })}
+          // onBlur={() => setState({ onInput: false })}
+        />
         {state.accountTypeList.length === 2 && (
           <div className="z_switch" onClick={handleSwitch}>
             <img src={require('./switch.svg')} alt="" />
@@ -71,7 +98,7 @@ export default function SwitchAccount(props) {
           </div>
         )}
       </div>
-      {isQQ(state.accountType) && <div className="z_tip">为防止充值错误，已为您开启昵称校验</div>}
+      {isQQ(state.accountType) && state.onInput && <div className="z_tip">为防止充值错误，已为您开启昵称校验</div>}
     </div>
   )
 }
