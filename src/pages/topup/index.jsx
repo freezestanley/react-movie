@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import TopupNote from '@/components/Card/TopupNote';
 import ProductSpecGroup from '@/components/ProductSpecGroup';
 import { ProductHead } from '@/components/Product';
+import PageStatus from '@/components/PageStatus';
 import { connect } from 'dva';
 import CardPage from './card';
 import DirectPage from './direct';
@@ -16,7 +17,9 @@ export default connect(state => ({ product: state.productDetail.info }))(functio
     dispatch({ type: 'productDetail/getProduct', payload: { productId  } });
   }, [dispatch, productId]);
   const { topCornerMark, abbr, name, detail, type  } = product
-  
+
+  if (!type) return <PageStatus>数据加载异常</PageStatus>;
+
   return (
     <>
       <ProductHead
