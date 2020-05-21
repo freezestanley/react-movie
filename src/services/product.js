@@ -32,3 +32,12 @@ export function getProductItems(data) {
     },
   })
 }
+// 获取加购商品规格
+export function queryAdditionalProductItems(data) {
+  return request({
+    url: '/queryAdditionalProductItems',
+    serve: 'product',
+    method: 'GET',
+    data
+  });
+}
