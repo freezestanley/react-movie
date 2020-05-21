@@ -25,6 +25,8 @@ export default {
         { path: '/orderdetail', component: '../pages/orderdetail', backgroundColor:'gray',title: '订单详情' },
         { path: '/phone', component: '../pages/phone', backgroundColor:'gray',title: '话费充值', hasBuyFooter: true },
         { path: '/spike', component: '../pages/spike', backgroundColor:'gray',title: '秒杀活动',  },
+        { path: '/successbuy',component: '../pages/successbuy', title: '购买成功',  },
+
       
         // { path: '/test', component: '../pages/test' },
       ],
