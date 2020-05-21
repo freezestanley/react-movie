@@ -2,26 +2,37 @@ import React from 'react';
 import styles from './index.less'
 import Countdown from "react-countdown";
 const renderer = ({ hours, minutes, seconds}) => {
- 
     return (<div ><span>
       {hours}</span>:<span>{minutes}</span>:<span>{seconds}
       </span></div>);
-
 };
 
 export default ({hours, minutes, seconds,} )=>{
+
+  // useEffect(() => {
+    
+  //   return () => {
+  //     cleanup
+  //   };
+  // }, [isover]);
   return(
     <div className={styles.ActivityBanner}>
       <div className={styles.ActivityBannerHead}>
         <div>腾讯视频会员</div>
         <div>
-       
           <span>
             据活动开始
           </span>
           <Countdown date={Date.now() + 50000000} renderer={renderer} />
 
         </div>
+      </div>
+      <div className={styles.Spike}>
+
+        <div className={styles.SpikeDetail}>秒杀活动已售罄，每天早上10 : 00开</div>
+        <div className={styles.SpikeMore}>查看该商品更多折扣</div>
+
+
       </div>
       
      
