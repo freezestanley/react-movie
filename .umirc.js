@@ -26,6 +26,7 @@ export default {
         { path: '/phone', component: '../pages/phone', backgroundColor:'gray',title: '话费充值', hasBuyFooter: true },
         { path: '/spike', component: '../pages/spike', backgroundColor:'gray',title: '秒杀活动',  },
         { path: '/successbuy',component: '../pages/successbuy', title: '购买成功',  },
+        { path: '/cardpackage',component: '../pages/cardpackage',backgroundColor:'gray', title: '我的卡券包',  },
 
       
         // { path: '/test', component: '../pages/test' },
