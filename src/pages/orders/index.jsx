@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './index.less'
 import router from 'umi/router';
 import Order from '@/components/OrderItem'
+import Activity from '../../components/ActivityBanner'
 export default()=>{
   return(
 
@@ -17,6 +18,7 @@ export default()=>{
       <Order/>
       <Order/>
       <Order/>
+      <Activity></Activity>
 
      
       

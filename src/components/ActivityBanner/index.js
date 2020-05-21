@@ -1,24 +1,26 @@
 import React from 'react';
 import styles from './index.less'
+import Countdown from "react-countdown";
+const renderer = ({ hours, minutes, seconds}) => {
+ 
+    return (<div ><span>
+      {hours}</span>:<span>{minutes}</span>:<span>{seconds}
+      </span></div>);
 
-export default ()=>{
+};
+
+export default ({hours, minutes, seconds,} )=>{
   return(
     <div className={styles.ActivityBanner}>
       <div className={styles.ActivityBannerHead}>
         <div>腾讯视频会员</div>
         <div>
+       
           <span>
             据活动开始
           </span>
-          <span>
-            07
-          </span>:
-          <span>
-            02
-          </span>:
-          <span>
-            22
-          </span>
+          <Countdown date={Date.now() + 50000000} renderer={renderer} />
+
         </div>
       </div>
       
