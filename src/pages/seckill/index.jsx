@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from './index.less';
-import SeckillActivityInfo from '@/components/SeckillActivityInfo';
 import Recommend from '@/components/RecommendBuy';
+import SeckillActivityInfo from './SeckillActivityInfo';
 
 const mockData = {
   beginTime: 'string',
