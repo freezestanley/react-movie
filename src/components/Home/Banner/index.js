@@ -14,6 +14,7 @@ export default class Banner extends React.Component {
   render() {
     const self = this;
     const { activeIndex } = this.state;
+    const { list }=this.props;
     var settings = {
       dots: true,
       customPaging(idx) {
@@ -31,7 +32,9 @@ export default class Banner extends React.Component {
     };
     return (
       <Slider className={styles.homeBanner} {...settings}>
-        {map([1,2,3], (item, idx) => (<div key={idx} className={styles.item}>头部封面{item}</div>))}
+        {map(list, (item, idx) => (<div key={idx} className={styles.item} onClick={() => window.location.href=item.bannerLinkUrl}>
+          <img src={item.bannerCoverUrl} alt="封面"/>
+        </div>))}
       </Slider>
     );
   }

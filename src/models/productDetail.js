@@ -12,7 +12,6 @@ export default {
   },
   effects: {
     *getProduct({ payload }, { put, call }) {
-      console.log('----payload', payload);
       const res = yield call(service.queryProduct, payload);
       const { code, data } = res || {};
       if (code === '0000') {
