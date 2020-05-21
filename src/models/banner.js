@@ -13,7 +13,7 @@ export default {
   effects: {
     *getBanner({ payload }, { put, call }) {
       const res = yield call(service.getBanners, payload);
-      const { code, data } = res.data || {};
+      const { code, data } = res || {};
       if (code === '0000') {
         yield put({
           type: 'setState',

@@ -10,7 +10,7 @@ import styles from './index.less';
 
 export default connect(state => ({ product: state.productDetail.info }))(function TopupPage(props) {
   const { dispatch, location: { query }, product } = props;
-  const { productId } = query;
+  const { id: productId } = query;
   // constructor的作用
   useEffect(() => {
     dispatch({ type: 'productDetail/getProduct', payload: { productId  } });
