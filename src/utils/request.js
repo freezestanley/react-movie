@@ -13,9 +13,7 @@ export const apiPrefix = {
 
 // create an axios instance
 const service = axios.create({
-  // baseURL: '', // url = base url + request url
-  // withCredentials: true, // send cookies when cross-domain requests
-  // timeout: 30 * 1000, // request timeout
+  timeout: 30 * 1000,
 });
 
 
@@ -33,14 +31,14 @@ service.interceptors.request.use(
     //     config.params.hackuid = uid;
     //   }
     // }
+    // console.log('-----config', config);
+    // if (config.serve) {
+    //   config.url = apiPrefix[config.serve] + config.url;
+    // }
 
-    if (config.serve) {
-      config.url = apiPrefix[config.serve] + config.url;
-    }
-
-    if (config.method === 'GET') {
-      config.params = config.data;
-    }
+    // if (config.method === 'GET') {
+    //   config.params = config.data;
+    // }
 
     return config;
   },
@@ -90,4 +88,13 @@ service.interceptors.response.use(
   },
 );
 
-export default service;
+export default function (config) {
+  const { serve, method, data, ...rest } = config;
+  const options = {
+    baseURL: apiPrefix[config.serve],
+    method,
+    [method === 'GET' ? 'params' : 'data']: data,
+    ...rest
+  }
+  return service.request(options);
+};
