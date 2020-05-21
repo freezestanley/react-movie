@@ -7,13 +7,43 @@ import "slick-carousel/slick/slick-theme.css";
 // import sample from '@/assets/sample.png';
 import styles from './index.less';
 import router from 'umi/router';
+import sample from '@/assets/sample.png';
+
 
 export default class AsNavFor extends Component {
   constructor(props) {
     super(props);
     this.state = {
       nav1: null,
-      nav2: null
+      nav2: null,
+      list:[
+        {
+          thumbnail:sample,
+          image:sample,
+          link:'www.baidu.com'
+        },
+        {
+          thumbnail:sample,
+          image:sample,
+          link:'www.baidu.com'
+        },
+        {
+          thumbnail:sample,
+          image:sample,
+          link:'www.baidu.com'
+        },
+        {
+          thumbnail:sample,
+          image:sample,
+          link:'www.baidu.com'
+        },
+        {
+          thumbnail:sample,
+          image:sample,
+          link:'www.baidu.com'
+        },
+        
+      ]
     };
   }
   componentDidMount() {
@@ -34,7 +64,7 @@ export default class AsNavFor extends Component {
           ref={slider => (this.slider1 = slider)}
         >
           {
-            (this.props.list || []).map((item,index) => {
+            (this.state.list || []).map((item,index) => {
               return (
                 <div key={index} className={styles['main-image']} onClick={() => this.gotoDetail(item)}>
                   <img src={item.image} alt="" />
@@ -45,26 +75,20 @@ export default class AsNavFor extends Component {
           }
 
         </Slider>
-        <Slider
-          asNavFor={this.state.nav1}
-          ref={slider => (this.slider2 = slider)}
-          slidesToShow={5}
-          swipeToSlide={true}
-          focusOnSelect={true}
-        >
-           {
-            (this.props.list || []).map((item,index) => {
+        <div className={styles['list-content']}>
+          {
+            (this.state.list || []).map((item,index) => {
               return (
                 <div key={index} className={styles['thumbnail']}>
-                <img src={item.thumbnail} alt="" />
+                  <img src={item.thumbnail} alt="" />
 
                 </div>
               )
             })
           }
-
-
-        </Slider>
+        </div>
+      
+       
       </div>
     );
   }

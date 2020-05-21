@@ -21,6 +21,17 @@ export default {
           payload: { info: data },
         });
       }
+    },
+    *getEventList({ payload }, { put, call }) {
+      console.log('----payload', payload);
+      const res = yield call(service.eventList, payload);
+      const { code, data } = res.data || {};
+      if (code === '0000') {
+        yield put({
+          type: 'setState',
+          payload: { info: data },
+        });
+      }
     }
   }
 }

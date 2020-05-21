@@ -9,45 +9,13 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import styles from './style/index.less';
-import sample from '@/assets/sample.png';
 import TimeLimitSlider from '@/components/TimeLimitSlider';
 
-const imgList = [
-  {
-    thumbnail:sample,
-    image:sample,
-    link:'www.baidu.com'
-  },
-  {
-    thumbnail:sample,
-    image:sample,
-    link:'www.baidu.com'
-  },
-  {
-    thumbnail:sample,
-    image:sample,
-    link:'www.baidu.com'
-  },
-  {
-    thumbnail:sample,
-    image:sample,
-    link:'www.baidu.com'
-  },
-  {
-    thumbnail:sample,
-    image:sample,
-    link:'www.baidu.com'
-  },
-  {
-    thumbnail:sample,
-    image:sample,
-    link:'www.baidu.com'
-  },
-];
 
 function Home ({ dispatch }) {
   useEffect(() => {
     dispatch({ type: 'banner/getBanner', payload: {} });
+    dispatch({ type: 'productDetail/getEventList', payload: {} });
   }, [dispatch]);
   return (
     <div className={styles.homePage}>
@@ -55,7 +23,7 @@ function Home ({ dispatch }) {
       <ShortCut />
       <Belt />
       <TimeLimitSlider />
-      <HotRecommend list={imgList} />
+      <HotRecommend />
     </div>
   );
 }
