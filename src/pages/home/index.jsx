@@ -12,23 +12,26 @@ import styles from './style/index.less';
 import TimeLimitSlider from '@/components/TimeLimitSlider';
 
 
-function Home ({ dispatch }) {
+function Home ({ dispatch, ...rest }) {
   useEffect(() => {
     dispatch({ type: 'banner/getBanner', payload: {} });
     dispatch({ type: 'productDetail/getEventList', payload: {} });
   }, [dispatch]);
+  console.log('rest',rest);
+  
   return (
     <div className={styles.homePage}>
       <Banner />
       <ShortCut />
       <Belt />
-      <TimeLimitSlider />
+      <TimeLimitSlider data={rest.productDetail.eventList} dispatch={dispatch} />
       <HotRecommend />
     </div>
   );
 }
 
 const mapStateToProps = state => ({
-  user: state.user
+  user: state.user,
+  productDetail:state.productDetail
 })
 export default connect(mapStateToProps)(Home)

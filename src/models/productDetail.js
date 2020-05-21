@@ -4,6 +4,7 @@ export default {
   namespace: 'productDetail',
   state: {
     info: {},
+    eventList:[]
   },
   reducers: {
     setState(state, { payload }) {
@@ -25,11 +26,11 @@ export default {
     *getEventList({ payload }, { put, call }) {
       console.log('----payload', payload);
       const res = yield call(service.eventList, payload);
-      const { code, data } = res.data || {};
-      if (code === '0000') {
+      
+      if (res.code === '0000') {
         yield put({
           type: 'setState',
-          payload: { info: data },
+          payload: { eventList: res.data },
         });
       }
     }
