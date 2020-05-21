@@ -24,11 +24,11 @@ export default {
         { path: '/charge', component: '../pages/charge', backgroundColor:'gray',title: '充值成功' },
         { path: '/orderdetail', component: '../pages/orderdetail', backgroundColor:'gray',title: '订单详情' },
         { path: '/phone', component: '../pages/phone', backgroundColor:'gray',title: '话费充值', hasBuyFooter: true },
-        { path: '/spike', component: '../pages/spike', backgroundColor:'gray',title: '秒杀活动',  },
+        { path: '/seckill', component: '../pages/seckill', backgroundColor:'gray',title: '秒杀活动',  },
         { path: '/successbuy',component: '../pages/successbuy', title: '购买成功',  },
         { path: '/cardpackage',component: '../pages/cardpackage',backgroundColor:'gray', title: '我的卡券包',  },
 
-      
+
         // { path: '/test', component: '../pages/test' },
       ],
     }

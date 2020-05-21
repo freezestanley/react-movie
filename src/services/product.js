@@ -1,26 +1,34 @@
 /* eslint-disable import/prefer-default-export */
 import request from '@/utils/request';
 
-export function queryProduct({ source='H5', ...rest }) {
+// 获取商品信息
+export function queryProduct(data) {
   return request({
     url: '/queryProduct',
     serve: 'product',
     method: 'GET',
-    headers: {
-      source
-    },
-    data: rest,
+    data,
   });
 }
 
-export function eventList({ source='H5', ...rest }) {
+export function eventList(data) {
   return request({
     url: '/eventList',
     serve: 'seckill',
     method: 'GET',
-    headers: {
-      source
-    },
-    data: rest,
+    data,
   });
+}
+
+// 获取商品规格
+export function getProductItems(data) {
+  return request({
+    url: '/queryProductItems',
+    serve: 'product',
+    method: 'GET',
+    data: {
+      status: 2,
+      productId: data,
+    },
+  })
 }

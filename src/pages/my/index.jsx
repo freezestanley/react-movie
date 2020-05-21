@@ -4,9 +4,12 @@ import router from 'umi/router';
 import styles from './index.less';
 
 
-function my(props){
+function My(props){
 
   console.log(props)
+  const handleExit = () => {
+    props.dispatch({ type: 'user/loginOut' })
+  }
 
   return (
     <div className={styles.myPage}>
@@ -26,8 +29,9 @@ function my(props){
         </ul>
       </div>
       <button onClick={() => router.push('/login')}>登录</button>
+      <button onClick={handleExit}>退出</button>
     </div>
   );
 }
 
-export default connect(state=>state)(my)
+export default connect(state=>state)(My)

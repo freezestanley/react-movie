@@ -20,6 +20,15 @@ export function login(data) {
   });
 }
 
+// 手机验证码登录
+export function loginOut() {
+  return request({
+    url: '/loginOut',
+    method: 'POST',
+    serve: 'user',
+  });
+}
+
 // 发送验证码
 export function sendCode(data) {
   return request({
@@ -32,9 +41,12 @@ export function sendCode(data) {
 // 验证是否注册
 export function checkRegistered(data) {
   return request({
-    url: `/checkRegist?mobileNumber=${data}`,
+    url: '/checkRegist',
     method: 'GET',
     serve: 'user',
+    data: {
+      mobileNumber: data,
+    }
   });
 }
 
@@ -44,5 +56,14 @@ export function getUserInfo(data) {
     url: `/`,
     method: 'GET',
     serve: 'user',
+  });
+}
+
+// QQ头像和昵称
+export function getQQInfo(data) {
+  return request({
+    url: `/qq/${data}`,
+    serve: 'user',
+    method: 'POST',
   });
 }
