@@ -3,8 +3,7 @@ import styles from './index.less'
 import router from 'umi/router';
 import Order from '@/components/OrderItem'
 import Activity from '@/components/SpikeActivity'
-import Card from '../../components/Card'
-import Recommend from '../../components/RecommendBuy'
+
 import { Pull, Cell, Message, Icon, Button } from 'zarm';
 const REFRESH_STATE = {
   normal: 0,  // 普通
@@ -45,13 +44,7 @@ export default()=>{
       <Order/>
       <Order/>
       <Order/>
-      <div>
-      <Card title='蜜蜂会员都在买' extra='更多' >
-        <Recommend/>
-        <Recommend/>
-      </Card>
-      </div>
-      <Activity></Activity>
+     
       
 
      

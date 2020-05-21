@@ -1,5 +1,9 @@
 import axios from 'axios';
 import { Toast } from 'zarm';
+// import router from 'umi/router';
+import { Store, BrowserInfo } from './tools';
+
+const source = BrowserInfo.isWeixin ? 'WX' : 'H5';
 
 export const apiPrefix = {
   ance: '/api/ants_user/v1/ance',
@@ -16,30 +20,13 @@ const service = axios.create({
   timeout: 30 * 1000,
 });
 
-
 // request interceptor
 service.interceptors.request.use(
   config => {
-    // console.log('[20] request.js: ', config);
-
-    // if (process.env.NODE_ENV === 'development') {
-    //   if (config.method === 'post') {
-    //     config.url = config.url + '?hackuid=' + uid;
-    //   }
-
-    //   if (config.method === 'get') {
-    //     config.params.hackuid = uid;
-    //   }
-    // }
-    // console.log('-----config', config);
-    // if (config.serve) {
-    //   config.url = apiPrefix[config.serve] + config.url;
-    // }
-
-    // if (config.method === 'GET') {
-    //   config.params = config.data;
-    // }
-
+    const token = Store.get('token');
+    token && (config.headers.Authorization = token);
+    // 浏览器环境
+    config.headers.source = source;
     return config;
   },
   error => {
@@ -63,27 +50,32 @@ service.interceptors.response.use(
    * You can also judge the status by HTTP Status Code
    */
   response => {
-    // console.log('[55] request.js: ', response);
-    const res = response.data || {};
-    // const msg = res.msg;
-    // const code = res.code;
-
-    // if (code !== '0000') {
-    //   Toast.show(msg);
-    // }
-
-    return res;
+    if (response.status === 200) {
+      return Promise.resolve(response.data);
+    } else {
+      return Promise.reject(response);
+    }
   },
   error => {
+    // if (error.response.status) {
+    //   switch (error.response.status) {
+    //     case 401: // 未登录
+    //       router.push('/login');
+    //       break;
+    //     case 403: // token过期
+    //       Toast.show({
+    //         content: '登录过期，请重新登录',
+    //         stayTime: 1000,
+    //       });
+    //       localStorage.removeItem('token');
+    //       setTimeout(() => {
+    //         router.push('/login');
+    //       }, 1000);
+    //   }
+    // }
     if (error.message.indexOf('500')) {
       Toast.show('服务器异常，请稍后再试' || error.message);
     }
-    const { host, hash } = location;
-
-    if (host.indexOf('localhost') > -1) {
-      return;
-    }
-
     return Promise.reject(error);
   },
 );

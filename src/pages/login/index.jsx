@@ -27,12 +27,10 @@ function LoginPage(props) {
     setState({ [field]: e });
     if (field === 'phone') {
       if (e.length === 11) {
-        // console.log('[29] index.jsx: ', 11111);
-        // TODO: check registered
-
+        // check registered
         props.dispatch({
           type: 'user/checkRegistered',
-          payload: state.phone,
+          payload: e,
         }).then(hasAccount => {
           if (!hasAccount) setState({ isRegistered: false })
         })

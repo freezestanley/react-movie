@@ -46,7 +46,7 @@ export default ()=>{
         </div>
         <div className={styles.contact}>
 
-          <div><img className={styles.icon} src="" alt="11"/> <span>联系客服</span></div>
+          <div><img className={styles.icon} src="" alt=""/> <span>联系客服</span></div>
         </div>
 
       </div>

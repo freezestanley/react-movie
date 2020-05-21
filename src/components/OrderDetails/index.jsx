@@ -19,23 +19,23 @@ export default ()=>{
         </div>
         <div>
           <span>原价</span>
-          <span></span>
+          <span>299</span>
         </div>
         <div>
           <span>会员价</span>
-          <span></span>
+          <span>299</span>
         </div>
         <div>
           <span>会员费</span>
-          <span></span>
+          <span>200</span>
         </div>
         <div>
           <span>实际支付</span>
-          <span></span>
+          <span>200</span>
         </div>
         <div>
           <span>时间</span>
-          <span></span>
+          <span>2020-02-20</span>
         </div>
        
       </div>

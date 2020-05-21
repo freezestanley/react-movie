@@ -29,10 +29,19 @@ export function sendCode(data) {
   });
 }
 
-// 发送验证码
+// 验证是否注册
 export function checkRegistered(data) {
   return request({
-    url: `/sms/check/${data}`,
+    url: `/checkRegist?mobileNumber=${data}`,
+    method: 'GET',
+    serve: 'user',
+  });
+}
+
+// 获取用户信息
+export function getUserInfo(data) {
+  return request({
+    url: `/`,
     method: 'GET',
     serve: 'user',
   });

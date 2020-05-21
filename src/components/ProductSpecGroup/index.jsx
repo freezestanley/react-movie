@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react';
 import cns from 'classnames';
-import { ProductHead } from '../Product';
+
 
 import './index.less';
 
@@ -14,11 +14,6 @@ export default function ProductSpecGroup(props) {
   }
   return (
     <div className={cns('product_spec_group', props.className)}>
-      <ProductHead
-        corner="95折起"
-        title="腾讯视频蜜蜂会员七五折起"
-        desc="不负好时光，月卡年卡任你挑"
-      />
       <div className="product_spec_box">
         <div className="product_spec_tab">
           <div className="tab_l tab_item" onClick={() => handleTab('left')}>

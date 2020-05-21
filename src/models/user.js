@@ -28,13 +28,7 @@ export default {
     *login({ payload }, { put, call }) {
       const res = yield call(services.login, payload);
       if (res.code === '0000') {
-        yield put({
-          type: 'setState',
-          payload: {
-            userInfo: res.data
-          }
-        })
-        Store.set('userInfo', res.data);
+        Store.set('token', res.data);
         return true;
       } else {
         Toast.show(res.msg);
@@ -50,8 +44,8 @@ export default {
     // 是否注册过手机号
     // eslint-disable-next-line require-yield
     *checkRegistered({ payload }, { put, call }) {
-      // yield call(services.checkRegistered, payload);
-      return Math.random() > 0.5 ? true : false;
+      const res = yield call(services.checkRegistered, payload);
+      return res.data;
     },
   },
 };
