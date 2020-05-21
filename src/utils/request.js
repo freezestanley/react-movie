@@ -63,16 +63,7 @@ service.interceptors.response.use(
    * You can also judge the status by HTTP Status Code
    */
   response => {
-    // console.log('[55] request.js: ', response);
-    const res = response.data || {};
-    // const msg = res.msg;
-    // const code = res.code;
-
-    // if (code !== '0000') {
-    //   Toast.show(msg);
-    // }
-
-    return res;
+    return response;
   },
   error => {
     if (error.message.indexOf('500')) {
