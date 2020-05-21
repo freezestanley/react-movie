@@ -28,13 +28,7 @@ export default {
     *login({ payload }, { put, call }) {
       const res = yield call(services.login, payload);
       if (res.code === '0000') {
-        yield put({
-          type: 'setState',
-          payload: {
-            userInfo: res.data
-          }
-        })
-        Store.set('userInfo', res.data);
+        Store.set('token', res.data);
         return true;
       } else {
         Toast.show(res.msg);
