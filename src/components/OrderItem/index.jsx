@@ -12,9 +12,9 @@ export default ( {onClick})=>{
         <p className={styles.up_p}>¥22</p>
 
         <div className={styles.details}>
-          <p className={styles.details_p1}>订单 :</p>
-          <p className={styles.details_p1}>时间 :</p>
-          <p className={styles.details_p1}>规格 :</p>
+          <p className={styles.details_p1}>订单 : 2827266666654</p>
+          <p className={styles.details_p1}>时间 : 2020-05-20 19:20</p>
+          <p className={styles.details_p1}>规格 :月卡 </p>
 
         </div>
       </div>
