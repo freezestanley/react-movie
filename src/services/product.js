@@ -12,3 +12,15 @@ export function queryProduct({ source='H5', ...rest }) {
     data: rest,
   });
 }
+
+export function eventList({ source='H5', ...rest }) {
+  return request({
+    url: '/eventList',
+    serve: 'seckill',
+    method: 'GET',
+    headers: {
+      source
+    },
+    data: rest,
+  });
+}

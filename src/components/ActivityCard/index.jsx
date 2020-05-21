@@ -9,9 +9,13 @@ const ActivityCard = props => {
         <div className={styles['right-top']}></div>
         <img src={brand} className={styles['brand']} alt="" />
 
-        <div className={styles['card-title']}>{props.data.activityName}</div>
+        <div className={styles['card-title']}>{props.data.eventName}</div>
+      
         <div className={styles['card-description']}>
-          <span className={styles['member-discount']}>会员优惠</span>
+          {
+           props.data.limitBuy &&  <span className={styles['member-discount']}>会员优惠</span>
+         
+          }
           {props.data.description}
         </div>
         <div className={styles['price-box']}>
@@ -20,7 +24,7 @@ const ActivityCard = props => {
         </div>
       </div>
       <div className={styles['bottom-part']}>
-        <div className={styles['rest']}>剩余30件</div>
+        <div className={styles['rest']}>{props.data.stock === 0 ? '已售罄' :`剩余${props.data.stock}件`}</div>
         <div className={styles['progress']}>
           <div className={styles['progress-value']} style={{width:props.data.percent * 100 + '%'}}></div>
         </div>

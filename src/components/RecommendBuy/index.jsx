@@ -1,24 +1,26 @@
 import React from 'react';
 import styles from './index.less'
-export default ({ title, detail, price, icon, onClick }) => {
-  const handleClick = () => {
-    onClick && onClick();
-  }
+import brand from '@/assets/brand.png'
+export default (props ) => {
+  
   return (
-    <div className={styles.BeeBuy} onClick={handleClick}>
-      <div className={styles.BeeBuy_up} >
-        <p>{title}</p>
-        <p>{detail}</p>
-        <div>
-          ¥{price} <del>¥499</del>
+    <div className={styles['acitivity-card']}>
+      <div className={styles['main-part']}>
+        <div className={styles['right-top']}></div>
+        <img src={brand} className={styles['brand']} alt="" />
+
+        <div className={styles['card-title']}>Q币限时秒杀</div>
+        <div className={styles['card-description']}>
+          <span className={styles['member-discount']}>会员优惠</span>
+        
+        </div>
+        <div className={styles['price-box']}>
+          <div className={styles['now-price']}><span className={styles['yuan']}>￥</span>274</div>
+          <div className={styles['origin-price']}>￥498</div>
         </div>
       </div>
-      <div className={styles.BeeBuy_icon}> <img src={icon} alt="" /></div>
-      <div className={styles.BeeBuy_down}>
-        <p>剩余30件</p>
-        <div className={styles.progress_bar}>
-          <div className={styles.progress}> </div>
-        </div>
+      <div className={styles['bottom-part']}>
+        
       </div>
     </div>
   )

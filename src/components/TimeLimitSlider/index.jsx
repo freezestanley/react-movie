@@ -4,16 +4,20 @@ import Slider from "react-slick";
 import ActivityCard from '../ActivityCard';
 import styles from './index.less';
 import moment from 'moment';
+import Countdown,{zeroPad} from 'react-countdown';
 
-const endTime = '2020-5-21';
+const renderer = ({ hours, minutes, seconds, completed, total,type }) => {
+  console.log('hours',hours);
+  return (
+     <div className={styles['daojishi']}>
+       <span className={styles['over-text']}>{type === 'end' ? '距活动结束' :'距活动开始'}</span>
+       <div className={styles['color-text']}>{zeroPad(hours)}</div> : 
+       <div className={styles['color-text']}>{zeroPad(minutes)}</div> : 
+       <div className={styles['color-text']}>{zeroPad(seconds)}</div>
+     </div>
+  )
+ };
 
-const addZero = str => {
-  if(str < 10){
-    str = '0'+ str;
-  }
-  return str;
-}
-let si
 export default class MultipleRows extends Component {
   state = {
     hh:'00',
@@ -21,25 +25,11 @@ export default class MultipleRows extends Component {
     ss:'00'
   }
   componentDidMount(){
-    si = setInterval(() => {
-      const minusTime = moment.duration(moment(endTime)-moment());
-      // console.log('minusTime',minusTime);
-      let hh = minusTime.hours();
-      hh = addZero(hh)
-      let mm = minusTime.minutes();
-      mm = addZero(mm);
-      let ss = minusTime.seconds();
-      ss = addZero(ss);
-      this.setState({
-        hh : hh,
-        mm : mm,
-        ss : ss
-      })
-
-    },1000)
+    
   }
-  componentWillUnmount(){
-    clearInterval(si);
+ 
+  refresh = () => {
+    this.props.dispatch({ type: 'productDetail/getEventList', payload: {} });
   }
   render() {
     const settings = {
@@ -51,41 +41,46 @@ export default class MultipleRows extends Component {
       speed: 500,
       rows: 1,
     };
-    const data = {
-      percent:'0.3',
-      activityName:'Q币限时秒杀',
-      description:'5折特惠秒杀'
-    }
-    const {hh, mm, ss} = this.state;
+   
+  
     return (
       <div className={styles['timelimit-slider']}>
           <div className={styles['title-box']}>
             <div className={styles['title']}>限时抢购</div>
-            <div className={styles['daojishi']}>
-              <span className={styles['over-text']}>距活动结束</span>
-              <div className={styles['color-text']}>{hh}</div> :
-              <div className={styles['color-text']}>{mm}</div> :
-              <div className={styles['color-text']}>{ss}</div>
 
-
-            </div>
+            {
+              this.props.data.length > 0 && (
+                (moment().valueOf() < this.props.data[0]['endTimestamp']) ? 
+                <Countdown key={1} date={this.props.data[0]['endTimestamp']} renderer={(params) => {params.type='end'; return renderer(params)}} onComplete={this.refresh} />:
+                <Countdown key={2} date={this.props.data[0]['beginTimestamp']} renderer={(params) => {params.type='start';return  renderer(params)}}  onComplete={this.refresh} />
+              )
+             
+            }
+             {/* {
+              this.props.data.length > 0 && (
+                (moment().valueOf() < 1590058239000) ? 
+                <Countdown key={1} date={1590058239000} renderer={(params) => {params.type='end'; return renderer(params)}} zeroPadTime={2} onComplete={this.refresh} />:
+                <Countdown key={2} date={1590058299000} renderer={(params) => {params.type='start';return  renderer(params)}} zeroPadTime={2} onComplete={this.refresh} />
+              )
+             
+            } */}
+             
+          
           </div>
         <Slider {...settings}>
-
-          <div className={styles['slider-item-box']}>
-            <ActivityCard data={data} />
-          </div>
-          <div className={styles['slider-item-box']}>
-            <ActivityCard data={data} />
-          </div>
-          <div className={styles['slider-item-box']}>
-            <ActivityCard data={data} />
-          </div>
-          <div className={styles['slider-item-box']}>
-            <ActivityCard data={data} />
-          </div>
-
-
+          {
+            (this.props.data || []).map(item => {
+              return (
+                <div key={item.id} className={styles['slider-item-box']}>
+                  <ActivityCard data={item} />
+                </div>
+              )
+            })
+          }
+         
+        
+         
+         
         </Slider>
       </div>
     );
