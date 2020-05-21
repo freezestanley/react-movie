@@ -23,7 +23,7 @@ export default class MultipleRows extends Component {
   componentDidMount(){
     si = setInterval(() => {
       const minusTime = moment.duration(moment(endTime)-moment());
-      console.log('minusTime',minusTime);
+      // console.log('minusTime',minusTime);
       let hh = minusTime.hours();
       hh = addZero(hh)
       let mm = minusTime.minutes();
@@ -35,7 +35,7 @@ export default class MultipleRows extends Component {
         mm : mm,
         ss : ss
       })
-     
+
     },1000)
   }
   componentWillUnmount(){
@@ -63,15 +63,15 @@ export default class MultipleRows extends Component {
             <div className={styles['title']}>限时抢购</div>
             <div className={styles['daojishi']}>
               <span className={styles['over-text']}>距活动结束</span>
-              <div className={styles['color-text']}>{hh}</div> : 
-              <div className={styles['color-text']}>{mm}</div> : 
+              <div className={styles['color-text']}>{hh}</div> :
+              <div className={styles['color-text']}>{mm}</div> :
               <div className={styles['color-text']}>{ss}</div>
 
 
             </div>
           </div>
         <Slider {...settings}>
-        
+
           <div className={styles['slider-item-box']}>
             <ActivityCard data={data} />
           </div>
@@ -84,8 +84,8 @@ export default class MultipleRows extends Component {
           <div className={styles['slider-item-box']}>
             <ActivityCard data={data} />
           </div>
-         
-         
+
+
         </Slider>
       </div>
     );

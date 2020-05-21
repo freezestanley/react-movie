@@ -44,8 +44,8 @@ export default {
     // 是否注册过手机号
     // eslint-disable-next-line require-yield
     *checkRegistered({ payload }, { put, call }) {
-      // yield call(services.checkRegistered, payload);
-      return Math.random() > 0.5 ? true : false;
+      const res = yield call(services.checkRegistered, payload);
+      return res.data;
     },
   },
 };

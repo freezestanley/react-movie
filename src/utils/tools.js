@@ -90,7 +90,30 @@ export const Store = {
       return JSON.parse(value)
     }
     return value;
-  }
+  },
+  remove(key) {
+    localStorage.removeItem(key);
+  },
+}
+
+export const Session = {
+  set(key, value) {
+    switch (typeof value) {
+      case 'string': sessionStorage.setItem(key, value); break;
+      case 'object': sessionStorage.setItem(key, JSON.stringify(value)); break;
+      default: new Error('Invalid');
+    }
+  },
+  get(key) {
+    const value = sessionStorage.getItem(key);
+    if (isJSON(value)) {
+      return JSON.parse(value)
+    }
+    return value;
+  },
+  remove(key) {
+    sessionStorage.removeItem(key);
+  },
 }
 
 export const isPhone = (data, hasToast = true) => {
