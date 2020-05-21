@@ -27,13 +27,13 @@ export default ({hours, minutes, seconds,} )=>{
 
         </div>
       </div>
-      <div className={styles.Spike}>
+      {/* <div className={styles.Spike}>
 
         <div className={styles.SpikeDetail}>秒杀活动已售罄，每天早上10 : 00开</div>
         <div className={styles.SpikeMore}>查看该商品更多折扣</div>
 
 
-      </div>
+      </div> */}
       
      
       <div className={styles.ActivityBannerCon}>
