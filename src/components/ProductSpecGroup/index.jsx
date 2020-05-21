@@ -18,7 +18,7 @@ export default function ProductSpecGroup(props) {
         <div className="product_spec_tab">
           <div className="tab_l tab_item" onClick={() => handleTab('left')}>
             <img src={imgURL('left')} alt=""/>
-            <div className="tab_item_title">超级影视会员</div>
+            <div className="tab_item_title">VIP会员</div>
           </div>
           <div className="tab_r tab_item" onClick={() => handleTab('right')}>
             <img src={imgURL('right')} alt=""/>

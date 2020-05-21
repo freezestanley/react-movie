@@ -37,14 +37,28 @@ export default {
     },
 
     // 发送验证码
+    *loginOut(_, { put, call }) {
+      const res = yield call(services.loginOut);
+      if (res.code === '0000') {
+        localStorage.clear();
+        sessionStorage.clear();
+      }
+    },
+
+    // 发送验证码
     *sendCode({ payload }, { put, call }) {
       yield call(services.sendCode, payload);
     },
 
     // 是否注册过手机号
-    // eslint-disable-next-line require-yield
     *checkRegistered({ payload }, { put, call }) {
       const res = yield call(services.checkRegistered, payload);
+      return res.data;
+    },
+
+    // 获取QQ昵称
+    *getQQInfo({ payload }, { put, call }) {
+      const res = yield call(services.getQQInfo, payload);
       return res.data;
     },
   },
