@@ -47,6 +47,19 @@ function Layout(props) {
   const { hasNavBar = false, footer, hasBuyFooter=false } = currRoute;
 
   useEffect(() => {
+    // 反欺诈
+    let s = 'b61f4b29a9b2#test#support'; // 测试ID
+    if (/vip.zhongan.io$/.test(window.location.origin)) {
+      s = 'a8987701693f#prd#support'; // 生产ID
+    }
+    window.__SuperCode = window.SuperCode && new window.SuperCode({
+      scene: s
+    });
+
+    // 获取用户信息
+    props.dispatch({ type: 'user/getUserInfo', hasToast: false })
+
+    // 微信授权
     if (isWx && !Store.get('openId')) {
       weChatAuth(code => props.dispatch({ type: 'user/wxLogin', payload: { code }}))
     }
@@ -56,6 +69,7 @@ function Layout(props) {
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
   useEffect(() => {
     let _nav = [];
     routesMap.forEach(item => {

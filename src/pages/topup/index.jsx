@@ -4,12 +4,13 @@ import TopupNote from '@/components/Card/TopupNote';
 import ProductSpecGroup from '@/components/ProductSpecGroup';
 import { ProductHead } from '@/components/Product';
 import PageStatus from '@/components/PageStatus';
+import { productCornerMark } from '@/utils/ants';
 
 import CardPage from './card';
 import DirectPage from './direct';
 import styles from './index.less';
 
-export default connect(state => ({ productInfo: state.productDetail.info, isVIP: state.global.isVIP }))(function TopupPage(props) {
+export default connect(state => ({ productInfo: state.productDetail.info, isVIP: state.user.isVIP }))(function TopupPage(props) {
   const [state, setState] = useReducer((o, n) => ({ ...o, ...n}), {
     isOpenVIP: false,
     productCorner: '',
@@ -33,12 +34,15 @@ export default connect(state => ({ productInfo: state.productDetail.info, isVIP:
     <>
       <ProductHead
         // corner={topCornerMark}
-        corner={`${state.tabKey}`}
+        corner={topCornerMark}
         title={abbr}
         desc={name}
         imgUrl={image}
       />
-      <ProductSpecGroup onChange={(tab) => setState({ tabKey: tab })}>
+      <ProductSpecGroup onChange={(tab) => setState({
+        tabKey: tab,
+        productCorner: productCornerMark(productItems, isVIP, state.isOpenVIP)
+      })}>
         {(tabKey, data) => {
           const _props = {
             dispatch,

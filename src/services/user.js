@@ -53,7 +53,7 @@ export function checkRegistered(data) {
 // 获取用户信息
 export function getUserInfo(data) {
   return request({
-    url: `/`,
+    url: `/query`,
     method: 'GET',
     serve: 'user',
   });
