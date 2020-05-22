@@ -7,7 +7,7 @@ export default function DirectPage(props) {
   return (
     <div>
       tabKey-{props.tabKey}
-      <SwitchAccount dispatch={props.dispatch} accountTypeList={props.accountTypeList} />
+      <SwitchAccount accountTypeList={props.accountTypeList} />
       <SpecAndVIP dataSource={props.productItems} />
     </div>
   );
