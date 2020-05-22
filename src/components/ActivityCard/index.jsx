@@ -3,6 +3,11 @@ import React from 'react'
 import styles from './index.less'
 import brand from '@/assets/brand.png'
 const ActivityCard = props => {
+  let progress = 0;
+  if(props.data.stock !== 0){
+    const sell = ((props.data.quantity-props.data.stock)/props.data.quantity) * 100;
+    progress = 60 + (sell * 0.4);
+  }
   return (
     <div className={styles['acitivity-card']}>
       <div className={styles['main-part']}>
@@ -26,7 +31,7 @@ const ActivityCard = props => {
       <div className={styles['bottom-part']}>
         <div className={styles['rest']}>{props.data.stock === 0 ? '已售罄' :`剩余${props.data.stock}件`}</div>
         <div className={styles['progress']}>
-          <div className={styles['progress-value']} style={{width:props.data.percent * 100 + '%'}}></div>
+          <div className={styles['progress-value']} style={{width: progress + '%'}}></div>
         </div>
       </div>
     </div>
