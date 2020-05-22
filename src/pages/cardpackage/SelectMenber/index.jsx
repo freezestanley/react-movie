@@ -1,5 +1,5 @@
 import React ,{useReducer}from 'react';
-// import style from './index/less';s
+import style from './index.less';
 import { Cell, Button, Picker, Toast } from 'zarm';
 const SINGLE_DATA = [
   { value: '1', label: '选项一' },
@@ -14,15 +14,19 @@ export default ()=>{
   })
  
   return(
-    <div>
-        <div>请选择您想要的会员卡</div>
-          <Cell
-          description={
-            <Button size="xs" onClick={()=>{setState({visible:true});console.log(state)}}>选择</Button>
-          }
-        >
-          单列
-        </Cell>
+    <div className={style.sel}>
+       <div className={style.CardPackageMainSelect}>
+        <span>请选择您想要的会员卡</span><br/>
+        <input type="text" placeholder= '请选择' />
+        <span onClick={()=>{setState({visible:true})} }> > </span>
+      </div>
+       
+        {/* //   description={ */}
+        {/* //     <Button size="xs" onClick={()=>{setState({visible:true});console.log(state)}}>选择</Button>
+        //   }
+        // >
+        //   单列 */}
+        {/* // </Cell> */}
        <Picker
           visible={state.visible}
           value={state.value}
@@ -37,6 +41,7 @@ export default ()=>{
           
           
         />
-    </div>
+        </div>
+   
   )
 }
