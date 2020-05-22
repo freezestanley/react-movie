@@ -8,7 +8,7 @@ import SpecItem from '@/components/Phone/FeeItem'
 import AttachItem from '@/components/Phone/AttachItem';
 import { ProductHead } from '@/components/Product';
 import TopupNote from '@/components/Card/TopupNote';
-import RecommendBuy from '@/components/RecommendBuy/recomend.jsx';
+import RecommendBuy from '@/components/RecommendBuy';
 
 // const phoneItemList = [
 //   { price: 20, payPrice: 10 },
