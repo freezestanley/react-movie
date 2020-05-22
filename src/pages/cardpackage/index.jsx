@@ -1,5 +1,8 @@
 import React from 'react'
 import styles from './index.less';
+import Button from './Button'
+import SwitchAccount from '@/components/SwitchAccount';
+import SelectMenber from './SelectMenber'
 
 export default ()=>{
   return <div>
@@ -12,27 +15,25 @@ export default ()=>{
     <div className={styles.CardPackageMain}>
       <div className={styles.CardPackageMainSelect}>
         <span>请选择您想要的会员卡</span><br/>
-
         <input type="text" placeholder= '请选择' />
         <span>></span>
       </div>
       <div className={styles.CardPackageMainPut}>
-        <span>充值账号</span><br/>
-        <input type="text" placeholder= '请输入' />
-        <img src={require('./images/switch.svg')}  alt=""/>
-        <span>微信账号</span>
+          <SwitchAccount/>
       </div>
     
       
-      <div>
+   
 
+    </div>
+      <div className={styles.CardPackageMainGet}>
+         <Button>领取</Button> 
       </div>
 
+
     </div>
-    <div className={styles.CardPackageMainGet}>
-      领取
-      
-    </div>
-    </div>
+    <SelectMenber/>
+   
+  
   </div>
 }
