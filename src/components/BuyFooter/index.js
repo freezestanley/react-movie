@@ -11,6 +11,18 @@ import { ReactComponent as CloseSvg } from './img/close.svg';
 import { ReactComponent as PromptSvg } from './img/prompt.svg';
 import { ReactComponent as SafeSvg } from './img/safe.svg';
 
+const getTotalPrice = ({ main, type, attach }) => {
+  let price = 0;
+  switch(type) {
+    case 'phone': 
+      price = (main.price || 0) + (attach.payPrice || 0);
+      break;
+    default: 
+      break;
+  }
+  return price
+}
+
 export default withRouter(connect(state => state.prePay)(function(props) {
   const { history, main, attach, type, dispatch } = props;
   const [visible, setVisible]=useState(false);
@@ -43,6 +55,7 @@ export default withRouter(connect(state => state.prePay)(function(props) {
     }
     handlePay(dispatch, data);
   };
+  const totalPrice = getTotalPrice({ main, attach, type });
   return ([<div className={styles.buyFooter} key='footer'>
     <dl className={styles.home} onClick={goToHome}>
       <dt className={styles.homeIcon}>
@@ -51,7 +64,7 @@ export default withRouter(connect(state => state.prePay)(function(props) {
       <dd>首页</dd>
     </dl>
     <div className={styles.content}>
-      <div className={styles.total}>合计<i>¥</i><span>10</span></div>
+      <div className={styles.total} dangerouslySetInnerHTML={{ __html: '合计'+fmtPrice(totalPrice, 'tag') }}></div>
       <div className={styles.saleDetail} onClick={toggleFn.bind(null, true)}>优惠明细<PromptSvg className={styles.questionIcon} /></div>
     </div>
     <div className={styles.btn} onClick={startPayFn}>立即支付</div>
