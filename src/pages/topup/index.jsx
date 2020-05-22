@@ -40,7 +40,7 @@ export default connect(state => ({ productInfo: state.productDetail.info }))(fun
             productItems
           };
           // TODO: test switch account
-          product.rechargeAccountType = [1, 2];
+          // product.rechargeAccountType = [1, 2];
           return [
             type === 1 && <DirectPage key={1} {..._props} accountTypeList={product.rechargeAccountType} />,
             type === 2 && <CardPage key={2} {..._props} />,

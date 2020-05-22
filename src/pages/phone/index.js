@@ -1,39 +1,62 @@
-import React from 'react';
+import React, { useEffect, useCallback } from 'react';
+import { connect } from 'dva';
 import { Input } from 'zarm';
+import debounce from 'lodash/debounce';
 import map from 'lodash/map';
+import isEmpty from 'lodash/isEmpty';
 import styles from './index.module.less';
-import SpecItem from '@/components/SpecItem'
+import SpecItem from '@/components/Phone/FeeItem'
 import AttachItem from '@/components/Phone/AttachItem';
 import { ProductHead } from '@/components/Product';
+import TopupNote from '@/components/Card/TopupNote';
+import RecommendBuy from '@/components/RecommendBuy';
 
-
-const phoneItemList = [
-  { price: 20, payPrice: 10 },
-  { price: 50, payPrice: 180 },
-  { price: 198, payPrice: 365 }
-]
-
-const attachList = [
-  { productName: '芒果TV视频会员', productItemName: '月卡', price: 20, payPrice: 13, active: true },
-  { productName: '优酷视频会员', productItemName: '月卡', price: 20, payPrice: 15 },
-  { productName: '拜博口腔十项检查卡', productItemName: '含数字全景片/牙周组织/智齿/龋齿/残根残冠/咬合关系检查', price: 300, payPrice: 5 },
-]
-
-export default function(props) {
+export default connect(state => ({
+  phone: state.phone,
+  phoneForm: state.phoneForm
+}))(function(props) {
+  const { phone: { product={}, productItems=[], attachList=[] }, phoneForm: { main, attach, rechargeAccount }, dispatch } =props;
+  // const mainLen = productItems.length;
+  // const attachLen = attachList.length;
+  useEffect(() => {
+    (async function() {
+      await dispatch({ type: 'phone/getAttachList', payload: { productId: 19 } });
+      await dispatch({ type: 'phone/getProductItems', payload: 19 });
+      // if (mainLen > 0) {
+      //   dispatch({ type: 'phoneForm/setState', payload: { main: productItems[0] } });
+      // }
+      // if (attachLen > 0) {
+      //   dispatch({ type: 'phoneForm/setState', payload: { attach: attachList[0] } });
+      // }
+    })();
+  }, [dispatch]); // eslint-disable-line
+  const onSelectFn = (idx) => {
+    dispatch({ type: 'phoneForm/setState', payload: { main: productItems[idx] } });
+  };
+  const onSelectAddtionFn = (idx) => {
+    dispatch({ type: 'phoneForm/setState', payload: { attach: attachList[idx] } });
+  };
+  const onInputChange = (value) => {
+    dispatch({ type: 'phoneForm/setState', payload: { rechargeAccount: value } });
+  };
   return (<div className={styles.phonePage}>
     <ProductHead
-      corner="95折起"
-      title="腾讯视频蜜蜂会员七五折起"
-      desc="不负好时光，月卡年卡任你挑"
+      corner={product.topCornerMark}
+      title={product.abbr}
+      desc={product.name}
     />
     <div className={styles.group}>
       <h2>手机话费</h2>
-      <Input placeholder="请输入手机号" className={styles.phoneInput} />
+      <Input placeholder="请输入手机号" className={styles.phoneInput} value={rechargeAccount} onChange={onInputChange} />
       <div className={styles.phoneItemList}>
-        { map(phoneItemList, (item, idx) => <SpecItem active={ idx === 0 } key={idx} {...item} column={3} index={idx} />) }
+        { map(productItems, (item, idx) => <SpecItem active={ main.id === item.id } key={idx} {...item} column={3} index={idx} onChange={onSelectFn} />) }
       </div>
-      <h2>超值换购<span>组合购买更优惠</span></h2>
-      {map(attachList, (item, index) => <AttachItem key={index} data={item} />)}
+      { !isEmpty(attachList) && <h2>超值换购<span>组合购买更优惠</span></h2> }
+      {map(attachList, (item, index) => <AttachItem key={index} data={item} index={index} active={attach.id === item.id } onChange={onSelectAddtionFn} />)}
     </div>
+    <div className={styles.detailBox}>
+      <TopupNote nodes={product.detail || ''} />
+    </div>
+    <RecommendBuy />
   </div>);
-}
+})

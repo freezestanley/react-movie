@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './index.less'
 import CardCharge from '@/components/CardCharge'
 import OrderDetails from '@/components/OrderDetails';
+import AllBuy from './../../components/RecommendBuy'
 
 export default()=>{
   return(
@@ -23,6 +24,7 @@ export default()=>{
      
       <OrderDetails/>
       <CardCharge/>
+      <AllBuy/>
 
     </div>
   )
