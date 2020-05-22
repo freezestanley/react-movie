@@ -9,16 +9,19 @@ export default ({ info }) => {
   return (
     <div className={styles['product']}>
       <div className={styles['price']}>
-        <div className={styles['price-inner']}>
-          <div className={styles['price-content']}>
-            <div className={styles['price-current']}>
-              ￥<span className={styles['price-current-value']}>{info.discountPrice}</span>
-            </div>
-            <div className={styles['price-original']}>
-              原价￥<span>{info.originPrice}</span>
+        <div className={styles['price-container']}>
+          <div className={styles['price-inner']}>
+            <div className={styles['price-content']}>
+              <div className={styles['price-current']}>
+                ￥<span className={styles['price-current-value']}>{info.discountPrice}</span>
+              </div>
+              <div className={styles['price-original']}>
+                原价￥<span>{info.originPrice}</span>
+              </div>
             </div>
           </div>
         </div>
+        <div className={styles['price-discount']}>{info.discount * 10}折</div>
       </div>
       <div className={styles['main']}>
         <div className={styles['main-inner']}>

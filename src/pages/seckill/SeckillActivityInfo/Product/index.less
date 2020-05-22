@@ -22,14 +22,19 @@
     top: 5px;
     bottom: 5px;
     width: 101px;
-    background: var(--btn-bg);
     box-shadow: 0px 0px 16px 0px rgba(0, 33, 69, 0.16);
-    padding: 3px;
-    clip-path: polygon(84% 0, 95% 50%, 84% 100%, 0 100%, 0 0);
+  }
+
+  .price-container {
+    height: 100%;
+    padding: 3px 0 3px 3px;
+    background: var(--btn-bg);
+    clip-path: polygon(84% 0, 100% 50%, 84% 100%, 0 100%, 0 0);
   }
 
   .price-inner {
     border: 1px solid #ffffff;
+    border-right: 0;
     height: 100%;
     color: #ffffff;
     display: flex;
@@ -42,6 +47,19 @@
     margin-right: 10px;
   }
 
+  .price-discount {
+    position: absolute;
+    left: 50%;
+    bottom: 85%;
+    background: linear-gradient(45deg, rgba(87, 0, 176, 1) 0%, rgba(255, 0, 105, 1) 100%);
+    font-weight: 600;
+    font-size: 12px;
+    color: #ffffff;
+    padding: 5px 10px;
+    word-break: keep-all;
+    border-radius: 4px;
+  }
+
   .price-current {
     font-size: 14px;
   }
@@ -52,7 +70,7 @@
 
   .price-original {
     font-size: 10px;
-    margin-top: 8px;
+    margin-top: 4px;
   }
 
   .name {
