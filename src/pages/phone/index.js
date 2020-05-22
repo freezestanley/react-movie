@@ -16,20 +16,20 @@ export default connect(state => ({
   phoneForm: state.phoneForm
 }))(function(props) {
   const { phone: { product={}, productItems=[], attachList=[] }, phoneForm: { main, attach, rechargeAccount }, dispatch } =props;
-  const mainLen = productItems.length;
-  const attachLen = attachList.length;
+  // const mainLen = productItems.length;
+  // const attachLen = attachList.length;
   useEffect(() => {
     (async function() {
       await dispatch({ type: 'phone/getAttachList', payload: { productId: 19 } });
       await dispatch({ type: 'phone/getProductItems', payload: 19 });
-      if (mainLen > 0) {
-        dispatch({ type: 'phoneForm/setState', payload: { main: productItems[0] } });
-      }
-      if (attachLen > 0) {
-        dispatch({ type: 'phoneForm/setState', payload: { attach: attachList[0] } });
-      }
+      // if (mainLen > 0) {
+      //   dispatch({ type: 'phoneForm/setState', payload: { main: productItems[0] } });
+      // }
+      // if (attachLen > 0) {
+      //   dispatch({ type: 'phoneForm/setState', payload: { attach: attachList[0] } });
+      // }
     })();
-  }, [dispatch, mainLen, attachLen]); // eslint-disable-line
+  }, [dispatch]); // eslint-disable-line
   const onSelectFn = (idx) => {
     dispatch({ type: 'phoneForm/setState', payload: { main: productItems[idx] } });
   };

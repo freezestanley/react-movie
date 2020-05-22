@@ -15,7 +15,6 @@ export default {
   },
   effects: {
     *getAttachList({ payload }, { put, call }) {
-      console.log('-----payload', payload);
       const res = yield call(service.queryAdditionalProductItems, payload);
       const { code, data } = res || {};
       if (code === '0000') {
