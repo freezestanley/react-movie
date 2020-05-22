@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import withRouter from 'umi/withRouter';
+import { connect } from 'dva';
 import '@/assets/svgIcon/home.svg';
 import { Popup } from 'zarm';
 import { fmtPrice } from '@/utils/tools';
@@ -10,14 +11,37 @@ import { ReactComponent as CloseSvg } from './img/close.svg';
 import { ReactComponent as PromptSvg } from './img/prompt.svg';
 import { ReactComponent as SafeSvg } from './img/safe.svg';
 
-export default withRouter(function(props) {
-  const { history } = props;
+export default withRouter(connect(state => state.prePay)(function(props) {
+  const { history, main, attach, type, dispatch } = props;
   const [visible, setVisible]=useState(false);
   const toggleFn = (val) =>{
     setVisible(val);
   };
   const goToHome = () => {
     history.push('/');
+  };
+  const handlePay = (dispatch, data) => {
+    console.log('-------handle pay data', data);
+  }
+  const startPayFn = () => {
+    let data = {};
+    switch(type) {
+      case 'product':
+        data = main;
+        break;
+      case 'vip':
+        data = main;
+        break;
+      case 'seckill':
+        data = main;
+        break;
+      case 'phone':
+        data = { main, attach };
+        break;
+      default:
+        data = main; 
+    }
+    handlePay(dispatch, data);
   };
   return ([<div className={styles.buyFooter} key='footer'>
     <dl className={styles.home} onClick={goToHome}>
@@ -30,7 +54,7 @@ export default withRouter(function(props) {
       <div className={styles.total}>合计<i>¥</i><span>10</span></div>
       <div className={styles.saleDetail} onClick={toggleFn.bind(null, true)}>优惠明细<PromptSvg className={styles.questionIcon} /></div>
     </div>
-    <div className={styles.btn}>立即支付</div>
+    <div className={styles.btn} onClick={startPayFn}>立即支付</div>
   </div>, <Popup
     key='payInfo'
     direction="bottom"
@@ -73,4 +97,4 @@ export default withRouter(function(props) {
       </div>
     </div>
   </Popup>]);
-})
+}))
