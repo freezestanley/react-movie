@@ -2,7 +2,6 @@ import React from 'react';
 import styles from './index.less'
 import router from 'umi/router';
 import Order from '@/components/OrderItem'
-import Activity from '@/components/SpikeActivity'
 
 import { Pull, Cell, Message, Icon, Button } from 'zarm';
 const REFRESH_STATE = {
@@ -34,7 +33,7 @@ export default()=>{
 
     <div className={styles.myorder}>
 
-    
+
       <Order onClick={() => router.push('/orderdetail')}/>
       <Order/>
       <Order/>
@@ -44,11 +43,11 @@ export default()=>{
       <Order/>
       <Order/>
       <Order/>
-     
-      
 
-     
-      
+
+
+
+
 
     </div>
   )
