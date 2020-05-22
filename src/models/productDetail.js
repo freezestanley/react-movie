@@ -35,7 +35,7 @@ export default {
     },
     *getProductItems({ payload }, { put, call }) {
       const res = yield call(service.getProductItems, payload);
-      console.log('[27] productDetail.js: ', res.data);
+      // console.log('[27] productDetail.js: ', res.data);
       const { code, data } = res || {};
       if (code === '0000') {
         yield put({

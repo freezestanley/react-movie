@@ -1,16 +1,23 @@
-import React, { useReducer } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import { Checkbox } from 'zarm';
 import { fmtPrice } from '@/utils/tools';
 import Corner from '../Corner';
 
 import './index.less';
 
-export default function OpenVIP(props) {
+export default function OpenVIP({ onChange, value = false }) {
   const [state, setState] = useReducer((o, n) => ({...o, ...n}), {
-    checked: true,
+    checked: false,
   })
+  useEffect(() => {
+    onChange && onChange(state.checked)
+    setState({ checked: value })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value])
   const handleChange = e => {
-    setState({ checked: !state.checked });
+    const val = e.target.checked;
+    setState({ checked: val });
+    onChange && onChange(val);
   }
   return (
     <div className="open-vip">

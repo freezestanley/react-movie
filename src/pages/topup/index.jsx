@@ -1,17 +1,21 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useReducer } from 'react';
+import { connect } from 'dva';
 import TopupNote from '@/components/Card/TopupNote';
 import ProductSpecGroup from '@/components/ProductSpecGroup';
 import { ProductHead } from '@/components/Product';
 import PageStatus from '@/components/PageStatus';
-import { connect } from 'dva';
+
 import CardPage from './card';
 import DirectPage from './direct';
-
 import styles from './index.less';
 
-export default connect(state => ({ productInfo: state.productDetail.info }))(function TopupPage(props) {
-  console.log('[12] index.jsx: ', props);
-  const { dispatch, location: { query }, productInfo } = props;
+export default connect(state => ({ productInfo: state.productDetail.info, isVIP: state.global.isVIP }))(function TopupPage(props) {
+  const [state, setState] = useReducer((o, n) => ({ ...o, ...n}), {
+    isOpenVIP: false,
+    productCorner: '',
+    tabKey: '',
+  });
+  const { dispatch, location: { query }, productInfo, isVIP } = props;
   const { productId } = query;
   // constructor的作用
   useEffect(() => {
@@ -23,21 +27,29 @@ export default connect(state => ({ productInfo: state.productDetail.info }))(fun
 
   const { topCornerMark, abbr, name, detail, type, image } = product;
 
+  // console.log('[30] index.jsx: ', state);
+
   return (
     <>
       <ProductHead
-        corner={topCornerMark}
+        // corner={topCornerMark}
+        corner={`${state.tabKey}`}
         title={abbr}
         desc={name}
         imgUrl={image}
       />
-      <ProductSpecGroup>
+      <ProductSpecGroup onChange={(tab) => setState({ tabKey: tab })}>
         {(tabKey, data) => {
           const _props = {
             dispatch,
             tabKey,
             dataSource: data,
-            productItems
+            productItems,
+            isVIP,
+            onOpenVIP(data) {
+              // console.log('[43] index.jsx: ', data);
+              setState({ isOpenVIP: data });
+            },
           };
           // TODO: test switch account
           // product.rechargeAccountType = [1, 2];

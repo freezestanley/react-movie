@@ -26,10 +26,12 @@ export default function SpecGroup(props) {
   const [state, setState] = useReducer((o, n) => ({...o, ...n}), {
     active: 0,
   })
+  // console.log('[29] index.jsx: ', props);
   return (
     <div className="spec-group">
       {data.map((item, idx) => {
-        const payPrice = item.membershipPrice;
+        const payPrice = paymentAmount(item, props.isVIP, props.isOpenVIP);
+        // console.log('[33] index.jsx: ', payPrice);
         return (
           <SpecItem
             key={idx}
@@ -38,7 +40,7 @@ export default function SpecGroup(props) {
             active={state.active === idx}
             onChange={e => setState({ active: e })}
             name={item.name}
-            payPrice={payPrice}
+            payPrice={payPrice.price}
             price={item.price}
             subText={item.bottomCornerMark}
           />
