@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import DigitalCountdown from '@/components/DigitalCountdown';
 import styles from './index.less';
 

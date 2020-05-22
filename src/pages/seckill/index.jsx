@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styles from './index.less';
-import Recommend from '@/components/RecommendBuy';
+// import Recommend from '@/components/RecommendBuy';
 import SeckillActivityInfo from './SeckillActivityInfo';
 
 const mockData = {
@@ -33,7 +33,7 @@ const mockData = {
   productSmallTitle: 'string',
   productType: 0,
   quantity: 100,
-  stock: 10,
+  stock: 0,
 };
 
 export default () => {

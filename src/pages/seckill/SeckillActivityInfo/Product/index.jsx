@@ -1,16 +1,16 @@
 import React, { useMemo } from 'react';
-import DigitalCountdown from '@/components/DigitalCountdown';
 import styles from './index.less';
 
 export default ({ info }) => {
   const percentage = useMemo(() => {
     return info.stock / info.quantity;
   }, [info]);
+
   return (
     <div className={styles['product']}>
       <div className={styles['price']}>
         <div className={styles['price-inner']}>
-          <div>
+          <div className={styles['price-content']}>
             <div className={styles['price-current']}>
               ￥<span className={styles['price-current-value']}>{info.discountPrice}</span>
             </div>

@@ -1,5 +1,4 @@
 import React, { useMemo } from 'react';
-import DigitalCountdown from '@/components/DigitalCountdown';
 import Layout from './Layout';
 import Product from './Product';
 import Button from './Button';
