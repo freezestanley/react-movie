@@ -1,4 +1,5 @@
 import * as service from '@/services/product';
+import map from 'lodash/map';
 
 export default {
   namespace: 'phone',
@@ -20,7 +21,15 @@ export default {
       if (code === '0000') {
         yield put({
           type: 'setState',
-          payload: { attachList: data.list || [] },
+          payload: { attachList: map(data || [], ({ product, productItem }) => ({
+            id: product.id,
+            icon: product.image,
+            title: product.name,
+            subTitle:productItem.name,
+            price: productItem.price,
+            payPrice: productItem.additionalPrice,
+            productItemId: productItem.id,
+          })) },
         });
       }
     },
