@@ -2,10 +2,13 @@ import React, { useEffect } from 'react';
 import { connect } from 'dva';
 import { Input } from 'zarm';
 import map from 'lodash/map';
+import isEmpty from 'lodash/isEmpty';
 import styles from './index.module.less';
-import SpecItem from '@/components/SpecItem'
+import SpecItem from '@/components/Phone/FeeItem'
 import AttachItem from '@/components/Phone/AttachItem';
 import { ProductHead } from '@/components/Product';
+import TopupNote from '@/components/Card/TopupNote';
+import RecommendBuy from '@/components/RecommendBuy/recomend.jsx';
 
 // const phoneItemList = [
 //   { price: 20, payPrice: 10 },
@@ -22,16 +25,16 @@ import { ProductHead } from '@/components/Product';
 export default connect(state => ({
   phone: state.phone
 }))(function(props) {
-  const { phone: { product, productItems, attachList }, dispatch } =props;
+  const { phone: { product={}, productItems, attachList }, dispatch } =props;
   useEffect(() => {
     dispatch({ type: 'phone/getAttachList', payload: { productId: 19 } });
     dispatch({ type: 'phone/getProductItems', payload: 19 });
   }, [dispatch]);
   return (<div className={styles.phonePage}>
     <ProductHead
-      corner="95折起"
-      title="腾讯视频蜜蜂会员七五折起"
-      desc="不负好时光，月卡年卡任你挑"
+      corner={product.topCornerMark}
+      title={product.abbr}
+      desc={product.name}
     />
     <div className={styles.group}>
       <h2>手机话费</h2>
@@ -39,8 +42,12 @@ export default connect(state => ({
       <div className={styles.phoneItemList}>
         { map(productItems, (item, idx) => <SpecItem active={ idx === 0 } key={idx} {...item} column={3} index={idx} />) }
       </div>
-      <h2>超值换购<span>组合购买更优惠</span></h2>
+      { !isEmpty(attachList) && <h2>超值换购<span>组合购买更优惠</span></h2> }
       {map(attachList, (item, index) => <AttachItem key={index} data={item} />)}
     </div>
+    <div className={styles.detailBox}>
+      <TopupNote nodes={product.detail || ''} />
+    </div>
+    <RecommendBuy />
   </div>);
 })
