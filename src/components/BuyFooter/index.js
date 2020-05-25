@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import withRouter from 'umi/withRouter';
 import { connect } from 'dva';
 import '@/assets/svgIcon/home.svg';
@@ -56,7 +56,7 @@ export default withRouter(connect(state => state.prePay)(function(props) {
     handlePay(dispatch, data);
   };
   const totalPrice = getTotalPrice({ main, attach, type });
-  return ([<div className={styles.buyFooter} key='footer'>
+  return [<div className={styles.buyFooter} key='footer' id="buy-footer-box">
     <dl className={styles.home} onClick={goToHome}>
       <dt className={styles.homeIcon}>
         <HomeSvg />
@@ -109,5 +109,5 @@ export default withRouter(connect(state => state.prePay)(function(props) {
         <span>承保</span>
       </div>
     </div>
-  </Popup>]);
+  </Popup>]
 }))

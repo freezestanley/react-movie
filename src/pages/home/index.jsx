@@ -17,10 +17,12 @@ function Home ({ dispatch,bannerList, ...rest }) {
   const topBanners = filter(bannerList, item => item.bannerType === 1);
   const middleBanners = filter(bannerList, item => item.bannerType === 3);
   useEffect(() => {
-    dispatch({ type: 'banner/getBanner', payload: {} });
+    dispatch({ type: 'banner/getBanner', payload: {
+      bannerType:[1,2,3,5]
+    } });
     dispatch({ type: 'productDetail/getEventList', payload: {} });
   }, [dispatch]);
-  console.log('rest',rest);
+  console.log('rest',rest,bannerList);
   
   return (
     <div className={styles.homePage}>
@@ -29,7 +31,7 @@ function Home ({ dispatch,bannerList, ...rest }) {
       <Belt />
       <TimeLimitSlider data={rest.productDetail.eventList} dispatch={dispatch} />
       <Belt list={middleBanners} />
-      <HotRecommend />
+      <HotRecommend bannerList={bannerList} />
     </div>
   );
 }
