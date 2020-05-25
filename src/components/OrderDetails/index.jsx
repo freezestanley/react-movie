@@ -37,7 +37,6 @@ export default ()=>{
           <span>时间</span>
           <span>2020-02-20</span>
         </div>
-       
       </div>
     </div>
 

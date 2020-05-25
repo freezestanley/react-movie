@@ -10,6 +10,5 @@ return <div className={styles.CardPackageHead}>
   <div className={styles.Content}>
     {info.content}
   </div>
-  
 </div>
 }

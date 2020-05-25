@@ -8,7 +8,6 @@ export default ()=>{
          <div className={styles.SuccessTopText}>
            盎司白金视听年卡
          </div>
-
        </div>
        <div className={styles.SuccessContent}> 
         <div>
@@ -19,8 +18,6 @@ export default ()=>{
           <span>商品规格</span>
           <span>年卡大礼包</span>
         </div>
-
-
        </div>
        <div className={styles.SuccessBlank}>
          <span></span>
@@ -31,9 +28,6 @@ export default ()=>{
          <div>我的卡券包</div>
          <div>点击查看您的盎司白金视听年卡大礼包</div>
        </div>
-   
-
-
     </div>
   )
 }

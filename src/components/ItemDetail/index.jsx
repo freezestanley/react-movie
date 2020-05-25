@@ -1,11 +1,7 @@
 import React ,{ useState }from 'react';
 import styles from './index.less'
-
-
 export default ()=>{
   const [isShow, setShow] = useState(false);
-
- 
   return(
     <div className={styles.ItemDetail}>
       <div className={styles.ItemDetaiTitle}>腾讯视频会员+盎司会员白金卡</div>
@@ -45,11 +41,8 @@ export default ()=>{
       </div>
       <div className={styles.ShowMore}>
         <span onClick={()=>{setShow(!isShow)}}>{isShow?'收起详情':'显示详情'}</span>
-
        <div>查看更多折扣商品</div>
-
       </div>
-
     </div>
 
   )

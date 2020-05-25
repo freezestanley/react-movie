@@ -5,7 +5,6 @@ import {Modal,Input} from 'zarm';
 export default ()=>{
   const [isShow, setShow ]= useState(true);
   return (
-
    isShow?(<Modal
       visible={isShow}
       maskClosable

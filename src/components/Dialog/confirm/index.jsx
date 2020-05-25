@@ -7,8 +7,7 @@ export default ({onClick})=>{
     onClick && onClick();
   }
   const handleInput = e => {
-    console.log(e)
-    
+    console.log(e) 
   }
   return (
     <Modal
@@ -30,8 +29,5 @@ export default ({onClick})=>{
       <button className='btn_cancle'onClick={handleClick} > 取消</button> <button className='btn_ensure'  > 提交</button>
       </div>
     </Modal>
-    
-
-
   )
 }
