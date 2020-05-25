@@ -4,7 +4,7 @@ import cns from 'classnames';
 
 import './index.less';
 
-export default function ProductSpecGroup({ onChange, className, children }) {
+export default function ProductSpecGroup({ onChange, className, children, dataSource }) {
   const [state, setState] = useReducer((o, n) => ({ ...o, ...n }), {
     tab: '0',
   })
@@ -19,18 +19,20 @@ export default function ProductSpecGroup({ onChange, className, children }) {
       onChange && onChange(key)
     }
   }
-  return (
-    <div className={cns('product_spec_group', className)}>
+  return dataSource.length > 0 && dataSource.length <= 2 && (
+    <div className={cns('product_spec_group', className, { single: !dataSource[1] })}>
       <div className="product_spec_box">
         <div className="product_spec_tab">
           <div className="tab_l tab_item" onClick={() => handleTab('0')}>
             <img src={imgURL('0')} alt=""/>
-            <div className="tab_item_title">VIP会员</div>
+            <div className="tab_item_title">{dataSource[0].categoryName}</div>
           </div>
-          <div className="tab_r tab_item" onClick={() => handleTab('1')}>
-            <img src={imgURL('1')} alt=""/>
-            <div className="tab_item_title">超级影视会员</div>
-          </div>
+          {dataSource[1] && (
+            <div className="tab_r tab_item" onClick={() => handleTab('1')}>
+              <img src={imgURL('1')} alt=""/>
+              <div className="tab_item_title">{dataSource[1].categoryName}</div>
+            </div>
+          )}
           <div className="product_spec_cont">
             {typeof children === 'function' ? children(state.tab) : children}
           </div>

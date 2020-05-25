@@ -9,3 +9,13 @@ export function checkMemberFlag(userId) {
     method: 'GET',
   });
 }
+
+// 创建并支付订单
+export function createAndPay(data) {
+  return request({
+    url: '/createAndPay',
+    serve: 'order',
+    method: 'POST',
+    data,
+  });
+}

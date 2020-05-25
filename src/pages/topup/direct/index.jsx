@@ -5,6 +5,7 @@ import SwitchAccount from '@/components/SwitchAccount';
 
 export default function DirectPage(props) {
   const [state, setState] = useReducer((o, n) => ({ ...o, ...n}), {
+    isOpenVIP: false,
     specIndex: 0,
     specInfo: {},
     account: '',
@@ -13,13 +14,10 @@ export default function DirectPage(props) {
 
   useEffect(() => {
     props.onChange && props.onChange(state)
-  }, [state.specIndex, state.accountType, state.account])
+  }, [state])
 
-  const handleSpec = (active, record) => {
-    setState({
-      specIndex: active,
-      specInfo: record,
-    })
+  const handleSpec = (specData) => {
+    setState({ ...specData })
   }
   const handleAccount = (e) => {
     setState({
@@ -27,15 +25,18 @@ export default function DirectPage(props) {
       accountType: e.accountType,
     })
   }
+
+  // console.log('[29] index.jsx: ', props.productSpecItems);
+
   return (
     <div>
-      tabKey-{props.tabKey}
+      {/* tabKey-{props.tabKey} */}
       <SwitchAccount
         onChange={handleAccount}
         accountTypeList={props.accountTypeList}
       />
       <SpecAndVIP
-        dataSource={props.productItems}
+        dataSource={props.productSpecItems}
         isVIP={props.isVIP}
         onOpenVIP={props.onOpenVIP}
         onChange={handleSpec}

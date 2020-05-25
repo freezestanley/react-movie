@@ -18,7 +18,7 @@ export default connect(state => ({seckill: state.seckill}))((props) => {
     fetchData();
   }, [fetchData]);
   useEffect(() => {
-    dispatch({});
+    dispatch({type: 'prePay/setState', payload: { main: detail, type: 'seckill' }});
   }, [detail.id]); // eslint-disable-line
 
   return (
@@ -34,7 +34,7 @@ export default connect(state => ({seckill: state.seckill}))((props) => {
           <TopupNote nodes={detail.productDesc || ''} />
     </div> }
       <RecommendBuy />
-      <BuyFooter/>
+      <BuyFooter onValidate={()=> true}/>
     </div>
   );
 });

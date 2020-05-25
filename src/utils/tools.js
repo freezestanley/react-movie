@@ -162,3 +162,6 @@ export const getOffsetTopBy = (targetEl, parentEl) => {
   }
   return offsetTop
 }
+
+export const vipDiscount = (data) => `${((data.membershipPrice / data.price) * 100).toFixed(2)}`.replace(/(0?\.00?)?0?$/, '');
+export const vipDiscount2 = (data) => data ? `${(data * 100).toFixed(2)}`.replace(/(0)*(\.)*0*$/, '') : '-';

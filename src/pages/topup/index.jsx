@@ -23,7 +23,7 @@ export default connect(state => ({ productInfo: state.productDetail.info, isVIP:
   useEffect(() => {
     dispatch({ type: 'productDetail/getProductItems', payload: id });
   }, [dispatch, id]);
-  const { product = {}, productItems = [] } = productInfo;
+  const { product = {}, queryProductItemDtoList = [] } = productInfo;
 
   if (!product) return <PageStatus>获取商品信息失败</PageStatus>;
 
@@ -33,6 +33,13 @@ export default connect(state => ({ productInfo: state.productDetail.info, isVIP:
 
   const handleChangeSpec = (specData) => {
     console.log('[topup spec]: ', specData);
+    dispatch({
+      type: 'prePay/setState',
+      payload: {
+        type: 'product',
+        main: specData
+      }
+    });
   };
 
   return (
@@ -43,16 +50,23 @@ export default connect(state => ({ productInfo: state.productDetail.info, isVIP:
         desc={name}
         imgUrl={image}
       />
-      <ProductSpecGroup onChange={(tab) => setState({
-        tabKey: tab,
-        productCorner: productCornerMark(productItems, isVIP, state.isOpenVIP)
-      })}>
+      <ProductSpecGroup
+        dataSource={queryProductItemDtoList}
+        onChange={(tabKey) => {
+          // const currData = queryProductItemDtoList[tabKey];
+          setState({
+            tabKey: tabKey,
+            // productCorner: productCornerMark(productItems, isVIP, state.isOpenVIP)
+          })
+        }}
+      >
         {(tabKey, data) => {
+          const currData = queryProductItemDtoList[tabKey];
           const _props = {
             dispatch,
             tabKey,
             dataSource: data,
-            productItems,
+            productSpecItems: currData ? currData.queryProductItemRespList : [],
             isVIP,
             onOpenVIP(data) {
               // console.log('[43] index.jsx: ', data);
@@ -77,7 +91,7 @@ export default connect(state => ({ productInfo: state.productDetail.info, isVIP:
       <div className={styles.topupOther}>
         <TopupNote nodes={detail || ''} />
       </div>
-      <BuyFooter/>
+      <BuyFooter />
     </>
   );
 });

@@ -28,6 +28,7 @@ export default {
             price: productItem.price,
             payPrice: productItem.additionalPrice,
             productItemId: productItem.id,
+            productItemName: productItem.name
           })) },
         });
       }
