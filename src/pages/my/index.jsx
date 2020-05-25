@@ -2,10 +2,7 @@ import React from 'react';
 import { connect } from 'dva';
 import router from 'umi/router';
 import styles from './index.less';
-import Dialog from '../../components/Dialog';
-import MenuItem from './components/MenuItem'
-import Charge from '@/components/Charge'
-
+import MenuItem from './components/MenuItem';
 
 function MyPage(props){
   const userInfo = props.user.userInfo;
@@ -32,7 +29,6 @@ function MyPage(props){
       <button onClick={() => router.push('/login')}>登录</button>
       <button onClick={handleExit}>退出</button>
       <pre>{JSON.stringify(props.user, null, 2)}</pre>
-      <Dialog/>
     </div>
   );
 }
