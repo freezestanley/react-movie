@@ -59,9 +59,9 @@ function Layout(props) {
 
     // 获取用户信息
     props.dispatch({ type: 'user/getUserInfo', hasToast: false })
-    props.dispatch({ type: 'banner/getBanner', payload: {
-      bannerType:[1,2,3,4,5,6]
-    } });
+    // props.dispatch({ type: 'banner/getBanner', payload: {
+    //   bannerType:[1,2,3,4,5,6]
+    // } });
     // 微信授权
     if (isWx && !Store.get('openId')) {
       weChatAuth(code => props.dispatch({ type: 'user/wxLogin', payload: { code }}))
