@@ -1,10 +1,12 @@
-import RecommendItem from './rec';
 import React ,{useEffect}from 'react';
-import style from './index.less';
 import { connect } from 'dva';
+import router from 'umi/router'
+import RecommendItem from './rec';
+import style from './index.less';
+
 
 function RecommendBuy(props){
-  const { recommend: {list={}}, dispatch } =props
+  const { recommend: {list=[]}, dispatch } =props
   useEffect(() => {
     (async function() {
       await dispatch({ type: 'recommend/getBanner', payload: { bannerType: [6] } });
@@ -13,7 +15,7 @@ function RecommendBuy(props){
   return  <div className={style.SpikeR}>
   <div className={style.SpikeRItem}>
     <div>
-      <span>蜜蜂会员都在买</span><span onClick={()=>{console.log(' ')}}>更多 <span>></span></span>
+      <span>蜜蜂会员都在买</span><span onClick={ () => router.push('./')}>更多 <span>></span></span>
     </div>
     <div >
       {list.map((item,index) => <RecommendItem key={index} info={item} />)}
@@ -21,4 +23,4 @@ function RecommendBuy(props){
   </div>
 </div>
 }
-export default connect(state=>state)(RecommendBuy)
+export default connect(state=>({recommend:state.recommend}))(RecommendBuy)

@@ -1,6 +1,6 @@
 import React ,{useReducer}from 'react';
-import style from './index.less';
-import {  Picker, Toast } from 'zarm';
+import  './index.less';
+import {  Select, Toast } from 'zarm';
 
 const SINGLE_DATA = [
   { value: '1', label: '选项一' },
@@ -14,23 +14,20 @@ export default () => {
     dataSource: SINGLE_DATA,
   })
   return (
-    <div className={style.sel} onClick={()=>{setState({visible:true})} }>
-      <div className={style.CardPackageMainSelect}>
+    <div className='sel' onClick={()=>{setState({visible:true})} }>
+      <div className='CardPackageMainSelect'>
         <span>请选择您想要的会员卡</span><br/>
-        <input type="text" placeholder= '请选择' />
-        <span > > </span>
       </div>
-      <Picker
-        visible={state.visible}
+      <Select
         value={state.value}
         dataSource={state.dataSource}
         onOk={(selected) => {
           console.log('Picker onOk: ', selected);
           state.value = selected.map(item => item.value);
-          setState({visible:false})
-          Toast.show(JSON.stringify(selected));
+          setState({value:state.value})
+         
         }}
-        onCancel={() =>  setState({visible:false})}
+        
       />
     </div>
   )
