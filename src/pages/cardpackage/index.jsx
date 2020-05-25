@@ -6,7 +6,7 @@ import SelectMenber from './SelectMember'
 import TobBack from './TopBack'
 const mock={
   title:' 盎司白金视听年卡',
-content:' 7月券·热门会员月卡多选一 '
+  content:' 7月券·热门会员月卡多选一 '
 }
 export default ()=>{
   return <div>
