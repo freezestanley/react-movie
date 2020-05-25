@@ -31,10 +31,13 @@ export default connect(state => ({ productInfo: state.productDetail.info, isVIP:
 
   // console.log('[30] index.jsx: ', state);
 
+  const handleChangeSpec = (specData) => {
+    console.log('[topup spec]: ', specData);
+  };
+
   return (
     <>
       <ProductHead
-        // corner={topCornerMark}
         corner={topCornerMark}
         title={abbr}
         desc={name}
@@ -59,7 +62,14 @@ export default connect(state => ({ productInfo: state.productDetail.info, isVIP:
           // TODO: test switch account
           // product.rechargeAccountType = [1, 2];
           return [
-            type === 1 && <DirectPage key={1} {..._props} accountTypeList={product.rechargeAccountType} />,
+            type === 1 && (
+              <DirectPage
+                key={1}
+                {..._props}
+                accountTypeList={product.rechargeAccountType}
+                onChange={handleChangeSpec}
+              />
+            ),
             type === 2 && <CardPage key={2} {..._props} />,
           ]
         }}

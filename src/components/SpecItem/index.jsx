@@ -5,9 +5,9 @@ import { fmtPrice } from '@/utils/tools';
 import './index.less';
 
 export default function SpecItem(props) {
-  const { column=2, index, onChange, active } = props;
+  const { column = 2, index, onChange, active } = props;
   const handleChange = () => {
-    onChange && onChange(index);
+    onChange && onChange(index, props.dataSource);
   }
   const gapCount = column - 1;
   const isLastItem = index % column  === gapCount;

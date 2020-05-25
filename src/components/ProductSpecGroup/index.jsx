@@ -14,8 +14,10 @@ export default function ProductSpecGroup({ onChange, className, children }) {
   }, [])
   const imgURL = (tabKey) => require(`./img/tab-bg${state.tab === tabKey ? '-active' : ''}.png`);
   const handleTab = (key) => {
-    setState({ tab: key })
-    onChange && onChange(key)
+    if (key !== state.tab ) {
+      setState({ tab: key })
+      onChange && onChange(key)
+    }
   }
   return (
     <div className={cns('product_spec_group', className)}>

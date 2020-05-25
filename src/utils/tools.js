@@ -6,8 +6,12 @@ export const fmtPrice = (data, type) => {
   //   return `¥0`;
   // }
   const price = numeral(data).format('0.00').replace(/(\.00?)?0?$/, '');
+  const _price = price < 0 ? '-' : price;
+  if (type === 'CN') {
+    return `${_price}元`
+  }
   return type === 'tag'
-    ? `${price<0 ? '-': ''}<i class="money-symbol">¥</i><span>${Math.abs(price)}</span>`
+    ? `${price < 0 ? '-': ''}<i class="money-symbol">¥</i><span>${Math.abs(price)}</span>`
     : (price < 0 ? `-¥${Math.abs(price)}` : `¥${price}`);
 }
 
