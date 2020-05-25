@@ -10,6 +10,7 @@ import AttachItem from '@/components/Phone/AttachItem';
 import { ProductHead } from '@/components/Product';
 import TopupNote from '@/components/Card/TopupNote';
 import RecommendBuy from '@/components/RecommendBuy';
+import BuyFooter from '@/components/BuyFooter';
 
 export default connect(state => ({
   phone: state.phone,
@@ -56,5 +57,6 @@ export default connect(state => ({
       <TopupNote nodes={product.detail || ''} />
     </div>
     <RecommendBuy />
+    <BuyFooter />
   </div>);
 })

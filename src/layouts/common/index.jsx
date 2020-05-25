@@ -4,7 +4,7 @@ import cns from 'classnames';
 import 'zarm/dist/zarm.min.css';
 import { BrowserInfo, Store } from '@/utils/tools';
 import weChatAuth from '@/utils/weChatAuth';
-import BuyFooter from '@/components/BuyFooter';
+// import BuyFooter from '@/components/BuyFooter';
 
 import TabNavItem from './TabNavItem';
 import './index.less';
@@ -103,7 +103,7 @@ function Layout(props) {
         )}
       </div>
 
-      <div className="z_layout_cont">
+      <div className={cns('z_layout_cont', hasBuyFooter ? 'buy_footer_fix' : '')}>
         <div className="z_layout_box">
           {props.children}
         </div>
@@ -121,7 +121,7 @@ function Layout(props) {
             ))}
           </div>
         )}
-        { hasBuyFooter && <BuyFooter /> }
+        {/* { hasBuyFooter && <BuyFooter /> } */}
       </div>
 
     </div>
