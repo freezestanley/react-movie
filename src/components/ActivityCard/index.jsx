@@ -23,7 +23,7 @@ const ActivityCard = props => {
       
         <div className={styles['card-description']}>
           {
-           props.data.limitBuy &&  <span className={styles['member-discount']}>会员优惠</span>
+           props.data.onlyForVip === 'Y' &&  <span className={styles['member-discount']}>会员优惠</span>
          
           }
           {props.data.description}
