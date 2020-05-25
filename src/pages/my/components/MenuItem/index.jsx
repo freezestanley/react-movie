@@ -8,7 +8,7 @@ export default({ title , icon , onClick })=>{
     <div className='menu_item'  onClick={handleClick}>
       <img src={icon} alt=""/>
       <span>{title}</span>
-      <img src={require('../images/arrow.svg')} alt=""/>
+      <img src={require('../../images/arrow.svg')} alt=""/>
     </div>
   )
 }
