@@ -14,8 +14,7 @@ import BuyFooter from '@/components/BuyFooter';
 
 export default connect(state => ({
   phone: state.phone,
-  phoneForm: state.phoneForm,
-  banner:state.banner
+  phoneForm: state.phoneForm
 }))(function(props) {
 const { phone: { product={}, productItems=[], attachList=[] }, phoneForm: { main, attach, rechargeAccount }, dispatch } =props;
   useEffect(() => {
