@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { connect } from 'dva';
 import styles from './index.module.less';
 import { ProductHead } from '@/components/Product';
 import TopupNote from '@/components/Card/TopupNote';
@@ -45,25 +46,23 @@ const getDetail = id => {
   });
 };
 
-export default () => {
-  const [detail, setDetail] = useState();
+export default connect(state => ({seckill: state.seckill}))((props) => {
+  const { dispatch, location: { query }, seckill: { info: detail } } = props;
 
-  const fetch = useCallback(() => {
-    getDetail().then(res => {
-      setDetail(res);
-    });
-  }, []);
+  const fetchData = useCallback(() => {
+    dispatch({ type: 'seckill/getSeckillDetail', payload: { id: query.id  } })
+  }, [dispatch, query.id]);
 
   useEffect(() => {
-    fetch();
-  }, [fetch]);
+    fetchData();
+  }, [fetchData]);
 
   return (
     <div className={styles.seckillContainer}>
       <ProductHead
-        corner={''}
-        title={'腾讯视频蜜蜂会员七五折起'}
-        desc={'不负好时光，月卡年卡任你挑'}
+        corner={detail.cornerMark}
+        title={detail.productName}
+        desc={detail.eventName}
         imgUrl={'#'}
       />
       {detail && <SeckillActivityInfo info={detail} />}
@@ -74,4 +73,4 @@ export default () => {
       <BuyFooter/>
     </div>
   );
-};
+});
