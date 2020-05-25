@@ -2,7 +2,6 @@ import React  from 'react';
 import withRouter from 'umi/withRouter';
 import styles from './index.module.less';
 import map from 'lodash/map';
-import list from './data.js';
 
 class ShortCut extends React.Component {
   constructor(props){
@@ -10,17 +9,19 @@ class ShortCut extends React.Component {
     this.state={}
   }
   goToPage(id=1) {
-    this.props.history.push(`/topup?productId=1`);
+    this.props.history.push(`/topup?productId=${id}`);
   }
   render() {
+    const { list } = this.props;
+    console.log('-----list', list);
     return (
-      <div className={styles.shortCut} onClick={this.goToPage.bind(this, 1)}>
+      <div className={styles.shortCut} >
         <div className={styles.inner}>
-          {map(list, (lItem, idx) => (<dl key={idx} className={styles.item}>
-            <dt></dt>
+          {map(list, ({ bannerItem }, idx) => (<dl key={idx} className={styles.item} onClick={this.goToPage.bind(this, bannerItem.id)}>
+            <dt style={{ backgroundImage: `url(${bannerItem.image})` }}></dt>
             <dd>
-              <h2>{lItem.title}</h2>
-              <div className={styles.subTitle}>{lItem.subTitle}</div>
+              <h2>{bannerItem.abbr}</h2>
+              <div className={styles.subTitle}>{bannerItem.topCornerMark}</div>
             </dd>
           </dl>))}
         </div>

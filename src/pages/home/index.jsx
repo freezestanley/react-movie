@@ -16,6 +16,7 @@ import TimeLimitSlider from '@/components/TimeLimitSlider';
 function Home ({ dispatch,bannerList, ...rest }) {
   const topBanners = filter(bannerList, item => item.bannerType === 1);
   const middleBanners = filter(bannerList, item => item.bannerType === 3);
+  const shortCutList = filter(bannerList, item => item.bannerType === 4);
   useEffect(() => {
     dispatch({ type: 'banner/getBanner', payload: {
       bannerType:[1,2,3,4,5,6]
@@ -27,7 +28,7 @@ function Home ({ dispatch,bannerList, ...rest }) {
   return (
     <div className={styles.homePage}>
       <Banner list={topBanners} />
-      <ShortCut />
+      <ShortCut list={shortCutList} />
       <Belt />
       <TimeLimitSlider data={rest.productDetail.eventList} dispatch={dispatch} />
       <Belt list={middleBanners} />
