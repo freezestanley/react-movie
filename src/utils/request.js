@@ -85,7 +85,8 @@ export default function (config) {
   const options = {
     baseURL: apiPrefix[config.serve],
     method,
-    [method === 'GET' ? 'params' : 'data']: data,
+    // 给get接口加时间戳，防止缓存
+    [method === 'GET' ? 'params' : 'data']: (method === 'GET' ? { ...data, t: Date.now() } : data),
     ...rest
   }
   return service.request(options);
