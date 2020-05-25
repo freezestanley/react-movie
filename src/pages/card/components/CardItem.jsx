@@ -28,10 +28,12 @@ const itemState = {
 }
 
 const cardItem = (props) => {
-    const border = props.border
-    const state = props.state
-    const btnTitle = props.btnTitle
-    const btnClick = props.btnClick
+    // const border = props.border
+    // const state = props.state
+    // const btnTitle = props.btnTitle
+    // const btnClick = props.btnClick
+    debugger
+    const {border, state, btnTitle, btnClick} = props
     const {title, retitle, time } =  props.data
     return (
         <div className={`${styles.cardItem} ${styles[state]} ${border ? styles.border : ''}`}
@@ -39,20 +41,20 @@ const cardItem = (props) => {
         >
             {btnTitle ? (
                 <div className={styles.box2col}>
-                    <div>
+                    <div onClick={(e) => btnClick(e)}>
                         <div>{title}</div>
                         <div>{retitle}</div>
-                        <div>{time}</div>
+                        <div>有效期至:{time}</div>
                     </div>
                     <div>
                         <div className={styles.yelloBtn} onClick={(e) => btnClick(e)}>{btnTitle}</div>
                     </div>
                 </div>
             ) : (
-                <div className={styles.box}>
+                <div className={styles.box}  onClick={(e) => btnClick(e)}>
                     <div>{title}</div>
                     <div>{retitle}</div>
-                    <div>{time}</div>
+                    <div>有效期至:{time}</div>
                 </div>
             ) }
             

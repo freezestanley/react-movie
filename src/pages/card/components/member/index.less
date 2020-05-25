@@ -1,0 +1,41 @@
+.cardmember{
+    .pwTable{
+        display: table;
+        width: 100%;
+        margin: 0px 0 20px;
+        & > div{
+            display:table-row;
+            & > div:first-child{
+                width:25%;
+            }
+            & > div:last-child{
+                width:20px;
+            }
+            & > div{
+                display: table-cell;
+                font-size:15px;
+                line-height: 25px;
+                padding: 8px 0;
+            }
+        }
+    }
+    .copy{
+        background:linear-gradient(319deg,rgba(18,24,43,1) 0%,rgba(58,65,88,1) 100%);
+        color:#fff;
+        font-size: 12px;
+        display:block;
+        text-align:center;
+    }
+    .goldBtn{
+        background:linear-gradient(322deg,rgba(166,124,56,1) 0%,rgba(234,209,149,1) 100%);
+        border-radius:4px;
+        color:#000;
+        font-size:17px;
+        text-align: center;
+        line-height: 40px;
+        margin: -10px 0 20px 0;
+    }
+    .fail{
+        color:#f00;
+    }
+}
