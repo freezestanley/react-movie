@@ -7,7 +7,6 @@ import moment from 'moment';
 import Countdown,{zeroPad} from 'react-countdown';
 
 const renderer = ({ hours, minutes, seconds, completed, total,type }) => {
-  console.log('hours',hours);
   return (
      <div className={styles['daojishi']}>
        <span className={styles['over-text']}>{type === 'end' ? '距活动结束' :'距活动开始'}</span>

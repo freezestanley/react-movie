@@ -1,86 +1,40 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import styles from './index.less';
-// import Recommend from '@/components/RecommendBuy';
+import React, { useEffect, useCallback } from 'react';
+import { connect } from 'dva';
+import styles from './index.module.less';
+import { ProductHead } from '@/components/Product';
+import TopupNote from '@/components/Card/TopupNote';
+import RecommendBuy from '@/components/RecommendBuy';
 import SeckillActivityInfo from './SeckillActivityInfo';
+import BuyFooter from '@/components/BuyFooter';
 
-const getDetail = id => {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      resolve({
-        beginTime: 'string',
-        beginTimestamp: 1590057373923,
-        cornerMark: 'string',
-        currStatus: 2,
-        currTime: 'string',
-        currTimestamp: 1590057473923,
-        discount: 0.4,
-        discountPrice: 10,
-        endTime: 'string',
-        endTimestamp: 1590057910629,
-        eventBeginDate: 'string',
-        eventCode: 'string',
-        eventEndDate: 'string',
-        eventName: 'string',
-        id: 0,
-        itemId: 0,
-        itemName: 'VIP年卡',
-        limitBuy: 'Y',
-        limitBuyCount: 2,
-        nextBeginTimestamp: 0,
-        nextEndTimestamp: 0,
-        onlyForVip: 'string',
-        originPrice: 39,
-        productDesc: 'string',
-        productId: 0,
-        productName: '腾讯视频会员',
-        productSmallTitle: 'string',
-        productType: 0,
-        quantity: 100,
-        stock: 10,
-      });
-    }, 500);
-  });
-};
+export default connect(state => ({seckill: state.seckill}))((props) => {
+  const { dispatch, location: { query }, seckill: { info: detail } } = props;
 
-export default () => {
-  const [detail, setDetail] = useState();
-
-  const fetch = useCallback(() => {
-    getDetail().then(res => {
-      setDetail(res);
-    });
-  }, []);
+  const fetchData = useCallback(() => {
+    dispatch({ type: 'seckill/getSeckillDetail', payload: { id: query.id  } })
+  }, [dispatch, query.id]);
 
   useEffect(() => {
-    fetch();
-  }, [fetch]);
+    fetchData();
+  }, [fetchData]);
+  useEffect(() => {
+    dispatch({});
+  }, [detail.id]); // eslint-disable-line
 
   return (
-    <div className={styles.Spike}>
+    <div className={styles.seckillContainer}>
+      <ProductHead
+        corner={detail.cornerMark}
+        title={detail.productName}
+        desc={detail.eventName}
+        imgUrl={'#'}
+      />
       {detail && <SeckillActivityInfo info={detail} />}
-
-      {/* <div className={styles.SpikeR}>
-        <div className={styles.SpikeRItem}>
-          <div>
-            <span>蜜蜂会员都在买</span>
-            <span>更多 ></span>
-          </div>
-          <div>
-            <div>
-              <Recommend title="Q币限时优惠" detail="捂着限时秒杀，限时专享" price="274" />
-            </div>
-            <div>
-              <Recommend title="Q币限时优惠" detail="捂着限时秒杀，限时专享" price="274" />
-            </div>
-            <div>
-              <Recommend title="Q币限时优惠" detail="捂着限时秒杀，限时专享" price="274" />
-            </div>
-            <div>
-              <Recommend title="Q币限时优惠" detail="捂着限时秒杀，限时专享" price="274" />
-            </div>
-          </div>
-        </div>
-      </div> */}
+      { detail && <div className={styles.topupOther}>
+          <TopupNote nodes={detail.productDesc || ''} />
+    </div> }
+      <RecommendBuy />
+      <BuyFooter/>
     </div>
   );
-};
+});

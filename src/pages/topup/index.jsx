@@ -18,11 +18,11 @@ export default connect(state => ({ productInfo: state.productDetail.info, isVIP:
     tabKey: '',
   });
   const { dispatch, location: { query }, productInfo, isVIP } = props;
-  const { productId } = query;
+  const { id } = query;
   // constructor的作用
   useEffect(() => {
-    dispatch({ type: 'productDetail/getProductItems', payload: productId });
-  }, [dispatch, productId]);
+    dispatch({ type: 'productDetail/getProductItems', payload: id });
+  }, [dispatch, id]);
   const { product = {}, productItems = [] } = productInfo;
 
   if (!product) return <PageStatus>获取商品信息失败</PageStatus>;
