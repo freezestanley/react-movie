@@ -17,11 +17,10 @@ export default connect(state => ({
   phoneForm: state.phoneForm,
   banner:state.banner
 }))(function(props) {
-const { banner:{list={}},phone: { product={}, productItems=[], attachList=[] }, phoneForm: { main, attach, rechargeAccount }, dispatch } =props;
+const { phone: { product={}, productItems=[], attachList=[] }, phoneForm: { main, attach, rechargeAccount }, dispatch } =props;
   useEffect(() => {
     (async function() {
       await dispatch({ type: 'phone/getAttachList', payload: { productId: 19 } });
-      await dispatch({ type: 'banner/getBanner', payload: { bannerType: [6] } });
       await dispatch({ type: 'phone/getProductItems', payload: 19 });
     })();
   }, [dispatch]); // eslint-disable-line
@@ -67,7 +66,7 @@ const { banner:{list={}},phone: { product={}, productItems=[], attachList=[] }, 
     <div className={styles.detailBox}>
       <TopupNote nodes={product.detail || ''} />
     </div>
-    <RecommendBuy info={list} />
+    <RecommendBuy />
     <BuyFooter />
   </div>);
 })
