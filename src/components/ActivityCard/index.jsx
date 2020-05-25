@@ -1,15 +1,20 @@
-import React from 'react'
+import React from 'react';
+import withRouter from 'umi/withRouter';
 
 import styles from './index.less'
 import brand from '@/assets/brand.png'
 const ActivityCard = props => {
+  const { history }= props;
   let progress = 0;
   if(props.data.stock !== 0){
     const sell = ((props.data.quantity-props.data.stock)/props.data.quantity) * 100;
     progress = 60 + (sell * 0.4);
   }
+  const onClickFn = () => {
+    history.push(`/seckill?id=${props.data.id}`);
+  };
   return (
-    <div className={styles['acitivity-card']}>
+    <div className={styles['acitivity-card']} onClick={onClickFn}>
       <div className={styles['main-part']}>
         <div className={styles['right-top']}></div>
         <img src={brand} className={styles['brand']} alt="" />
@@ -37,4 +42,4 @@ const ActivityCard = props => {
     </div>
   )
 }
-export default ActivityCard
+export default withRouter(ActivityCard);
