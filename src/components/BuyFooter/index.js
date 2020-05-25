@@ -55,6 +55,7 @@ export default withRouter(connect(state => state.prePay)(function(props) {
   const { 
     itemName, // 产品规格
     originPrice, // 原价
+    discountLabel,
     discount, // 折扣
     discountAmount, // 折扣金额
     vipPrice, // VIP会员费
@@ -65,6 +66,7 @@ export default withRouter(connect(state => state.prePay)(function(props) {
     dispatch({ type: 'global/setState', payload: { hasBuyFooter: true } });
     return () => {
       dispatch({ type: 'global/setState', payload: { hasBuyFooter: false } });
+      dispatch({ type: 'prePay/resetState' });
     }
   }, [dispatch]);
   return [<div className={styles.buyFooter} key='footer' id="buy-footer-box">
@@ -101,7 +103,7 @@ export default withRouter(connect(state => state.prePay)(function(props) {
         </div>
       </div>}
       {discountAmount && <div className={styles.infoItem}>
-        <div className={styles.label}>秒杀价</div>
+        <div className={styles.label}>{discountLabel}</div>
         <div className={styles.valueBox} >
           <span className={styles.prompt}>本单享{vipDiscount(discount)}折优惠</span>
           <div className={styles.value} dangerouslySetInnerHTML={{ __html: fmtPrice(discountAmount, 'tag') }}></div>
