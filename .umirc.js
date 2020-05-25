@@ -27,8 +27,9 @@ export default {
         { path: '/seckill', component: '../pages/seckill', backgroundColor:'gray',title: '秒杀活动',  },
         { path: '/successbuy',component: '../pages/successbuy', title: '购买成功',  },
         { path: '/cardpackage',component: '../pages/cardpackage',backgroundColor:'gray', title: '我的卡券包',  },
-
-
+        { path: '/spike', component: '../pages/spike', backgroundColor:'gray',title: '秒杀活动',  },
+        { path: '/history', component: '../pages/card/history', backgroundColor:'white',title: '历史卡券',  },
+        { path: '/card', component: '../pages/card', backgroundColor:'white',title: '我的卡券',  },
         // { path: '/test', component: '../pages/test' },
       ],
     }

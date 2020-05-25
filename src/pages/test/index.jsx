@@ -4,6 +4,7 @@ import { connect } from 'dva';
 import cns from 'classnames';
 import router from 'umi/router';
 import Cb from './callback'
+import Contx from './context'
 
 const usePrevious = (value) => {
     const ref = useRef()
@@ -75,6 +76,8 @@ const Test = (props) => {
         <Child2 ref={child2Ref}/>
         --------------------
         <Cb/>
+        --------------------
+        <Contx/>
     </div>
   );
 }

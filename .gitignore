@@ -7,6 +7,13 @@
 /yarn.lock
 /package-lock.json
 
+# production
+/dist
+dist
+
+test
+*/test
+
 # misc
 .DS_Store
 

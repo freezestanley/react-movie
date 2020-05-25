@@ -1,0 +1,26 @@
+.Cardpw{
+    background: #fff;
+    border-radius: 10px 10px 0 0;
+    position: relative;
+    padding: 45px 10px 10px;
+    & > .close{
+        position: absolute;
+        right: 5px;
+        top: 10px;
+        &:before,&:after{
+            content: " ";
+            width: 20px;
+            height: 20px;
+            display: block;
+        }
+        &:before{
+            transform: rotate(-45deg);
+            border-left: 2px solid #ccc;
+        }
+        &:after{
+            transform: rotate(45deg) translate(-23px, -5px);
+            border-right: 2px solid #ccc;
+            
+        }
+    }
+}

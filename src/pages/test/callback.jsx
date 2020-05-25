@@ -4,8 +4,10 @@ import { connect } from 'dva';
 import cns from 'classnames';
 import router from 'umi/router';
 
-const set = new Set()
+const Couter = React.memo()
 
+const set = new Set()
+// const Couter = React.memo(function Couter(props))
 export default function Callback (){
     const [count, setCount] = useState(1);
     const [val, setVal]= useState('')
