@@ -42,9 +42,10 @@ function Layout(props) {
     currRoute,
     routesMap,
     title,
+    hasBuyFooter,
     tabPageList=[]
   } } =props;
-  const { hasNavBar = false, footer, hasBuyFooter=false } = currRoute;
+  const { hasNavBar = false, footer } = currRoute;
 
   useEffect(() => {
     // 反欺诈
