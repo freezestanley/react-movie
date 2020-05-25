@@ -13,7 +13,6 @@ class ShortCut extends React.Component {
   }
   render() {
     const { list } = this.props;
-    console.log('-----list', list);
     return (
       <div className={styles.shortCut} >
         <div className={styles.inner}>

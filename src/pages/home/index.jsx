@@ -5,6 +5,7 @@ import Banner from '@/components/Home/Banner';
 import ShortCut from '@/components/Home/ShortCut';
 import Belt from '@/components/Home/Belt';
 import filter from 'lodash/filter';
+import isEmpty from 'lodash/isEmpty';
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -27,12 +28,11 @@ function Home ({ dispatch,bannerList, ...rest }) {
   
   return (
     <div className={styles.homePage}>
-      <Banner list={topBanners} />
-      <ShortCut list={shortCutList} />
-      <Belt />
-      <TimeLimitSlider data={rest.productDetail.eventList} dispatch={dispatch} />
-      <Belt list={middleBanners} />
-      <HotRecommend bannerList={bannerList} />
+      { !isEmpty(topBanners) && <Banner list={topBanners} />}
+      { !isEmpty(shortCutList) && <ShortCut list={shortCutList} />}
+      { !isEmpty(middleBanners) && <Belt list={middleBanners} /> }
+      { !isEmpty(rest.productDetail.eventList) && <TimeLimitSlider data={rest.productDetail.eventList} dispatch={dispatch} />}
+      { !isEmpty(bannerList) && <HotRecommend bannerList={bannerList} />}
     </div>
   );
 }
