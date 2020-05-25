@@ -7,6 +7,7 @@ export default {
   state: {
     userInfo: {},
     isVIP: false,
+    membershipList: [],
   },
   reducers: {
     setState(state, { payload }) {
@@ -63,6 +64,7 @@ export default {
       return res.data;
     },
 
+    // 获取用户信息
     *getUserInfo({ payload, hasToast = true }, { put, call }) {
       const res = yield call(services.getUserInfo, payload);
       if (res.code === '0000') {
@@ -79,9 +81,23 @@ export default {
             userId: _data.id
           },
         })
+        console.log('[84] user.js: ', _data.id);
+        Store.set('userId', _data.id)
       } else {
         hasToast && Toast.show(res.msg)
       }
-    }
+    },
+
+    // 获取会员等级列表
+    *getMembershipList(_, { put, call }) {
+      const res = yield call(services.getMembershipList);
+      // const { code, data } = res || {};
+      if (res.code === '0000' && res.data) {
+        yield put({
+          type: 'setState',
+          payload: { membershipList: res.data },
+        });
+      }
+    },
   },
 };

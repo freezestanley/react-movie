@@ -5,7 +5,6 @@ import {Modal,Input} from 'zarm';
 export default ()=>{
   const [isShow, setShow ]= useState(true);
   return (
-
    isShow?(<Modal
       visible={isShow}
       maskClosable
@@ -21,12 +20,8 @@ export default ()=>{
         <Input className='code_enter_input'></Input>
       </div> 
       <div className="code_sub" onClick={()=>{setShow(!isShow)}}>
-        <button > 提交</button>
+        <div > 提交</div>
       </div>
     </Modal>):(<Confirm onClick={()=>{setShow(!isShow)}}/>)
-  
-    
-
-
   )
 }

@@ -4,7 +4,7 @@ import cns from 'classnames';
 import 'zarm/dist/zarm.min.css';
 import { BrowserInfo, Store } from '@/utils/tools';
 import weChatAuth from '@/utils/weChatAuth';
-import BuyFooter from '@/components/BuyFooter';
+// import BuyFooter from '@/components/BuyFooter';
 
 import TabNavItem from './TabNavItem';
 import './index.less';
@@ -42,9 +42,10 @@ function Layout(props) {
     currRoute,
     routesMap,
     title,
+    hasBuyFooter,
     tabPageList=[]
   } } =props;
-  const { hasNavBar = false, footer, hasBuyFooter=false } = currRoute;
+  const { hasNavBar = false, footer } = currRoute;
 
   useEffect(() => {
     // 反欺诈
@@ -58,7 +59,9 @@ function Layout(props) {
 
     // 获取用户信息
     props.dispatch({ type: 'user/getUserInfo', hasToast: false })
-
+    // props.dispatch({ type: 'banner/getBanner', payload: {
+    //   bannerType:[1,2,3,4,5,6]
+    // } });
     // 微信授权
     if (isWx && !Store.get('openId')) {
       weChatAuth(code => props.dispatch({ type: 'user/wxLogin', payload: { code }}))
@@ -103,7 +106,7 @@ function Layout(props) {
         )}
       </div>
 
-      <div className="z_layout_cont">
+      <div className={cns('z_layout_cont', hasBuyFooter ? 'buy_footer_fix' : '')}>
         <div className="z_layout_box">
           {props.children}
         </div>
@@ -121,7 +124,7 @@ function Layout(props) {
             ))}
           </div>
         )}
-        { hasBuyFooter && <BuyFooter /> }
+        {/* { hasBuyFooter && <BuyFooter /> } */}
       </div>
 
     </div>

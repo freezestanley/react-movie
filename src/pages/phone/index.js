@@ -10,12 +10,13 @@ import AttachItem from '@/components/Phone/AttachItem';
 import { ProductHead } from '@/components/Product';
 import TopupNote from '@/components/Card/TopupNote';
 import RecommendBuy from '@/components/RecommendBuy';
+import BuyFooter from '@/components/BuyFooter';
 
 export default connect(state => ({
   phone: state.phone,
   phoneForm: state.phoneForm
 }))(function(props) {
-  const { phone: { product={}, productItems=[], attachList=[] }, phoneForm: { main, attach, rechargeAccount }, dispatch } =props;
+const { phone: { product={}, productItems=[], attachList=[] }, phoneForm: { main, attach, rechargeAccount }, dispatch } =props;
   useEffect(() => {
     (async function() {
       await dispatch({ type: 'phone/getAttachList', payload: { productId: 19 } });
@@ -47,7 +48,16 @@ export default connect(state => ({
       <h2>手机话费</h2>
       <Input placeholder="请输入手机号" className={styles.phoneInput} value={rechargeAccount} onChange={onInputChange} />
       <div className={styles.phoneItemList}>
-        { map(productItems, (item, idx) => <SpecItem active={ main.id === item.id } key={idx} {...item} column={3} index={idx} onChange={onSelectFn} />) }
+        { map(productItems, (item, idx) => (
+          <SpecItem
+            active={ main.id === item.id }
+            key={idx}
+            {...item}
+            column={3}
+            index={idx}
+            onChange={onSelectFn}
+          />
+        )) }
       </div>
       { !isEmpty(attachList) && <h2>超值换购<span>组合购买更优惠</span></h2> }
       {map(attachList, (item, index) => <AttachItem key={index} data={item} index={index} active={attach.id === item.id } onChange={onSelectAddtionFn} />)}
@@ -56,5 +66,6 @@ export default connect(state => ({
       <TopupNote nodes={product.detail || ''} />
     </div>
     <RecommendBuy />
+    <BuyFooter />
   </div>);
 })

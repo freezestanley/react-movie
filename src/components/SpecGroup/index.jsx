@@ -1,32 +1,25 @@
-import React, { useReducer } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useReducer } from 'react';
 import { paymentAmount } from '@/utils/ants';
 
 import SpecItem from '../SpecItem';
 import './index.less';
 
 export default function SpecGroup(props) {
-  // const data = [{
-  //   name: 'VIP月卡',
-  //   cornerMark: '5-10元',
-  //   price: 15,
-  //   membershipPrice: 12,
-  // }, {
-  //   name: 'VIP季卡',
-  //   // cornerMark: '8-10元可提现红包',
-  //   cornerMark: '8-10元红包',
-  //   price: 45,
-  //   membershipPrice: 36.55,
-  // }, {
-  //   name: 'VIP季卡',
-  //   cornerMark: null,
-  //   price: 45,
-  //   membershipPrice: 36.55,
-  // }];
   const data = props.dataSource || [];
   const [state, setState] = useReducer((o, n) => ({...o, ...n}), {
     active: 0,
   })
   // console.log('[29] index.jsx: ', props);
+  const handleChange = (idx, item) => {
+    if (idx !== state.active) {
+      setState({ active: idx })
+      props.onChange && props.onChange(idx, item)
+    }
+  }
+  useEffect(() => {
+    props.onChange && props.onChange(state.active, data[state.active])
+  }, [])
   return (
     <div className="spec-group">
       {data.map((item, idx) => {
@@ -37,8 +30,9 @@ export default function SpecGroup(props) {
             key={idx}
             index={idx}
             column={props.column}
+            dataSource={item}
             active={state.active === idx}
-            onChange={e => setState({ active: e })}
+            onChange={handleChange}
             name={item.name}
             payPrice={payPrice.price}
             price={item.price}

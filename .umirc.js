@@ -16,14 +16,14 @@ export default {
         // hasNavBar: 是否显示头部导航
         //
         { path: '/login', component: '../pages/login', title: '盎司登陆' },
-        { path: '/topup', component: '../pages/topup', backgroundColor: 'gray', hasNavBar: false, hasBuyFooter: true },
+        { path: '/topup', component: '../pages/topup', backgroundColor: 'gray', hasNavBar: false},
         { path: '/', type: 'tabBar', component: '../pages/home', title: '首页', hasNavBar: false },
         { path: '/explore', type: 'tabBar', component: '../pages/explore', title: '发现', backgroundColor:'gray' },
-        { path: '/orders', type: 'tabBar', component: '../pages/orders', backgroundColor:'gray', title: '订单' },
+        { path: '/orders', type: 'tabBar', component: '../pages/orders', backgroundColor:'gray',footer:false, title: '订单' },
         { path: '/my', type: 'tabBar', component: '../pages/my', title: '我的' },
         { path: '/charge', component: '../pages/charge', backgroundColor:'gray',title: '充值成功' },
         { path: '/orderdetail', component: '../pages/orderdetail', backgroundColor:'gray',title: '订单详情' },
-        { path: '/phone', component: '../pages/phone', backgroundColor:'gray',title: '话费充值', hasBuyFooter: true },
+        { path: '/phone', component: '../pages/phone', backgroundColor:'gray',title: '话费充值'},
         { path: '/seckill', component: '../pages/seckill', backgroundColor:'gray',title: '秒杀活动',  },
         { path: '/successbuy',component: '../pages/successbuy', title: '购买成功',  },
         { path: '/cardpackage',component: '../pages/cardpackage',backgroundColor:'gray', title: '我的卡券包',  },

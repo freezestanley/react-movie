@@ -6,8 +6,12 @@ export const fmtPrice = (data, type) => {
   //   return `¥0`;
   // }
   const price = numeral(data).format('0.00').replace(/(\.00?)?0?$/, '');
+  const _price = price < 0 ? '-' : price;
+  if (type === 'CN') {
+    return `${_price}元`
+  }
   return type === 'tag'
-    ? `${price<0 ? '-': ''}<i class="money-symbol">¥</i><span>${Math.abs(price)}</span>`
+    ? `${price < 0 ? '-': ''}<i class="money-symbol">¥</i><span>${Math.abs(price)}</span>`
     : (price < 0 ? `-¥${Math.abs(price)}` : `¥${price}`);
 }
 
@@ -78,10 +82,11 @@ export const cookie = {
 
 export const Store = {
   set(key, value) {
+    console.log('[85] tools.js: ', value);
     switch (typeof value) {
-      case 'string': localStorage.setItem(key, value); break;
       case 'object': localStorage.setItem(key, JSON.stringify(value)); break;
-      default: new Error('Invalid');
+      default: localStorage.setItem(key, value); break;
+      // default: new Error('Invalid');
     }
   },
   get(key) {
@@ -99,9 +104,9 @@ export const Store = {
 export const Session = {
   set(key, value) {
     switch (typeof value) {
-      case 'string': sessionStorage.setItem(key, value); break;
       case 'object': sessionStorage.setItem(key, JSON.stringify(value)); break;
-      default: new Error('Invalid');
+      default: sessionStorage.setItem(key, value); break;
+      // default: new Error('Invalid');
     }
   },
   get(key) {

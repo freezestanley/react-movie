@@ -10,11 +10,7 @@
    btnTitle   按钮文字
    btnClick   按钮click
  */
-import React, { useEffect, useReducer } from 'react';
-import { Input, Button, Toast } from 'zarm';
-import { connect } from 'dva';
-import cns from 'classnames';
-import router from 'umi/router';
+import React from 'react';
 import styles from './CardItem.less';
 
 const itemState = {

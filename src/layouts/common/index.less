@@ -9,12 +9,16 @@
     flex: none;
   }
   .z_layout_cont {
+    position: relative;
     flex: 1;
     overflow-y: scroll;
     display: flex;
     flex-direction: column;
     .z_layout_box {
       flex: 1;
+    }
+    &.buy_footer_fix{
+      padding-bottom: 67px;
     }
   }
 

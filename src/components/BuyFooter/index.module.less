@@ -1,10 +1,9 @@
 @import '~@/less/variable.less';
 .buyFooter{
-  // z-index: 1001;
-  // bottom: 0;
-  // left: 0;
-  // position: absolute;
-  position: relative;
+  z-index: 1001;
+  bottom: 0;
+  left: 0;
+  position: fixed;
   z-index: 2;
   height: 67px;  
   width: 100%;
@@ -27,10 +26,7 @@
   }
   .content{
     padding: 15px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-end;
+    text-align: right;
     .total{
       font-size: 12px;
       line-height: 23px;
@@ -38,7 +34,7 @@
       text-shadow:0px -4px 12px fade(@black, 16);
       >i{
         margin-left: 5px;
-        vertical-align: middle;
+        vertical-align: bottom;
         color: @black;
         font-style: normal;
       }
@@ -46,10 +42,11 @@
         margin-left: 5px;
         font-size: 23px;
         color: @black;
-        vertical-align: middle;
+        vertical-align: bottom;
       }
     }
     .saleDetail{
+      margin-top: 2px;
       height:12px;
       font-size:10px;
       font-weight:400;
@@ -60,7 +57,7 @@
         position: relative;
         top: -1.5px;
         display: inline-block;
-        vertical-align: middle;
+        vertical-align: bottom;
         width: 12px;
         height: 12px;
         border-radius: 50%;

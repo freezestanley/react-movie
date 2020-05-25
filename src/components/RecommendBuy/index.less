@@ -3,18 +3,15 @@
   margin-right: 10px;
   margin-top: 5px;
   .SpikeRItem{
-    
      margin-bottom: 5px;
      background:rgba(255,255,255,1);
      border-radius:8px;
      >div:first-child{
        padding-top: 20px;;
        display: flex;
-       
        justify-content: space-between;
        >span:first-child{
-
-        margin-left: 16px;
+         margin-left: 16px;
          height:15px;
          font-size:15px;
          font-family:PingFangSC-Medium,PingFang SC;
@@ -22,17 +19,29 @@
          color:rgba(0,0,0,1);
          line-height:15px;
        }
-       >span:last-child{
-        width:56px;
-        height:14px;
-        font-size:14px;
-        font-family:PingFangSC-Regular,PingFang SC;
-        font-weight:400;
-        color:rgba(0,0,0,0.5);
-        line-height:14px;
-        margin-right: 15px;
+       >span:nth-child(2){
+        //  width:56px;
+        display: inline-block;
+         height:14px;
+         font-size:14px;
+         font-family:PingFangSC-Regular,PingFang SC;
+         font-weight:400;
+         color:rgba(0,0,0,0.5);
+         line-height:14px;
+         margin-right: 15px;
+         >span:first-child{
+          
+           display: inline-block;
+          font-size:14px;
+          font-family:PingFangSC-Regular,PingFang SC;
+          font-weight:400;
+          color:rgba(0,0,0,0.5);
+          line-height:14px;
+         
+          padding-bottom: 7px;
+        }
        }
-
+      
      }
      >div:last-child{
        justify-content: space-between;
@@ -45,12 +54,7 @@
        margin-top: 9px;
        >div{
          flex: 0,0,50%;
-
        }
-
      }
-  
-
-
   }
 }

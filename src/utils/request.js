@@ -10,7 +10,7 @@ export const apiPrefix = {
   user: '/api/ants_user/v1/user',
   banner: '/api/ants_product/v1/banner',
   seckill: '/api/ants_product/v1/seckill',
-  charge: '/api/ants_charge/v1/charge',
+  order: '/api/ants_order/v1/charge/order',
   pay: '/api/ants_charge/v1/pay',
   product: '/api/ants_product/v1/product',
 }
@@ -85,7 +85,8 @@ export default function (config) {
   const options = {
     baseURL: apiPrefix[config.serve],
     method,
-    [method === 'GET' ? 'params' : 'data']: data,
+    // 给get接口加时间戳，防止缓存
+    [method === 'GET' ? 'params' : 'data']: (method === 'GET' ? { ...data, t: Date.now() } : data),
     ...rest
   }
   return service.request(options);

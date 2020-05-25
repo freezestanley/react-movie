@@ -7,6 +7,7 @@ export default {
     tabPageList: [],
     currRoute: {},
     isVIP: true,
+    hasBuyFooter: false,
   },
   reducers: {
     setState(state, { payload }) {

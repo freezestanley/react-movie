@@ -6,6 +6,9 @@ export default ({onClick})=>{
   const handleClick = () => {
     onClick && onClick();
   }
+  const handleInput = e => {
+    console.log(e) 
+  }
   return (
     <Modal
       visible={isShow}
@@ -20,14 +23,11 @@ export default ({onClick})=>{
           充值账号
       </div>
       <div className='code_enter'>
-        <Input className='code_enter_input'></Input>
+        <Input className='code_enter_input'  onChange={handleInput} />
       </div> 
       <div className="code_sub" onClick={()=>{console.log(1)}}>
       <button className='btn_cancle'onClick={handleClick} > 取消</button> <button className='btn_ensure'  > 提交</button>
       </div>
     </Modal>
-    
-
-
   )
 }

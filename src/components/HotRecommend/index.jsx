@@ -14,36 +14,7 @@ export default class AsNavFor extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      nav1: null,
-      nav2: null,
-      list:[
-        {
-          thumbnail:sample,
-          image:sample,
-          link:'www.baidu.com'
-        },
-        {
-          thumbnail:sample,
-          image:sample,
-          link:'www.baidu.com'
-        },
-        {
-          thumbnail:sample,
-          image:sample,
-          link:'www.baidu.com'
-        },
-        {
-          thumbnail:sample,
-          image:sample,
-          link:'www.baidu.com'
-        },
-        {
-          thumbnail:sample,
-          image:sample,
-          link:'www.baidu.com'
-        },
-        
-      ]
+      selectedIndex:0
     };
   }
   componentDidMount() {
@@ -55,32 +26,32 @@ export default class AsNavFor extends Component {
   gotoDetail = (item) => {
     router.push(item.link);
   }
+  updateSelectImg = (index) => {
+    this.setState({
+      selectedIndex:index
+    })
+  }
  render() {
+   const {selectedIndex} = this.state;
+   const bannerList = this.props.bannerList.filter(item => item.bannerType === 5) || [];
+   const selectedItem = bannerList.length > 0 ? bannerList[selectedIndex]:{}
     return (
       <div className={styles['hot-recommend']}>
         <div className={styles['title']}>热门推荐</div>
-        <Slider
-          asNavFor={this.state.nav2}
-          ref={slider => (this.slider1 = slider)}
-        >
-          {
-            (this.state.list || []).map((item,index) => {
-              return (
-                <div key={index} className={styles['main-image']} onClick={() => this.gotoDetail(item)}>
-                  <img src={item.image} alt="" />
-
-                </div>
-              )
-            })
-          }
-
-        </Slider>
+        {
+          bannerList.length > 0 && (
+            <div className={styles['main-image']} onClick={() => {router.push(selectedItem.bannerLinkUrl)}}>
+              <img src={selectedItem.bannerCoverUrl} alt="" />
+            </div>
+          )
+        }
+      
         <div className={styles['list-content']}>
           {
-            (this.state.list || []).map((item,index) => {
+            (bannerList || []).map((item,index) => {
               return (
-                <div key={index} className={styles['thumbnail']}>
-                  <img src={item.thumbnail} alt="" />
+                <div key={index} className={styles['thumbnail']} onClick={() => this.updateSelectImg(index)}>
+                  <img src={item.bannerThumbnail} alt="" />
 
                 </div>
               )
