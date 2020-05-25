@@ -24,7 +24,7 @@ const getTotalPrice = ({ main, type, attach }) => {
 }
 
 export default withRouter(connect(state => state.prePay)(function(props) {
-  const { history, main, attach, type, dispatch } = props;
+  const { history, main, attach, type, dispatch, onValidate } = props;
   const [visible, setVisible]=useState(false);
   const toggleFn = (val) =>{
     setVisible(val);
@@ -36,24 +36,28 @@ export default withRouter(connect(state => state.prePay)(function(props) {
     console.log('-------handle pay data', data);
   }
   const startPayFn = () => {
-    let data = {};
-    switch(type) {
-      case 'product':
-        data = main;
-        break;
-      case 'vip':
-        data = main;
-        break;
-      case 'seckill':
-        data = main;
-        break;
-      case 'phone':
-        data = { main, attach };
-        break;
-      default:
-        data = main; 
+    if (onValidate && onValidate())  {
+      // console.log('-------handle pay data', data);
+      let data = {};
+      switch(type) {
+        case 'product':
+          data = main;
+          break;
+        case 'vip':
+          data = main;
+          break;
+        case 'seckill':
+          data = main;
+          break;
+        case 'phone':
+          data = { main, attach };
+          break;
+        default:
+          data = main; 
+      }
+      handlePay(dispatch, data);
     }
-    handlePay(dispatch, data);
+    
   };
   const totalPrice = getTotalPrice({ main, attach, type });
   useEffect(() => {
