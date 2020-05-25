@@ -2,7 +2,7 @@ import React from 'react'
 import './index.less';
 import Button from './Button'
 import SwitchAccount from '@/components/SwitchAccount';
-import SelectMenber from './SelectMember'
+import SelectMember from './SelectMember'
 import TobBack from './TopBack'
 const mock={
   title:' 盎司白金视听年卡',
@@ -13,7 +13,7 @@ export default ()=>{
    <TobBack info={mock}/>
     <div className='CardPackage'>
     <div className='CardPackageMain'>
-      <SelectMenber/>
+      <SelectMember/>
       <div className='CardPackageMainPut'>
         <SwitchAccount/>
       </div>

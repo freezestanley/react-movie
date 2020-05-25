@@ -1,6 +1,6 @@
 import React from 'react';
 import './index.less';
-export default({ title , icon , onClick })=>{
+export default({ title, icon, onClick })=>{
   const handleClick=()=>{
     onClick && onClick()
   }

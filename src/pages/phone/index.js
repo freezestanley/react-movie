@@ -14,12 +14,14 @@ import BuyFooter from '@/components/BuyFooter';
 
 export default connect(state => ({
   phone: state.phone,
-  phoneForm: state.phoneForm
+  phoneForm: state.phoneForm,
+  banner:state.banner
 }))(function(props) {
-  const { phone: { product={}, productItems=[], attachList=[] }, phoneForm: { main, attach, rechargeAccount }, dispatch } =props;
+const { banner:{list={}},phone: { product={}, productItems=[], attachList=[] }, phoneForm: { main, attach, rechargeAccount }, dispatch } =props;
   useEffect(() => {
     (async function() {
       await dispatch({ type: 'phone/getAttachList', payload: { productId: 19 } });
+      await dispatch({ type: 'banner/getBanner', payload: { bannerType: [6] } });
       await dispatch({ type: 'phone/getProductItems', payload: 19 });
     })();
   }, [dispatch]); // eslint-disable-line
@@ -48,7 +50,16 @@ export default connect(state => ({
       <h2>手机话费</h2>
       <Input placeholder="请输入手机号" className={styles.phoneInput} value={rechargeAccount} onChange={onInputChange} />
       <div className={styles.phoneItemList}>
-        { map(productItems, (item, idx) => <SpecItem active={ main.id === item.id } key={idx} {...item} column={3} index={idx} onChange={onSelectFn} />) }
+        { map(productItems, (item, idx) => (
+          <SpecItem
+            active={ main.id === item.id }
+            key={idx}
+            {...item}
+            column={3}
+            index={idx}
+            onChange={onSelectFn}
+          />
+        )) }
       </div>
       { !isEmpty(attachList) && <h2>超值换购<span>组合购买更优惠</span></h2> }
       {map(attachList, (item, index) => <AttachItem key={index} data={item} index={index} active={attach.id === item.id } onChange={onSelectAddtionFn} />)}
@@ -56,7 +67,7 @@ export default connect(state => ({
     <div className={styles.detailBox}>
       <TopupNote nodes={product.detail || ''} />
     </div>
-    <RecommendBuy />
+    <RecommendBuy info={list} />
     <BuyFooter />
   </div>);
 })

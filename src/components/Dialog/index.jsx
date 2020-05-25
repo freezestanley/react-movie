@@ -20,7 +20,7 @@ export default ()=>{
         <Input className='code_enter_input'></Input>
       </div> 
       <div className="code_sub" onClick={()=>{setShow(!isShow)}}>
-        <button > 提交</button>
+        <div > 提交</div>
       </div>
     </Modal>):(<Confirm onClick={()=>{setShow(!isShow)}}/>)
   )

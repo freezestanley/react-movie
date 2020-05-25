@@ -1,20 +1,21 @@
 import React from 'react';
 import styles from './rec.less'
-import brand from '@/assets/brand.png'
+import router from 'umi/router';
 export default (props ) => {
-  
+  const allData=props.info
+  const data=allData.bannerItem
   return (
-    <div className={styles['acitivity-card']}>
+    <div className={styles['acitivity-card']} onClick={() => router.push(allData.bannerLinkUrl)} >
       <div className={styles['main-part']}>
         <div className={styles['right-top']}></div>
-        <img src={brand} className={styles['brand']} alt="" />
-        <div className={styles['card-title']}>Q币限时秒杀</div>
+        <img src={data.productImage} className={styles['brand']} alt="" />
+        <div className={styles['card-title']}>{data.productName}</div>
         <div className={styles['card-description']}>
           <span className={styles['member-discount']}>会员优惠</span>
         </div>
         <div className={styles['price-box']}>
-          <div className={styles['now-price']}><span className={styles['yuan']}>￥</span>274</div>
-          <div className={styles['origin-price']}>￥498</div>
+          <div className={styles['now-price']}><span className={styles['yuan']}>￥</span>{data.price}</div>
+          <div className={styles['origin-price']}>￥499</div>
         </div>
       </div>
       <div className={styles['bottom-part']}> 

@@ -9,6 +9,7 @@ import Charge from '@/components/Charge'
 
 function MyPage(props){
   const userInfo = props.user.userInfo;
+   console.log(props.banner)
   console.log('[8] index.jsx: ', props);
   const handleExit = () => {
     props.dispatch({ type: 'user/loginOut' })
