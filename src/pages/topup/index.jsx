@@ -84,7 +84,7 @@ export default connect(state => ({ productInfo: state.productDetail.info, isVIP:
                 onChange={handleChangeSpec}
               />
             ),
-            type === 2 && <CardPage key={2} {..._props} />,
+            type === 2 && <CardPage key={2} {..._props} onChange={handleChangeSpec} />,
           ]
         }}
       </ProductSpecGroup>

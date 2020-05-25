@@ -1,11 +1,12 @@
+
+import { paymentAmount } from '@/utils/ants';
 //  价格展示逻辑
-export const getTotalPrice = ({ main={}, type, attach }) => {
+export const getTotalPrice = ({ main={}, type, attach, isVIP }) => {
   let price = 0;
   switch(type) {
     case 'product': 
       const { specInfo={}, isOpenVIP, vipPrice }  = main;
-      const { eventPrice, membershipPrice, price: originPrice} = specInfo;
-      price = (Math.min(eventPrice || 0, membershipPrice || 0) || originPrice) + (isOpenVIP ? vipPrice : 0);
+      price = paymentAmount(specInfo, isVIP, isOpenVIP).price + (isOpenVIP ? vipPrice : 0);
       break;
     case 'phone': 
       price = (main.price || 0) + (attach.payPrice || 0);
@@ -20,26 +21,24 @@ export const getTotalPrice = ({ main={}, type, attach }) => {
 }
 
 // 优惠信息弹框
-export const getDiscountInfo = ({ main, type, attach }) => {
+export const getDiscountInfo = ({ main, type, attach, isVIP }) => {
   let data = {};
   switch(type) {
     case 'product':
       const { specInfo={}, isOpenVIP, vipPrice }  = main;
-      const { eventPrice, eventDiscount, membershipPrice, membershipDiscount, name, price } = specInfo;
-      const isShouldShowEventPrice = eventPrice >= 0 && eventPrice < membershipPrice;
-      const isShouldMemberPrice = membershipPrice >= 0 && membershipPrice < eventPrice
+      const { eventDiscount, membershipDiscount, name, price } = specInfo;
+      const { price: payPrice, type: priceType } = paymentAmount(specInfo, isVIP, isOpenVIP);
       data = {
         type,
         itemName: name,
         originPrice: price,
+        discountAmount: payPrice - price
       };
-      if (isShouldShowEventPrice) {
-        data.discountAmount = eventPrice - price;
+      if (priceType === 'activity') {
         data.discount = eventDiscount;
         data.discountLabel = '活动价';
       }
-      if (isShouldMemberPrice) {
-        data.discountAmount = membershipPrice - price;
+      if (priceType === 'vip') {
         data.discount = membershipDiscount;
         data.discountLabel = '会员价';
       }

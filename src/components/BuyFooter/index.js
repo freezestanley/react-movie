@@ -14,8 +14,8 @@ import { ReactComponent as SafeSvg } from './img/safe.svg';
 import { getTotalPrice, getDiscountInfo } from './util';
 
 
-export default withRouter(connect(state => state.prePay)(function(props) {
-  const { history, main, attach, type, dispatch, onValidate } = props;
+export default withRouter(connect(state => ({ ...state.prePay, isVIP: state.global.isVIP }))(function(props) {
+  const { history, main, attach, type, dispatch, onValidate, isVIP } = props;
   const [visible, setVisible]=useState(false);
   const toggleFn = (val) =>{
     setVisible(val);
@@ -50,8 +50,8 @@ export default withRouter(connect(state => state.prePay)(function(props) {
     }
     
   };
-  const totalPrice = getTotalPrice({ main, attach, type });
-  const discountInfo = getDiscountInfo({ main, attach, type });
+  const totalPrice = getTotalPrice({ main, attach, type, isVIP });
+  const discountInfo = getDiscountInfo({ main, attach, type, isVIP });
   const { 
     itemName, // 产品规格
     originPrice, // 原价

@@ -1,12 +1,14 @@
 import React from 'react';
-import SpecGroup from '@/components/SpecGroup';
+import SpecAndVIP from '@/components/SpecAndVIP';
 
 export default function CardPage(props) {
   return (
     <div>
-      CardPage
-      <SpecGroup
-        dataSource={props.productItems}
+      <SpecAndVIP
+        dataSource={props.productSpecItems}
+        isVIP={props.isVIP}
+        onOpenVIP={props.onOpenVIP}
+        onChange={props.onChange}
       />
     </div>
   );
