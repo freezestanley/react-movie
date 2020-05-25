@@ -1,7 +1,8 @@
 import { Pull } from 'zarm';
-import Order from '../../components/OrderItem';
+import Order from '@/components/OrderItem';
 import  React,{Component} from 'react';
-import styles from './index.less'
+import './index.less'
+import {connect } from 'dva'
 
 const REFRESH_STATE = {
   normal: 0,  // 普通
@@ -29,14 +30,19 @@ const getRandomNum = (min, max) => {
 
 class Index extends Component {
   mounted = true;
+  constructor(props){
+    super(props)
+    this.state = {
+      useBodyScroll: false,
+      refreshing: REFRESH_STATE.normal,
+      loading: LOAD_STATE.normal,
+      dataSource: [],
+    };
+    console.log(props)
+  
+  }
 
-  state = {
-    useBodyScroll: false,
-    refreshing: REFRESH_STATE.normal,
-    loading: LOAD_STATE.normal,
-    dataSource: [],
-  };
-
+ 
   componentDidUpdate() {
       document.body.style.overflow = 'hidden';
   }
@@ -67,13 +73,10 @@ class Index extends Component {
     this.setState({ loading: LOAD_STATE.loading });
     setTimeout(() => {
       if (!this.mounted) return;
-
       const randomNum = getRandomNum(0, 5);
-      const { dataSource } = this.state;
+      //const { dataSource } = this.state;
       let loading = LOAD_STATE.success;
-
       console.log(`状态: ${randomNum === 0 ? '失败' : (randomNum === 1 ? '完成' : '成功')}`);
-
       if (randomNum === 0) {
         loading = LOAD_STATE.failure;
       } else if (randomNum === 1) {
@@ -81,7 +84,6 @@ class Index extends Component {
       } else {
         this.appendData(20);
       }
-
       this.setState({ loading });
     }, 2000);
   }
@@ -94,7 +96,6 @@ class Index extends Component {
     }
     this.setState({ dataSource });
   }
-
   toggleScrollContainer = () => {
     this.setState({
       useBodyScroll: !this.state.useBodyScroll,
@@ -187,4 +188,4 @@ class Index extends Component {
     )
   }
 }
-export default Index;
+export default connect(state=>state)(Index);
