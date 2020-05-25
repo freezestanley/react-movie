@@ -23,7 +23,7 @@ export function eventList(data) {
 // 获取商品规格
 export function getProductItems(data) {
   return request({
-    url: '/queryProductItems',
+    url: '/queryProductItemsGroupByCategory',
     serve: 'product',
     method: 'GET',
     data: {

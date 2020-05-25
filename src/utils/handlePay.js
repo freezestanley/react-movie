@@ -1,64 +1,60 @@
 import router from 'umi/router';
 import { Loading } from 'zarm';
-import { PAY_TYPE, BUY_MEMBER } from '@utils/constant';
 import { Store, isWX } from '@utils/tools';
 import { wechatPay, randomStr } from '@utils/wechatPay';
 
-export default ({ dispatch, data, payType = PAY_TYPE.wechat, onSuccessCb }) => {
-  // console.log('pay data: ', payload);
-  // if the order is created successfully
-  const openId = Store.get('openId');
-  Loading.show();
-  dispatch({
-    type: 'charge/weChatPayStart',
-    payload: {
-      openId: openId,
-      orderId: data.orderId,
-      // 微信：1，支付宝：2
-      payType,
-    },
-    callback(_data) {
-      if (isWX) {
-        wechatPay(
-          {
-            // config
-            timeStamp: Date.now().toString(),
-            nonceStr: randomStr(24),
-            package: `prepay_id=${_data.prepayId}`,
-          },
-          // get paySign
-          async params => {
-            const _d = (await dispatch({
-              type: 'charge/weChatPaySign',
-              payload: { ...params, orderId: data.orderId },
-            })) || {};
-            Loading.hide();
-            return _d;
-          },
-          // success callback
-          () => {
-            onSuccessCb
-              ? onSuccessCb()
-              : router.push(`/topup/temp/?out_trade_no=${data.orderId}`)
-          },
-        );
-      } else {
-        _data.payLink && browserPay(_data);
-      }
-    }
-  })
-}
+const isPrd = /vip.zhongan.io$/.test(window.location.origin);
+const superCodeURL = isPrd ? 'https://vpc-af.zhongan.io' : 'https://vpc-test-af.zhongan.io';
 
-export function formatPayForm(dispatch) {
-  dispatch({
-    type: 'global/payForm',
-    payload: {
-      accountType: null,
-      rechargeAccount: null,
-      productItemId: null,
-      productId: null,
-      quantity: 1,
-      buyMember: BUY_MEMBER.no,
+export default function superCodePay({ dispatch, type = 'order/createAndPay', formData, callback }) {
+  window.__SuperCode && window.__SuperCode.show({
+    serverDomain: superCodeURL,
+    onSuccess(data) {
+      const _data = data.data;
+
+      const openId = Store.get('openId');
+      if (openId) formData.openId = formData;
+
+      dispatch({
+        type: type,
+        payload: {
+          ...formData,
+          // 1：普通h5浏览器 2：微信内部浏览器
+          payEnv: isWX ? 2 : 1,
+          // 反欺诈
+          did: _data.did,
+          sid: _data.scene,
+          token: _data.token,
+        },
+      }).then(res => {
+        if (isWX) {
+          wechatPay(
+            {
+              // config
+              timeStamp: Date.now().toString(),
+              nonceStr: randomStr(24),
+              package: `prepay_id=${res.prepayId}`,
+            },
+            // get paySign
+            async params => {
+              const _d = (await dispatch({
+                type: 'charge/wechatPaySign',
+                payload: { ...params, orderId: res.orderId },
+              })) || {};
+              Loading.hide();
+              return _d;
+            },
+            // success callback
+            () => {
+              callback
+                ? callback()
+                : router.push(`/topup/temp/?out_trade_no=${data.orderId}`)
+            },
+          );
+        } else {
+          _data.payLink && browserPay(_data);
+        }
+      })
     }
   })
 }

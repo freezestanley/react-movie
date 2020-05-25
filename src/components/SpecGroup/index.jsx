@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useReducer } from 'react';
 import { paymentAmount } from '@/utils/ants';
 

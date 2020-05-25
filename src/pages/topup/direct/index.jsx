@@ -26,15 +26,17 @@ export default function DirectPage(props) {
     })
   }
 
+  // console.log('[29] index.jsx: ', props.productSpecItems);
+
   return (
     <div>
-      tabKey-{props.tabKey}
+      {/* tabKey-{props.tabKey} */}
       <SwitchAccount
         onChange={handleAccount}
         accountTypeList={props.accountTypeList}
       />
       <SpecAndVIP
-        dataSource={props.productItems}
+        dataSource={props.productSpecItems}
         isVIP={props.isVIP}
         onOpenVIP={props.onOpenVIP}
         onChange={handleSpec}
