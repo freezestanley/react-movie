@@ -9,12 +9,11 @@ const SINGLE_DATA = [
 
 export default () => {
   const [state, setState] = useReducer((o, n) => ({ ...o, ...n }), {
-    visible: false,
     value: '',
     dataSource: SINGLE_DATA,
   })
   return (
-    <div className='sel' onClick={()=>{setState({visible:true})} }>
+    <div className='sel'  >
       <div className='CardPackageMainSelect'>
         <span>请选择您想要的会员卡</span><br/>
       </div>
@@ -25,9 +24,7 @@ export default () => {
           console.log('Picker onOk: ', selected);
           state.value = selected.map(item => item.value);
           setState({value:state.value})
-         
         }}
-        
       />
     </div>
   )
