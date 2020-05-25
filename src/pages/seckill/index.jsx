@@ -1,7 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import styles from './index.less';
-// import Recommend from '@/components/RecommendBuy';
+import styles from './index.module.less';
+import { ProductHead } from '@/components/Product';
+import TopupNote from '@/components/Card/TopupNote';
+import RecommendBuy from '@/components/RecommendBuy';
 import SeckillActivityInfo from './SeckillActivityInfo';
+import BuyFooter from '@/components/BuyFooter';
 
 const getDetail = id => {
   return new Promise(resolve => {
@@ -30,9 +33,9 @@ const getDetail = id => {
         nextEndTimestamp: 0,
         onlyForVip: 'string',
         originPrice: 39,
-        productDesc: 'string',
         productId: 0,
         productName: '腾讯视频会员',
+        productDesc: '<p><i>1</i>激活方式：请通过"订单详情"页面点击链接激活VIP</p><p><i>2</i>请您在2021年12月07日前开通本会员卡</p><p><i>3</i>赠品使用方式：<p>芒果视频：关注“芒果互联网电视助手”微信公众号，点击右下角“开通会员”→“会员卡兑换”输入兑换码激活会员；”</p><p>网易云音乐：“网易云音乐APP”—“账号”—“会员中心”—“立即开通”—“使用会员兑换码”（区分大小写）；</p><p>话费：凭兑换码，微信联系“盎司一起”客服完成充值。</p></p><p><i>4</i>如有疑问，请联系公众号客服：盎司一起</p>',
         productSmallTitle: 'string',
         productType: 0,
         quantity: 100,
@@ -56,31 +59,19 @@ export default () => {
   }, [fetch]);
 
   return (
-    <div className={styles.Spike}>
+    <div className={styles.seckillContainer}>
+      <ProductHead
+        corner={''}
+        title={'腾讯视频蜜蜂会员七五折起'}
+        desc={'不负好时光，月卡年卡任你挑'}
+        imgUrl={'#'}
+      />
       {detail && <SeckillActivityInfo info={detail} />}
-
-      {/* <div className={styles.SpikeR}>
-        <div className={styles.SpikeRItem}>
-          <div>
-            <span>蜜蜂会员都在买</span>
-            <span>更多 ></span>
-          </div>
-          <div>
-            <div>
-              <Recommend title="Q币限时优惠" detail="捂着限时秒杀，限时专享" price="274" />
-            </div>
-            <div>
-              <Recommend title="Q币限时优惠" detail="捂着限时秒杀，限时专享" price="274" />
-            </div>
-            <div>
-              <Recommend title="Q币限时优惠" detail="捂着限时秒杀，限时专享" price="274" />
-            </div>
-            <div>
-              <Recommend title="Q币限时优惠" detail="捂着限时秒杀，限时专享" price="274" />
-            </div>
-          </div>
-        </div>
-      </div> */}
+      { detail && <div className={styles.topupOther}>
+          <TopupNote nodes={detail.productDesc || ''} />
+    </div> }
+      <RecommendBuy />
+      <BuyFooter/>
     </div>
   );
 };
