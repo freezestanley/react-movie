@@ -9,8 +9,8 @@ export const apiPrefix = {
   ance: '/api/ants_user/v1/ance',
   user: '/api/ants_user/v1/user',
   banner: '/api/ants_product/v1/banner',
-  seckill: '/api/ants_product/v1/seckill',
-  charge: '/api/ants_charge/v1/charge',
+  seckill: '/api/ants_order/v1/charge/seckill',
+  order: '/api/ants_order/v1/charge/order',
   pay: '/api/ants_charge/v1/pay',
   product: '/api/ants_product/v1/product',
 }

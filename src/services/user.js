@@ -67,3 +67,12 @@ export function getQQInfo(data) {
     method: 'POST',
   });
 }
+
+// 获取会员等级
+export function getMembershipList() {
+  return request({
+    url: '/membership/level/list',
+    serve: 'user',
+    method: 'GET'
+  });
+}

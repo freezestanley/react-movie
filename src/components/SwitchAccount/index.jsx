@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useReducer, useCallback } from 'react';
 import { Input } from 'zarm';
 import debounce from 'lodash/debounce';
@@ -37,6 +38,13 @@ export default function SwitchAccount(props) {
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [JSON.stringify(accountTypeList)])
+
+  useEffect(() => {
+    props.onChange && props.onChange({
+      account: state.account,
+      accountType: state.accountType
+    });
+  }, [state.account, state.accountType])
 
   const handleSwitch = () => {
     const isFirst = state.index === 0;
