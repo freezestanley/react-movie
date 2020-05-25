@@ -5,6 +5,7 @@ import ProductSpecGroup from '@/components/ProductSpecGroup';
 import { ProductHead } from '@/components/Product';
 import PageStatus from '@/components/PageStatus';
 import { productCornerMark } from '@/utils/ants';
+import BuyFooter from '@/components/BuyFooter';
 
 import CardPage from './card';
 import DirectPage from './direct';
@@ -66,6 +67,7 @@ export default connect(state => ({ productInfo: state.productDetail.info, isVIP:
       <div className={styles.topupOther}>
         <TopupNote nodes={detail || ''} />
       </div>
+      <BuyFooter/>
     </>
   );
 });

@@ -56,6 +56,12 @@ export default withRouter(connect(state => state.prePay)(function(props) {
     handlePay(dispatch, data);
   };
   const totalPrice = getTotalPrice({ main, attach, type });
+  useEffect(() => {
+    dispatch({ type: 'global/setState', payload: { hasBuyFooter: true } });
+    return () => {
+      dispatch({ type: 'global/setState', payload: { hasBuyFooter: false } });
+    }
+  }, [dispatch]);
   return [<div className={styles.buyFooter} key='footer' id="buy-footer-box">
     <dl className={styles.home} onClick={goToHome}>
       <dt className={styles.homeIcon}>
