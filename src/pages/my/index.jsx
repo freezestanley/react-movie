@@ -36,5 +36,4 @@ function MyPage(props){
     </div>
   );
 }
-
 export default connect(state => state)(MyPage)

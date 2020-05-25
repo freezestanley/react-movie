@@ -42,7 +42,6 @@ class Index extends Component {
   
   }
 
- 
   componentDidUpdate() {
       document.body.style.overflow = 'hidden';
   }
@@ -74,7 +73,6 @@ class Index extends Component {
     setTimeout(() => {
       if (!this.mounted) return;
       const randomNum = getRandomNum(0, 5);
-      //const { dataSource } = this.state;
       let loading = LOAD_STATE.success;
       console.log(`状态: ${randomNum === 0 ? '失败' : (randomNum === 1 ? '完成' : '成功')}`);
       if (randomNum === 0) {
@@ -107,79 +105,18 @@ class Index extends Component {
     const style = useBodyScroll
       ? {}
       : { position: 'relative', overflowY: 'auto', maxHeight: 1200, };
-
     return (
       <>
-  
         <Pull
           style={style}
           refresh={{
             state: refreshing,
             handler: this.refreshData,
-            // render: (refreshState, percent) => {
-            //   const cls = 'custom-control';
-            //   switch (refreshState) {
-            //     case REFRESH_STATE.pull:
-            //       return (
-            //         <div className={cls}>
-            //           <ActivityIndicator loading={false} percent={percent} />
-            //           <span>下拉刷新</span>
-            //         </div>
-            //       );
-
-            //     case REFRESH_STATE.drop:
-            //       return (
-            //         <div className={cls}>
-            //           <ActivityIndicator loading={false} percent={100} />
-            //           <span>释放立即刷新</span>
-            //         </div>
-            //       );
-
-            //     case REFRESH_STATE.loading:
-            //       return (
-            //         <div className={cls}>
-            //           <ActivityIndicator type="spinner" />
-            //           <span>加载中</span>
-            //         </div>
-            //       );
-
-            //     case REFRESH_STATE.success:
-            //       return (
-            //         <div className={cls}>
-            //           <Icon type="right-round" theme="success" />
-            //           <span>加载成功</span>
-            //         </div>
-            //       );
-
-            //     case REFRESH_STATE.failure:
-            //       return (
-            //         <div className={cls}>
-            //           <Icon type="wrong-round" theme="danger" />
-            //           <span>加载失败</span>
-            //         </div>
-            //       );
-
-            //     default:
-            //   }
-            // },
           }}
           load={{
             state: loading,
             distance: 200,
             handler: this.loadData,
-            // render: (loadState) => {
-            //   const cls = 'custom-control';
-            //   switch (loadState) {
-            //     case LOAD_STATE.loading:
-            //       return <div className={cls}><ActivityIndicator type="spinner" /></div>;
-
-            //     case LOAD_STATE.failure:
-            //       return <div className={cls}>加载失败</div>;
-
-            //     case LOAD_STATE.complete:
-            //       return <div className={cls}>我是有底线的</div>;
-            //   }
-            // },
           }}
         >
           {dataSource}
