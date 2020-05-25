@@ -6,6 +6,7 @@ export default {
   namespace: 'user',
   state: {
     userInfo: {},
+    isVIP: false,
   },
   reducers: {
     setState(state, { payload }) {
@@ -61,5 +62,26 @@ export default {
       const res = yield call(services.getQQInfo, payload);
       return res.data;
     },
+
+    *getUserInfo({ payload, hasToast = true }, { put, call }) {
+      const res = yield call(services.getUserInfo, payload);
+      if (res.code === '0000') {
+        const _data = res.data || {};
+        yield put({
+          type: 'setState',
+          payload: {
+            userInfo: _data,
+            // 0 - 非会员；
+            // 1 - GOLD（金卡）；
+            // 2 - PLATINUM（白金卡）；
+            // 3 - DIAMOND（钻石卡）
+            isVIP: _data.membershipLevel !== 0,
+            userId: _data.id
+          },
+        })
+      } else {
+        hasToast && Toast.show(res.msg)
+      }
+    }
   },
 };

@@ -133,6 +133,8 @@ export const BrowserInfo = {
   isPWA: navigator.standalone || window.matchMedia('(display-mode: standalone)').matches,
 };
 
+export const isWX = BrowserInfo.isWeixin;
+
 export const wxClass = name => !BrowserInfo.isWeixin ? `wx__${name}` : '';
 
 export const textURL = (str, text) => str ? str.replace(/((https?|http|ftp|file):\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|])/g, `<a class="text__url" href="$1">${text || '$1'}</a>`) : '';

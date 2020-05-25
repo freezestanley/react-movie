@@ -72,6 +72,8 @@ export default function SwitchAccount(props) {
       })
   }, 500, { leading: false, trailing: true }), [])
 
+  const len = state.accountTypeList.length;
+
   return (
     <div className="z_switch_account">
       <div className="z_switch_head">
@@ -83,7 +85,7 @@ export default function SwitchAccount(props) {
           </div>
         )}
       </div>
-      <div className="z_switch_account_input">
+      <div className={`z_switch_account_input ${len === 1 ? 'w100' : ''}`}>
         <Input
           placeholder={`请输入${state.accountTypeName}`}
           value={state.account}
@@ -91,7 +93,7 @@ export default function SwitchAccount(props) {
           // onFocus={() => setState({ onInput: true })}
           // onBlur={() => setState({ onInput: false })}
         />
-        {state.accountTypeList.length === 2 && (
+        {len === 2 && (
           <div className="z_switch" onClick={handleSwitch}>
             <img src={require('./switch.svg')} alt="" />
             <span>{state.accountTypeName}</span>

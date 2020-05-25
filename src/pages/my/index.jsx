@@ -1,14 +1,15 @@
 import React from 'react';
 import { connect } from 'dva';
 import router from 'umi/router';
+import { Modal } from 'zarm';
 import styles from './index.less';
 // import Dialog from '../../components/Dialog';
 import MenuItem from './MenuItem'
 
 
-function My(props){
-
-  console.log(props)
+function MyPage(props){
+  const userInfo = props.user.userInfo;
+  console.log('[8] index.jsx: ', props);
   const handleExit = () => {
     props.dispatch({ type: 'user/loginOut' })
   }
@@ -19,8 +20,8 @@ function My(props){
         <div className='me_avatar-img'  >
            <div  className='img' src="" alt=""/>
          </div>
-        <div className='me_vip'></div>
-        <p className='me_nickname'>王小明</p>
+        {userInfo.isVIP && <div className='me_vip' />}
+        <p className='me_nickname'>{userInfo.nickname}</p>
       </div>
       <div className='me_container'>
         {/* <ul>
@@ -36,9 +37,11 @@ function My(props){
       </div>
       <button onClick={() => router.push('/login')}>登录</button>
       <button onClick={handleExit}>退出</button>
-      {/* <Dialog/> */}
+
+      <pre>{JSON.stringify(props.user, null, 2)}</pre>
+
     </div>
   );
 }
 
-export default connect(state=>state)(My)
+export default connect(state => state)(MyPage)

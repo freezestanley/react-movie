@@ -6,6 +6,7 @@ export default {
     routesMap: [],
     tabPageList: [],
     currRoute: {},
+    isVIP: true,
   },
   reducers: {
     setState(state, { payload }) {
