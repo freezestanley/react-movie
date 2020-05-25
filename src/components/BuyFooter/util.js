@@ -3,8 +3,9 @@ export const getTotalPrice = ({ main={}, type, attach }) => {
   let price = 0;
   switch(type) {
     case 'product': 
-      const { eventPrice, membershipPrice, price: originPrice} = main.specInfo || {};
-      price = Math.min(eventPrice || 0, membershipPrice || 0) || originPrice;
+      const { specInfo={}, isOpenVIP, vipPrice }  = main;
+      const { eventPrice, membershipPrice, price: originPrice} = specInfo;
+      price = (Math.min(eventPrice || 0, membershipPrice || 0) || originPrice) + (isOpenVIP ? vipPrice : 0);
       break;
     case 'phone': 
       price = (main.price || 0) + (attach.payPrice || 0);
