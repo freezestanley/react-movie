@@ -17,9 +17,6 @@ function Home ({ dispatch,bannerList, ...rest }) {
   const topBanners = filter(bannerList, item => item.bannerType === 1);
   const middleBanners = filter(bannerList, item => item.bannerType === 3);
   useEffect(() => {
-    dispatch({ type: 'banner/getBanner', payload: {
-      bannerType:[1,2,3,5]
-    } });
     dispatch({ type: 'productDetail/getEventList', payload: {} });
   }, [dispatch]);
   console.log('rest',rest,bannerList);
