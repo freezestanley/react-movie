@@ -77,7 +77,7 @@ export default connect(state => ({ productInfo: state.productDetail.info, isVIP:
       <div className={styles.topupOther}>
         <TopupNote nodes={detail || ''} />
       </div>
-      <BuyFooter/>
+      <BuyFooter />
     </>
   );
 });
