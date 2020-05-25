@@ -4,7 +4,7 @@ import TopupNote from '@/components/Card/TopupNote';
 import ProductSpecGroup from '@/components/ProductSpecGroup';
 import { ProductHead } from '@/components/Product';
 import PageStatus from '@/components/PageStatus';
-import { productCornerMark } from '@/utils/ants';
+import RecommendBuy from '@/components/RecommendBuy';
 import BuyFooter from '@/components/BuyFooter';
 
 import CardPage from './card';
@@ -91,6 +91,7 @@ export default connect(state => ({ productInfo: state.productDetail.info, isVIP:
       <div className={styles.topupOther}>
         <TopupNote nodes={detail || ''} />
       </div>
+      <RecommendBuy />
       <BuyFooter />
     </>
   );
