@@ -19,7 +19,13 @@ export const getDiscountInfo = ({ main, type, attach }) => {
   let data = {};
   switch(type) {
     case 'phone': 
-      data = (main.price || 0) + (attach.payPrice || 0);
+      data = {
+        type,
+        itemName: main.name,
+        originPrice: main.price,
+        attachProductName: `${attach.title}${attach.productItemName}`,
+        attachPrice: attach.payPrice
+      };
       break;
     case 'seckill': 
       data = {

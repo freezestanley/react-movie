@@ -52,6 +52,15 @@ export default withRouter(connect(state => state.prePay)(function(props) {
   };
   const totalPrice = getTotalPrice({ main, attach, type });
   const discountInfo = getDiscountInfo({ main, attach, type });
+  const { 
+    itemName, // 产品规格
+    originPrice, // 原价
+    discount, // 折扣
+    discountAmount, // 折扣金额
+    vipPrice, // VIP会员费
+    attachProductName, // 换购商品名称
+    attachPrice, // 换购商品价格
+  } = discountInfo;
   useEffect(() => {
     dispatch({ type: 'global/setState', payload: { hasBuyFooter: true } });
     return () => {
@@ -67,7 +76,7 @@ export default withRouter(connect(state => state.prePay)(function(props) {
     </dl>
     <div className={styles.content}>
       <div className={styles.total} dangerouslySetInnerHTML={{ __html: '合计'+fmtPrice(totalPrice, 'tag') }}></div>
-      <div className={styles.saleDetail} onClick={toggleFn.bind(null, true)}>优惠明细<PromptSvg className={styles.questionIcon} /></div>
+      {totalPrice > 0 && <div className={styles.saleDetail} onClick={toggleFn.bind(null, true)}>优惠明细<PromptSvg className={styles.questionIcon} /></div>}
     </div>
     <div className={styles.btn} onClick={startPayFn}>立即支付</div>
   </div>, <Popup
@@ -79,29 +88,41 @@ export default withRouter(connect(state => state.prePay)(function(props) {
     <div className={styles.payInfoBox}>
       <CloseSvg className={styles.closeIcon} onClick={toggleFn.bind(null, false)}/>
       <h2>优惠明细</h2>
-      { discountInfo.itemName && <div className={styles.infoItem}>
+      { itemName && <div className={styles.infoItem}>
           <div className={styles.label}>产品规格</div>
           <div className={styles.valueBox}>
-          <div className={styles.value}>{discountInfo.itemName}</div>
+          <div className={styles.value}>{itemName}</div>
           </div>
       </div> }
-      {discountInfo.originPrice && <div className={styles.infoItem}>
+      {originPrice && <div className={styles.infoItem}>
         <div className={styles.label}>产品原价</div>
         <div className={styles.valueBox}>
-          <div className={styles.value} dangerouslySetInnerHTML={{ __html: fmtPrice(discountInfo.originPrice, 'tag') }}></div>
+          <div className={styles.value} dangerouslySetInnerHTML={{ __html: fmtPrice(originPrice, 'tag') }}></div>
         </div>
       </div>}
-      {discountInfo.discountAmount && <div className={styles.infoItem}>
+      {discountAmount && <div className={styles.infoItem}>
         <div className={styles.label}>秒杀价</div>
         <div className={styles.valueBox} >
-          <span className={styles.prompt}>本单享{vipDiscount(main.discount)}折优惠</span>
-          <div className={styles.value} dangerouslySetInnerHTML={{ __html: fmtPrice(discountInfo.discountAmount, 'tag') }}></div>
+          <span className={styles.prompt}>本单享{vipDiscount(discount)}折优惠</span>
+          <div className={styles.value} dangerouslySetInnerHTML={{ __html: fmtPrice(discountAmount, 'tag') }}></div>
         </div>
       </div>}
-      { discountInfo.vipPrice && <div className={styles.infoItem}>
+      { vipPrice && <div className={styles.infoItem}>
         <div className={styles.label}>VIP会员费用</div>
         <div className={styles.valueBox}>
-        <div className={styles.value} dangerouslySetInnerHTML={{ __html: fmtPrice(main.vipPrice, 'tag') }}></div>
+        <div className={styles.value} dangerouslySetInnerHTML={{ __html: fmtPrice(vipPrice, 'tag') }}></div>
+        </div>
+      </div>}
+      { attachProductName && <div className={styles.infoItem}>
+        <div className={styles.label}>换购商品</div>
+        <div className={styles.valueBox}>
+        <div className={styles.value}>{attachProductName}</div>
+        </div>
+      </div>}
+      { attachPrice && <div className={styles.infoItem}>
+        <div className={styles.label}>换购价格</div>
+        <div className={styles.valueBox}>
+        <div className={styles.value}>{attachPrice}</div>
         </div>
       </div>}
       <div className={styles.reminderTip}>
