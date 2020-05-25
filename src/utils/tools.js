@@ -82,10 +82,11 @@ export const cookie = {
 
 export const Store = {
   set(key, value) {
+    console.log('[85] tools.js: ', value);
     switch (typeof value) {
-      case 'string': localStorage.setItem(key, value); break;
       case 'object': localStorage.setItem(key, JSON.stringify(value)); break;
-      default: new Error('Invalid');
+      default: localStorage.setItem(key, value); break;
+      // default: new Error('Invalid');
     }
   },
   get(key) {
@@ -103,9 +104,9 @@ export const Store = {
 export const Session = {
   set(key, value) {
     switch (typeof value) {
-      case 'string': sessionStorage.setItem(key, value); break;
       case 'object': sessionStorage.setItem(key, JSON.stringify(value)); break;
-      default: new Error('Invalid');
+      default: sessionStorage.setItem(key, value); break;
+      // default: new Error('Invalid');
     }
   },
   get(key) {
@@ -162,6 +163,3 @@ export const getOffsetTopBy = (targetEl, parentEl) => {
   }
   return offsetTop
 }
-
-export const vipDiscount = (data) => `${((data.membershipPrice / data.price) * 100).toFixed(2)}`.replace(/(0?\.00?)?0?$/, '');
-export const vipDiscount2 = (data) => data ? `${(data * 100).toFixed(2)}`.replace(/(0)*(\.)*0*$/, '') : '-';

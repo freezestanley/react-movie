@@ -10,6 +10,7 @@ export default function DirectPage(props) {
     specInfo: {},
     account: '',
     accountType: null,
+    vipPrice: null,
   });
 
   useEffect(() => {

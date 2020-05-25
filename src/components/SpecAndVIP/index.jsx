@@ -10,10 +10,12 @@ function SpecAndVIP(props) {
     specIndex: 0,
     specInfo: {},
     isOpenVIP: false,
+    vipPrice: null,
   })
 
-  const handleOpenVIP = (e) => {
-    setState({ isOpenVIP: e })
+  const handleOpenVIP = (data) => {
+    // console.log('[16] index.jsx: ', e);
+    setState({ ...data })
   }
 
   const handleSpec = (active, record) => {

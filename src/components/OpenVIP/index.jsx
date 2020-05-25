@@ -13,7 +13,7 @@ function OpenVIP(props) {
     checked: false,
     membershipInfo: {},
   })
-  // console.log('[16] index.jsx: ', props);
+  console.log('[16] index.jsx: ', props);
 
   useEffect(() => {
     onChange && onChange(state.checked)
@@ -36,7 +36,10 @@ function OpenVIP(props) {
     // const val = e.target.checked;
     const val = !state.checked;
     setState({ checked: val });
-    onChange && onChange(val);
+    onChange && onChange({
+      isOpenVIP: val,
+      vipPrice: val ? state.membershipInfo.lowerPrice : null,
+    });
   }
   return (
     <div className="open-vip">

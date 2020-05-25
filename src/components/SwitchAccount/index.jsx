@@ -60,7 +60,7 @@ export default function SwitchAccount(props) {
   }
 
   const handleInput = e => {
-    console.log(e)
+    // console.log(e)
     setState({ account: e })
     handleQQInfo(e, state);
   }
