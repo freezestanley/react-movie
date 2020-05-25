@@ -9,7 +9,7 @@ class ShortCut extends React.Component {
     this.state={}
   }
   goToPage(id=1) {
-    this.props.history.push(`/topup?productId=${id}`);
+    this.props.history.push(`/topup?id=${id}`);
   }
   render() {
     const { list } = this.props;
