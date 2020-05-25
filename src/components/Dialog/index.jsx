@@ -24,9 +24,5 @@ export default ()=>{
         <button > 提交</button>
       </div>
     </Modal>):(<Confirm onClick={()=>{setShow(!isShow)}}/>)
-  
-    
-
-
   )
 }

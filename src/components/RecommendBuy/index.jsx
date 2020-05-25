@@ -14,7 +14,5 @@ export default (props)=>{
       <div>  <RecommendItem /></div>
     </div>
   </div>
- 
-
 </div>
 }

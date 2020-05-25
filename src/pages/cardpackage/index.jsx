@@ -12,9 +12,7 @@ content:' 7月券·热门会员月卡多选一 '
 export default ()=>{
   return <div>
    <TobBack info={mock}/>
-
     <div className={styles.CardPackage}>
-     
     <div className={styles.CardPackageMain}>
       <SelectMenber/>
       <div className={styles.CardPackageMainPut}>

@@ -41,11 +41,8 @@ export default ()=>{
             <span>时间</span>
             <span></span>
           </div>
-         
-         
         </div>
         <div className={styles.contact}>
-
           <div><img className={styles.icon} src="" alt=""/> <span>联系客服</span></div>
         </div>
 

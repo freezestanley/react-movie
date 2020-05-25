@@ -1,6 +1,6 @@
 import React from 'react';
 import './index.less';
-export default({title,icon,onClick})=>{
+export default({ title , icon , onClick })=>{
   const handleClick=()=>{
     onClick&&onClick()
   }
@@ -9,7 +9,6 @@ export default({title,icon,onClick})=>{
       <img src={icon} alt=""/>
       <span>{title}</span>
       <img src={require('../images/arrow.svg')} alt=""/>
-
     </div>
   )
 }

@@ -12,7 +12,6 @@ export default ()=>{
     dataSource: SINGLE_DATA,
     
   })
- 
   return(
     <div className={style.sel}>
        <div className={style.CardPackageMainSelect}>
@@ -20,13 +19,6 @@ export default ()=>{
         <input type="text" placeholder= '请选择' />
         <span onClick={()=>{setState({visible:true})} }> > </span>
       </div>
-       
-        {/* //   description={ */}
-        {/* //     <Button size="xs" onClick={()=>{setState({visible:true});console.log(state)}}>选择</Button>
-        //   }
-        // >
-        //   单列 */}
-        {/* // </Cell> */}
        <Picker
           visible={state.visible}
           value={state.value}
@@ -38,8 +30,6 @@ export default ()=>{
             Toast.show(JSON.stringify(selected));
           }}
           onClick={()=> setState({visible:true}) }
-          
-          
         />
         </div>
    
