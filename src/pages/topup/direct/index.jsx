@@ -11,6 +11,7 @@ export default function DirectPage(props) {
     account: '',
     accountType: null,
     vipPrice: null,
+    savePrice: null,
   });
 
   useEffect(() => {

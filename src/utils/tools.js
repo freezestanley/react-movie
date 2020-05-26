@@ -82,7 +82,6 @@ export const cookie = {
 
 export const Store = {
   set(key, value) {
-    console.log('[85] tools.js: ', value);
     switch (typeof value) {
       case 'object': localStorage.setItem(key, JSON.stringify(value)); break;
       default: localStorage.setItem(key, value); break;

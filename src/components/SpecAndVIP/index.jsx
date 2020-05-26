@@ -11,6 +11,7 @@ function SpecAndVIP(props) {
     specInfo: {},
     isOpenVIP: false,
     vipPrice: null,
+    savePrice: null,
   })
 
   const handleOpenVIP = (data) => {
@@ -41,7 +42,13 @@ function SpecAndVIP(props) {
   return (
     <div>
       <SpecGroup {...rest} isOpenVIP={state.isOpenVIP} onChange={handleSpec} />
-      {!order.hasVipOrder && <OpenVIP {...rest} onChange={handleOpenVIP} />}
+      {!order.hasVipOrder && (
+        <OpenVIP
+          // savePrice={10}
+          {...rest}
+          onChange={handleOpenVIP}
+        />
+      )}
     </div>
   )
 }

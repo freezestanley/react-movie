@@ -8,12 +8,12 @@ import Corner from '../Corner';
 import './index.less';
 
 function OpenVIP(props) {
-  const { onChange, value = false, savePrice, vipPrice } = props;
+  const { onChange, value = false, savePrice = 0, vipPrice } = props;
   const [state, setState] = useReducer((o, n) => ({...o, ...n}), {
     checked: false,
     membershipInfo: {},
   })
-  console.log('[16] index.jsx: ', props);
+  // console.log('[16] index.jsx: ', props);
 
   useEffect(() => {
     onChange && onChange(state.checked)
@@ -39,6 +39,7 @@ function OpenVIP(props) {
     onChange && onChange({
       isOpenVIP: val,
       vipPrice: val ? state.membershipInfo.lowerPrice : null,
+      savePrice: val ? savePrice : null,
     });
   }
   return (

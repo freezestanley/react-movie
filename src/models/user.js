@@ -81,7 +81,7 @@ export default {
             userId: _data.id
           },
         })
-        console.log('[84] user.js: ', _data.id);
+        // console.log('[84] user.js: ', _data.id);
         Store.set('userId', _data.id)
       } else {
         hasToast && Toast.show(res.msg)
