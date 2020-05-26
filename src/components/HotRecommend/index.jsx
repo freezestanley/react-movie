@@ -36,7 +36,8 @@ export default class AsNavFor extends Component {
    const bannerList = this.props.bannerList.filter(item => item.bannerType === 5) || [];
    const selectedItem = bannerList.length > 0 ? bannerList[selectedIndex]:{}
     return (
-      <div className={styles['hot-recommend']}>
+      bannerList.length > 0 ? (
+        <div className={styles['hot-recommend']}>
         <div className={styles['title']}>热门推荐</div>
         {
           bannerList.length > 0 && (
@@ -61,6 +62,9 @@ export default class AsNavFor extends Component {
       
        
       </div>
+      ):
+      ""
+     
     );
   }
 }
