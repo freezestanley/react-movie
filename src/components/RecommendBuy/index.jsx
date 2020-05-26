@@ -14,10 +14,12 @@ function RecommendBuy(props){
   return  <div className={style.SpikeR}>
   <div className={style.SpikeRItem}>
     <div className={style.beebuy}>
-      <span>蜜蜂会员都在买</span>
+      <span>盎司会员都在买</span>
       <div className={style.beemore} onClick={ () => router.push('./')}>
         更多 
         <img src={require('./images/arrow.svg')} alt=""/>
+        更多
+          <span>></span>
       </div>
     </div>
     <div >

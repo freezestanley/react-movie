@@ -33,6 +33,7 @@ export default ( {info})=>{
             {mock.paystate===2&&(<span className={styles.chagrefailed}>充值失败</span>)}
             {mock.paystate===3&&(<span className={styles.paid}>已支付</span>)}
             {mock.paystate===4&&(<span className={styles.outtime}>已失效</span> )}
+
             </div>
         </div>
         <p className={styles.up_p}>¥ 22</p>
@@ -42,7 +43,7 @@ export default ( {info})=>{
           <p className={styles.details_p1}>规格 : 月卡 </p>
         </div>
       </div>
-      {mock.paystate!=4&&(<div className={styles.order_down}> 
+      {mock.paystate!==4&&(<div className={styles.order_down}>
         <div>
           {mock.paystate===1&&( <span className={styles.recharge}>支付</span> )}
           {mock.paystate===2&&(<span className={styles.concat}>联系客服</span>)}

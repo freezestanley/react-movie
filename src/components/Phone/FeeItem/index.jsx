@@ -23,7 +23,7 @@ export default function FeeItem(props) {
     >
       <div>
         <div className="spec-item-price" dangerouslySetInnerHTML={{ __html: fmtPrice(props.price, 'tag') }} />
-        {props.price && <div className="spec-item-original">原价 {props.name}</div>}
+        {props.price && <div className="spec-item-original-phone">原价 {props.name}</div>}
         {props.active && <img className="spec-item-check-ico" src={require('./check-ico.svg')} alt="" />}
       </div>
     </div>

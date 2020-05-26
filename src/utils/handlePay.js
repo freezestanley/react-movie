@@ -6,6 +6,12 @@ import { wechatPay, randomStr } from '@/utils/wechatPay';
 const isPrd = /vip.zhongan.io$/.test(window.location.origin);
 const superCodeURL = isPrd ? 'https://vpc-af.zhongan.io' : 'https://vpc-test-af.zhongan.io';
 
+// {
+//   outTradeNo: "20052618433200002"
+//   payLink: "https://wx.tenpay.com/cgi-bin/mmpayweb-bin/checkmweb?prepay_id=wx261843329635673afbcc31511761057900&package=1121860560"
+//   prepayId: "wx261843329635673afbcc31511761057900"
+// }
+
 export default function superCodePay({ dispatch, type = 'order/createAndPay', formData, callback }) {
   window.__SuperCode && window.__SuperCode.show({
     serverDomain: superCodeURL,
@@ -13,7 +19,7 @@ export default function superCodePay({ dispatch, type = 'order/createAndPay', fo
       const _data = data.data;
 
       const openId = Store.get('openId');
-      if (openId) formData.openId = formData;
+      if (openId) formData.openId = openId;
 
       dispatch({
         type: type,
@@ -28,6 +34,7 @@ export default function superCodePay({ dispatch, type = 'order/createAndPay', fo
         },
       }).then(res => {
         if (isWX) {
+          if (!res.prepayId) return;
           wechatPay(
             {
               // config
@@ -65,7 +72,7 @@ export function superCodePayV1({ dispatch, type = 'order/createAndPay', formData
     onSuccess(data) {
       const _data = data.data;
       const openId = Store.get('openId');
-      if (openId) formData.openId = formData;
+      if (openId) formData.openId = openId;
       dispatch({
         type: type,
         payload: {
@@ -94,7 +101,8 @@ function browserPay(data) {
     window.location.origin +
       '/topup/temp/?' +
       '&out_trade_no=' +
-      data.outTradeNo
+      data.outTradeNo +
+      '&paylink=' + encodeURIComponent(data.payLink)
   );
 
   window.location = data.payLink + `&redirect_url=${uri}`;

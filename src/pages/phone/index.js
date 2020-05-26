@@ -40,9 +40,9 @@ const { phone: { product={}, productItems=[], attachList=[] }, phoneForm: { main
   }, [debouncedFn, main, attach, rechargeAccount]);
   return (<div className={styles.phonePage}>
     <ProductHead
+      imgUrl={product.image}
       corner={product.topCornerMark}
-      title={product.abbr}
-      desc={product.name}
+      description={product.description}
     />
     <div className={styles.group}>
       <h2>手机话费</h2>

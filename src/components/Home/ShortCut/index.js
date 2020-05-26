@@ -1,5 +1,6 @@
 import React  from 'react';
 import withRouter from 'umi/withRouter';
+import Corner from '@/components/Corner';
 import styles from './index.module.less';
 import map from 'lodash/map';
 import allImgIcon from '@/assets/icons/all.png';
@@ -21,7 +22,9 @@ class ShortCut extends React.Component {
       <div className={styles.shortCut} >
         <div className={styles.inner}>
           {map(list, ({ bannerItem, bannerCoverUrl },  idx) => (<dl key={idx} className={styles.item} onClick={this.goToPage.bind(this, bannerItem.id)}>
-            <dt style={{ backgroundImage: `url(${bannerCoverUrl})` }}></dt>
+            <dt style={{ backgroundImage: `url(${bannerCoverUrl})` }}>
+              {bannerItem.topCornerMark && <div className={styles.cornerBox}><Corner>{bannerItem.topCornerMark}</Corner></div>}
+            </dt>
             <dd>
               <h2>{bannerItem.abbr}</h2>
               <div className={styles.subTitle}>{bannerItem.bottomCornerMark}</div>

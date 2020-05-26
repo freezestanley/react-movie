@@ -7,6 +7,9 @@ export const fmtPrice = (data, type) => {
   // }
   const price = numeral(data).format('0.00').replace(/(\.00?)?0?$/, '');
   const _price = price < 0 ? '-' : price;
+  if (type === 'number') {
+    return price < 0 ? null : +price;
+  }
   if (type === 'CN') {
     return `${_price}元`
   }
@@ -82,7 +85,6 @@ export const cookie = {
 
 export const Store = {
   set(key, value) {
-    console.log('[85] tools.js: ', value);
     switch (typeof value) {
       case 'object': localStorage.setItem(key, JSON.stringify(value)); break;
       default: localStorage.setItem(key, value); break;

@@ -17,6 +17,7 @@ export default {
         //
         { path: '/login', component: '../pages/login', title: '盎司登陆' },
         { path: '/topup', component: '../pages/topup', backgroundColor: 'gray', hasNavBar: false},
+        { path: '/topup/temp', component: '../pages/topup/temp', backgroundColor: 'gray', hasNavBar: false},
         { path: '/', type: 'tabBar', component: '../pages/home', title: '首页', hasNavBar: false },
         { path: '/explore', type: 'tabBar', component: '../pages/explore', title: '发现', backgroundColor:'gray' },
         { path: '/orders', type: 'tabBar', component: '../pages/orders', backgroundColor:'gray',footer:false, title: '订单' },
