@@ -120,8 +120,10 @@
     .label{
       color:fade(@black, 50);
       line-height:21px;
+      white-space: nowrap;
     }
     .valueBox{
+      padding-left: 10px;
       color:fade(@black, 100);
       line-height:21px;
       .prompt{
@@ -144,6 +146,8 @@
           margin-right: 2px;
         }
         font-size: 15px;
+        word-break: break-all;
+        white-space: wrap;
       }
     }
   }
