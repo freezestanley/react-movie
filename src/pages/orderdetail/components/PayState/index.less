@@ -1,15 +1,108 @@
 :global{
   .pay_state{
-    display: flex;
-    justify-self: space-between;
-    >div:first-child{
-      
-
+    .unpaid{
+      margin-top:5px ;
+      padding-top: 12px;
+      display: flex;
+      justify-content: space-between;
+      margin-left: 10px;
+      margin-right: 10px;
+      height:50px;
+      background: rgba(255,154,82,0.28);
+      border-radius:5px;
+      border:1px solid rgba(255,154,82,1);
+      font-size:17px;
+      font-family:PingFangSC-Semibold,PingFang SC;
+      font-weight:600;
+      color:rgba(255,135,49,1);
+      >div:first-child{
+        padding-left: 15px;
+      }
+      >div:last-child{
+        padding-right: 10px
+      }
     }
-
-    >div:last-child{
+    .paytime{
+      margin: 5px 10px 0 10px;
+      height: 71px;
+      background:rgba(255,255,255,1);
+      border-radius:8px;
+      padding-top: 5px;
+      >div:first-child{
+        margin: 0 auto;
+        margin-top: 10px;
+        width: 100px;
+        height:28px;
+        text-align: center;
+        background: rgba(255,154,82,0.24);
+        border-radius:110px 100px 100px 110px;
+        padding-top: 7px;
+        font-size:17px;
+        font-family:PingFangSC-Medium,PingFang SC;
+        font-weight:500;
+        color:rgba(255,154,82,1);
+        line-height:15px;
+      }
+      >div:last-child{
+        text-align: center;
+        height:17px;
+        font-size:12px;
+        font-family:PingFangSC-Regular,PingFang SC;
+        font-weight:400;
+        color:rgba(0,0,0,0.4);
+        line-height:17px;
+        margin: 0 auto;
+        margin-top: 5px;
+      }
+    }
+    .paid{
+      margin-top:5px ;
+      padding-top: 12px;
+      display: flex;
+      justify-content: space-between;
+      margin-left: 10px;
+      margin-right: 10px;
+      height:50px;
+      background: rgba(7,193,96,0.1);
+      border-radius:5px;
+      border:1px solid rgba(7,193,96,1);
+      font-size:17px;
+      font-family:PingFangSC-Semibold,PingFang SC;
+      font-weight:600;
+      color:rgba(7,193,96,1);;
+      >div:first-child{
+        padding-left: 15px;
+      }
+      >div:last-child{
+        padding-right: 10px
+      }
+    }
+    .invalid{
+      margin-top:5px ;
+      padding-top: 12px;
+      display: flex;
+      justify-content: space-between;
+      margin-left: 10px;
+      margin-right: 10px;
+      height:50px;
+      background: rgba(183,183,183,0.2);
+      border-radius:5px;
+      border:1px solid rgba(12,18,37,1);
+      font-size:17px;
+      font-family:PingFangSC-Semibold,PingFang SC;
+      font-weight:600;
+      color:rgba(0,0,0,0.4);;
+      >div:first-child{
+        padding-left: 15px;
+      }
+      >div:last-child{
+        padding-right: 10px
+      }
 
     }
 
   }
+
 }
+  
+  
