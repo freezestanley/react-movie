@@ -14,8 +14,12 @@ function RecommendBuy(props){
   }, [dispatch]); //
   return  <div className={style.SpikeR}>
   <div className={style.SpikeRItem}>
-    <div>
-      <span>蜜蜂会员都在买</span><span onClick={ () => router.push('./')}>更多 <span>></span></span>
+    <div className={style.beebuy}>
+      <span>蜜蜂会员都在买</span>
+      <div className={style.beemore} onClick={ () => router.push('./')}>
+        更多 
+          <span>></span>
+      </div>
     </div>
     <div >
       {list.map((item,index) => <RecommendItem key={index} info={item} />)}
