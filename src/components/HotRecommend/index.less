@@ -4,10 +4,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
     flex:1;
     img{
       width:60px;
       height:60px;
+      margin-top: 6px;
     }
   }
   .main-image{
@@ -29,5 +31,14 @@
   .list-content{
     display: flex;
    
+  }
+  .tri{
+    position: absolute;
+    top: -5px;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid #000;
   }
 }

@@ -18,10 +18,7 @@ export default class AsNavFor extends Component {
     };
   }
   componentDidMount() {
-    this.setState({
-      nav1: this.slider1,
-      nav2: this.slider2
-    });
+   
   }
   gotoDetail = (item) => {
     router.push(item.link);
@@ -33,7 +30,15 @@ export default class AsNavFor extends Component {
   }
  render() {
    const {selectedIndex} = this.state;
-   const bannerList = this.props.bannerList.filter(item => item.bannerType === 5) || [];
+   const bannerList = this.props.bannerList.filter(item => item.bannerType === 5).slice(0,5) || [];
+    // const bannerList = [{
+    //   bannerCoverUrl:sample,
+    //   bannerThumbnail:sample
+    // },{
+    //   bannerCoverUrl:sample,
+
+    //   bannerThumbnail:sample
+    // }]
    const selectedItem = bannerList.length > 0 ? bannerList[selectedIndex]:{}
     return (
       bannerList.length > 0 ? (
@@ -52,6 +57,10 @@ export default class AsNavFor extends Component {
             (bannerList || []).map((item,index) => {
               return (
                 <div key={index} className={styles['thumbnail']} onClick={() => this.updateSelectImg(index)}>
+                  {
+                    index === this.state.selectedIndex && <div className={styles['tri']} />
+                  }
+                 
                   <img src={item.bannerThumbnail} alt="" />
 
                 </div>
