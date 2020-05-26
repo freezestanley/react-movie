@@ -1,6 +1,7 @@
 import { Pull } from 'zarm';
 import Order from '@/components/OrderItem';
 import  React,{Component} from 'react';
+import {queryOrders} from './../../services/order'
 import './index.less'
 import {connect } from 'dva'
 
@@ -21,15 +22,9 @@ const LOAD_STATE = {
   failure: 4,  // 加载失败
   complete: 5, // 加载完成（无新数据）
 };
-
-const getRandomNum = (min, max) => {
-  const Range = max - min;
-  const Rand = Math.random();
-  return (min + Math.round(Rand * Range));
-}
-
 class Index extends Component {
   mounted = true;
+   page=1
   constructor(props){
     super(props)
     this.state = {
@@ -37,9 +32,9 @@ class Index extends Component {
       refreshing: REFRESH_STATE.normal,
       loading: LOAD_STATE.normal,
       dataSource: [],
+      data:[],
+      page:1
     };
-    console.log(props)
-  
   }
 
   componentDidUpdate() {
@@ -47,7 +42,11 @@ class Index extends Component {
   }
 
   componentDidMount() {
-    this.appendData(20);
+    queryOrders({}).then((res)=>{
+      if(res.code==='0000'){
+        this.setState({data:res.data})
+      }
+    })
   }
 
   componentWillUnmount() {
@@ -55,56 +54,57 @@ class Index extends Component {
     document.body.style.overflow = 'auto';
   }
 
-  // 模拟请求数据
+
+
   refreshData = () => {
-    this.setState({ refreshing: REFRESH_STATE.loading });
-    setTimeout(() => {
-      if (!this.mounted) return;
-      this.appendData(20, []);
-      this.setState({
-        refreshing: REFRESH_STATE.success,
-      });
-    }, 2000);
+    if (!this.mounted) return;
+     queryOrders({}).then((res)=>{
+      if(res.code==='0000'){
+        this.setState({data:res.data})
+        this.setState({ refreshing: REFRESH_STATE.loading });
+        this.appendData()
+      }else{
+         this.setState({ refreshing: REFRESH_STATE.loading });
+
+      }
+    })
   }
 
   // 模拟加载更多数据
   loadData = () => {
+    const {data,page}=this.state
+    this.setState({page:page+1})
     this.setState({ loading: LOAD_STATE.loading });
-    setTimeout(() => {
-      if (!this.mounted) return;
-      const randomNum = getRandomNum(0, 5);
-      let loading = LOAD_STATE.success;
-      console.log(`状态: ${randomNum === 0 ? '失败' : (randomNum === 1 ? '完成' : '成功')}`);
-      if (randomNum === 0) {
-        loading = LOAD_STATE.failure;
-      } else if (randomNum === 1) {
-        loading = LOAD_STATE.complete;
-      } else {
-        this.appendData(20);
-      }
-      this.setState({ loading });
-    }, 2000);
-  }
+    queryOrders({pageNo:page+1}).then((res)=>{
+        if(res.code==='0000'){
+          data.concat(res.data)
+          this.setState({data:data})
+          this.appendData()
+          let loading = LOAD_STATE.success;
+          this.setState({ loading })
+        }else{
+          let loading = LOAD_STATE.complete;
+          this.setState({ loading })
+        }
+      })
+     }
 
-  appendData(length, dataSource) {
-    dataSource = dataSource || this.state.dataSource;
-    const startIndex = dataSource.length;
-    for (let i = startIndex; i < startIndex + length; i++) {
-      dataSource.push(<Order key={+i}></Order>);
-    }
-    this.setState({ dataSource });
-  }
-  toggleScrollContainer = () => {
-    this.setState({
-      useBodyScroll: !this.state.useBodyScroll,
+  appendData() {
+    const {data,dataSource}=this.state;
+    data.map((item)=>{
+      dataSource.push(<Order key={item.orderId} info={item} ></Order>);
     })
-  };
+    dataSource.concat(dataSource)
+    this.setState({ dataSource:dataSource });
+  }
 
   render() {
-    const { useBodyScroll, refreshing, loading, dataSource } = this.state;
-    const style = useBodyScroll
-      ? {}
-      : { position: 'relative', overflowY: 'auto', maxHeight: 1200, };
+    const {  refreshing, loading, dataSource ,data} = this.state;
+    const style ={ position: 'relative', overflowY: 'auto', maxHeight: 1000,};
+    data.map((item)=>{
+      console.log(item)
+      dataSource.push(<Order key={item.orderId} info={item} ></Order>);
+    },()=>{console.log(1);this.setState(dataSource)})
     return (
       <>
         <Pull
@@ -125,4 +125,4 @@ class Index extends Component {
     )
   }
 }
-export default connect(state=>state)(Index);
+export default connect(state=>({order:state.order}))(Index);

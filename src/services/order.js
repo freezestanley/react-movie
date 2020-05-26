@@ -19,3 +19,13 @@ export function createAndPay(data) {
     data,
   });
 }
+
+// 查询订单
+export function queryOrders(data) {
+  return request({
+    url: '/pageListOrder',
+    serve: 'order',
+    method: 'POST',
+    data
+  });
+}
