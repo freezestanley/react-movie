@@ -1,36 +1,85 @@
 @import '~@/less/variable.less';
 .homeBanner{
-  background-color: @blue;
+  background:linear-gradient(134deg,rgba(112,120,255,1) 0%,rgba(3,8,64,1) 100%);
   overflow: hidden;
   position: relative;
   height: 193px;
-  .item{
-    height: 193px;
-    text-align: center;
-    >img{
-      display: block;
-      height: 100%;
-      width: 100%;
-    }
-  }
-  .pageItem{
-    display: inline-block;
-    width: 10px;
-    height: 3px;
-    border-radius: 2px;
-    background-color: fade(@white, 40);
-    margin-right: 3px;
-    &.active{
-      background-color: @white;
-    }
-  }
-  .dotsContainer{
+  padding-top: 62px;
+  .searchBox{
     position: absolute;
-    bottom: 10px;
+    left: 10px;
     right: 10px;
-    white-space: nowrap;
-    >li{
+    top: 20px;
+    z-index: 1;
+    .searchIconBox{
+      float: right;
+      height: 32px;
+      width: 32px;
+      border-radius: 50%;
+      background-image: url('@/assets/icons/service.png');
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      background-position: center center;
+    }
+    .searchInput{
+      height: 32px;
+      margin-right: 42px;
+      border-radius: 16px;
+      background-color: fade(@white, 32);
+      color: @white;
+      border: 1px solid fade(@white, 32);
+      line-height: 32px;
+      padding: 0 16px 0 10px;
+      .searchIcon{
+        display: inline-block;
+        height: 17px;
+        width: 17px;
+        fill: fade(@white, 30);
+        vertical-align: middle;
+      }
+      .searchPlaceHolder{
+        vertical-align: middle;
+        margin-left: 10px;
+        height: 17px;
+        line-height: 17px;
+        font-size: 12px;
+        color: fade(@white, 30);
+      }
+    }
+  }
+  .innerBanner{
+    overflow: hidden;
+    position: relative;
+    height: 118px;
+    padding: 0 10px;
+    .item{
+      height: 98px;
+      text-align: center;
+      >img{
+        display: block;
+        height: 100%;
+        width: 100%;
+      }
+    }
+    .pageItem{
       display: inline-block;
+      width: 10px;
+      height: 3px;
+      border-radius: 2px;
+      background-color: fade(@white, 40);
+      margin-right: 3px;
+      &.active{
+        background-color: @white;
+      }
+    }
+    .dotsContainer{
+      position: absolute;
+      bottom: 5px;
+      right: 10px;
+      white-space: nowrap;
+      >li{
+        display: inline-block;
+      }
     }
   }
 }

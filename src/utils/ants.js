@@ -1,3 +1,5 @@
+import { Toast } from 'zarm';
+
 // 商品角标
 const fmtMask = num => num ? `${`${(num * 100).toFixed(2)}`.replace(/(0)*(\.)*0*$/, '')}折起` : '';
 export const productCornerMark = (data = [], isVIP, isOpenVIP) => {
@@ -98,6 +100,33 @@ export const formatAccountStr = (account, type) => {
     return str;
   }
 };
+
+// 账号校验
+export const formValidate = (data, type) => {
+  if (type === 1) {
+    const val = data.account;
+    if (!val) {
+      Toast.show(formatAccountStr(data.accountType));
+      return false;
+    }
+    switch (data.accountType) {
+      case 1:
+        if (!/[1-9][0-9]{4,}/.test(val)) {
+          Toast.show('QQ号不合法');
+          return false;
+        }
+        return true;
+      case 2:
+        if (!/^1\d{10}$/.test(val)) {
+          Toast.show('手机号码格式错误');
+          return false;
+        }
+        return true;
+      default: return true;
+    }
+  }
+  return true;
+}
 
 export const isQQ = type => type === 1;
 

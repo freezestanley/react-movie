@@ -5,18 +5,25 @@
   overflow-y: auto;
   font-size: 0;
   .inner{
-    margin: 0 -10px;
+    margin: 0 -5px;
   }
   dl.item{
     margin-bottom: 10px;
-    width: 25%;
+    width: 20%;
     display: inline-block;
     dt{
       margin: 0 auto;
+      position: relative;
       width: 43px;
       height: 43px;
       background-size: 100% 100%;
       background-repeat: no-repeat;
+      .cornerBox{
+        position: absolute;
+        right: 50%;
+        top: 30%;
+        transform: translate(-100%, -100%);
+      }
     }
     dd{
       h2{

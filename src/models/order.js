@@ -32,6 +32,17 @@ export default {
           type: 'setState',
           payload: { orderInfo: res.data },
         });
+        return res.data;
+      }
+    },
+    *queryOrders({ payload }, { put, call }) {
+      const res = yield call(services.queryOrders, payload);
+      if (res.code === '0000') {
+        yield put({
+          type: 'setState',
+          payload: { orderInfo: res.data },
+        });
+        return res.data;
       }
     },
   },

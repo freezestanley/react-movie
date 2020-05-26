@@ -4,7 +4,6 @@ import router from 'umi/router'
 import RecommendItem from './rec';
 import style from './index.less';
 
-
 function RecommendBuy(props){
   const { recommend: {list=[]}, dispatch } =props
   useEffect(() => {
@@ -14,8 +13,12 @@ function RecommendBuy(props){
   }, [dispatch]); //
   return  <div className={style.SpikeR}>
   <div className={style.SpikeRItem}>
-    <div>
-      <span>蜜蜂会员都在买</span><span onClick={ () => router.push('./')}>更多 <span>></span></span>
+    <div className={style.beebuy}>
+      <span>盎司会员都在买</span>
+      <div className={style.beemore} onClick={ () => router.push('./')}>
+        更多 
+        <img src={require('./images/arrow.svg')} alt=""/>
+      </div>
     </div>
     <div >
       {list.map((item,index) => <RecommendItem key={index} info={item} />)}

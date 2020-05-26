@@ -36,11 +36,12 @@ export default {
     *getProductItems({ payload }, { put, call }) {
       const res = yield call(service.getProductItems, payload);
       const { code, data } = res || {};
+      const [{ queryProductItemRespList }] = data.queryProductItemDtoList;
       if (code === '0000') {
         yield put({
           type: 'setState',
           payload: { 
-            productItems: data.productItems || [],
+            productItems: (queryProductItemRespList || []),
             product: data.product || {}
           }
         });

@@ -24,6 +24,7 @@ export default class Banner extends React.Component {
       infinite: true,
       dotsClass: `${styles.beltDots}`,
       speed: 500,
+      autoplaySpeed: 6000,
       slidesToShow: 1,
       slidesToScroll: 1,
       afterChange(index) {

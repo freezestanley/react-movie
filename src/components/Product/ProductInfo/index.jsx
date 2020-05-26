@@ -3,7 +3,7 @@ import Corner from '@/components/Corner';
 
 import './index.less';
 
-export default function ProductInfo({ title, desc, imgUrl, corner }) {
+export default function ProductInfo({ description, imgUrl, corner }) {
   const img = imgUrl ? imgUrl : require('@/assets/logo.png');
   return (
     <div className="product_info_p1">
@@ -11,9 +11,7 @@ export default function ProductInfo({ title, desc, imgUrl, corner }) {
         <img src={img} alt="" />
         {corner && <Corner>{corner}</Corner>}
       </div>
-      <div className="product_info_p1_cont">
-        <p className="t1">{title}</p>
-        <p className="t2">{desc}</p>
+      <div className="product_info_p1_cont" dangerouslySetInnerHTML={{ __html: description }}>
       </div>
     </div>
   )

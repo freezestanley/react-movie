@@ -11,7 +11,7 @@ export default (props ) => {
         <img src={data.productImage} className={styles['brand']} alt="" />
         <div className={styles['card-title']}>{data.productName}</div>
         <div className={styles['card-description']}>
-          <span className={styles['member-discount']}>会员优惠</span>
+          <span className={styles['member-discount']}>会员专享</span>
         </div>
         <div className={styles['price-box']}>
           <div className={styles['now-price']}><span className={styles['yuan']}>￥</span>{data.price}</div>

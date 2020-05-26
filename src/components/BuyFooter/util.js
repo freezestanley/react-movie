@@ -1,20 +1,24 @@
 
 import { paymentAmount } from '@/utils/ants';
+import { fmtPrice } from '@/utils/tools';
+import superCodePay, { superCodePayV1 } from '@/utils/handlePay';
 //  价格展示逻辑
 export const getTotalPrice = ({ main={}, type, attach, isVIP }) => {
   let price = 0;
   switch(type) {
-    case 'product': 
+    case 'product':
       const { specInfo={}, isOpenVIP, vipPrice }  = main;
+      console.log('-----isVIP', isVIP);
       price = paymentAmount(specInfo, isVIP, isOpenVIP).price + (isOpenVIP ? vipPrice : 0);
+      price = fmtPrice(price, 'number');
       break;
-    case 'phone': 
+    case 'phone':
       price = (main.price || 0) + (attach.payPrice || 0);
       break;
-    case 'seckill': 
+    case 'seckill':
       price = (main.discountPrice || 0);
       break;
-    default: 
+    default:
       break;
   }
   return price
@@ -46,7 +50,7 @@ export const getDiscountInfo = ({ main, type, attach, isVIP }) => {
         data.vipPrice=vipPrice
       }
       break;
-    case 'phone': 
+    case 'phone':
       data = {
         type,
         itemName: main.name,
@@ -55,7 +59,7 @@ export const getDiscountInfo = ({ main, type, attach, isVIP }) => {
         attachPrice: attach.payPrice
       };
       break;
-    case 'seckill': 
+    case 'seckill':
       data = {
         type,
         itemName: main.itemName,
@@ -65,8 +69,50 @@ export const getDiscountInfo = ({ main, type, attach, isVIP }) => {
         discount: main.discount
       };
       break;
-    default: 
+    default:
       break;
   }
   return data;
+}
+
+
+export function createPhoneOrder ({ data, dispatch, callback }) {
+  const type = 'order/createAndPay'
+  const { main, attach } = data;
+  console.log('----attach', attach);
+  const payAmount = (main.price || 0) + (attach.payPrice || 0)
+  const formData = {
+    productId: main.productId,
+    productItemId: main.id,
+    quantity: 1,
+    appendAccountType: 2,
+    appendProductId: attach.id,
+    appendProductItemId: attach.productItemId,
+    appendQuantity: 1,
+    payType: 1,
+    rechargeAccount	: main.rechargeAccount,
+    payAmount
+  };
+  superCodePayV1({ dispatch, type, formData, callback });
+}
+
+export function createProductOrder({ data, dispatch, callback }) {
+  const formData = {
+    productId: data.productId, // 商品id
+    productItemId: data.specInfo.id, // 规格id
+    buyMember: data.isOpenVIP ? 1 : 0, // 是否购买会员 0：否 1：是 默认否
+    payAmount: data.payPrice, // 支付金额
+    payType: 1, // 支付方式 1：微信 2：支付宝
+    quantity: 1, // 数量
+    // rechargeAccount: data.account, // 充值账户
+    // accountType: data.accountType, // 账号类型
+  };
+
+  if (data.type === 1) {
+    formData.rechargeAccount = data.account; // 充值账户
+    formData.accountType = data.accountType; // 账号类型
+  }
+
+  // console.log('[create order]: ', formData);
+  superCodePay({ dispatch, formData, callback });
 }

@@ -4,6 +4,7 @@ import { connect } from 'dva';
 import '@/assets/svgIcon/home.svg';
 import { Popup } from 'zarm';
 import { fmtPrice } from '@/utils/tools';
+
 import { vipDiscount } from '@/utils/ants';
 import styles from './index.module.less';
 import zaLogo from './img/za-logo.png';
@@ -11,12 +12,14 @@ import { ReactComponent as HomeSvg } from './img/home.svg';
 import { ReactComponent as CloseSvg } from './img/close.svg';
 import { ReactComponent as PromptSvg } from './img/prompt.svg';
 import { ReactComponent as SafeSvg } from './img/safe.svg';
-import { getTotalPrice, getDiscountInfo } from './util';
+import { getTotalPrice, getDiscountInfo, createPhoneOrder, createProductOrder } from './util';
 
 
-export default withRouter(connect(state => ({ ...state.prePay, isVIP: state.global.isVIP }))(function(props) {
+export default withRouter(connect(state => ({ ...state.prePay, isVIP: state.user.isVIP }))(function(props) {
   const { history, main, attach, type, dispatch, onValidate, isVIP } = props;
   const [visible, setVisible]=useState(false);
+  const totalPrice = getTotalPrice({ main, attach, type, isVIP });
+  const discountInfo = getDiscountInfo({ main, attach, type, isVIP });
   const toggleFn = (val) =>{
     setVisible(val);
   };
@@ -32,7 +35,13 @@ export default withRouter(connect(state => ({ ...state.prePay, isVIP: state.glob
       let data = {};
       switch(type) {
         case 'product':
+          main.payPrice = totalPrice;
           data = main;
+          createProductOrder({
+            data,
+            dispatch,
+            // callback() {}
+          });
           break;
         case 'vip':
           data = main;
@@ -42,17 +51,18 @@ export default withRouter(connect(state => ({ ...state.prePay, isVIP: state.glob
           break;
         case 'phone':
           data = { main, attach };
+          createPhoneOrder({ data, dispatch, callback: ()=>{
+            history.push('/orders');
+          }})
           break;
         default:
-          data = main; 
+          data = main;
       }
       handlePay(dispatch, data);
     }
-    
+
   };
-  const totalPrice = getTotalPrice({ main, attach, type, isVIP });
-  const discountInfo = getDiscountInfo({ main, attach, type, isVIP });
-  const { 
+  const {
     itemName, // 产品规格
     originPrice, // 原价
     discountLabel,
@@ -129,7 +139,7 @@ export default withRouter(connect(state => ({ ...state.prePay, isVIP: state.glob
       </div>}
       <div className={styles.reminderTip}>
         <SafeSvg className={styles.small} />
-        <span>蜜蜂充值平台商品真实有效性由</span>
+        <span>盎司充值平台商品真实有效性由</span>
         <img className={styles.logo} alt='' src={zaLogo} />
         <span>承保</span>
       </div>

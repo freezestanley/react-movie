@@ -6,7 +6,6 @@ export default {
     routesMap: [],
     tabPageList: [],
     currRoute: {},
-    isVIP: true,
     hasBuyFooter: false,
   },
   reducers: {
