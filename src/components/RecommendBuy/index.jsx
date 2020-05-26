@@ -18,8 +18,6 @@ function RecommendBuy(props){
       <div className={style.beemore} onClick={ () => router.push('./')}>
         更多 
         <img src={require('./images/arrow.svg')} alt=""/>
-        更多
-          <span>></span>
       </div>
     </div>
     <div >
