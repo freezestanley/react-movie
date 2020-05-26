@@ -15,7 +15,7 @@ import { ReactComponent as SafeSvg } from './img/safe.svg';
 import { getTotalPrice, getDiscountInfo, createPhoneOrder } from './util';
 
 
-export default withRouter(connect(state => ({ ...state.prePay, isVIP: state.global.isVIP }))(function(props) {
+export default withRouter(connect(state => ({ ...state.prePay, isVIP: state.user.isVIP }))(function(props) {
   const { history, main, attach, type, dispatch, onValidate, isVIP } = props;
   const [visible, setVisible]=useState(false);
   const toggleFn = (val) =>{
