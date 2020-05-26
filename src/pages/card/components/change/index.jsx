@@ -8,7 +8,6 @@ import styles from './index.less';
 const Change = (props) => {
     const {visible, onMaskClick, afterOpen, afterClose, CloseClick} = props
     const {state, name, codeNo, paytime, cardNo} = props.data
-    debugger
     return (<CardPopup
             visible = {visible}
             onMaskClick = {onMaskClick}

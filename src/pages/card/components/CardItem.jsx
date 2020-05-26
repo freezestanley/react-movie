@@ -24,11 +24,6 @@ const itemState = {
 }
 
 const cardItem = (props) => {
-    // const border = props.border
-    // const state = props.state
-    // const btnTitle = props.btnTitle
-    // const btnClick = props.btnClick
-    debugger
     const {border, state, btnTitle, btnClick} = props
     const {title, retitle, time } =  props.data
     return (

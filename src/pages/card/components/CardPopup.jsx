@@ -6,9 +6,7 @@ import router from 'umi/router';
 import styles from './CardPopup.less';
 
 const CardPopup = (props) => {
-    const {visible, onMaskClick, afterOpen, afterClose, CloseClick } = props
-
-    debugger
+    const {visible, onMaskClick, afterOpen, afterClose, CloseClick, title} = props
     return (<Popup
         visible={visible}
         direction="bottom"
@@ -19,10 +17,15 @@ const CardPopup = (props) => {
         className="test-popup"
         >
         <div className= {styles.Cardpw}>
-            <div 
-                className = {styles.close}
-                onClick = {CloseClick}
-            ></div>
+            <div className = {styles.title}>
+                {title}
+                <div 
+                    className = {styles.close}
+                    onClick = {CloseClick}
+                ></div>
+            </div>
+            
+
             <div>
                 {props.children}
             </div>

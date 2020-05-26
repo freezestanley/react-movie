@@ -13,9 +13,7 @@ const Card = (props) => {
     } = props
 
     const [visible, setVisible] = useState(false)
-    debugger
     const btnClick = (e) => {
-        debugger
         setVisible(!visible)
     }
     return (
@@ -44,7 +42,7 @@ const Card = (props) => {
                 CloseClick = {btnClick}
                 data = {data}
             />) : null}
-            
+
         </>
         )
 }
