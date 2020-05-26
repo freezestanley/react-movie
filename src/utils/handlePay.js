@@ -78,6 +78,12 @@ export function superCodePayV1({ dispatch, type = 'order/createAndPay', formData
           token: _data.token,
         },
       }).then(res => {
+        console.log('-----res', res);
+        if (res) {
+          callback();
+        } else {
+          alert('创建订单出错～');
+        } 
       })
     }
   })

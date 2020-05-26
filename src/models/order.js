@@ -32,6 +32,7 @@ export default {
           type: 'setState',
           payload: { orderInfo: res.data },
         });
+        return res.data;
       }
     },
   },
