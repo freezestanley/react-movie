@@ -85,7 +85,7 @@ export function createPhoneOrder ({ data, dispatch, callback }) {
     appendProductId: attach.id,
     appendProductItemId: attach.productItemId,
     appendQuantity: 1,
-    appendRechargeAccount: main.rechargeAccount,
+    rechargeAccount	: main.rechargeAccount,
     payAmount
   };
   superCodePayV1({ dispatch, type, formData, callback });
