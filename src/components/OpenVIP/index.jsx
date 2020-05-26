@@ -3,20 +3,19 @@ import React, { useEffect, useReducer } from 'react';
 import { Checkbox } from 'zarm';
 import { connect } from 'dva';
 import { fmtPrice } from '@/utils/tools';
-import Corner from '../Corner';
+import { diffMoney } from '@/utils/ants';
 
+import Corner from '../Corner';
 import './index.less';
 
 function OpenVIP(props) {
-  const { onChange, value = false, savePrice = 0, vipPrice } = props;
+  const { onChange, value = false, savePrice = 0, vipPrice, specInfo } = props;
   const [state, setState] = useReducer((o, n) => ({...o, ...n}), {
     checked: false,
     membershipInfo: {},
   })
-  // console.log('[16] index.jsx: ', props);
 
   useEffect(() => {
-    onChange && onChange(state.checked)
     setState({ checked: value })
   }, [value])
 
@@ -32,16 +31,18 @@ function OpenVIP(props) {
     props.dispatch({ type: 'user/getMembershipList' })
   }, [])
 
-  const handleChange = () => {
-    // const val = e.target.checked;
-    const val = !state.checked;
-    setState({ checked: val });
+  useEffect(() => {
     onChange && onChange({
-      isOpenVIP: val,
-      vipPrice: val ? state.membershipInfo.lowerPrice : null,
-      savePrice: val ? savePrice : null,
+      isOpenVIP: state.checked,
+      vipPrice: state.checked ? state.membershipInfo.lowerPrice : null,
+      savePrice: state.checked ? diffMoney(specInfo) : null,
     });
+  }, [state.checked, JSON.stringify(specInfo)])
+
+  const handleChange = () => {
+    setState({ checked: !state.checked });
   }
+
   return (
     <div className="open-vip">
       <div className="open-vip-cont">

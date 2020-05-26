@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useReducer } from 'react';
 import { connect } from 'dva';
+
 import SpecGroup from '../SpecGroup';
 import OpenVIP from '../OpenVIP';
 
@@ -15,20 +16,19 @@ function SpecAndVIP(props) {
   })
 
   const handleOpenVIP = (data) => {
-    // console.log('[16] index.jsx: ', e);
-    setState({ ...data })
+    setState({ ...data });
   }
 
   const handleSpec = (active, record) => {
     setState({
       specIndex: active,
       specInfo: record,
-    })
+    });
   }
 
   useEffect(() => {
-    props.onChange && props.onChange(state)
-  }, [state])
+     props.onChange && props.onChange(state);
+  }, [JSON.stringify(state)])
 
   useEffect(() => {
     if (user.userId) {
@@ -44,8 +44,9 @@ function SpecAndVIP(props) {
       <SpecGroup {...rest} isOpenVIP={state.isOpenVIP} onChange={handleSpec} />
       {!order.hasVipOrder && (
         <OpenVIP
-          // savePrice={10}
           {...rest}
+          // savePrice={state.savePrice}
+          specInfo={state.specInfo}
           onChange={handleOpenVIP}
         />
       )}
