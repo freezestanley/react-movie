@@ -9,9 +9,9 @@ export default ( {onClick})=>{
       <div className={styles.order_up}>
         <div className={styles.order_head}>
           <img  alt=''/>
-          <span className={styles.span_1}>腾讯视屏会员+蜜蜂会员卡白金</span>
+          <span className={styles.span_1}>腾讯视屏会员+盎司会员卡白金</span>
           <div className={styles.pay}>
-            {mock.paystate==1&&(<span className={styles.unpaid}>待支付 </span>)} 
+            {mock.paystate==1&&(<span className={styles.unpaid}>待支付 </span>)}
             {mock.paystate==2&&(<span className={styles.chagrefailed}>充值失败</span>)}
             {mock.paystate==3&&(<span className={styles.paid}>已支付</span>)}
             {mock.paystate==4&&(<span className={styles.outtime}>已失效</span> )}
@@ -24,7 +24,7 @@ export default ( {onClick})=>{
           <p className={styles.details_p1}>规格 : 月卡 </p>
         </div>
       </div>
-      {mock.paystate!=4&&(<div className={styles.order_down}> 
+      {mock.paystate!=4&&(<div className={styles.order_down}>
         <div>
           {mock.paystate==1&&( <span className={styles.recharge}>支付</span> )}
           {mock.paystate==2&&(<span className={styles.concat}>联系客服</span>)}

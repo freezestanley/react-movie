@@ -139,7 +139,7 @@ export default withRouter(connect(state => ({ ...state.prePay, isVIP: state.user
       </div>}
       <div className={styles.reminderTip}>
         <SafeSvg className={styles.small} />
-        <span>蜜蜂充值平台商品真实有效性由</span>
+        <span>盎司充值平台商品真实有效性由</span>
         <img className={styles.logo} alt='' src={zaLogo} />
         <span>承保</span>
       </div>
