@@ -43,7 +43,9 @@ export default withRouter(connect(state => ({ ...state.prePay, isVIP: state.glob
           break;
         case 'phone':
           data = { main, attach };
-          createPhoneOrder({ data, dispatch, callback: ()=>{alert(1)} })
+          createPhoneOrder({ data, dispatch, callback: ()=>{
+            history.push('/orders');
+          }})
           break;
         default:
           data = main; 

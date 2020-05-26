@@ -76,7 +76,8 @@ export const getDiscountInfo = ({ main, type, attach, isVIP }) => {
 export function createPhoneOrder ({ data, dispatch, callback }) {
   const type = 'order/createAndPay'
   const { main, attach } = data;
-  const payAmount = (main.price || 0 + attach.payPrice || 0)
+  console.log('----attach', attach);
+  const payAmount = (main.price || 0) + (attach.payPrice || 0)
   const formData = {
     productId: main.productId,
     productItemId: main.id,
@@ -85,6 +86,7 @@ export function createPhoneOrder ({ data, dispatch, callback }) {
     appendProductId: attach.id,
     appendProductItemId: attach.productItemId,
     appendQuantity: 1,
+    payType: 1,
     rechargeAccount	: main.rechargeAccount,
     payAmount
   };
