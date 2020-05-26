@@ -31,6 +31,7 @@ class Banner extends React.Component {
       infinite: true,
       dotsClass: `${styles.dotsContainer}`,
       speed: 500,
+      autoplaySpeed: 5000,
       slidesToShow: 1,
       slidesToScroll: 1,
       afterChange(index) {
@@ -46,7 +47,7 @@ class Banner extends React.Component {
             <span className={styles.searchPlaceHolder}>搜商品、品牌优惠</span>
           </div>
         </div>
-        <Slider  {...settings}>
+        <Slider className={styles.innerBanner}  {...settings}>
           {map(list, (item, idx) => (<div key={idx} className={styles.item} onClick={() => window.location.href=item.bannerLinkUrl}>
             <img src={item.bannerCoverUrl} alt="封面"/>
           </div>))}
