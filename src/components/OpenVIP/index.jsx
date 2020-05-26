@@ -2,7 +2,7 @@
 import React, { useEffect, useReducer, useRef } from 'react';
 import { Checkbox } from 'zarm';
 import { connect } from 'dva';
-import { fmtPrice, getOffsetTop } from '@/utils/tools';
+import { fmtPrice, getOffsetTopBy } from '@/utils/tools';
 import { diffMoney } from '@/utils/ants';
 
 import Corner from '../Corner';
@@ -31,7 +31,8 @@ function OpenVIP(props) {
   useEffect(() => {
     props.dispatch({ type: 'user/getMembershipList' });
     setTimeout(() => {
-      const y = getOffsetTop(ref.current);
+      const containerEl = document.querySelector('.z_layout_cont')
+      const y = getOffsetTopBy(ref.current, containerEl);
       props.dispatch({ type: 'vipTip/setState', payload: { y } });
     }, 1000);
   }, [])
