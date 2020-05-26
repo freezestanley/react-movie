@@ -16,11 +16,12 @@ import TimeLimitSlider from '@/components/TimeLimitSlider';
 
 function Home ({ dispatch,bannerList, ...rest }) {
   const topBanners = filter(bannerList, item => item.bannerType === 1);
-  const middleBanners = filter(bannerList, item => item.bannerType === 3);
+  const middleBanners = filter(bannerList, item => item.bannerType === 2);
   const shortCutList = filter(bannerList, item => item.bannerType === 4);
+  const hotRecommendList = filter(bannerList, item => item.bannerType === 5);
   useEffect(() => {
     dispatch({ type: 'banner/getBanner', payload: {
-      bannerType:[1,2,3,4,5,6]
+      bannerType:[1,2,3,4,5]
     } });
     dispatch({ type: 'productDetail/getEventList', payload: {} });
   }, [dispatch]);
@@ -32,7 +33,7 @@ function Home ({ dispatch,bannerList, ...rest }) {
       { !isEmpty(shortCutList) && <ShortCut list={shortCutList} />}
       { !isEmpty(middleBanners) && <Belt list={middleBanners} /> }
       { !isEmpty(rest.productDetail.eventList) && <TimeLimitSlider data={rest.productDetail.eventList} dispatch={dispatch} />}
-      { !isEmpty(bannerList) && <HotRecommend bannerList={bannerList} />}
+      { !isEmpty(hotRecommendList) && <HotRecommend bannerList={hotRecommendList} />}
     </div>
   );
 }
