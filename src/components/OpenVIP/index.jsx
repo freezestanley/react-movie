@@ -59,7 +59,7 @@ function OpenVIP(props) {
         <div className="t-cont">
           <div>
             <div className="t2">白金卡</div><br />
-            <div className="t3">本单立省{fmtPrice(savePrice, 'CN')}</div>
+            <div className="t3">本单立省{fmtPrice(diffMoney(specInfo), 'CN')}</div>
           </div>
           <div className="t4" onClick={handleChange}>
             <span className="t4-1" dangerouslySetInnerHTML={{ __html: fmtPrice(vipPrice || state.membershipInfo.lowerPrice, 'tag') }} />

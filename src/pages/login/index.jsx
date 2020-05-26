@@ -80,6 +80,7 @@ function LoginPage(props) {
       })
       .then(isOk => {
         if (isOk) {
+          props.dispatch({ type: 'user/getUserInfo', hasToast: false })
           router.push('/');
         }
       });

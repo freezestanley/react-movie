@@ -12,12 +12,14 @@ import { ReactComponent as HomeSvg } from './img/home.svg';
 import { ReactComponent as CloseSvg } from './img/close.svg';
 import { ReactComponent as PromptSvg } from './img/prompt.svg';
 import { ReactComponent as SafeSvg } from './img/safe.svg';
-import { getTotalPrice, getDiscountInfo, createPhoneOrder } from './util';
+import { getTotalPrice, getDiscountInfo, createPhoneOrder, createProductOrder } from './util';
 
 
 export default withRouter(connect(state => ({ ...state.prePay, isVIP: state.user.isVIP }))(function(props) {
   const { history, main, attach, type, dispatch, onValidate, isVIP } = props;
   const [visible, setVisible]=useState(false);
+  const totalPrice = getTotalPrice({ main, attach, type, isVIP });
+  const discountInfo = getDiscountInfo({ main, attach, type, isVIP });
   const toggleFn = (val) =>{
     setVisible(val);
   };
@@ -33,7 +35,13 @@ export default withRouter(connect(state => ({ ...state.prePay, isVIP: state.user
       let data = {};
       switch(type) {
         case 'product':
+          main.payPrice = totalPrice;
           data = main;
+          createProductOrder({
+            data,
+            dispatch,
+            // callback() {}
+          });
           break;
         case 'vip':
           data = main;
@@ -48,15 +56,13 @@ export default withRouter(connect(state => ({ ...state.prePay, isVIP: state.user
           }})
           break;
         default:
-          data = main; 
+          data = main;
       }
       handlePay(dispatch, data);
     }
-    
+
   };
-  const totalPrice = getTotalPrice({ main, attach, type, isVIP });
-  const discountInfo = getDiscountInfo({ main, attach, type, isVIP });
-  const { 
+  const {
     itemName, // 产品规格
     originPrice, // 原价
     discountLabel,

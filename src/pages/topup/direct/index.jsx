@@ -16,7 +16,7 @@ export default function DirectPage(props) {
 
   useEffect(() => {
     props.onChange && props.onChange(state)
-  }, [state])
+  }, [JSON.stringify(state)])
 
   const handleSpec = (specData) => {
     setState({ ...specData })
@@ -28,8 +28,6 @@ export default function DirectPage(props) {
     })
   }
 
-  // console.log('[29] index.jsx: ', props.productSpecItems);
-
   return (
     <div>
       {/* tabKey-{props.tabKey} */}
@@ -39,8 +37,6 @@ export default function DirectPage(props) {
       />
       <SpecAndVIP
         dataSource={props.productSpecItems}
-        isVIP={props.isVIP}
-        onOpenVIP={props.onOpenVIP}
         onChange={handleSpec}
       />
     </div>

@@ -6,6 +6,7 @@ import { ProductHead } from '@/components/Product';
 import PageStatus from '@/components/PageStatus';
 import RecommendBuy from '@/components/RecommendBuy';
 import BuyFooter from '@/components/BuyFooter';
+import { formValidate } from '@/utils/ants';
 
 import CardPage from './card';
 import DirectPage from './direct';
@@ -16,6 +17,7 @@ export default connect(state => ({ productInfo: state.productDetail.info, isVIP:
     isOpenVIP: false,
     productCorner: '',
     tabKey: '',
+    specData: {},
   });
   const { dispatch, location: { query }, productInfo, isVIP } = props;
   const { id } = query;
@@ -33,11 +35,13 @@ export default connect(state => ({ productInfo: state.productDetail.info, isVIP:
 
   const handleChangeSpec = (specData) => {
     console.log('[topup spec]: ', specData);
+    setState({ specData })
     dispatch({
       type: 'prePay/setState',
       payload: {
         type: 'product',
-        main: specData
+        // type: 1：直充；2：卡密
+        main: { ...specData, productId: +id, type },
       }
     });
   };
@@ -92,7 +96,7 @@ export default connect(state => ({ productInfo: state.productDetail.info, isVIP:
         <TopupNote nodes={detail || ''} />
       </div>
       <RecommendBuy />
-      <BuyFooter />
+      <BuyFooter onValidate={() => formValidate(state.specData, type)} />
     </>
   );
 });

@@ -7,6 +7,9 @@ export const fmtPrice = (data, type) => {
   // }
   const price = numeral(data).format('0.00').replace(/(\.00?)?0?$/, '');
   const _price = price < 0 ? '-' : price;
+  if (type === 'number') {
+    return price < 0 ? null : +price;
+  }
   if (type === 'CN') {
     return `${_price}元`
   }

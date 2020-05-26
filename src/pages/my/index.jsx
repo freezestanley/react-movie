@@ -6,6 +6,7 @@ import MenuItem from './components/MenuItem';
 
 function MyPage(props){
   const userInfo = props.user.userInfo;
+  console.log('[9] index.jsx: ', props.user);
    console.log(props.banner)
   console.log('[8] index.jsx: ', props);
   const handleExit = () => {
@@ -17,7 +18,7 @@ function MyPage(props){
         <div className='me_avatar-img'  >
            <div  className='img'/>
          </div>
-        {userInfo.isVIP && <div className='me_vip' />}
+        {props.user.isVIP && <div className='me_vip' />}
         <p className='me_nickname'>{userInfo.nickname}</p>
       </div>
       <div className='me_container'>

@@ -42,7 +42,7 @@ function SpecAndVIP(props) {
   return (
     <div>
       <SpecGroup {...rest} isOpenVIP={state.isOpenVIP} onChange={handleSpec} />
-      {!order.hasVipOrder && (
+      {!order.hasVipOrder && !user.isVIP && (
         <OpenVIP
           {...rest}
           // savePrice={state.savePrice}
