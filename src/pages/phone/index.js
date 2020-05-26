@@ -32,12 +32,12 @@ const { phone: { product={}, productItems=[], attachList=[] }, phoneForm: { main
   const onInputChange = (value) => {
     dispatch({ type: 'phoneForm/setState', payload: { rechargeAccount: value } });
   };
-  const debouncedFn = useCallback(debounce((mainData, attachData) => {
-    dispatch({ type: 'prePay/setState', payload: { type: 'phone', main: mainData, attach: attachData } });
+  const debouncedFn = useCallback(debounce((mainData, attachData, rechargeAccount) => {
+    dispatch({ type: 'prePay/setState', payload: { type: 'phone', main: { ...mainData, rechargeAccount }, attach: attachData } });
   }, 200, { leading: false, trailing: true }), []);
   useEffect(()=> {
-    debouncedFn(main, attach);
-  }, [debouncedFn, main, attach]);
+    debouncedFn(main, attach, rechargeAccount);
+  }, [debouncedFn, main, attach, rechargeAccount]);
   return (<div className={styles.phonePage}>
     <ProductHead
       corner={product.topCornerMark}
@@ -66,6 +66,6 @@ const { phone: { product={}, productItems=[], attachList=[] }, phoneForm: { main
       <TopupNote nodes={product.detail || ''} />
     </div>
     <RecommendBuy />
-    <BuyFooter />
+    <BuyFooter onValidate={() => true} />
   </div>);
 })

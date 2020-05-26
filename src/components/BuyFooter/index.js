@@ -4,6 +4,7 @@ import { connect } from 'dva';
 import '@/assets/svgIcon/home.svg';
 import { Popup } from 'zarm';
 import { fmtPrice } from '@/utils/tools';
+
 import { vipDiscount } from '@/utils/ants';
 import styles from './index.module.less';
 import zaLogo from './img/za-logo.png';
@@ -11,7 +12,7 @@ import { ReactComponent as HomeSvg } from './img/home.svg';
 import { ReactComponent as CloseSvg } from './img/close.svg';
 import { ReactComponent as PromptSvg } from './img/prompt.svg';
 import { ReactComponent as SafeSvg } from './img/safe.svg';
-import { getTotalPrice, getDiscountInfo } from './util';
+import { getTotalPrice, getDiscountInfo, createPhoneOrder } from './util';
 
 
 export default withRouter(connect(state => ({ ...state.prePay, isVIP: state.global.isVIP }))(function(props) {
@@ -42,6 +43,7 @@ export default withRouter(connect(state => ({ ...state.prePay, isVIP: state.glob
           break;
         case 'phone':
           data = { main, attach };
+          createPhoneOrder({ data, dispatch, callback: ()=>{alert(1)} })
           break;
         default:
           data = main; 
