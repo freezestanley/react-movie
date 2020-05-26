@@ -15,11 +15,12 @@ import { ReactComponent as SafeSvg } from './img/safe.svg';
 import { getTotalPrice, getDiscountInfo, createPhoneOrder, createProductOrder } from './util';
 
 
-export default withRouter(connect(state => ({ ...state.prePay, isVIP: state.user.isVIP }))(function(props) {
-  const { history, main, attach, type, dispatch, onValidate, isVIP } = props;
+export default withRouter(connect(state => ({ ...state.prePay, isVIP: state.user.isVIP, vipTip: state.vipTip  }))(function(props) {
+  const { history, main, attach, type, dispatch, onValidate, isVIP, vipTip={} } = props;
   const [visible, setVisible]=useState(false);
   const totalPrice = getTotalPrice({ main, attach, type, isVIP });
   const discountInfo = getDiscountInfo({ main, attach, type, isVIP });
+  const isVipTipVisible = type === 'product' && main.savePrice >0 && !isVIP && !main.isOpenVIP && vipTip.visible
   const toggleFn = (val) =>{
     setVisible(val);
   };
@@ -27,11 +28,16 @@ export default withRouter(connect(state => ({ ...state.prePay, isVIP: state.user
     history.push('/');
   };
   const handlePay = (dispatch, data) => {
-    console.log('-------handle pay data', data);
   }
+  const goToDesPositon = () => {
+    const scrollContainer = document.querySelector('.z_layout_cont');
+    if (scrollContainer) {
+      scrollContainer.scrollTop = vipTip.y - scrollContainer.clientWidth / 2 ;
+      dispatch({ type: 'vipTip/setState', payload: { visible: false } })
+    }
+  };
   const startPayFn = () => {
     if (onValidate && onValidate())  {
-      // console.log('-------handle pay data', data);
       let data = {};
       switch(type) {
         case 'product':
@@ -77,9 +83,11 @@ export default withRouter(connect(state => ({ ...state.prePay, isVIP: state.user
     return () => {
       dispatch({ type: 'global/setState', payload: { hasBuyFooter: false } });
       dispatch({ type: 'prePay/resetState' });
+      dispatch({ type: 'vipTip/setState', payload: { visible: true } })
     }
   }, [dispatch]);
   return [<div className={styles.buyFooter} key='footer' id="buy-footer-box">
+    {isVipTipVisible && <div className={styles.vipTip} onClick={goToDesPositon}>开通会员 , 本单立省{main.savePrice}元</div>}
     <dl className={styles.home} onClick={goToHome}>
       <dt className={styles.homeIcon}>
         <HomeSvg />

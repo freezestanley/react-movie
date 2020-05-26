@@ -1,12 +1,9 @@
 
 export default {
-  namespace: 'global',
+  namespace: 'vipTip',
   state: {
-    title: '',
-    routesMap: [],
-    tabPageList: [],
-    currRoute: {},
-    hasBuyFooter: false
+    y: 0,
+    visible: true
   },
   reducers: {
     setState(state, { payload }) {
