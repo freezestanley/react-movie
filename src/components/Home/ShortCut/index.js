@@ -16,11 +16,11 @@ class ShortCut extends React.Component {
     return (
       <div className={styles.shortCut} >
         <div className={styles.inner}>
-          {map(list, ({ bannerItem }, idx) => (<dl key={idx} className={styles.item} onClick={this.goToPage.bind(this, bannerItem.id)}>
-            <dt style={{ backgroundImage: `url(${bannerItem.image})` }}></dt>
+          {map(list, ({ bannerItem, bannerCoverUrl },  idx) => (<dl key={idx} className={styles.item} onClick={this.goToPage.bind(this, bannerItem.id)}>
+            <dt style={{ backgroundImage: `url(${bannerCoverUrl})` }}></dt>
             <dd>
               <h2>{bannerItem.abbr}</h2>
-              <div className={styles.subTitle}>{bannerItem.topCornerMark}</div>
+              <div className={styles.subTitle}>{bannerItem.bottomCornerMark}</div>
             </dd>
           </dl>))}
         </div>

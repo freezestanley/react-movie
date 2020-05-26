@@ -11,6 +11,16 @@ export function queryProduct(data) {
   });
 }
 
+// 获取商品列表
+export function queryProducts(data) {
+  return request({
+    url: '/queryProducts',
+    serve: 'product',
+    method: 'GET',
+    data,
+  });
+}
+
 export function eventList(data) {
   return request({
     url: '/eventList',

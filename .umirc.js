@@ -29,6 +29,7 @@ export default {
         { path: '/memberrecharge',component: '../pages/memberrecharge',backgroundColor:'gray', title: '我的卡券包',  },
         { path: '/history', component: '../pages/card/history', backgroundColor:'white',title: '历史卡券',  },
         { path: '/card', component: '../pages/card', backgroundColor:'white',title: '我的卡券',  },
+        { path: '/search', component: '../pages/search', backgroundColor:'white',title: '搜索',  },
         // { path: '/test', component: '../pages/test' },
       ],
     }

@@ -21,7 +21,8 @@ function Home ({ dispatch,bannerList, ...rest }) {
   const hotRecommendList = filter(bannerList, item => item.bannerType === 5);
   useEffect(() => {
     dispatch({ type: 'banner/getBanner', payload: {
-      bannerType:[1,2,3,4,5]
+      bannerType:[1,2,3,4,5],
+      pageSize: 100,
     } });
     dispatch({ type: 'productDetail/getEventList', payload: {} });
   }, [dispatch]);
