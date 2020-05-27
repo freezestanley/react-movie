@@ -1,7 +1,7 @@
 
 import { paymentAmount } from '@/utils/ants';
 import { fmtPrice } from '@/utils/tools';
-import superCodePay, { superCodePayV1 } from '@/utils/handlePay';
+import superCodePay from '@/utils/handlePay';
 //  价格展示逻辑
 export const getTotalPrice = ({ main={}, type, attach, isVIP }) => {
   let price = 0;
@@ -76,9 +76,8 @@ export const getDiscountInfo = ({ main, type, attach, isVIP }) => {
 
 
 export function createPhoneOrder ({ data, dispatch, callback }) {
-  const type = 'order/createAndPay'
   const { main, attach } = data;
-  const payAmount = (main.price || 0) + (attach.payPrice || 0)
+  const payAmount = fmtPrice((main.price || 0) + (attach.payPrice || 0), 'number');
   const formData = {
     productId: main.productId,
     productItemId: main.id,
@@ -91,7 +90,7 @@ export function createPhoneOrder ({ data, dispatch, callback }) {
     rechargeAccount	: main.rechargeAccount,
     payAmount
   };
-  superCodePayV1({ dispatch, type, formData, callback });
+  superCodePay({ dispatch, formData, callback });
 }
 
 export function createProductOrder({ data, dispatch, callback }) {

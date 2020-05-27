@@ -1,6 +1,6 @@
 import React, { useEffect, useCallback } from 'react';
 import { connect } from 'dva';
-import { Input } from 'zarm';
+import { Input, Toast } from 'zarm';
 import debounce from 'lodash/debounce';
 import map from 'lodash/map';
 import isEmpty from 'lodash/isEmpty';
@@ -35,6 +35,17 @@ const { phone: { product={}, productItems=[], attachList=[] }, phoneForm: { main
   const debouncedFn = useCallback(debounce((mainData, attachData, rechargeAccount) => {
     dispatch({ type: 'prePay/setState', payload: { type: 'phone', main: { ...mainData, rechargeAccount }, attach: attachData } });
   }, 200, { leading: false, trailing: true }), []);
+  const validate = useCallback(() => {
+    if (!/^1\d{10}$/.test(rechargeAccount)) {
+      Toast.show('手机号码格式错误！');
+      return false;
+    }
+    if (isEmpty(main)) {
+      Toast.show('请选择话费规格！');
+      return false;
+    }
+    return true
+  }, [rechargeAccount, main]);
   useEffect(()=> {
     debouncedFn(main, attach, rechargeAccount);
   }, [debouncedFn, main, attach, rechargeAccount]);
@@ -66,6 +77,6 @@ const { phone: { product={}, productItems=[], attachList=[] }, phoneForm: { main
       <TopupNote nodes={product.detail || ''} />
     </div>
     <RecommendBuy />
-    <BuyFooter onValidate={() => true} />
+    <BuyFooter onValidate={validate} />
   </div>);
 })
