@@ -1,11 +1,27 @@
 .Active{
     background: rgb(17, 13, 56);
+    position: fixed;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling:touch;
+    .footer{
+        position: fixed;
+        bottom:-6px;
+        left:0;
+        transform: translate(0, 100%);
+    }
+    .outin{
+        animation: dropdown 1s ease-in 1 forwards;
+    }
     img{
         width: 100%;
     }
     .info{
         color:#fff;
-        margin: 20px 20px 0;
+        margin: 20px 20px 130px;
         font-size: 12px;
         .title{
             font-size: 18px;
@@ -28,4 +44,15 @@
         margin: 20px 0;
         text-align: center;
     }
+}
+:global{
+    @keyframes dropdown {
+        0% {
+            transform: translate(0, 100%);
+        }
+        100% {
+            transform: translate(0, 0%);
+        }
+    }
+    
 }
