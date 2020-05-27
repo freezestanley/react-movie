@@ -2,16 +2,12 @@ import { useState, useEffect, useRef } from 'react';
 import { Popup, Icon } from 'zarm';
 import styles from './index.less';
 
-export default function ({ visible, container, onClose }) {
-    // const codeRef = useRef()
-    console.log(container, 'sss')
+export default function ({ visible, onClose }) {
     return (
         <Popup
             visible={visible}
             direction="center"
             width="70%"
-            afterClose={() => console.log('关闭')}
-
         >
             <div className={styles.popup}>
                 <div className={styles.top}>
