@@ -30,6 +30,18 @@ export function queryOrders(data) {
   });
 }
 
+// 查询订单
+export function orderInfo(data) {
+  return request({
+    url: `/get/${data}`,
+    serve: 'order',
+    method: 'GET',
+  }).then(res => {
+    if (res.code === '0000') {
+      return res.data;
+    }
+  });
+}
 
 export function queryOrderDetails(orderId){
   return request({
