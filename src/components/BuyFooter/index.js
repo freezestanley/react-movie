@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import withRouter from 'umi/withRouter';
 import { connect } from 'dva';
 import '@/assets/svgIcon/home.svg';
@@ -15,8 +15,9 @@ import { ReactComponent as SafeSvg } from './img/safe.svg';
 import { getTotalPrice, getDiscountInfo, createPhoneOrder, createProductOrder } from './util';
 
 
-export default withRouter(connect(state => ({ ...state.prePay, isVIP: state.user.isVIP, vipTip: state.vipTip  }))(function(props) {
-  const { history, main, attach, type, dispatch, onValidate, isVIP, vipTip={} } = props;
+export default withRouter(connect(state => ({ ...state.prePay, user: state.user, vipTip: state.vipTip  }))(function(props) {
+  const { history, main, attach, type, dispatch, onValidate, user, vipTip={} } = props;
+  const { isVIP, userId } = user;
   const [visible, setVisible]=useState(false);
   const totalPrice = getTotalPrice({ main, attach, type, isVIP });
   const discountInfo = getDiscountInfo({ main, attach, type, isVIP });
@@ -36,7 +37,12 @@ export default withRouter(connect(state => ({ ...state.prePay, isVIP: state.user
       dispatch({ type: 'vipTip/setState', payload: { visible: false } })
     }
   };
-  const startPayFn = () => {
+  const startPayFn = useCallback(() => {
+    if (!userId) {
+      const sourcePage = window.encodeURIComponent(`${window.location.pathname}${window.location.search}`);
+      history.push({ pathname: '/login', query: { sourcePage  } });
+      return;
+    }
     if (onValidate && onValidate())  {
       let data = {};
       switch(type) {
@@ -67,7 +73,7 @@ export default withRouter(connect(state => ({ ...state.prePay, isVIP: state.user
       handlePay(dispatch, data);
     }
 
-  };
+  }, [userId]); // eslint-disable-line
   const {
     itemName, // 产品规格
     originPrice, // 原价
