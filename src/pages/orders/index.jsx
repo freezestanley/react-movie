@@ -53,12 +53,14 @@ class Index extends Component {
 
   refreshData = () => {
     if (!this.mounted) return;
+    this.setState({pageNo:1})
      queryOrders({}).then((res)=>{
        this.setState({ refreshing: REFRESH_STATE.loading });
-       console.log(60)
-       console.log(res)
+      //  console.log(60)
+      //  console.log(res)
       if(res.code==='0000'){
-        this.setState({data:res.data})
+        
+        this.setState({data:res.data,pageNo:1})
         this.appendDa()
         this.setState({
           refreshing: REFRESH_STATE.success,
@@ -75,25 +77,26 @@ class Index extends Component {
   // 模拟加载更多数据
   loadData = () => {
     const {data,page,dataSource}=this.state
+    console.log(data)
     this.setState({ loading: LOAD_STATE.loading });
     queryOrders({pageNo:page+1}).then((res)=>{
+      let loading = LOAD_STATE.complete;
+      this.setState({ loading })
       console.log(res)
       if(res.code==='0000'){
         if(res.data==null){
-        console.log(11)
-        let loading = LOAD_STATE.complete;
-        this.setState({ loading })
+          let loading = LOAD_STATE.complete;
+          this.setState({ loading })
           return
         }
         data.concat(res.data)
         console.log(data)
         this.setState({data:data})
-        // this.appendData()
         res.data.map((item)=>{
           dataSource.push(<Order key={item.orderId} info={item} ></Order>);
         })
         this.setState({page:page+1})
-        this.state({dataSource})
+        this.setState({dataSource})
         let loading = LOAD_STATE.success;
         this.setState({ loading })
       }else{

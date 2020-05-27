@@ -29,3 +29,12 @@ export function queryOrders(data) {
     data
   });
 }
+
+
+export function queryOrderDetails(orderId){
+  return request({
+    url: `/get/${orderId}`,
+    serve: 'order',
+    method: 'GET',
+  });
+}

@@ -6,6 +6,7 @@ export default {
   state: {
     hasVipOrder: false,
     orderInfo: {},
+    orderDetails:{}
   },
   reducers: {
     setState(state, { payload }) {
@@ -41,6 +42,16 @@ export default {
         yield put({
           type: 'setState',
           payload: { orderInfo: res.data },
+        });
+        return res.data;
+      }
+    },
+    *queryOrderDetials({ payload }, { put, call }) {
+      const res = yield call(services.queryOrderDetails, payload);
+      if (res.code === '0000') {
+        yield put({
+          type: 'setState',
+          payload: { orderDetails: res.data },
         });
         return res.data;
       }

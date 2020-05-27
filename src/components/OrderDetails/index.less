@@ -24,7 +24,7 @@
     position: absolute;
     top:44px;
     left: 18px;
-    padding-right: 28px;;
+    padding-right: 15px;;
     >div{
       flex :0 ,0, 100%;
       display: flex;
@@ -36,7 +36,13 @@
       font-weight:400;
       color:rgba(0,0,0,0.5);
       line-height:30px;
+      span:first-child{
+        width: 100px;
+      }
       span:last-child{
+        overflow:hidden;  
+        text-overflow:ellipsis;
+        white-space:wrap;
         font-size:15px;
         font-family:PingFangSC-Regular,PingFang SC;
         font-weight:400;
