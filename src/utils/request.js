@@ -13,8 +13,9 @@ export const apiPrefix = {
   order: '/api/ants_order/v1/charge/order',
   pay: '/api/ants_charge/v1/pay',
   product: '/api/ants_product/v1/product',
-  card: '/api/ants_coupon/v1/coupon'
-}
+  charge: '/api/ants_order/v1/charge',
+  card: '/api/ants_coupon/v1/coupon',
+};
 
 // create an axios instance
 const service = axios.create({
@@ -81,14 +82,14 @@ service.interceptors.response.use(
   },
 );
 
-export default function (config) {
+export default function(config) {
   const { serve, method, data, ...rest } = config;
   const options = {
     baseURL: apiPrefix[config.serve],
     method,
     // 给get接口加时间戳，防止缓存
-    [method === 'GET' ? 'params' : 'data']: (method === 'GET' ? { ...data, t: Date.now() } : data),
-    ...rest
-  }
+    [method === 'GET' ? 'params' : 'data']: method === 'GET' ? { ...data, t: Date.now() } : data,
+    ...rest,
+  };
   return service.request(options);
-};
+}

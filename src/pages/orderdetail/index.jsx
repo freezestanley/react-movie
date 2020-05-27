@@ -7,7 +7,7 @@ import styles from './index.less'
 import { connect } from 'dva';
 
 function OrderDetail(props){
-  const {location: { query = {} } ,order:{orderDetails={}},dispatch}=props;
+  const {location: { query = {} } ,order:{orderDetails, productList },dispatch}=props;
   const orderId = query.id;
   useEffect(() => {
     dispatch({ type: 'order/queryOrderDetials', payload: orderId  });
@@ -15,7 +15,7 @@ function OrderDetail(props){
   return(
     <div className={styles.myorder}>
       <PayState info={orderDetails}/>
-      <OrderDetails info={orderDetails}/>
+      <OrderDetails info={orderDetails} productList={productList}/>
       <RecommendBuy/>
     </div>
   )

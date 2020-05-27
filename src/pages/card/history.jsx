@@ -31,7 +31,12 @@ const data = [{
 }]
 
 const Local = (props) => {
-    
+    const { userId } = props.user||{};
+    useEffect(() => {
+        // debugger
+        if (userId) props.dispatch({ type: 'card/getHistoryCard', payload: { pageNo:1, pageSize: 100 } })
+    }, [props, userId])
+
     return (
         <div className={styles.history}>
             <div className={styles.title}>历史卡券</div>
@@ -51,5 +56,6 @@ const Local = (props) => {
 }
 
 export default connect(state => ({
-    loading: state.loading.effects['user/login'],
+    card: state.card,
+    user: state.user
   }))(Local);
