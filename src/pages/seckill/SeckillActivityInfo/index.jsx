@@ -9,14 +9,12 @@ export default ({ info }) => {
     return [1, 3, 4].indexOf(info.currStatus) > -1;
   }, [info]);
 
-  const noStock = useMemo(() => {
-    return info.stock === 0;
-  }, [info]);
+  const noStock = useMemo(() => info.stock === 0, [info]);
 
   const limited = useMemo(() => {
     // todo
-    return false;
-  }, []);
+    return info.limitBuy === 'Y';
+  }, [info.limitBuy]);
 
   const time = useMemo(() => {
     if (info.currStatus === 1) {
@@ -27,8 +25,12 @@ export default ({ info }) => {
       return Date.now() + info.beginTimestamp - info.currTimestamp;
     }
 
+    if (noStock) {
+      return Date.now() + info.nextBeginTimestamp - info.currTimestamp;
+    }
+
     return Date.now();
-  }, [info]);
+  }, [info, noStock]);
 
   if (!begun) {
     return (
@@ -40,7 +42,7 @@ export default ({ info }) => {
 
   if (noStock) {
     return (
-      <Layout title={info.productName}>
+      <Layout title={info.productName} timeDesc="距活动开始" time={time}>
         <Product info={info} />
         <div className={styles['box']}>
           <div className={styles['desc']}>秒杀活动已售罄，每天早上10 : 00开抢</div>
