@@ -10,6 +10,7 @@ import { isPhone, Store } from '@/utils/tools';
 import styles from './index.less';
 
 function LoginPage(props) {
+  const { location: { query: { sourcePage='' } } } = props;
   const [state, setState] = useReducer((o, n) => ({ ...o, ...n }), {
     isRegistered: true,
     disabled: true,
@@ -81,7 +82,13 @@ function LoginPage(props) {
       .then(isOk => {
         if (isOk) {
           props.dispatch({ type: 'user/getUserInfo', hasToast: false })
-          router.push('/');
+          if (sourcePage) {
+            let sourceUrl = window.decodeURIComponent(sourcePage);
+            sourceUrl = sourceUrl.indexOf('?') !== -1 ? `${sourceUrl}&ref=login` : `${sourceUrl}?ref=login`;
+            router.push(sourceUrl);
+          } else {
+            router.push('/');
+          }
         }
       });
   };

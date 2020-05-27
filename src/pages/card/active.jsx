@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { connect } from 'dva';
 import router from 'umi/router';
 import styles from './style/active.less';
@@ -15,15 +15,37 @@ import Item from './components/item'
 
 const Active = () => {
     const [visible, setVisible] = useState(false)
+    const [showFooter, setShowFooter] = useState(false)
+    const box = useRef(null)
+    const footer = useRef(null)
     const openClick = (e) => {
-        debugger
     }
     const viewStoreList = (e) => {
-        debugger
         setVisible(!visible)
     }
+    const throttle = function(func, delay) {            
+        　　var prev = Date.now();            
+        　　return function() {                
+        　　　　var context = this;                
+        　　　　var args = arguments;                
+        　　　　var now = Date.now();                
+        　　　　if (now - prev >= delay) {                    
+        　　　　　　func.apply(context, args);                    
+        　　　　　　prev = Date.now();                
+        　　　　}            
+        　　}        
+        }  
+    const scrollClick = (e) => {
+        console.log('aa:' + box.current.scrollTop)
+        const top = box.current.scrollTop
+        if ( top > 20) {
+            setShowFooter(true)
+        } else {
+            setShowFooter(false)
+        }
+    }
     return (
-        <div className = {styles.Active}>
+        <div ref={box} className = {styles.Active} onScroll = {throttle(scrollClick, 30)}>
             <img src={top} />
             <img src={month} />
             {
@@ -55,9 +77,11 @@ const Active = () => {
                     加，大礼包内的每个商品的领取截止日（半年）
                 </div>
             </div>
-            <div onClick={openClick}>
+
+            <div ref={footer} className={`${styles.footer} ${showFooter ? styles.outin : ''}`} onClick={openClick}>
                 <img src={foot} />
             </div>
+            
         </div>
     )
 }

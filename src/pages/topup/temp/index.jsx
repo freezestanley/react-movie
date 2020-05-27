@@ -2,21 +2,15 @@ import React, { useReducer } from 'react';
 import router from 'umi/router';
 import useInterval from '@/hooks/useInterval';
 import { Query } from '@/utils/tools';
+import { orderInfo } from '@/services/order';
+import { wxPayLink } from '@/utils/handlePay';
 
 import styles from './index.less';
-
-async function orderInfo() {
-  return {
-    code: '0000',
-    data: {
-      status: 3,
-    }
-  };
-}
 
 export default function TopupTemp() {
   const orderId = Query.get('out_trade_no');
   const paylink = Query.get('paylink');
+  // console.log('[20] index.jsx: ', orderId, paylink);
   const [state, setState] = useReducer((o, n) => ({ ...o, ...n }), {
     isOk: false,
     delay: 2000,
@@ -24,21 +18,20 @@ export default function TopupTemp() {
   })
 
   const handleOk = () => {
-    router.push(`/topup/result/?out_trade_no=${orderId}`);
+    router.push(`/orderdetail?id=${orderId}`);
   };
 
   useInterval(
     () => {
       setState({ count: state.count + 1 });
-      if (state.count > 150) {
+      if (state.count > 5) {
         setState({ delay: null });
       }
-      orderInfo({ orderId: orderId }).then(res => {
+      orderInfo(orderId).then(res => {
         if (!res) return;
-        const data = res.data || {};
-        if (data.status === 3) {
+        if (res.status === 2) { // 已支付
           setState({ isOk: true });
-          // handleOk();
+          handleOk();
         } else {
           setState({ isOk: false });
         }
@@ -48,7 +41,9 @@ export default function TopupTemp() {
   );
 
   const handlePayAgain = () => {
-     window.location = paylink;
+    let _link = wxPayLink({ outTradeNo: orderId, payLink: paylink })
+    //  window.location = paylink;
+     window.location = _link;
   };
 
   return (
@@ -57,6 +52,7 @@ export default function TopupTemp() {
       <button className={styles.payAgain} onClick={handlePayAgain}>
         支付遇到问题，重新支付
       </button>
+      <button onClick={() => router.push('/')}>返回首页</button>
     </div>
   );
 }

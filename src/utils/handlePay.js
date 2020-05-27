@@ -6,12 +6,6 @@ import { wechatPay, randomStr } from '@/utils/wechatPay';
 const isPrd = /vip.zhongan.io$/.test(window.location.origin);
 const superCodeURL = isPrd ? 'https://vpc-af.zhongan.io' : 'https://vpc-test-af.zhongan.io';
 
-// {
-//   outTradeNo: "20052618433200002"
-//   payLink: "https://wx.tenpay.com/cgi-bin/mmpayweb-bin/checkmweb?prepay_id=wx261843329635673afbcc31511761057900&package=1121860560"
-//   prepayId: "wx261843329635673afbcc31511761057900"
-// }
-
 export default function superCodePay({ dispatch, type = 'order/createAndPay', formData, callback }) {
   window.__SuperCode && window.__SuperCode.show({
     serverDomain: superCodeURL,
@@ -46,7 +40,7 @@ export default function superCodePay({ dispatch, type = 'order/createAndPay', fo
             async params => {
               const _d = (await dispatch({
                 type: 'charge/wechatPaySign',
-                payload: { ...params, orderId: res.orderId },
+                payload: { ...params, orderId: res.outTradeNo },
               })) || {};
               Loading.hide();
               return _d;
@@ -55,11 +49,13 @@ export default function superCodePay({ dispatch, type = 'order/createAndPay', fo
             () => {
               callback
                 ? callback()
-                : router.push(`/topup/temp/?out_trade_no=${data.orderId}`)
+                : router.push(`/topup/temp?out_trade_no=${data.outTradeNo}`)
             },
           );
         } else {
-          _data.payLink && browserPay(_data);
+          if (res.payLink) {
+            window.location = wxPayLink(res);
+          }
         }
       })
     }
@@ -90,20 +86,20 @@ export function superCodePayV1({ dispatch, type = 'order/createAndPay', formData
           callback();
         } else {
           alert('创建订单出错～');
-        } 
+        }
       })
     }
   })
 }
 
-function browserPay(data) {
+export function wxPayLink(data) {
   const uri = encodeURIComponent(
     window.location.origin +
-      '/topup/temp/?' +
-      '&out_trade_no=' +
+      '/topup/temp?' +
+      'out_trade_no=' +
       data.outTradeNo +
       '&paylink=' + encodeURIComponent(data.payLink)
   );
 
-  window.location = data.payLink + `&redirect_url=${uri}`;
+  return data.payLink + `&redirect_url=${uri}`;
 }

@@ -1,18 +1,23 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+import { connect } from 'dva';
 import withRouter from 'umi/withRouter';
 
 import styles from './index.less'
-import brand from '@/assets/brand.png'
 const ActivityCard = props => {
-  const { history }= props;
+  const { history, user: { userId } }= props;
   let progress = 0;
   if(props.data.stock !== 0){
     const sell = ((props.data.quantity-props.data.stock)/props.data.quantity) * 100;
     progress = 60 + (sell * 0.4);
   }
-  const onClickFn = () => {
-    history.push(`/seckill?id=${props.data.id}`);
-  };
+  const onClickFn = useCallback(() => {
+    if (userId) {
+      history.push(`/seckill?id=${props.data.id}`);
+    } else {
+      const pathname = history.location.pathname;
+      history.push({ pathname: '/login', query: { sourcePage: window.encodeURIComponent(pathname) } });
+    }
+  }, [history, props.data.id, userId]);
   return (
     <div className={styles['acitivity-card']} onClick={onClickFn}>
       <div className={styles['main-part']}>
@@ -44,4 +49,4 @@ const ActivityCard = props => {
     </div>
   )
 }
-export default withRouter(ActivityCard);
+export default withRouter(connect(state => ({ user: state.user }))(ActivityCard));

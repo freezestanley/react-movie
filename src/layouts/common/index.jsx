@@ -4,7 +4,6 @@ import cns from 'classnames';
 import 'zarm/dist/zarm.min.css';
 import { BrowserInfo, Store } from '@/utils/tools';
 import weChatAuth from '@/utils/weChatAuth';
-// import BuyFooter from '@/components/BuyFooter';
 
 import TabNavItem from './TabNavItem';
 import './index.less';
@@ -48,28 +47,31 @@ function Layout(props) {
   const { hasNavBar = false, footer } = currRoute;
 
   useEffect(() => {
-    // 反欺诈
-    let s = 'b61f4b29a9b2#test#support'; // 测试ID
-    if (/vip.zhongan.io$/.test(window.location.origin)) {
-      s = 'a8987701693f#prd#support'; // 生产ID
-    }
-    window.__SuperCode = window.SuperCode && new window.SuperCode({
-      scene: s
-    });
+    props.dispatch({ type: 'user/checkLogin' }).then(valid => {
+      // 非法时清除旧的token
+      if (!valid) {
+        Store.remove('token');
+      }
+      // 反欺诈
+      let s = 'b61f4b29a9b2#test#support'; // 测试ID
+      if (/vip.zhongan.io$/.test(window.location.origin)) {
+        s = 'a8987701693f#prd#support'; // 生产ID
+      }
+      window.__SuperCode = window.SuperCode && new window.SuperCode({
+        scene: s
+      });
 
-    // 获取用户信息
-    props.dispatch({ type: 'user/getUserInfo', hasToast: false })
-    // props.dispatch({ type: 'banner/getBanner', payload: {
-    //   bannerType:[1,2,3,4,5,6]
-    // } });
-    // 微信授权
-    if (isWx && !Store.get('openId')) {
-      weChatAuth(code => props.dispatch({ type: 'user/wxLogin', payload: { code }}))
-    }
-    if (routesMap.length === 0) {
-      const _routes = mapRouter(props.route.routes);
-      props.dispatch({ type: 'global/setState', payload: { routesMap: _routes }})
-    }
+      // 获取用户信息
+      props.dispatch({ type: 'user/getUserInfo', hasToast: false })
+      // 微信授权
+      if (isWx && !Store.get('openId')) {
+        weChatAuth(code => props.dispatch({ type: 'user/wxLogin', payload: { code }}))
+      }
+      if (routesMap.length === 0) {
+        const _routes = mapRouter(props.route.routes);
+        props.dispatch({ type: 'global/setState', payload: { routesMap: _routes }})
+      }
+    });
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 

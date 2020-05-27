@@ -29,6 +29,15 @@ export function loginOut() {
   });
 }
 
+// 检查是否登陆
+export function checkLogin() {
+  return request({
+    url: '/checkLogin',
+    method: 'GET',
+    serve: 'user',
+  });
+}
+
 // 发送验证码
 export function sendCode(data) {
   return request({
