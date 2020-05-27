@@ -6,7 +6,8 @@ export default {
   state: {
     hasVipOrder: false,
     orderInfo: {},
-    orderDetails:{}
+    orderDetails:{},
+    productList: [],
   },
   reducers: {
     setState(state, { payload }) {
@@ -51,7 +52,10 @@ export default {
       if (res.code === '0000') {
         yield put({
           type: 'setState',
-          payload: { orderDetails: res.data },
+          payload: {
+            orderDetails: res.data,
+            productList: res.data.productList || [],
+          },
         });
         return res.data;
       }
