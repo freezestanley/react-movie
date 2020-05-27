@@ -21,8 +21,10 @@ const ActivityCard = props => {
   return (
     <div className={styles['acitivity-card']} onClick={onClickFn}>
       <div className={styles['main-part']}>
-        <div className={styles['right-top']}></div>
-        <img src={props.data.productImage} className={styles['brand']} alt="" />
+        <div className={styles['right-top']}>
+          <img src={props.data.productImage} className={styles['brand']} alt="" />
+
+        </div>
 
         <div className={styles['card-title']}>{props.data.eventName}</div>
       

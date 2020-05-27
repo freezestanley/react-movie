@@ -73,7 +73,7 @@ export default withRouter(connect(state => ({ ...state.prePay, user: state.user,
       handlePay(dispatch, data);
     }
 
-  }, [userId]); // eslint-disable-line
+  }, [userId, type, main, attach]); // eslint-disable-line
   const {
     itemName, // 产品规格
     originPrice, // 原价

@@ -10,7 +10,7 @@ function ExplorePage() {
     <div className={styles.explorePage}>
       <Card title="商品列表" extra={<span>测试</span>}>
         Product Item
-        <Button onClick={() => router.push(`/topup?productId=1`)}>充值</Button>
+        <Button onClick={() => router.push(`/topup?id=21`)}>充值</Button>
       </Card>
     </div>
   );
