@@ -53,7 +53,7 @@ class Index extends Component {
 
   refreshData = () => {
     if (!this.mounted) return;
-    this.setState({pageNo:1})
+    this.setState({page:1})
      queryOrders({}).then((res)=>{
        this.setState({ refreshing: REFRESH_STATE.loading });
       //  console.log(60)
@@ -77,12 +77,10 @@ class Index extends Component {
   // 模拟加载更多数据
   loadData = () => {
     const {data,page,dataSource}=this.state
-    console.log(data)
     this.setState({ loading: LOAD_STATE.loading });
     queryOrders({pageNo:page+1}).then((res)=>{
       let loading = LOAD_STATE.complete;
       this.setState({ loading })
-      console.log(res)
       if(res.code==='0000'){
         if(res.data==null){
           let loading = LOAD_STATE.complete;
@@ -90,7 +88,6 @@ class Index extends Component {
           return
         }
         data.concat(res.data)
-        console.log(data)
         this.setState({data:data})
         res.data.map((item)=>{
           dataSource.push(<Order key={item.orderId} info={item} ></Order>);
@@ -120,7 +117,7 @@ class Index extends Component {
     })
   }
   appendDa=()=>{
-    const {data}=this.state;
+    const {data,dataSource}=this.state;
     let temp=[]
     data.map((item)=>{
       temp.push(<Order key={item.orderId} info={item} ></Order>);
