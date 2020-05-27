@@ -36,7 +36,6 @@ const Active = () => {
         　　}        
         }  
     const scrollClick = (e) => {
-        console.log('aa:' + box.current.scrollTop)
         const top = box.current.scrollTop
         if ( top > 20) {
             setShowFooter(true)
