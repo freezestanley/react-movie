@@ -54,7 +54,13 @@ export default function superCodePay({ dispatch, type = 'order/createAndPay', fo
           );
         } else {
           if (res.payLink) {
-            window.location = wxPayLink(res);
+              const aEle = document.createElement('a');
+              aEle.setAttribute('id', 'temp');
+              aEle.setAttribute('href', wxPayLink(res));
+              document.body.appendChild(aEle);
+              aEle.click();
+              document.body.removeChild(aEle);
+            // window.location.href = wxPayLink(res);
           }
         }
       })
@@ -97,8 +103,7 @@ export function wxPayLink(data) {
     window.location.origin +
       '/topup/temp?' +
       'out_trade_no=' +
-      data.outTradeNo +
-      '&paylink=' + encodeURIComponent(data.payLink)
+      data.outTradeNo
   );
 
   return data.payLink + `&redirect_url=${uri}`;
