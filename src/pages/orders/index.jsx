@@ -118,7 +118,7 @@ class Index extends Component {
   appendDa=()=>{
     const {data,dataSource}=this.state;
     let temp=[]
-    data.map((item)=>{
+    (data||[]).map((item)=>{
       temp.push(<Order key={item.orderId} info={item} ></Order>);
     })
     this.setState({ dataSource:temp });
