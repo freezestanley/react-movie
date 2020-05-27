@@ -49,7 +49,7 @@ export default class MultipleRows extends Component {
 
             {
               this.props.data.length > 0 && (
-                (moment().valueOf() < this.props.data[0]['endTimestamp']) ? 
+                (moment().valueOf() > this.props.data[0]['beginTimestamp']) ? 
                 <Countdown key={1} date={this.props.data[0]['endTimestamp']} renderer={(params) => {params.type='end'; return renderer(params)}} onComplete={this.refresh} />:
                 <Countdown key={2} date={this.props.data[0]['beginTimestamp']} renderer={(params) => {params.type='start';return  renderer(params)}}  onComplete={this.refresh} />
               )
