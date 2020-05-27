@@ -1,14 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useReducer } from 'react';
+import React, { useEffect, useReducer, useRef } from 'react';
 import { Checkbox } from 'zarm';
 import { connect } from 'dva';
-import { fmtPrice } from '@/utils/tools';
+import { fmtPrice, getOffsetTopBy } from '@/utils/tools';
 import { diffMoney } from '@/utils/ants';
 
 import Corner from '../Corner';
 import './index.less';
 
 function OpenVIP(props) {
+  const ref = useRef();
   const { onChange, value = false, savePrice = 0, vipPrice, specInfo } = props;
   const [state, setState] = useReducer((o, n) => ({...o, ...n}), {
     checked: false,
@@ -28,14 +29,19 @@ function OpenVIP(props) {
   }, [props.membershipList])
 
   useEffect(() => {
-    props.dispatch({ type: 'user/getMembershipList' })
+    props.dispatch({ type: 'user/getMembershipList' });
+    setTimeout(() => {
+      const containerEl = document.querySelector('.z_layout_cont')
+      const y = getOffsetTopBy(ref.current, containerEl);
+      props.dispatch({ type: 'vipTip/setState', payload: { y } });
+    }, 1000);
   }, [])
 
   useEffect(() => {
     onChange && onChange({
       isOpenVIP: state.checked,
       vipPrice: state.checked ? state.membershipInfo.lowerPrice : null,
-      savePrice: state.checked ? diffMoney(specInfo) : null,
+      savePrice: diffMoney(specInfo),
     });
   }, [state.checked, JSON.stringify(specInfo)])
 
@@ -44,7 +50,7 @@ function OpenVIP(props) {
   }
 
   return (
-    <div className="open-vip">
+    <div className="open-vip" ref={ref}>
       <div className="open-vip-cont">
         <div className="t1">
           <span>开通立省，可与满减折扣同享</span>

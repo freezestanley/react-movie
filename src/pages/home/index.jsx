@@ -26,8 +26,7 @@ function Home ({ dispatch,bannerList, ...rest }) {
     } });
     dispatch({ type: 'productDetail/getEventList', payload: {} });
   }, [dispatch]);
-  console.log('rest',rest,bannerList);
-  
+    
   return (
     <div className={styles.homePage}>
       { !isEmpty(topBanners) && <Banner list={topBanners} />}

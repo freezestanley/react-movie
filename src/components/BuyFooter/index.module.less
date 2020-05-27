@@ -89,6 +89,29 @@
     }
 
   }
+  .vipTip{
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    padding: 10px 13px;
+    border-radius: 4px;
+    font-size: 12px;
+    color: @white;
+    background-color: fade(@black, 80);
+    &:after{
+      position: absolute;
+      content: "";
+      display: block;
+      border: 6px solid fade(@black, 80);
+      border-bottom-color: transparent;
+      border-left-color: transparent;
+      border-right-color: transparent;
+      bottom: 0;
+      left: 50%;
+      transform: translate(-50%, 100%);
+    }
+  }
 }
 .payInfoBox{
   position: relative;

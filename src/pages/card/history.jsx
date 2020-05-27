@@ -4,40 +4,32 @@ import { connect } from 'dva';
 import cns from 'classnames';
 import router from 'umi/router';
 import styles from './style/index.less';
-import CardItem from './components/CardItem'
+import Card from './components/Card'
 
 
 const data = [{
     title: '6月券·热门会员月卡多选一', 
     retitle: '盎司白金视听年卡', 
-    time: '有效期至：2020-07-30', 
-    state: 'used'
+    time: '2020-07-30', 
+    state: 'used',
+    name: '腾讯视频会员VIP月卡',
+    account: '88874777839847564',
+    paytime: '2020-07-30',
+    codeNo: '888747778398475641',
+    cardNo: '888747778398475641'
 },
 {
     title: '6月券·热门会员月卡多选一', 
     retitle: '盎司白金视听年卡', 
-    time: '有效期至：2020-07-30', 
-    state: 'notime'
+    time: '2020-07-30', 
+    state: 'notime',
+    name: '腾讯视频会员VIP月卡',
+    account: '88874777839847564',
+    paytime: '2020-07-30',
+    codeNo: '888747778398475641',
+    cardNo: '888747778398475641'
 }]
-const af = [
-    {
-        title: '6月券·热门会员月卡多选一', 
-        retitle: '盎司白金视听年卡', 
-        time: '有效期至：2020-07-30', 
-        state: 'pay'
-    },
-    {
-        title: '6月券·热门会员月卡多选一', 
-        retitle: '盎司白金视听年卡', 
-        time: '有效期至：2020-07-30', 
-        state: 'willnotime'
-    },
-    {
-        title: '6月券·热门会员月卡多选一', 
-        retitle: '盎司白金视听年卡', 
-        time: '有效期至：2020-07-30', 
-        state: 'fail'
-    }]
+
 const Local = (props) => {
     
     return (
@@ -46,11 +38,11 @@ const Local = (props) => {
             {
                 data.map((ele, idx, arr) => {
                     return (
-                        <CardItem
+                        <Card
                          key = {`${idx.toString()}`} 
                          state = {ele.state}
                          data={ele}>
-                        </CardItem>
+                        </Card>
                     )
                 })
             }

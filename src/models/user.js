@@ -5,6 +5,7 @@ import { Store } from '@/utils/tools';
 export default {
   namespace: 'user',
   state: {
+    isValidToken: false,
     userInfo: {},
     isVIP: false,
     membershipList: [],
@@ -15,6 +16,26 @@ export default {
     },
   },
   effects: {
+    // 手机验证码登录
+    *checkLogin({ payload }, { put, call }) {
+      let result = false;
+      try {
+        const res = yield call(services.checkLogin, payload);
+        if (res.code === '0000') {
+          yield put({
+            type: 'setState',
+            payload: {
+              isValidToken: res.data
+            }
+          });
+          result = res.data;
+        }
+      } catch(e){
+        console.log('-----error', e);
+        result = false;
+      }
+      return result;
+    },
     // 微信登录
     *wxLogin({ payload }, { put, call }) {
       const res = yield call(services.wxLogin, payload);

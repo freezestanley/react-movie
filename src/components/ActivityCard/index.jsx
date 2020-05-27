@@ -17,7 +17,7 @@ const ActivityCard = props => {
     <div className={styles['acitivity-card']} onClick={onClickFn}>
       <div className={styles['main-part']}>
         <div className={styles['right-top']}></div>
-        <img src={brand} className={styles['brand']} alt="" />
+        <img src={props.data.productImage} className={styles['brand']} alt="" />
 
         <div className={styles['card-title']}>{props.data.eventName}</div>
       
@@ -29,8 +29,8 @@ const ActivityCard = props => {
           {props.data.description}
         </div>
         <div className={styles['price-box']}>
-          <div className={styles['now-price']}><span className={styles['yuan']}>￥</span>274</div>
-          <div className={styles['origin-price']}>￥498</div>
+        <div className={styles['now-price']}><span className={styles['yuan']}>￥</span>{props.data.discountPrice}</div>
+        <div className={styles['origin-price']}>￥{props.data.originPrice}</div>
         </div>
       </div>
       <div className={styles['bottom-part']}>

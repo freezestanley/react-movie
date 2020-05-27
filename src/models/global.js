@@ -6,7 +6,7 @@ export default {
     routesMap: [],
     tabPageList: [],
     currRoute: {},
-    hasBuyFooter: false,
+    hasBuyFooter: false
   },
   reducers: {
     setState(state, { payload }) {
