@@ -4,17 +4,16 @@ import Product from './Product';
 import Button from './Button';
 import styles from './index.less';
 
-export default ({ info }) => {
+export default ({ info, mystock }) => {
   const begun = useMemo(() => {
     return [1, 3, 4].indexOf(info.currStatus) > -1;
   }, [info]);
 
-  const noStock = useMemo(() => info.stock === 0, [info]);
+  const noStock = useMemo(() => info.currStatus === 3, [info]);
 
   const limited = useMemo(() => {
-    // todo
-    return info.limitBuy === 'Y';
-  }, [info.limitBuy]);
+    return info.limitBuy === 'Y' && mystock === 0;
+  }, [info.limitBuy, mystock]);
 
   const time = useMemo(() => {
     if (info.currStatus === 1) {
@@ -25,12 +24,12 @@ export default ({ info }) => {
       return Date.now() + info.beginTimestamp - info.currTimestamp;
     }
 
-    if (noStock) {
+    if (info.currStatus === 3) {
       return Date.now() + info.nextBeginTimestamp - info.currTimestamp;
     }
 
     return Date.now();
-  }, [info, noStock]);
+  }, [info]);
 
   if (!begun) {
     return (

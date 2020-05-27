@@ -10,3 +10,23 @@ export function querySeckillDetail({ id, ...rest }) {
     data: rest,
   });
 }
+
+// 预约秒杀活动
+export function registerSeckill(params) {
+  return request({
+    url: `/seckill/register`,
+    serve: 'charge',
+    method: 'POST',
+    data: params,
+  });
+}
+
+// 查询秒杀库存
+export function getStock({ eventCode }) {
+  return request({
+    url: `/seckill/getStock/${eventCode}`,
+    serve: 'charge',
+    method: 'GET',
+    data: {},
+  });
+}
