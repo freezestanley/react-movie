@@ -14,6 +14,7 @@ export const apiPrefix = {
   pay: '/api/ants_charge/v1/pay',
   product: '/api/ants_product/v1/product',
   charge: '/api/ants_order/v1/charge',
+  card: '/api/ants_coupon/v1/coupon',
 };
 
 // create an axios instance

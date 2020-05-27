@@ -1,4 +1,4 @@
-// import { Toast } from 'zarm';
+import { Toast } from 'zarm';
 import * as services from '@/services/order';
 
 export default {
@@ -34,6 +34,8 @@ export default {
           payload: { orderInfo: res.data },
         });
         return res.data;
+      } else {
+        Toast.show(res.msg || '订单创建失败，请重新尝试')
       }
     },
     *queryOrders({ payload }, { put, call }) {

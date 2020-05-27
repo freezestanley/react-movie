@@ -104,7 +104,13 @@ const ee = {
     cardNo: '888747778398475641'
 }
 
-const Local = (props) => {
+const CardPaper = (props) => {
+    debugger
+    const { userId } = props.user
+    useEffect(() => {
+        debugger
+        if (userId) props.dispatch({ type: 'card/getCard', payload: { pageNo:1, pageSize: 100 } })
+    }, [props, userId])
     const gotoHistory = (item) => {
         router.push('/history');
       }
@@ -149,5 +155,6 @@ const Local = (props) => {
 }
 
 export default connect(state => ({
-    loading: state.loading.effects['user/login'],
-  }))(Local);
+    card: state.card,
+    user: state.user
+  }))(CardPaper);
