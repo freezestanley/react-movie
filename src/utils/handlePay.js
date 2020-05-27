@@ -26,7 +26,7 @@ export default function superCodePay({ dispatch, type = 'order/createAndPay', fo
           sid: _data.scene,
           token: _data.token,
         },
-      }).then(res => {
+      }).then((res ={}) => {
         if (isWX) {
           if (!res.prepayId) return;
           wechatPay(

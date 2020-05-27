@@ -4,19 +4,16 @@ import Product from './Product';
 import Button from './Button';
 import styles from './index.less';
 
-export default ({ info }) => {
+export default ({ info, mystock }) => {
   const begun = useMemo(() => {
     return [1, 3, 4].indexOf(info.currStatus) > -1;
   }, [info]);
 
-  const noStock = useMemo(() => {
-    return info.stock === 0;
-  }, [info]);
+  const noStock = useMemo(() => info.currStatus === 3, [info]);
 
   const limited = useMemo(() => {
-    // todo
-    return false;
-  }, []);
+    return info.limitBuy === 'Y' && mystock === 0;
+  }, [info.limitBuy, mystock]);
 
   const time = useMemo(() => {
     if (info.currStatus === 1) {
@@ -25,6 +22,10 @@ export default ({ info }) => {
 
     if (info.currStatus === 2) {
       return Date.now() + info.beginTimestamp - info.currTimestamp;
+    }
+
+    if (info.currStatus === 3) {
+      return Date.now() + info.nextBeginTimestamp - info.currTimestamp;
     }
 
     return Date.now();
@@ -40,7 +41,7 @@ export default ({ info }) => {
 
   if (noStock) {
     return (
-      <Layout title={info.productName}>
+      <Layout title={info.productName} timeDesc="距活动开始" time={time}>
         <Product info={info} />
         <div className={styles['box']}>
           <div className={styles['desc']}>秒杀活动已售罄，每天早上10 : 00开抢</div>
