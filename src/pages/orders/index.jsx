@@ -59,7 +59,6 @@ class Index extends Component {
       //  console.log(60)
       //  console.log(res)
       if(res.code==='0000'){
-        
         this.setState({data:res.data,pageNo:1})
         this.appendDa()
         this.setState({
@@ -109,7 +108,7 @@ class Index extends Component {
       if(res.code==='0000'){
         this.setState({data:res.data})
         const {data,dataSource}=this.state;
-        data.map((item)=>{
+        (data||[]).map((item)=>{
           dataSource.push(<Order key={item.orderId} info={item} ></Order>);
         }) 
         this.setState({ dataSource:dataSource });
