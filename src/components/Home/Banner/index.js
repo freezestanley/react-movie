@@ -4,14 +4,20 @@ import Slider from "react-slick";
 import map from 'lodash/map';
 import cns from 'classnames';
 import styles from './index.module.less';
+import QRcode from './QRcode';
 import { ReactComponent as SearchSvgIcon } from '@/assets/svg/search.svg';
 
 class Banner extends React.Component {
   constructor(props){
     super(props);
     this.state ={
-      activeIndex: 0
+      activeIndex: 0,
+      codeVisible: false
     };
+  }
+
+  handleQRcode() {
+    this.setState({codeVisible:true})
   }
 
   goToSearchPage() {
@@ -20,7 +26,7 @@ class Banner extends React.Component {
 
   render() {
     const self = this;
-    const { activeIndex } = this.state;
+    const { activeIndex, codeVisible } = this.state;
     const { list }=this.props;
     var settings = {
       dots: true,
@@ -41,7 +47,7 @@ class Banner extends React.Component {
     return (
       <div className={styles.homeBanner}>
         <div className={styles.searchBox}>
-          <div className={styles.searchIconBox}></div>
+          <div className={styles.searchIconBox} onClick={this.handleQRcode.bind(this)}></div>
           <div className={styles.searchInput} onClick={this.goToSearchPage.bind(this)}>
             <SearchSvgIcon className={styles.searchIcon} />
             <span className={styles.searchPlaceHolder}>搜商品、品牌优惠</span>
@@ -52,6 +58,9 @@ class Banner extends React.Component {
             <img src={item.bannerCoverUrl} alt="封面"/>
           </div>))}
         </Slider>
+        <QRcode visible={codeVisible} onClose={e=>{
+          this.setState({codeVisible:e})
+        }}/>
       </div>
     );
   }
