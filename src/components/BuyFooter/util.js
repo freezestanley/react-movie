@@ -8,7 +8,6 @@ export const getTotalPrice = ({ main={}, type, attach, isVIP }) => {
   switch(type) {
     case 'product':
       const { specInfo={}, isOpenVIP, vipPrice }  = main;
-      console.log('-----isVIP', isVIP);
       price = paymentAmount(specInfo, isVIP, isOpenVIP).price + (isOpenVIP ? vipPrice : 0);
       price = fmtPrice(price, 'number');
       break;
@@ -79,7 +78,6 @@ export const getDiscountInfo = ({ main, type, attach, isVIP }) => {
 export function createPhoneOrder ({ data, dispatch, callback }) {
   const type = 'order/createAndPay'
   const { main, attach } = data;
-  console.log('----attach', attach);
   const payAmount = (main.price || 0) + (attach.payPrice || 0)
   const formData = {
     productId: main.productId,
