@@ -4,7 +4,8 @@ import cns from 'classnames';
 import 'zarm/dist/zarm.min.css';
 import { BrowserInfo, Store } from '@/utils/tools';
 import weChatAuth from '@/utils/weChatAuth';
-
+import VConsole from 'vconsole';
+import getEnv from '@/utils/env';
 import TabNavItem from './TabNavItem';
 import './index.less';
 
@@ -61,6 +62,12 @@ function Layout(props) {
       }
     
   });
+  },[])
+  useEffect(() => {
+    console.log(getEnv())
+    if(getEnv() !== 'prd' && getEnv() !== 'local'){
+      new VConsole()
+    }
   },[])
 
   useEffect(() => {

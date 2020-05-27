@@ -23,6 +23,7 @@
     "react-helmet": "^6.0.0",
     "react-slick": "^0.26.1",
     "slick-carousel": "^1.8.1",
+    "vconsole": "^3.3.4",
     "zarm": "^2.2.0"
   },
   "devDependencies": {
