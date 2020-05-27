@@ -30,11 +30,17 @@ function OpenVIP(props) {
 
   useEffect(() => {
     props.dispatch({ type: 'user/getMembershipList' });
-    setTimeout(() => {
+    let tik =setTimeout(() => {
       const containerEl = document.querySelector('.z_layout_cont')
       const y = getOffsetTopBy(ref.current, containerEl);
       props.dispatch({ type: 'vipTip/setState', payload: { y } });
     }, 1000);
+    return () => {
+      if (tik) {
+        clearTimeout(tik);
+        tik = null;
+      }
+    }
   }, [])
 
   useEffect(() => {
