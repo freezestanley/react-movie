@@ -18,7 +18,7 @@ export default function TopupTemp() {
   })
 
   const handleOk = () => {
-    router.push(`/orderdetail?id=${orderId}`);
+    router.replace(`/orderdetail?id=${orderId}`);
   };
 
   useInterval(
@@ -43,7 +43,7 @@ export default function TopupTemp() {
   const handlePayAgain = () => {
     let _link = wxPayLink({ outTradeNo: orderId, payLink: paylink })
     //  window.location = paylink;
-     window.location = _link;
+     window.location.href = _link;
   };
 
   return (

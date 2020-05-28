@@ -4,7 +4,9 @@ import * as services from '@/services/card';
 export default {
   namespace: 'card',
   state: {
-      data: []
+      data: [],
+      card: '12312312',
+      historyCards:[],//历史卡券
   },
   reducers: {
     setState(state, { payload }) {
@@ -1011,6 +1013,22 @@ export default {
       debugger
       yield put({ type: 'setState', payload: { data: res.data } });
       return res;
+      // yield put({ type: 'setState', payload: { data: '123123' } });
+    },
+    //history cards
+    *getHistoryCard({ payload }, { put, call }) {
+      const res = yield call(services.getCard, payload);
+      console.log(res,'res---')
+      const {data,success} = res;
+      if(success) {
+        yield put({
+          type:'setState',
+          payload:{
+            historyCards:data
+          }
+        })
+      }
+      // return res;
       // yield put({ type: 'setState', payload: { data: '123123' } });
     },
   },

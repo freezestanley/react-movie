@@ -50,3 +50,22 @@ export function queryOrderDetails(orderId){
     method: 'GET',
   });
 }
+
+// 获取秒杀下单orderKey
+export function getSeckillOrderKey({ eventCode }) {
+  return request({
+    url: `/getUrl/${eventCode}`,
+    serve: 'seckillOrder',
+    method: 'GET',
+  });
+}
+
+// 秒杀下单
+export function createSeckillOrder({ orderKey, ...rest }) {
+  return request({
+    url: `/order/${orderKey}`,
+    serve: 'seckillOrder',
+    method: 'POST',
+    data: rest
+  });
+}

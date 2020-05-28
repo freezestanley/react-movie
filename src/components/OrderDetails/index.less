@@ -1,16 +1,18 @@
 .orderdetail{
   margin: 5px 10px 5px 10px ;
-  position: relative;
-  // width: 100%;
-  height: 306px;
+  padding-bottom: 30px;
+  height: 100%;;
   background:rgba(255,255,255,1);
   border-radius:8px;
+  overflow: hidden;
   .orderdetail_title {
-    position: absolute;
-    top: 17px;
-    left: 18px;
+    // overflow:hidden;  
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    margin-top: 20px;
+    margin-left: 15px;
     width:205px;
-    height:14px;
+    height:15px;
     font-size:15px;
     font-family:PingFangSC-Medium,PingFang SC;
     font-weight:500;
@@ -18,13 +20,13 @@
     line-height:14px;
   }
   .orderdetail_container{
+    margin-top: 15px;
+    margin-right: 15px;
     display: flex;
     flex-flow: row wrap;
     align-content: flex-start;
-    position: absolute;
-    top:44px;
-    left: 18px;
-    padding-right: 15px;;
+    margin-left: 15px;
+    // padding-right: 15px;;
     >div{
       flex :0 ,0, 100%;
       display: flex;

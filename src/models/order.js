@@ -1,4 +1,4 @@
-// import { Toast } from 'zarm';
+import { Toast } from 'zarm';
 import * as services from '@/services/order';
 
 export default {
@@ -6,7 +6,8 @@ export default {
   state: {
     hasVipOrder: false,
     orderInfo: {},
-    orderDetails:{}
+    orderDetails:{},
+    productList: [],
   },
   reducers: {
     setState(state, { payload }) {
@@ -25,7 +26,7 @@ export default {
       }
     },
 
-    // 获取会员等级列表
+    // 普通商品下单
     *createAndPay({ payload }, { put, call }) {
       const res = yield call(services.createAndPay, payload);
       if (res.code === '0000') {
@@ -34,6 +35,22 @@ export default {
           payload: { orderInfo: res.data },
         });
         return res.data;
+      } else {
+        Toast.show(res.msg || '订单创建失败，请重新尝试');
+        return false;
+      }
+    },
+    // 秒杀下单
+    *createSeckillOrderAndPay({ payload }, { put, call }) {
+      const res = yield call(services.createSeckillOrder, payload);
+      if (res.code === '0000') {
+        yield put({
+          type: 'setState',
+          payload: { orderInfo: res.data },
+        });
+        return res.data;
+      } else {
+        Toast.show(res.msg || '订单创建失败，请重新尝试')
       }
     },
     *queryOrders({ payload }, { put, call }) {
@@ -51,7 +68,10 @@ export default {
       if (res.code === '0000') {
         yield put({
           type: 'setState',
-          payload: { orderDetails: res.data },
+          payload: {
+            orderDetails: res.data,
+            productList: res.data.productList || [],
+          },
         });
         return res.data;
       }

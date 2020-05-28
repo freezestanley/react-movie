@@ -12,6 +12,7 @@
   "dependencies": {
     "classnames": "^2.2.6",
     "copy-to-clipboard": "^3.3.1",
+    "dayjs": "^1.8.27",
     "dva": "^2.6.0-beta.6",
     "jquery": "^3.5.1",
     "numeral": "^2.0.6",
@@ -22,6 +23,7 @@
     "react-helmet": "^6.0.0",
     "react-slick": "^0.26.1",
     "slick-carousel": "^1.8.1",
+    "vconsole": "^3.3.4",
     "zarm": "^2.2.0"
   },
   "devDependencies": {

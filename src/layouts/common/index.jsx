@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'dva';
 import cns from 'classnames';
 import 'zarm/dist/zarm.min.css';
 import { BrowserInfo, Store } from '@/utils/tools';
 import weChatAuth from '@/utils/weChatAuth';
-
+import VConsole from 'vconsole';
+import getEnv from '@/utils/env';
 import TabNavItem from './TabNavItem';
 import './index.less';
 
@@ -45,6 +46,29 @@ function Layout(props) {
     tabPageList=[]
   } } =props;
   const { hasNavBar = false, footer } = currRoute;
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
+  useEffect(() => {
+    window.addEventListener('beforeinstallprompt', function (e) {
+      // 将事件返回存储起来
+      setDeferredPrompt(e);
+      console.log('beforeinstallprompt e',e);
+      //触发横幅显示
+      if(e){
+        e.prompt();
+        e.userChoice.then(function (choiceResult) {
+          console.log('choiceResult',choiceResult.outcome);
+          alert(choiceResult.outcome);
+      });
+      }
+    
+  });
+  },[])
+  useEffect(() => {
+    console.log(getEnv())
+    if(getEnv() !== 'prd' && getEnv() !== 'local'){
+      new VConsole()
+    }
+  },[])
 
   useEffect(() => {
     props.dispatch({ type: 'user/checkLogin' }).then(valid => {

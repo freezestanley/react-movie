@@ -14,6 +14,7 @@ const Separator = () => {
 const renderer = ({ hours, minutes, seconds }) => {
   return (
     <div className={styles['countdown']}>
+      <img src={require('./images/clock.svg')} />
       <Unit value={minutes} />
       <Separator />
       <Unit value={seconds} />
@@ -21,6 +22,6 @@ const renderer = ({ hours, minutes, seconds }) => {
   );
 };
 
-export default ({ date }) => {
-  return <Countdown date={date} renderer={renderer} />;
+export default ({ date, onComplete }) => {
+  return <Countdown date={date} renderer={renderer} onComplete={onComplete} />;
 };

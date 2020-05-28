@@ -3,7 +3,7 @@ import { connect } from 'dva';
 import router from 'umi/router';
 import styles from './index.less';
 import MenuItem from './components/MenuItem';
-
+import UserInfo from './components/UserInfo'
 function MyPage(props){
   const userInfo = props.user.userInfo;
   console.log('[9] index.jsx: ', props.user);
@@ -14,18 +14,18 @@ function MyPage(props){
   }
   return (
     <div className={styles.myPage}>
-      <div className='me_avatar'>
-        <div className='me_avatar-img'  >
-           <div  className='img'/>
-         </div>
-        {props.user.isVIP && <div className='me_vip' />}
-        <p className='me_nickname'>{userInfo.nickname}</p>
-      </div>
+      {
+        props.user.isVIP ? <div></div> : 
+        <div>
+          <UserInfo />
+        </div>
+      }
+     
       <div className='me_container'>
         <MenuItem  title='会员权益' icon={require('./images/order.png')} onClick={()=>{console.log(1)}}/>
-        <MenuItem  title='会员权益' icon={require('./images/contact.png')} onClick={()=>{console.log(1)}}/>
-        <MenuItem  title='会员权益' icon={require('./images/order.png')} onClick={()=>{console.log(1)}}/>
-        <MenuItem  title='会员权益' icon={require('./images/contact.png')} onClick={()=>{console.log(1)}}/>
+        <MenuItem  title='我的订单' icon={require('./images/contact.png')} onClick={()=>{console.log(1)}}/>
+        <MenuItem  title='兑换码' icon={require('./images/order.png')} onClick={()=>{console.log(1)}}/>
+        <MenuItem  title='联系客服' icon={require('./images/contact.png')} onClick={()=>{console.log(1)}}/>
       </div>
       <button onClick={() => router.push('/login')}>登录</button>
       <button onClick={handleExit}>退出</button>

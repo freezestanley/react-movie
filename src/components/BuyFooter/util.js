@@ -1,7 +1,9 @@
 
 import { paymentAmount } from '@/utils/ants';
 import { fmtPrice } from '@/utils/tools';
-import superCodePay, { superCodePayV1 } from '@/utils/handlePay';
+import superCodePay from '@/utils/handlePay';
+import * as services from '@/services/order';
+import * as seckillService from '@/services/seckill';
 //  价格展示逻辑
 export const getTotalPrice = ({ main={}, type, attach, isVIP }) => {
   let price = 0;
@@ -76,9 +78,8 @@ export const getDiscountInfo = ({ main, type, attach, isVIP }) => {
 
 
 export function createPhoneOrder ({ data, dispatch, callback }) {
-  const type = 'order/createAndPay'
   const { main, attach } = data;
-  const payAmount = (main.price || 0) + (attach.payPrice || 0)
+  const payAmount = fmtPrice((main.price || 0) + (attach.payPrice || 0), 'number');
   const formData = {
     productId: main.productId,
     productItemId: main.id,
@@ -91,7 +92,7 @@ export function createPhoneOrder ({ data, dispatch, callback }) {
     rechargeAccount	: main.rechargeAccount,
     payAmount
   };
-  superCodePayV1({ dispatch, type, formData, callback });
+  superCodePay({ dispatch, formData, callback });
 }
 
 export function createProductOrder({ data, dispatch, callback }) {
@@ -113,4 +114,44 @@ export function createProductOrder({ data, dispatch, callback }) {
 
   // console.log('[create order]: ', formData);
   superCodePay({ dispatch, formData, callback });
+}
+
+export async function createSeckillOrder ({ data, dispatch, callback }) {
+  const { eventCode, itemId, productId } = data;
+  const registerRes = await seckillService.registerSeckill({ eventCode});
+  if (registerRes.code === '0000' && registerRes.success) {
+    const orderKeyRes = await services.getSeckillOrderKey({ eventCode });
+    if (orderKeyRes.code === '0000' && orderKeyRes.data) {
+      const orderKey = orderKeyRes.data;
+      const formData = {
+        orderKey,
+        eventCode,
+        itemId,
+        productId,
+        quantity: 1,
+        payType: 1
+      };
+      console.log('-----seckill order fromData', formData);
+      superCodePay({ dispatch, type: 'order/createSeckillOrderAndPay',  formData, callback });
+    }
+  }
+  
+  
+  // if (orderKeyRes) {
+  //   services.createSeckillOrder({})
+  // }
+  // const payAmount = fmtPrice((main.price || 0) + (attach.payPrice || 0), 'number');
+  // const formData = {
+  //   productId: main.productId,
+  //   productItemId: main.id,
+  //   quantity: 1,
+  //   appendAccountType: 2,
+  //   appendProductId: attach.id,
+  //   appendProductItemId: attach.productItemId,
+  //   appendQuantity: 1,
+  //   payType: 1,
+  //   rechargeAccount	: main.rechargeAccount,
+  //   payAmount
+  // };
+  // superCodePay({ dispatch, formData: data, callback });
 }

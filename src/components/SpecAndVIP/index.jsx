@@ -28,6 +28,7 @@ function SpecAndVIP(props) {
 
   useEffect(() => {
      props.onChange && props.onChange(state);
+     console.log('------ssss')
   }, [JSON.stringify(state)])
 
   useEffect(() => {
