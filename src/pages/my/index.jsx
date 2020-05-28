@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'dva';
 import router from 'umi/router';
 import styles from './index.less';
-import MenuItem from './components/MenuItem';
 import UserInfo from './components/UserInfo'
 import MenuList from './components/MenuList'
 import VipAdv from './components/VipAdv';
@@ -21,7 +20,7 @@ function MyPage(props){
       <UserInfo user={props.user} />
       <MenuList />
       <VipAdv />
-    
+
       <button onClick={() => router.push('/login')}>登录</button>
       <button onClick={handleExit}>退出</button>
       <pre>{JSON.stringify(props.user, null, 2)}</pre>
