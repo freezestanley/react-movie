@@ -67,7 +67,16 @@ export default connect(state => ({ explore: state.explore }))(({ dispatch, explo
     setSelected(id);
     const container = document.querySelector('.z_layout_cont');
     const section = document.querySelector(`#section-${id}`);
-    container.scrollTop = section.offsetTop - catesEleRef.current.offsetTop;
+
+    const scrollTop = section.offsetTop - catesEleRef.current.offsetTop;
+    if (container.scrollTo) {
+      container.scrollTo({
+        top: scrollTop,
+        behavior: 'smooth',
+      });
+    } else {
+      container.scrollTop = scrollTop;
+    }
   }, []);
 
   useEffect(() => {
