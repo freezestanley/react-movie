@@ -29,7 +29,8 @@ function MyPage(props){
       bannerType:[2,5],
       pageSize: 100,
     } });
-  }, [props]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   console.log('middleBanners',middleBanners)
   return (
     <div className={styles.myPage}>
