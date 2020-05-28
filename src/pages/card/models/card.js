@@ -22,10 +22,18 @@ export default {
     },
     //history cards
     *getHistoryCard({ payload }, { put, call }) {
-      // debugger
       const res = yield call(services.getCard, payload);
-      console.log(res,'res')
-      return res;
+      console.log(res,'res---')
+      const {data,success} = res;
+      if(success) {
+        yield put({
+          type:'setState',
+          payload:{
+            historyCards:data
+          }
+        })
+      }
+      // return res;
       // yield put({ type: 'setState', payload: { data: '123123' } });
     },
   },
