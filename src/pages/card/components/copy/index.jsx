@@ -12,7 +12,7 @@ import styles from './index.less'
 
 const CardPw = (props) => {
     const {visible, onMaskClick, afterOpen, afterClose, CloseClick} = props
-    const {state, name, codeNo, paytime, cardNo} = props.data
+    const {state, name, codeNo, paytime, cardNo, remark} = props.data
     const copyCardNo = (e) => {
         if(copy(e)){
             Toast.show('复制成功')
@@ -47,7 +47,7 @@ const CardPw = (props) => {
                         <div>兑换码</div><div>{codeNo}</div><div><span className={styles.copy} onClick={() => copyCodeNo(codeNo)}>复制</span></div>
                     </div> 
                 </div>
-                <div className={styles.pwTitle}>使用说明：请通过"订单详情"页面点击链接激活VIPVIP。请您在2021年12月07日前开通本会员卡</div>
+            <div className={styles.pwTitle}>使用说明:{remark}</div>
                 <div className={styles.pwTable}> 
                     <div>
                         <div>充值时间</div><div>{paytime}</div><div></div>
