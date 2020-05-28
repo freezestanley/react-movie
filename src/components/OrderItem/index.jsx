@@ -42,11 +42,11 @@ export default ( {info})=>{
           <p className={styles.details_p3}>规格 : {product1.productItemName} </p>
         </div>
       </div>
-      {info.status!==4&&info.status!==5&&(<div className={styles.order_down}>
+      {info.status!==4&&info.status!==2&&(<div className={styles.order_down}>
         <div>
           {info.status===1&&( <span className={styles.recharge}>支付</span> )}
           {info.staus===3&&(<span className={styles.concat}>联系客服</span>)}
-          {info.status===2&&(<span className={styles.check} onClick={() => router.push(`./orderdetail?id=${info.orderId}`)}>查看卡密</span>)}
+          {info.status===5&&(<span className={styles.check} onClick={() => router.push(`./orderdetail?id=${info.orderId}`)}>查看卡密</span>)}
         </div>
       </div>)}
   </div>
