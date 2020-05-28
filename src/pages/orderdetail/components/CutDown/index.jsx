@@ -21,6 +21,6 @@ const renderer = ({ hours, minutes, seconds }) => {
   );
 };
 
-export default ({ date }) => {
-  return <Countdown date={date} renderer={renderer} />;
+export default ({ date, onComplete }) => {
+  return <Countdown date={date} renderer={renderer} onComplete={onComplete} />;
 };
