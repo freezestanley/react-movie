@@ -117,11 +117,26 @@ export function createProductOrder({ data, dispatch, callback }) {
 }
 
 export async function createSeckillOrder ({ data, dispatch, callback }) {
-  const { eventCode } = data;
+  const { eventCode, itemId, productId } = data;
   const registerRes = await seckillService.registerSeckill({ eventCode});
-  console.log('----registerRes', registerRes);
-  const orderKeyRes = await services.getSeckillOrderKey({ eventCode });
-  console.log('----orderKeyRes', orderKeyRes);
+  if (registerRes.code === '0000' && registerRes.sucess) {
+    const orderKeyRes = await services.getSeckillOrderKey({ eventCode });
+    if (orderKeyRes.code === '0000' && orderKeyRes.data) {
+      const orderKey = orderKeyRes.data;
+      const formData = {
+        orderKey,
+        eventCode,
+        itemId,
+        productId,
+        quantity: 1,
+        payType: 1
+      };
+      console.log('-----seckill order fromData', formData);
+      superCodePay({ dispatch, type: 'order/createSeckillOrderAndPay',  formData, callback });
+    }
+  }
+  
+  
   // if (orderKeyRes) {
   //   services.createSeckillOrder({})
   // }
