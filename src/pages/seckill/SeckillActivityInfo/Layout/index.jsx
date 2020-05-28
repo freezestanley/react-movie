@@ -9,7 +9,7 @@ export default ({ title, timeDesc, time, children }) => {
         <div className={styles['title']}>{title}</div>
         <div className={styles['time']}>
           <span className={styles['label']}>{timeDesc}</span>
-          <DigitalCountdown date={time} />
+          {time ? <DigitalCountdown date={time} /> : null}
         </div>
       </div>
       <div className={styles['body']}>{children}</div>
