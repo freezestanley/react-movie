@@ -9,7 +9,8 @@ import styles from './index.less';
 const CardMember = (props) => {
     const {visible, onMaskClick, afterOpen, afterClose, CloseClick} = props
     const {state, name, account, paytime} = props.data
-    debugger
+    console.log(props.data,'member')
+    // debugger
     return (
         <CardPopup
             visible = {visible}
