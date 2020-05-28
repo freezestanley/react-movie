@@ -12,7 +12,7 @@ import { ReactComponent as HomeSvg } from './img/home.svg';
 import { ReactComponent as CloseSvg } from './img/close.svg';
 import { ReactComponent as PromptSvg } from './img/prompt.svg';
 import { ReactComponent as SafeSvg } from './img/safe.svg';
-import { getTotalPrice, getDiscountInfo, createPhoneOrder, createProductOrder } from './util';
+import { getTotalPrice, getDiscountInfo, createPhoneOrder, createProductOrder, createSeckillOrder } from './util';
 
 
 export default withRouter(connect(state => ({ ...state.prePay, user: state.user, vipTip: state.vipTip  }))(function(props) {
@@ -60,6 +60,7 @@ export default withRouter(connect(state => ({ ...state.prePay, user: state.user,
           break;
         case 'seckill':
           data = main;
+          createSeckillOrder({data, dispatch, callback(){}});
           break;
         case 'phone':
           data = { main, attach };
