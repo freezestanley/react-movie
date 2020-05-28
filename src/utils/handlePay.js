@@ -1,20 +1,25 @@
 import router from 'umi/router';
-import { Loading } from 'zarm';
-import { Store, isWX } from '@/utils/tools';
+import { Loading, ActivityIndicator } from 'zarm';
+import { Store, isWX, BrowserInfo } from '@/utils/tools';
 import { wechatPay, randomStr } from '@/utils/wechatPay';
 
 const isPrd = /vip.zhongan.io$/.test(window.location.origin);
 const superCodeURL = isPrd ? 'https://vpc-af.zhongan.io' : 'https://vpc-test-af.zhongan.io';
 
 export default function superCodePay({ dispatch, type = 'order/createAndPay', formData, callback }) {
+  Loading.show();
   window.__SuperCode && window.__SuperCode.show({
     serverDomain: superCodeURL,
+    onFinaly() {
+      Loading.hide();
+    },
     onSuccess(data) {
+      Loading.hide();
+      Loading.show({ content: <ActivityIndicator size="lg" /> });
       const _data = data.data;
 
       const openId = Store.get('openId');
       if (openId) formData.openId = openId;
-
       dispatch({
         type: type,
         payload: {
@@ -26,7 +31,9 @@ export default function superCodePay({ dispatch, type = 'order/createAndPay', fo
           sid: _data.scene,
           token: _data.token,
         },
-      }).then((res ={}) => {
+      }).then(res => {
+        Loading.hide();
+        if (!res) return;
         if (isWX) {
           if (!res.prepayId) return;
           wechatPay(
@@ -42,7 +49,6 @@ export default function superCodePay({ dispatch, type = 'order/createAndPay', fo
                 type: 'charge/wechatPaySign',
                 payload: { ...params, orderId: res.outTradeNo },
               })) || {};
-              Loading.hide();
               return _d;
             },
             // success callback
@@ -54,13 +60,12 @@ export default function superCodePay({ dispatch, type = 'order/createAndPay', fo
           );
         } else {
           if (res.payLink) {
-              const aEle = document.createElement('a');
-              aEle.setAttribute('id', 'temp');
-              aEle.setAttribute('href', wxPayLink(res));
-              document.body.appendChild(aEle);
-              aEle.click();
-              document.body.removeChild(aEle);
-            // window.location.href = wxPayLink(res);
+            const link = wxPayLink(res);
+            if (BrowserInfo.isAndroid) {
+              window.open(link);
+            } else {
+              window.location.href = link;
+            }
           }
         }
       })
@@ -103,7 +108,8 @@ export function wxPayLink(data) {
     window.location.origin +
       '/topup/temp?' +
       'out_trade_no=' +
-      data.outTradeNo
+      data.outTradeNo +
+      '&paylink=' + encodeURIComponent(data.payLink)
   );
 
   return data.payLink + `&redirect_url=${uri}`;

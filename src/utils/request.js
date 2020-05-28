@@ -11,6 +11,7 @@ export const apiPrefix = {
   banner: '/api/ants_product/v1/banner',
   seckill: '/api/ants_product/v1/seckill',
   order: '/api/ants_order/v1/charge/order',
+  seckillOrder: '/api/ants_order/v1/charge/seckill',
   pay: '/api/ants_charge/v1/pay',
   product: '/api/ants_product/v1/product',
   charge: '/api/ants_order/v1/charge',
