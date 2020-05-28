@@ -33,7 +33,12 @@ function Home ({ dispatch,bannerList, ...rest }) {
       { !isEmpty(shortCutList) && <ShortCut list={shortCutList} />}
       { !isEmpty(middleBanners) && <Belt list={middleBanners} /> }
       { !isEmpty(rest.productDetail.eventList) && <TimeLimitSlider data={rest.productDetail.eventList} dispatch={dispatch} />}
-      { !isEmpty(hotRecommendList) && <HotRecommend bannerList={hotRecommendList} />}
+      { !isEmpty(hotRecommendList) && (
+        <React.Fragment>
+          <div className={styles['title']}>热门推荐</div>
+          <HotRecommend bannerList={hotRecommendList} />
+        </React.Fragment>
+      )}
     </div>
   );
 }
