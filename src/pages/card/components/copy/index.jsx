@@ -6,6 +6,7 @@ import { Input, Button, Toast, Popup } from 'zarm';
 import { connect } from 'dva';
 import cns from 'classnames';
 import router from 'umi/router';
+import {formatDate} from '@/utils/tools';
 import CardPopup from '../CardPopup'
 import copy from 'copy-to-clipboard'
 import styles from './index.less'
@@ -50,7 +51,7 @@ const CardPw = (props) => {
             <div className={styles.pwTitle}>使用说明:{remark}</div>
                 <div className={styles.pwTable}> 
                     <div>
-                        <div>充值时间</div><div>{paytime}</div><div></div>
+                        <div>充值时间</div><div>{formatDate(paytime)}</div><div></div>
                     </div>
                 </div>
             </div>

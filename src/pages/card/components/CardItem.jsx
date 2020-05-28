@@ -1,3 +1,4 @@
+import {formatDate} from '@/utils/tools'
 /**
  * CardItem
  * state: used: '已使用',
@@ -73,15 +74,15 @@ const recharge = [
 
 const cardItem = (props) => {
     const {border, state, btnTitle, btnClick, thirdStatus} = props
-    const {title, retitle, time } =  props.data
+    const {title, retitle, time, historyFlag } =  props.data
     let result = {}
-    debugger
-    if (state === 3) {
+    // debugger
+    // historyFlag:true,历史卡券标志
+    if (state === 3&& !historyFlag) {
         result = recharge[thirdStatus - 1]
     } else {
         result = restate[state - 1]
     }
-    
     return (
         <div className={`${styles.cardItem} ${styles[result.class]} ${border ? styles.border : ''}`}
             alt={result.txt}
@@ -91,7 +92,7 @@ const cardItem = (props) => {
                     <div onClick={(e) => btnClick(e)}>
                         <div>{title}</div>
                         <div>{retitle}</div>
-                        <div>有效期至:{time}</div>
+                        <div>有效期至:{formatDate(time)}</div>
                     </div>
                     <div>
                         <div className={styles.yelloBtn} onClick={(e) => btnClick(e)}>{btnTitle}</div>
@@ -101,7 +102,7 @@ const cardItem = (props) => {
                 <div className={styles.box}  onClick={(e) => btnClick(e)}>
                     <div>{title}</div>
                     <div>{retitle}</div>
-                    <div>有效期至:{time}</div>
+                    <div>有效期至: {formatDate(time)}</div>
                 </div>
             ) }
             
