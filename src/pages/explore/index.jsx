@@ -78,10 +78,7 @@ export default connect(state => ({ explore: state.explore }))(({ dispatch, explo
     <div className={styles['page']}>
       <div className={styles['search']}></div>
       <div className={styles['cates']}>
-        <div className={styles['cates-inner']}>
-          <Categories selected={selected} list={categories2use} onSelect={onCateSelected} />
-          <div className={styles['cates-placeholder']}></div>
-        </div>
+        <Categories selected={selected} list={categories2use} onSelect={onCateSelected} />
       </div>
       {categories2use.map(({ id, name, products }) => {
         return (

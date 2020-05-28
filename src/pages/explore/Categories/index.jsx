@@ -28,6 +28,11 @@ export default ({ selected, list, onSelect }) => {
           </div>
         );
       })}
+      <div
+        className={cx('placeholder', {
+          next: curIndex > -1 && curIndex === list.length - 1,
+        })}
+      ></div>
     </div>
   );
 };

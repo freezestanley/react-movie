@@ -1,4 +1,7 @@
 .cates {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .cate {
@@ -11,14 +14,18 @@
     color: #ab8442;
     background-color: var(--layout-bg);
   }
+}
 
-  &.prev {
-    border-bottom-right-radius: 4px;
-    // background-color: red;
-  }
+.placeholder {
+  min-height: 10px;
+  flex-grow: 1;
+  background-color: #ffffff;
+}
 
-  &.next {
-    border-top-right-radius: 4px;
-    // background: green;
-  }
+.prev {
+  border-bottom-right-radius: 4px;
+}
+
+.next {
+  border-top-right-radius: 4px;
 }
