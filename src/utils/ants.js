@@ -91,6 +91,7 @@ export const formatAccountStr = (account, type) => {
     case 2: str = '手机号'; break;
     case 3: str = '微信号'; break;
     case 4: str = '微博昵称'; break;
+    case 5: str = '抖音号'; break;
     default: break;
   }
   if (!type) {

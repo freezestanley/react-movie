@@ -34,6 +34,9 @@ export default function superCodePay({ dispatch, type = 'order/createAndPay', fo
       }).then(res => {
         Loading.hide();
         if (!res) return;
+        if (res.outTradeNo && !res.payLink && !res.prepayId) {
+          router.replace(`/orderdetail?id=${res.outTradeNo}`);
+        }
         if (isWX) {
           if (!res.prepayId) return;
           wechatPay(

@@ -10,7 +10,7 @@ import './index.less';
 
 function OpenVIP(props) {
   const ref = useRef();
-  const { onChange, value = false, savePrice = 0, vipPrice, specInfo } = props;
+  const { onChange, value = false, vipPrice, specInfo } = props;
   const [state, setState] = useReducer((o, n) => ({...o, ...n}), {
     checked: false,
     membershipInfo: {},
