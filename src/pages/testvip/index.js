@@ -7,7 +7,7 @@ export default connect(state => ({ user: state.user }))(function(props) {
   const buyVip = () => {
     const formData = {
       payAmount: 9.9,
-      payType: 1
+      payType: 1,
     }
     superCodePay({ dispatch, type: 'order/createMemberOrder',  formData, callback(){
       alert(1111);
