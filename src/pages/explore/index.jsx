@@ -1,61 +1,111 @@
-import React, { useState, useCallback } from 'react';
-import router from 'umi/router';
-import { Button } from 'zarm';
-import Card from '@/components/Card';
+import React, { useState, useCallback, useEffect, useMemo, useRef } from 'react';
+import { connect } from 'dva';
 import Categories from './Categories';
 import Section from './Section';
 import Product from './Product';
 
 import styles from './index.module.less';
 
-const list = [
-  {
-    id: 1,
-    name: '分类一',
-  },
-  {
-    id: 2,
-    name: '分类二',
-  },
-  {
-    id: 3,
-    name: '分类三',
-  },
-];
+const defaultCate = {
+  id: -1,
+  name: '热门推荐',
+  products: [],
+};
 
-export default () => {
-  const [selected, setSelected] = useState(undefined);
+export default connect(state => ({ explore: state.explore }))(({ dispatch, explore }) => {
+  const [selected, setSelected] = useState(defaultCate.id);
+  const catesEleRef = useRef();
+
+  const hot = useMemo(() => explore.hot, [explore]);
+  const categories = useMemo(() => explore.categories, [explore]);
+
+  const categories2use = useMemo(() => {
+    return (categories || []).reduce(
+      (acc, cur) => {
+        return [
+          ...acc,
+          {
+            id: cur.category,
+            name: cur.categoryName,
+            products: cur.baseProductInfoDtoList.map(item => {
+              return {
+                id: item.id,
+                logo: item.image,
+                name: item.abbr,
+                desc: item.bottomCornerMark,
+              };
+            }),
+          },
+        ];
+      },
+      [
+        {
+          ...defaultCate,
+          products: (hot || []).map(item => {
+            return {
+              id: item.bannerItem.id,
+              logo: item.bannerCoverUrl,
+              name: item.bannerItem.abbr,
+              desc: item.bannerItem.bottomCornerMark,
+            };
+          }),
+        },
+      ],
+    );
+  }, [hot, categories]);
+
+  const fetchData = useCallback(() => {
+    dispatch({ type: 'explore/getCategories', payload: {} });
+    dispatch({ type: 'explore/getHotRecommends', payload: { bannerType: [4], pageSize: 8 } });
+  }, [dispatch]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   const onCateSelected = useCallback(id => {
-    // todo
     setSelected(id);
+    const container = document.querySelector('.z_layout_cont');
+    const section = document.querySelector(`#section-${id}`);
+
+    const scrollTop = section.offsetTop - catesEleRef.current.offsetTop;
+    if (container.scrollTo) {
+      container.scrollTo({
+        top: scrollTop,
+        behavior: 'smooth',
+      });
+    } else {
+      container.scrollTop = scrollTop;
+    }
   }, []);
+
+  useEffect(() => {
+    console.log('explore:', explore);
+  }, [explore]);
 
   return (
     <div className={styles['page']}>
       <div className={styles['search']}></div>
-      <div className={styles['cates']}>
-        <Categories selected={selected} list={list} onSelect={onCateSelected} />
+      <div className={styles['cates']} ref={catesEleRef}>
+        <Categories selected={selected} list={categories2use} onSelect={onCateSelected} />
       </div>
-      {list.map(item => {
+      {categories2use.map(({ id, name, products }) => {
         return (
-          <Section key={item.id} title={item.name} id={item.id}>
-            <div className={styles['product-list']}>
-              {new Array(8).fill('').map((item, idx) => {
-                return (
-                  <div key={idx} className={styles['product-item']}>
-                    <Product />
-                  </div>
-                );
-              })}
-            </div>
-          </Section>
+          <div key={id} id={`section-${id}`} className={styles['section']}>
+            <Section title={name} id={id}>
+              <div className={styles['product-list']}>
+                {products.map((p, idx) => {
+                  return (
+                    <div key={idx} className={styles['product-item']}>
+                      <Product {...p} />
+                    </div>
+                  );
+                })}
+              </div>
+            </Section>
+          </div>
         );
       })}
-      {/* <Card title="商品列表" extra={<span>测试</span>}>
-        Product Item
-        <Button onClick={() => router.push(`/topup?id=21`)}>充值</Button>
-      </Card> */}
     </div>
   );
-};
+});

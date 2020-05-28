@@ -2,7 +2,8 @@
  * 
  */
 import React, { useEffect, useReducer } from 'react';
-import CardPopup from '../CardPopup'
+import CardPopup from '../CardPopup';
+import {formatDate} from '@/utils/tools';
 import styles from './index.less';
 
 const CardMember = (props) => {
@@ -26,7 +27,7 @@ const CardMember = (props) => {
                         <div>充值账号</div><div>{account}</div>
                     </div> 
                     <div>
-                        <div>充值时间</div><div>{paytime}</div>
+                        <div>充值时间</div><div>{formatDate(paytime)}</div>
                     </div> 
                     <div>
                         <div>充值状态</div>

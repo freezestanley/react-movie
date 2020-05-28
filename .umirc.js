@@ -32,7 +32,7 @@ export default {
         { path: '/card', component: '../pages/card', backgroundColor:'white',title: '我的卡券',  },
         { path: '/active', component: '../pages/card/active', backgroundColor:'',title: '大礼包', footer:false  },
         { path: '/search', component: '../pages/search', backgroundColor:'white',title: '搜索',  },
-        // { path: '/test', component: '../pages/test' },
+        { path: '/testvip', component: '../pages/testvip' },
       ],
     }
   ],

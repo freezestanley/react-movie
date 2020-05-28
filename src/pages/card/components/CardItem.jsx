@@ -1,3 +1,4 @@
+import {formatDate} from '@/utils/tools'
 /**
  * CardItem
  * state: used: '已使用',
@@ -86,7 +87,7 @@ const cardItem = (props) => {
                     <div onClick={(e) => btnClick(e)}>
                         <div>{title}</div>
                         <div>{retitle}</div>
-                        <div>有效期至:{time}</div>
+                        <div>有效期至:{formatDate(time)}</div>
                     </div>
                     <div>
                         <div className={styles.yelloBtn} onClick={(e) => btnClick(e)}>{btnTitle}</div>
@@ -96,7 +97,7 @@ const cardItem = (props) => {
                 <div className={styles.box}  onClick={(e) => btnClick(e)}>
                     <div>{title}</div>
                     <div>{retitle}</div>
-                    <div>有效期至:{time}</div>
+                    <div>有效期至: {formatDate(time)}</div>
                 </div>
             ) }
             

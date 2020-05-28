@@ -21,15 +21,18 @@ class ShortCut extends React.Component {
     return (
       <div className={styles.shortCut} >
         <div className={styles.inner}>
-          {map(list, ({ bannerItem, bannerCoverUrl },  idx) => (<dl key={idx} className={styles.item} onClick={this.goToPage.bind(this, bannerItem.id)}>
+          {map(list, (tItem={},  idx) => {
+            const {bannerCoverUrl='' } = tItem || {};
+            const bannerItemInstance = tItem.bannerItem || {};
+            return (<dl key={idx} className={styles.item} onClick={this.goToPage.bind(this, bannerItemInstance.id)}>
             <dt style={{ backgroundImage: `url(${bannerCoverUrl})` }}>
-              {bannerItem.topCornerMark && <div className={styles.cornerBox}><Corner>{bannerItem.topCornerMark}</Corner></div>}
+              {bannerItemInstance.topCornerMark && <div className={styles.cornerBox}><Corner>{bannerItemInstance.topCornerMark}</Corner></div>}
             </dt>
             <dd>
-              <h2>{bannerItem.abbr}</h2>
-              <div className={styles.subTitle}>{bannerItem.bottomCornerMark}</div>
+              <h2>{bannerItemInstance.abbr}</h2>
+              <div className={styles.subTitle}>{bannerItemInstance.bottomCornerMark}</div>
             </dd>
-          </dl>))}
+          </dl>)})}
           <dl className={styles.item} onClick={this.goToProductList.bind(this)}>
             <dt style={{ backgroundImage: `url(${allImgIcon})` }}></dt>
             <dd>
