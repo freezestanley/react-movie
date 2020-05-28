@@ -12,7 +12,7 @@ const Card = (props) => {
         step,
         closeHandler
     } = props
-    debugger
+    // debugger
     const [visible, setVisible] = useState(false)
     const btnClick = (e) => {
         setVisible(!visible)

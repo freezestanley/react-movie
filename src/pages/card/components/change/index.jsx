@@ -2,7 +2,8 @@
  * 
  */
 import React, { useEffect, useReducer, useState } from 'react';
-import CardPopup from '../CardPopup'
+import CardPopup from '../CardPopup';
+import {formatDate} from '@/utils/tools';
 import styles from './index.less';
 
 const Change = (props) => {
@@ -27,7 +28,7 @@ const Change = (props) => {
                 <div className={styles.pwTitle}>使用说明:{remark}</div>
                 <div className={styles.pwTable}>
                     <div>
-                        <div>有效期至</div><div>{paytime}</div>
+                        <div>有效期至</div><div>{formatDate(paytime)}</div>
                     </div> 
                 </div>
                 <div  className={styles.goldBtn}>兑换</div>
