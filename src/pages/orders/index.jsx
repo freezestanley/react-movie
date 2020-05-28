@@ -2,7 +2,7 @@ import { Pull } from 'zarm';
 import Order from '@/components/OrderItem';
 import  React,{Component} from 'react';
 import {queryOrders} from './../../services/order'
-import './index.less'
+import styles from './index.module.less'
 import {connect } from 'dva'
 
 const REFRESH_STATE = {
@@ -128,9 +128,8 @@ class Index extends Component {
 
   render() {
     const {  refreshing, loading, dataSource } = this.state;
-    const style ={ position: 'relative', overflowY: 'auto', maxHeight: 1000,};
+    const style ={ position: 'relative', overflowY: 'auto', height: '100%'};
     return (
-      <>
         <Pull
           style={style}
           refresh={{
@@ -145,7 +144,6 @@ class Index extends Component {
         >
           {dataSource}
         </Pull>
-      </>
     )
   }
 }

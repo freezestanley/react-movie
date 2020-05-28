@@ -45,7 +45,7 @@ function Layout(props) {
     hasBuyFooter,
     tabPageList=[]
   } } =props;
-  const { hasNavBar = false, footer } = currRoute;
+  const { hasNavBar = false, footer, fullSize=false } = currRoute;
   const [deferredPrompt, setDeferredPrompt] = useState(null);
   useEffect(() => {
     window.addEventListener('beforeinstallprompt', function (e) {
@@ -135,7 +135,7 @@ function Layout(props) {
       </div>
 
       <div className={cns('z_layout_cont', hasBuyFooter ? 'buy_footer_fix' : '')}>
-        <div className="z_layout_box">
+        <div className={cns('z_layout_box', fullSize ? 'full_size' : '' )}>
           {props.children}
         </div>
         {(footer || footer === undefined) && (
