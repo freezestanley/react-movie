@@ -1,8 +1,5 @@
-import React, { useState, useCallback, useEffect, useMemo } from 'react';
+import React, { useState, useCallback, useEffect, useMemo, useRef } from 'react';
 import { connect } from 'dva';
-import router from 'umi/router';
-import { Button } from 'zarm';
-import Card from '@/components/Card';
 import Categories from './Categories';
 import Section from './Section';
 import Product from './Product';
@@ -17,6 +14,7 @@ const defaultCate = {
 
 export default connect(state => ({ explore: state.explore }))(({ dispatch, explore }) => {
   const [selected, setSelected] = useState(defaultCate.id);
+  const catesEleRef = useRef();
 
   const hot = useMemo(() => explore.hot, [explore]);
   const categories = useMemo(() => explore.categories, [explore]);
@@ -66,8 +64,10 @@ export default connect(state => ({ explore: state.explore }))(({ dispatch, explo
   }, [fetchData]);
 
   const onCateSelected = useCallback(id => {
-    // todo
     setSelected(id);
+    const container = document.querySelector('.z_layout_cont');
+    const section = document.querySelector(`#section-${id}`);
+    container.scrollTop = section.offsetTop - catesEleRef.current.offsetTop;
   }, []);
 
   useEffect(() => {
@@ -77,28 +77,26 @@ export default connect(state => ({ explore: state.explore }))(({ dispatch, explo
   return (
     <div className={styles['page']}>
       <div className={styles['search']}></div>
-      <div className={styles['cates']}>
+      <div className={styles['cates']} ref={catesEleRef}>
         <Categories selected={selected} list={categories2use} onSelect={onCateSelected} />
       </div>
       {categories2use.map(({ id, name, products }) => {
         return (
-          <Section key={id} title={name} id={id}>
-            <div className={styles['product-list']}>
-              {products.map((p, idx) => {
-                return (
-                  <div key={idx} className={styles['product-item']}>
-                    <Product {...p} />
-                  </div>
-                );
-              })}
-            </div>
-          </Section>
+          <div key={id} id={`section-${id}`} className={styles['section']}>
+            <Section title={name} id={id}>
+              <div className={styles['product-list']}>
+                {products.map((p, idx) => {
+                  return (
+                    <div key={idx} className={styles['product-item']}>
+                      <Product {...p} />
+                    </div>
+                  );
+                })}
+              </div>
+            </Section>
+          </div>
         );
       })}
-      {/* <Card title="商品列表" extra={<span>测试</span>}>
-        Product Item
-        <Button onClick={() => router.push(`/topup?id=21`)}>充值</Button>
-      </Card> */}
     </div>
   );
 });
