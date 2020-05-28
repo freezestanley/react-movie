@@ -129,3 +129,17 @@ dva--数据流方案（https://dvajs.com/guide/）
 
 
 # js
+
+
+
+
+`status` int(1) NOT NULL COMMENT '卡券状态：1-未绑定，2-已绑定，3-已使用，4-已过期，5-已销毁',
+`third_recharge_status` int(1) DEFAULT NULL COMMENT '兑换的产品充值状态 1-充值中，2-充值成功，3-充值失败',
+
+  
+if(ele.status == 3){
+	//展示充值状态
+	return ele.exchangeData.third_recharge_status;
+} else {
+	return ele.status
+}

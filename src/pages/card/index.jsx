@@ -107,6 +107,7 @@ const ee = {
 const CardPaper = (props) => {
     debugger
     const { userId } = props.user
+    const { data } = props.card
     useEffect(() => {
         debugger
         if (userId) props.dispatch({ type: 'card/getCard', payload: { pageNo:1, pageSize: 100 } })
@@ -114,10 +115,38 @@ const CardPaper = (props) => {
     const gotoHistory = (item) => {
         router.push('/history');
       }
+    const closeHandler = () => {
+        if (userId) props.dispatch({ type: 'card/getCard', payload: { pageNo:1, pageSize: 100 } })
+    }
     return (
         <div className={styles.card}>
             <div>
-                <Card 
+                {
+                    data.map((ele, idx, arr) => {
+                        return (
+                        <Card 
+                            key = {idx.toString()}
+                            border
+                            btnTitle = {(ele.status === 3 && ele.exchangeData.thirdRechargeStatus === 3) ? '联系客服' : null}
+                            closeHandler = {closeHandler}
+                            data = {{
+                                title: ele.couponTitle,
+                                retitle: ele.packageName, 
+                                time: ele.couponEndDate, 
+                                state: ele.status,// 'fail', === 3 ? ele.exchangeData.thirdRechargeStatus : ele.status
+                                thirdStatus: ele.exchangeData.thirdRechargeStatus,
+                                name: ele.exchangeData.productName,
+                                account: ele.exchangeData.rechargeAccount,
+                                paytime: ele.exchangeData.rechargeDate,
+                                codeNo: ele.exchangeData.cardSecret,
+                                cardNo: ele.exchangeData.cardNO,
+                                remark: ele.exchangeData.cardRemark
+                            }}
+                            step = 'copy'
+                        />)
+                    })
+                }
+                {/* <Card 
                     border
                     btnTitle = '联系客服'
                     data = {aa}
@@ -141,7 +170,7 @@ const CardPaper = (props) => {
                 <Card 
                     border
                     data = {ee}
-                />
+                /> */}
             </div>
             <div >
                 <div 

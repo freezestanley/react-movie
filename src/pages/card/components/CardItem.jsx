@@ -22,13 +22,69 @@ const itemState = {
     willused: '待生效',
     normal: ''
 }
+const restate = [
+    {
+        txt: '未绑定',
+        class: 'unbind'
+    },
+    {
+        txt: '已绑定',
+        class: 'bind'
+    },
+    {  
+        txt: '已使用',
+        class: 'used'
+    },
+    {
+        txt: '已过期',
+        class: 'expire'
+    },
+    {
+        txt: '已销毁',
+        class: 'destory'
+    }
+]
+const recharge = [
+    {
+        txt: '充值中',
+        class: 'pay'
+    },
+    {
+        txt: '充值成功',
+        class: 'success'
+    },
+    {
+        txt: '充值失败',
+        class: 'fail'
+    }
+]
+
+
+// `status` int(1) NOT NULL COMMENT '卡券状态：1-未绑定，2-已绑定，3-已使用，4-已过期，5-已销毁',
+// `third_recharge_status` int(1) DEFAULT NULL COMMENT '兑换的产品充值状态 1-充值中，2-充值成功，3-充值失败',
+
+  
+// if(ele.status == 3){
+// 	//展示充值状态
+// 	return ele.exchangeData.third_recharge_status;
+// } else {
+// 	return ele.status
+// }
 
 const cardItem = (props) => {
-    const {border, state, btnTitle, btnClick} = props
+    const {border, state, btnTitle, btnClick, thirdStatus} = props
     const {title, retitle, time } =  props.data
+    let result = {}
+    debugger
+    if (state === 3) {
+        result = recharge[thirdStatus - 1]
+    } else {
+        result = restate[state - 1]
+    }
+    
     return (
-        <div className={`${styles.cardItem} ${styles[state]} ${border ? styles.border : ''}`}
-            alt={itemState[state]}
+        <div className={`${styles.cardItem} ${styles[result.class]} ${border ? styles.border : ''}`}
+            alt={result.txt}
         >
             {btnTitle ? (
                 <div className={styles.box2col}>

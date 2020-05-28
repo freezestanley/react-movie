@@ -125,7 +125,7 @@ function LoginPage(props) {
       </div>
       {!state.isRegistered && <p className="login-tip">未注册的手机号，验证通过后将自动注册</p>}
       <Button block className="login-btn" disabled={state.disabled} onClick={handleLogin}>
-        {props.loading ? '登录中' : '登录'}
+        {props.loading ? '登录中...' : '登录'}
       </Button>
     </div>
   );

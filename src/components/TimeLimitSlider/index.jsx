@@ -43,6 +43,9 @@ export default class MultipleRows extends Component {
    
   
     return (
+      
+      this.props.data.length > 0 && moment().isAfter(moment(this.props.data[0]['eventBeginDate'])) ?
+      
       <div className={styles['timelimit-slider']}>
           <div className={styles['title-box']}>
             <div className={styles['title']}>限时抢购</div>
@@ -55,15 +58,6 @@ export default class MultipleRows extends Component {
               )
              
             }
-             {/* {
-              this.props.data.length > 0 && (
-                (moment().valueOf() < 1590058239000) ? 
-                <Countdown key={1} date={1590058239000} renderer={(params) => {params.type='end'; return renderer(params)}} zeroPadTime={2} onComplete={this.refresh} />:
-                <Countdown key={2} date={1590058299000} renderer={(params) => {params.type='start';return  renderer(params)}} zeroPadTime={2} onComplete={this.refresh} />
-              )
-             
-            } */}
-             
           
           </div>
         <Slider {...settings}>
@@ -76,12 +70,10 @@ export default class MultipleRows extends Component {
               )
             })
           }
-         
-        
-         
-         
         </Slider>
       </div>
-    );
+      :
+      ""
+    )
   }
 }
