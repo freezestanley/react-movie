@@ -13,15 +13,6 @@
 import React from 'react';
 import styles from './CardItem.less';
 
-const itemState = {
-    used: '已使用',
-    notime: '已过期',
-    pay: '充值中' ,
-    willnotime:'即将过期',
-    fail: '充值失败',
-    willused: '待生效',
-    normal: ''
-}
 const restate = [
     {
         txt: '未绑定',
@@ -74,13 +65,17 @@ const recharge = [
 const cardItem = (props) => {
     const {border, state, btnTitle, btnClick, thirdStatus} = props
     const {title, retitle, time } =  props.data
-    let result = {}
     debugger
-    if (state === 3) {
-        result = recharge[thirdStatus - 1]
-    } else {
-        result = restate[state - 1]
+    let result = {
+        class: 'normal',
+        txt: ''
     }
+    if (state === 0 && thirdStatus === 0) {
+
+    } else {
+        result = (state === 3) ? recharge[thirdStatus - 1] : restate[state - 1]
+    }
+    
     
     return (
         <div className={`${styles.cardItem} ${styles[result.class]} ${border ? styles.border : ''}`}
