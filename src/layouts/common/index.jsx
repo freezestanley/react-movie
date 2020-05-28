@@ -60,7 +60,7 @@ function Layout(props) {
           alert(choiceResult.outcome);
       });
       }
-    
+
   });
   },[])
   useEffect(() => {
@@ -85,6 +85,8 @@ function Layout(props) {
         scene: s
       });
 
+      // 获取会员等级
+      props.dispatch({ type: 'user/getMembershipList' });
       // 获取用户信息
       props.dispatch({ type: 'user/getUserInfo', hasToast: false })
       // 微信授权
