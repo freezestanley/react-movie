@@ -58,7 +58,7 @@ export default connect(state => ({ explore: state.explore }))(({ dispatch, explo
 
   const fetchData = useCallback(() => {
     dispatch({ type: 'explore/getCategories', payload: {} });
-    dispatch({ type: 'explore/getHotRecommends', payload: { bannerType: [5], pageSize: 8 } });
+    dispatch({ type: 'explore/getHotRecommends', payload: { bannerType: [4], pageSize: 8 } });
   }, [dispatch]);
 
   useEffect(() => {
