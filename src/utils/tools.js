@@ -1,5 +1,6 @@
 import { Toast } from 'zarm';
 import numeral from 'numeral';
+import dayjs from 'dayjs';
 
 export const fmtPrice = (data, type) => {
   // if (data < 0 || !/[\d.]/.test(data)) {
@@ -164,4 +165,14 @@ export const getOffsetTopBy = (targetEl, parentEl) => {
     targetEl = targetEl.offsetParent
   }
   return offsetTop
+}
+
+/**
+ * 
+ * @param {*} t Date() or timestamp
+ * @param {*} type  default datetime
+ */ 
+export const formatDate = (t,type='YYYY-MM-DD HH:mm:ss') => {
+  if(!t) return t;
+  return dayjs(t).format(type)
 }

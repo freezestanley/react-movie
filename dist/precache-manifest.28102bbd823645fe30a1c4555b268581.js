@@ -1,18 +1,18 @@
 self.__precacheManifest = [
   {
-    "revision": "bda01332b741e84f6b20",
+    "revision": "bf4456c3dbe830c9936b",
     "url": "/vendors.chunk.css"
   },
   {
-    "revision": "bda01332b741e84f6b20",
+    "revision": "bf4456c3dbe830c9936b",
     "url": "/vendors.async.js"
   },
   {
-    "revision": "1698e6d65c8e263e9834",
+    "revision": "6c9e80dc90626c32e507",
     "url": "/layouts__common.chunk.css"
   },
   {
-    "revision": "1698e6d65c8e263e9834",
+    "revision": "6c9e80dc90626c32e507",
     "url": "/layouts__common.async.js"
   },
   {
@@ -20,143 +20,147 @@ self.__precacheManifest = [
     "url": "/p__card.async.js"
   },
   {
-    "revision": "a1875beecf2bf10292aa",
+    "revision": "d3e60600164e9d52618c",
     "url": "/p__card__active.chunk.css"
   },
   {
-    "revision": "a1875beecf2bf10292aa",
+    "revision": "d3e60600164e9d52618c",
     "url": "/p__card__active.async.js"
   },
   {
-    "revision": "d672fc80db028669dac6",
+    "revision": "c508b1f9456c1705f0dd",
     "url": "/p__card__history.async.js"
   },
   {
-    "revision": "d5a10996265d1eb1d9cf",
+    "revision": "69b4affaef806ebf24a6",
     "url": "/p__card__models__card.js.async.js"
   },
   {
-    "revision": "e4cfb0122d7b4e1fc473",
+    "revision": "9d71e95714328a3284ea",
     "url": "/p__charge.chunk.css"
   },
   {
-    "revision": "e4cfb0122d7b4e1fc473",
+    "revision": "9d71e95714328a3284ea",
     "url": "/p__charge.async.js"
   },
   {
-    "revision": "a793aeed19e25b1239ed",
+    "revision": "8b6c71a2cb27051d5c49",
     "url": "/p__explore.chunk.css"
   },
   {
-    "revision": "a793aeed19e25b1239ed",
+    "revision": "8b6c71a2cb27051d5c49",
     "url": "/p__explore.async.js"
   },
   {
-    "revision": "d2da27a980489b1e157d",
+    "revision": "ed3066b0c558e7e54419",
     "url": "/p__home.chunk.css"
   },
   {
-    "revision": "d2da27a980489b1e157d",
+    "revision": "ed3066b0c558e7e54419",
     "url": "/p__home.async.js"
   },
   {
-    "revision": "cea68438aabd10f39f68",
+    "revision": "37758a480d07d8419330",
     "url": "/p__home__models__home.js.async.js"
   },
   {
-    "revision": "31c13d50e26f08117d16",
+    "revision": "83e90de09ffaac10bbee",
     "url": "/p__login.chunk.css"
   },
   {
-    "revision": "31c13d50e26f08117d16",
+    "revision": "83e90de09ffaac10bbee",
     "url": "/p__login.async.js"
   },
   {
-    "revision": "642399b153dca91672a2",
+    "revision": "3ab816f25571d88b868d",
     "url": "/p__memberrecharge.chunk.css"
   },
   {
-    "revision": "642399b153dca91672a2",
+    "revision": "3ab816f25571d88b868d",
     "url": "/p__memberrecharge.async.js"
   },
   {
-    "revision": "ef2c42c91b2942230464",
+    "revision": "232b320bc11367a68739",
     "url": "/p__my.chunk.css"
   },
   {
-    "revision": "ef2c42c91b2942230464",
+    "revision": "232b320bc11367a68739",
     "url": "/p__my.async.js"
   },
   {
-    "revision": "9489e0a10f8127631fad",
+    "revision": "ff6ec952c8c6d95979e8",
     "url": "/p__orderdetail.chunk.css"
   },
   {
-    "revision": "9489e0a10f8127631fad",
+    "revision": "ff6ec952c8c6d95979e8",
     "url": "/p__orderdetail.async.js"
   },
   {
-    "revision": "b948ad969e4e173ad38e",
+    "revision": "331154e584a9adabb651",
     "url": "/p__orders.chunk.css"
   },
   {
-    "revision": "b948ad969e4e173ad38e",
+    "revision": "331154e584a9adabb651",
     "url": "/p__orders.async.js"
   },
   {
-    "revision": "8edceb534099d7bd0934",
+    "revision": "674bcb8355b8594c3927",
     "url": "/p__phone.chunk.css"
   },
   {
-    "revision": "8edceb534099d7bd0934",
+    "revision": "674bcb8355b8594c3927",
     "url": "/p__phone.async.js"
   },
   {
-    "revision": "d67992b798efec21cc8f",
+    "revision": "79b0b545cc96d02c816a",
     "url": "/p__search.chunk.css"
   },
   {
-    "revision": "d67992b798efec21cc8f",
+    "revision": "79b0b545cc96d02c816a",
     "url": "/p__search.async.js"
   },
   {
-    "revision": "7c56b52c80c5ba306d9d",
+    "revision": "386c3251c721a19c79a0",
     "url": "/p__seckill.chunk.css"
   },
   {
-    "revision": "7c56b52c80c5ba306d9d",
+    "revision": "386c3251c721a19c79a0",
     "url": "/p__seckill.async.js"
   },
   {
-    "revision": "52ffdf11cce018142571",
+    "revision": "cc5681ab08aa3d119ea7",
     "url": "/p__successbuy.chunk.css"
   },
   {
-    "revision": "52ffdf11cce018142571",
+    "revision": "cc5681ab08aa3d119ea7",
     "url": "/p__successbuy.async.js"
   },
   {
-    "revision": "599389476cdc992940f0",
+    "revision": "c1d6f2c2046e5c388549",
+    "url": "/p__testvip.async.js"
+  },
+  {
+    "revision": "4f87b4b1fd198fb30484",
     "url": "/p__topup.chunk.css"
   },
   {
-    "revision": "599389476cdc992940f0",
+    "revision": "4f87b4b1fd198fb30484",
     "url": "/p__topup.async.js"
   },
   {
-    "revision": "70201306d5bb83bde01c",
+    "revision": "e7c93394204908c66a64",
     "url": "/p__topup__temp.chunk.css"
   },
   {
-    "revision": "70201306d5bb83bde01c",
+    "revision": "e7c93394204908c66a64",
     "url": "/p__topup__temp.async.js"
   },
   {
-    "revision": "8970461bce2a0be5a8d1",
+    "revision": "bde0e0ca277ff3f976a0",
     "url": "/umi.css"
   },
   {
-    "revision": "8970461bce2a0be5a8d1",
+    "revision": "bde0e0ca277ff3f976a0",
     "url": "/umi.js"
   },
   {
@@ -224,24 +228,24 @@ self.__precacheManifest = [
     "url": "/index.html"
   },
   {
-    "revision": "bd4990cb16d90b5b3d7bf579d01f4f28",
-    "url": "/icons/256.png"
-  },
-  {
     "revision": "02f6a5307a950c19ae9c7b3740c14d1c",
     "url": "/icons/128.png"
   },
   {
-    "revision": "ec2c01423c80d74465f63c3da5fe389b",
-    "url": "/icons/144.png"
+    "revision": "b8bfa99aa7d0662f27da3f26ba7318f3",
+    "url": "/.DS_Store"
+  },
+  {
+    "revision": "bd4990cb16d90b5b3d7bf579d01f4f28",
+    "url": "/icons/256.png"
   },
   {
     "revision": "4a93a04c8af0922475875657d511efa2",
     "url": "/icons/192.png"
   },
   {
-    "revision": "8b1c8020cc67ebf844a1615ad394999a",
-    "url": "/icons/android-chrome-192x192.png"
+    "revision": "ec2c01423c80d74465f63c3da5fe389b",
+    "url": "/icons/144.png"
   },
   {
     "revision": "0efa5a654f225a5a603396a7f7aa8518",
@@ -252,40 +256,56 @@ self.__precacheManifest = [
     "url": "/icons/512.png"
   },
   {
-    "revision": "719cb777b3c5dd6f5f2288e538c98df1",
-    "url": "/icons/apple-touch-icon-180x180.png"
-  },
-  {
-    "revision": "7f791a77d6f2e2a30b570c2aa31fb7fa",
-    "url": "/icons/apple-touch-icon-120x120.png"
+    "revision": "8b1c8020cc67ebf844a1615ad394999a",
+    "url": "/icons/android-chrome-192x192.png"
   },
   {
     "revision": "d7e488ade6dbf67eef4668ddd15c5b1d",
     "url": "/icons/apple-touch-icon-152x152.png"
   },
   {
-    "revision": "f3b51acf7ce636366ba888475144b429",
-    "url": "/icons/android-chrome-512x512.png"
+    "revision": "719cb777b3c5dd6f5f2288e538c98df1",
+    "url": "/icons/apple-touch-icon-180x180.png"
   },
   {
     "revision": "98e177e60162bc26af57a5fdd65ab69e",
     "url": "/icons/apple-touch-icon-60x60.png"
   },
   {
+    "revision": "f3b51acf7ce636366ba888475144b429",
+    "url": "/icons/android-chrome-512x512.png"
+  },
+  {
+    "revision": "7f791a77d6f2e2a30b570c2aa31fb7fa",
+    "url": "/icons/apple-touch-icon-120x120.png"
+  },
+  {
     "revision": "bbedf478fa6adc4b1c8faa146a262bd2",
     "url": "/icons/apple-touch-icon-76x76.png"
+  },
+  {
+    "revision": "47cb723696508f2c5b8e5f704a31220f",
+    "url": "/icons/apple-touch-icon.png"
+  },
+  {
+    "revision": "8abb1cc4c5b8dc8db59e3026d135eb1d",
+    "url": "/icons/favicon-16x16.png"
   },
   {
     "revision": "18f17462b535693be93bc1184774c5c9",
     "url": "/icons/favicon-32x32.png"
   },
   {
+    "revision": "17ce9d5e4c6f674e8654255db087e432",
+    "url": "/MP_verify_rKD1zGVtaanIQ8NY.txt"
+  },
+  {
     "revision": "b92ee177ec93f530d294b6ac137a95b2",
     "url": "/icons/msapplication-icon-144x144.png"
   },
   {
-    "revision": "8abb1cc4c5b8dc8db59e3026d135eb1d",
-    "url": "/icons/favicon-16x16.png"
+    "revision": "9cc732a216a64fa60ccd6e6800643a75",
+    "url": "/manifest.json"
   },
   {
     "revision": "af2204ea0c88aaab35511768985c8020",
@@ -294,18 +314,6 @@ self.__precacheManifest = [
   {
     "revision": "f22d501a35a87d9f21701cb031f6ea17",
     "url": "/icons/safari-pinned-tab.svg"
-  },
-  {
-    "revision": "47cb723696508f2c5b8e5f704a31220f",
-    "url": "/icons/apple-touch-icon.png"
-  },
-  {
-    "revision": "17ce9d5e4c6f674e8654255db087e432",
-    "url": "/MP_verify_rKD1zGVtaanIQ8NY.txt"
-  },
-  {
-    "revision": "9cc732a216a64fa60ccd6e6800643a75",
-    "url": "/manifest.json"
   },
   {
     "revision": "9ef055bcf0c4b1f0ac5663173730b010",

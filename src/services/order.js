@@ -69,3 +69,13 @@ export function createSeckillOrder({ orderKey, ...rest }) {
     data: rest
   });
 }
+
+// 单独购买会员
+export function createMemberOrder({ orderKey, ...rest }) {
+  return request({
+    url: `/createMemberOrder`,
+    serve: 'order',
+    method: 'POST',
+    data: rest
+  });
+}
