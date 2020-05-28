@@ -2,10 +2,7 @@ import React  from 'react';
 import CutDown from '../CutDown'
 import './index.less'
 function PayState(props){
-  
   const{status,payAmount,deadline}=props.info
-  console.log(status,payAmount)
-  var time =1000
   return(
     <div className='pay_state'  >
       { status===1&&(<><div className='unpaid'>
@@ -15,7 +12,7 @@ function PayState(props){
         </div>
       </div>
       <div className='paytime'>
-        <CutDown date={deadline}/>
+        <CutDown date={deadline+1000} onComplete={props.onComplete} />
         <div>等待付款，秒杀折扣将为您保留至倒计时结束</div>
       </div></>)}
       {status==2&&(<><div className='paid'>
