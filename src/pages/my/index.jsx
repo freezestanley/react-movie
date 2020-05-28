@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import { connect } from 'dva';
 import router from 'umi/router';
 import styles from './index.less';
@@ -6,9 +6,11 @@ import UserInfo from './components/UserInfo'
 import MenuList from './components/MenuList'
 import VipAdv from './components/VipAdv';
 import Wallet from './components/Wallet'
-// import filter from 'lodash/filter';
-// import isEmpty from 'lodash/isEmpty';
-// import Belt from '@/components/Home/Belt';
+import filter from 'lodash/filter';
+import isEmpty from 'lodash/isEmpty';
+import Belt from '@/components/Home/Belt';
+import Title from './components/Title';
+import HotRecommend from '@/components/HotRecommend';
 
 function MyPage(props){
   const userInfo = props.user.userInfo;
@@ -19,26 +21,57 @@ function MyPage(props){
   const handleExit = () => {
     props.dispatch({ type: 'user/loginOut' })
   }
-  // const middleBanners = filter(props.bannerList, item => item.bannerType === 2);
+  const middleBanners = filter(props.banner.list, item => item.bannerType === 2);
+  const hotRecommendList = filter(props.banner.list, item => item.bannerType === 5);
 
+  useEffect(() => {
+    props.dispatch({ type: 'banner/getBanner', payload: {
+      bannerType:[2,5],
+      pageSize: 100,
+    } });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  console.log('middleBanners',middleBanners)
   return (
     <div className={styles.myPage}>
       <UserInfo user={props.user} />
       <MenuList />
-      <VipAdv />
-      <div className={styles['pocket']}>
-        <div className={styles['sub-title']}>
-          <div className={styles['dash-left']} />
-          <div className={styles['title-name']}>我的钱包</div>
-          <div className={styles['dash-right']} />
+      { !props.user.isVIP && <VipAdv />}
+       
+      {
+        props.user.isVIP ?
+        <React.Fragment>
+           <div className={styles['belt-container']}>
+            { !isEmpty(middleBanners) && <Belt list={middleBanners} /> }
+
+          </div>
+          <div className={styles['wallet-container']}>
+            <Title name='我的钱包' />
+            <Wallet />
+          </div>
+        </React.Fragment>:
+        <React.Fragment>
+          <div className={styles['wallet-container']}>
+            <Title name='我的钱包' />
+            <Wallet />
+          </div>
+          <div className={styles['belt-container']}>
+            { !isEmpty(middleBanners) && <Belt list={middleBanners} /> }
+
+          </div>
+        </React.Fragment>
+      }
+      <div className={styles['recommend-container']}>
+        <div className={styles['recommend-title']}>
+          <Title name='热门推荐' />
+
         </div>
-        <Wallet />
+        { !isEmpty(hotRecommendList) && <HotRecommend bannerList={hotRecommendList} />}
 
       </div>
+      
     
-      <button onClick={() => router.push('/login')}>登录</button>
       <button onClick={handleExit}>退出</button>
-      <pre>{JSON.stringify(props.user, null, 2)}</pre>
     </div>
   );
 }

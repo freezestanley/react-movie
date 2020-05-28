@@ -43,7 +43,6 @@ export default class AsNavFor extends Component {
     return (
       bannerList.length > 0 ? (
         <div className={styles['hot-recommend']}>
-        <div className={styles['title']}>热门推荐</div>
         {
           bannerList.length > 0 && (
             <div className={styles['main-image']} onClick={() => {router.push(selectedItem.bannerLinkUrl)}}>

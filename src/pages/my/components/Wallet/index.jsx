@@ -6,6 +6,7 @@ import draw from '../../images/draw.png';
 import exchange from '../../images/exchange.png';
 import integral from '../../images/integral.png';
 import menu_vip from '../../images/menu-vip.png';
+import cardpack from '../../images/cardpack.png';
 import router from 'umi/router';
 
 const UserInfo = props => {
@@ -22,7 +23,7 @@ const UserInfo = props => {
           <div className={style['menu-name']}>兑换</div>
         </div>
         <div className={style['menu-item']} onClick={() => gotourl('order')}>
-          <img src={menu_vip} alt='vip' />
+          <img src={cardpack} alt='vip' />
           <div className={style['menu-name']}>卡券包</div>
         </div>
         <div className={style['menu-item']} onClick={() => gotourl('order')}>
