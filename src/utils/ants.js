@@ -1,5 +1,7 @@
 import { Toast } from 'zarm';
 
+const notNull = data => data !== null;
+
 // 商品角标
 const fmtMask = num => num ? `${`${(num * 100).toFixed(2)}`.replace(/(0)*(\.)*0*$/, '')}折起` : '';
 export const productCornerMark = (data = [], isVIP, isOpenVIP) => {
@@ -8,11 +10,11 @@ export const productCornerMark = (data = [], isVIP, isOpenVIP) => {
   data.forEach(item => {
     // item.eventPrice = null;
     // item.membershipPrice = null;
-    if (item.eventPrice) {
+    if (notNull(item.eventPrice)) {
       hasPrice = true;
       minActivity = minActivity ? Math.min(minActivity, item.eventDiscount) : item.eventDiscount;
     }
-    if (item.membershipPrice) {
+    if (notNull(item.membershipPrice)) {
       hasPrice = true;
       minVip = minVip ? Math.min(minVip, item.membershipDiscount) : item.membershipDiscount;
     }
@@ -42,11 +44,11 @@ export const paymentAmount = (data = {}, isVIP, isOpenVIP) => {
   if (!isVIP) {
     // 活动价或者原价
     if (isOpenVIP) { // 开通VIP
-      if (data.membershipPrice) { // 会员价
+      if (notNull(data.membershipPrice)) { // 会员价
         return { price: data.membershipPrice, type: 'vip' };
       }
     }
-    if (data.eventPrice) {
+    if (notNull(data.eventPrice)) {
       return { price: data.eventPrice, type: 'activity' }
     }
     return { price: data.price, type: 'original' }
@@ -55,15 +57,15 @@ export const paymentAmount = (data = {}, isVIP, isOpenVIP) => {
 
   // 是VIP
   // 如果有活动
-  if (data.eventPrice) {
-    if (data.membershipPrice) {
+  if (notNull(data.eventPrice)) {
+    if (notNull(data.membershipPrice)) {
       if (data.eventPrice > data.membershipPrice) {
         return { price: data.membershipPrice, type: 'vip' }
       }
     }
     return { price: data.eventPrice, type: 'activity' };
   }
-  if (data.membershipPrice) {
+  if (notNull(data.membershipPrice)) {
     if (data.membershipPrice < data.price) {
       return { price: data.membershipPrice, type: 'vip' };
     }
@@ -71,7 +73,7 @@ export const paymentAmount = (data = {}, isVIP, isOpenVIP) => {
   return { price: data.price, type: 'original' };
 }
 
-export const diffMoney = (data) => (data.membershipPrice
+export const diffMoney = (data) => (notNull(data.membershipPrice)
   ? +(data.price - data.membershipPrice).toFixed(2) : 0);
 
 export const vipDiscount = (data) => (data ? `${(data * 100).toFixed(2)}`.replace(/(0)*(\.)*0*$/, '') : '-');

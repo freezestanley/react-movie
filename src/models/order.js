@@ -53,6 +53,19 @@ export default {
         Toast.show(res.msg || '订单创建失败，请重新尝试')
       }
     },
+    // 单独购买会员下单
+    *createMemberOrder({ payload }, { put, call }) {
+      const res = yield call(services.createMemberOrder, payload);
+      if (res.code === '0000') {
+        yield put({
+          type: 'setState',
+          payload: { orderInfo: res.data },
+        });
+        return res.data;
+      } else {
+        Toast.show(res.msg || '订单创建失败，请重新尝试')
+      }
+    },
     *queryOrders({ payload }, { put, call }) {
       const res = yield call(services.queryOrders, payload);
       if (res.code === '0000') {

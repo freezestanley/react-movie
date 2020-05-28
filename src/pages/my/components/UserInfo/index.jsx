@@ -1,15 +1,43 @@
 import React,{useState} from 'react';
 
-import './index.less'
+import style from './index.less'
+import baijinvip from '../../images/baijinvip.png';
+import nologin from '../../images/nologin.png';
 
 const UserInfo = props => {
+  const {user} = props;
   return (
-    <div className='me_avatar'>    
-      <p className='me_nickname'>{props.userInfo.nickname}</p>
+    <div className={style['me_userinfo']}>
+      {
+        user.userId ? (
+          <div className={style['me-content']}>
+          <img className={style['avatar']} alt='' src={user.userInfo.avatarUrl} />
+          <div className={style['phone-info']}>
+            <div className={style['phone']}>{user.userInfo.mobileNumber}</div>
+            {
+             user.isVIP ?  <img className={style['baijinvip']} src={baijinvip} alt='vip' /> : <div className={style['gotomember']}>开通会员<div className={style['rightarr']} /></div>
+            
+            }
+          </div>
+        </div>
+        ):
+        (
+          <div className={style['me-content']}>
+          <img className={style['avatar']} alt='' src={nologin} />
+          <div className={style['phone-info']}>
+            <div className={style['phone']}>点击登录/注册</div>
+          </div>
+        </div>
+        )
+      }
+    
+     
     </div>
   )
 }
 UserInfo.defaultProps = {
-  userInfo:{}
+  user:{
+    userInfo:{}
+  }
 }
 export default UserInfo

@@ -15,8 +15,8 @@ const HistoryCard = ({
     const {historyCards=[], data} = card||{};
     useEffect(() => {
         if (userId) dispatch({ type: 'card/getHistoryCard', payload: { pageNo:1, pageSize: 100, isHistoryFlag: true } })
-        if (userId) dispatch({ type: 'card/getCard', payload: { pageNo:1, pageSize: 100, isHistoryFlag: true } })
     }, [userId])
+    
     console.log(historyCards,'historyCards--')
     return (
         <div className={styles.history}>
