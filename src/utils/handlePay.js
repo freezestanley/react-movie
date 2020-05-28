@@ -55,6 +55,7 @@ export default function superCodePay({ dispatch, type = 'order/createAndPay', fo
             },
           );
         } else {
+          Loading.hide();
           if (res.payLink) {
             const link = wxPayLink(res);
             if (BrowserInfo.isAndroid) {

@@ -18,7 +18,7 @@ export default function TopupTemp() {
   })
 
   const handleOk = () => {
-    router.push(`/orderdetail?id=${orderId}`);
+    router.replace(`/orderdetail?id=${orderId}`);
   };
 
   useInterval(
