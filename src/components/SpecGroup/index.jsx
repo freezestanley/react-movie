@@ -10,6 +10,8 @@ export default function SpecGroup(props) {
   const [state, setState] = useReducer((o, n) => ({...o, ...n}), {
     active: 0,
   })
+  // 用来被依赖从而解决切换产品时首个选中item的数据更新
+  const firtItemName = (data && data[0] || {}).name
   // console.log('[29] index.jsx: ', props);
   const handleChange = (idx, item) => {
     if (idx !== state.active) {
@@ -19,7 +21,7 @@ export default function SpecGroup(props) {
   }
   useEffect(() => {
     props.onChange && props.onChange(state.active, data[state.active])
-  }, [])
+  }, [firtItemName]) // eslint-disable-line
   return (
     <div className="spec-group">
       {data.map((item, idx) => {

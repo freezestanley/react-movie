@@ -2,7 +2,7 @@
 import request from '@/utils/request';
 
 export function getCard({ ...rest }) {
-    debugger
+    // debugger
   return request({
     url: '/query',
     serve: 'card',

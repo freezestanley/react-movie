@@ -1,4 +1,5 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect, useMemo } from 'react';
+import { connect } from 'dva';
 import router from 'umi/router';
 import { Button } from 'zarm';
 import Card from '@/components/Card';
@@ -8,43 +9,85 @@ import Product from './Product';
 
 import styles from './index.module.less';
 
-const list = [
-  {
-    id: 1,
-    name: '分类一',
-  },
-  {
-    id: 2,
-    name: '分类二',
-  },
-  {
-    id: 3,
-    name: '分类三',
-  },
-];
+const defaultCate = {
+  id: -1,
+  name: '热门推荐',
+  products: [],
+};
 
-export default () => {
-  const [selected, setSelected] = useState(undefined);
+export default connect(state => ({ explore: state.explore }))(({ dispatch, explore }) => {
+  const [selected, setSelected] = useState(defaultCate.id);
+
+  const hot = useMemo(() => explore.hot, [explore]);
+  const categories = useMemo(() => explore.categories, [explore]);
+
+  const categories2use = useMemo(() => {
+    return (categories || []).reduce(
+      (acc, cur) => {
+        return [
+          ...acc,
+          {
+            id: cur.category,
+            name: cur.categoryName,
+            products: cur.baseProductInfoDtoList.map(item => {
+              return {
+                id: item.id,
+                logo: item.image,
+                name: item.abbr,
+                desc: item.bottomCornerMark,
+              };
+            }),
+          },
+        ];
+      },
+      [
+        {
+          ...defaultCate,
+          products: (hot || []).map(item => {
+            return {
+              id: item.id,
+              logo: item.bannerCoverUrl,
+              name: 'todo',
+              desc: 'todo',
+            };
+          }),
+        },
+      ],
+    );
+  }, [hot, categories]);
+
+  const fetchData = useCallback(() => {
+    dispatch({ type: 'explore/getCategories', payload: {} });
+    dispatch({ type: 'explore/getHotRecommends', payload: { bannerType: [5], pageSize: 8 } });
+  }, [dispatch]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   const onCateSelected = useCallback(id => {
     // todo
     setSelected(id);
   }, []);
 
+  useEffect(() => {
+    console.log('explore:', explore);
+  }, [explore]);
+
   return (
     <div className={styles['page']}>
       <div className={styles['search']}></div>
       <div className={styles['cates']}>
-        <Categories selected={selected} list={list} onSelect={onCateSelected} />
+        <Categories selected={selected} list={categories2use} onSelect={onCateSelected} />
       </div>
-      {list.map(item => {
+      {categories2use.map(({ id, name, products }) => {
         return (
-          <Section key={item.id} title={item.name} id={item.id}>
+          <Section key={id} title={name} id={id}>
             <div className={styles['product-list']}>
-              {new Array(8).fill('').map((item, idx) => {
+              {products.map((p, idx) => {
                 return (
                   <div key={idx} className={styles['product-item']}>
-                    <Product />
+                    <Product {...p} />
                   </div>
                 );
               })}
@@ -58,4 +101,4 @@ export default () => {
       </Card> */}
     </div>
   );
-};
+});

@@ -30,13 +30,17 @@ const data = [{
     cardNo: '888747778398475641'
 }]
 
-const Local = (props) => {
-    const { userId } = props.user||{};
+const Local = ({
+    user,
+    card,
+    dispatch
+}) => {
+    const { userId } = user||{};
+    const {historyCards=[]} = card||{};
     useEffect(() => {
-        // debugger
-        if (userId) props.dispatch({ type: 'card/getHistoryCard', payload: { pageNo:1, pageSize: 100 } })
-    }, [props, userId])
-
+        if (userId) dispatch({ type: 'card/getHistoryCard', payload: { pageNo:1, pageSize: 100, isHistoryFlag: true } })
+    }, [dispatch, userId])
+    console.log(historyCards,'historyCards--')
     return (
         <div className={styles.history}>
             <div className={styles.title}>历史卡券</div>

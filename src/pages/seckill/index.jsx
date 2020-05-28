@@ -39,14 +39,13 @@ export default connect(state => ({ seckill: state.seckill }))(props => {
     <div className={styles.seckillContainer}>
       <ProductHead
         corner={detail.cornerMark}
-        title={detail.productName}
-        desc={detail.eventName}
-        imgUrl={'#'}
+        description={detail.productDescription}
+        imgUrl={detail.productImage}
       />
       {detail && <SeckillActivityInfo info={detail} mystock={mystock} />}
       {detail && (
         <div className={styles.topupOther}>
-          <TopupNote nodes={detail.productDesc || ''} />
+          <TopupNote nodes={detail.productDetail || ''} />
         </div>
       )}
       <RecommendBuy />

@@ -7,7 +7,7 @@ import styles from './index.less';
 
 const Change = (props) => {
     const {visible, onMaskClick, afterOpen, afterClose, CloseClick} = props
-    const {state, name, codeNo, paytime, cardNo} = props.data
+    const {state, name, codeNo, paytime, cardNo, remark} = props.data
     return (<CardPopup
             visible = {visible}
             onMaskClick = {onMaskClick}
@@ -24,7 +24,7 @@ const Change = (props) => {
                         <div>兑换码</div><div>{codeNo}</div>
                     </div> 
                 </div>
-                <div className={styles.pwTitle}>使用说明：请通过"订单详情"页面点击链接激活VIP。请您在2021年12月07日前开通本会员卡</div>
+                <div className={styles.pwTitle}>使用说明:{remark}</div>
                 <div className={styles.pwTable}>
                     <div>
                         <div>有效期至</div><div>{paytime}</div>

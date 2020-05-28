@@ -9,12 +9,14 @@ const Card = (props) => {
         border,
         btnTitle,
         data,
-        step
+        step,
+        closeHandler
     } = props
-
+    debugger
     const [visible, setVisible] = useState(false)
     const btnClick = (e) => {
         setVisible(!visible)
+        if (closeHandler) closeHandler(e)
     }
     return (
         <>
@@ -23,6 +25,7 @@ const Card = (props) => {
                 state = {data.state} 
                 btnTitle = {btnTitle}
                 btnClick = {btnClick}
+                thirdStatus = {data.thirdStatus}
                 data ={data}
             />
             {step === 'member' ? (<Member 

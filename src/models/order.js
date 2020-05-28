@@ -26,7 +26,7 @@ export default {
       }
     },
 
-    // 获取会员等级列表
+    // 普通商品下单
     *createAndPay({ payload }, { put, call }) {
       const res = yield call(services.createAndPay, payload);
       if (res.code === '0000') {
@@ -38,6 +38,19 @@ export default {
       } else {
         Toast.show(res.msg || '订单创建失败，请重新尝试');
         return false;
+      }
+    },
+    // 秒杀下单
+    *createSeckillOrderAndPay({ payload }, { put, call }) {
+      const res = yield call(services.createSeckillOrder, payload);
+      if (res.code === '0000') {
+        yield put({
+          type: 'setState',
+          payload: { orderInfo: res.data },
+        });
+        return res.data;
+      } else {
+        Toast.show(res.msg || '订单创建失败，请重新尝试')
       }
     },
     *queryOrders({ payload }, { put, call }) {
