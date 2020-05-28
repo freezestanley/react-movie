@@ -10,6 +10,9 @@ export default function superCodePay({ dispatch, type = 'order/createAndPay', fo
   Loading.show();
   window.__SuperCode && window.__SuperCode.show({
     serverDomain: superCodeURL,
+    onFinaly() {
+      Loading.hide();
+    },
     onSuccess(data) {
       Loading.hide();
       Loading.show({ content: <ActivityIndicator size="lg" /> });
@@ -29,6 +32,8 @@ export default function superCodePay({ dispatch, type = 'order/createAndPay', fo
           token: _data.token,
         },
       }).then(res => {
+        Loading.hide();
+        if (!res) return;
         if (isWX) {
           if (!res.prepayId) return;
           wechatPay(
@@ -44,7 +49,6 @@ export default function superCodePay({ dispatch, type = 'order/createAndPay', fo
                 type: 'charge/wechatPaySign',
                 payload: { ...params, orderId: res.outTradeNo },
               })) || {};
-              Loading.hide();
               return _d;
             },
             // success callback
@@ -55,7 +59,6 @@ export default function superCodePay({ dispatch, type = 'order/createAndPay', fo
             },
           );
         } else {
-          Loading.hide();
           if (res.payLink) {
             const link = wxPayLink(res);
             if (BrowserInfo.isAndroid) {
