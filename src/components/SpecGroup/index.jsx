@@ -26,7 +26,6 @@ export default function SpecGroup(props) {
     <div className="spec-group">
       {data.map((item, idx) => {
         const payPrice = paymentAmount(item, props.isVIP, props.isOpenVIP);
-        // console.log('[33] index.jsx: ', payPrice);
         return (
           <SpecItem
             key={idx}

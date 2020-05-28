@@ -58,7 +58,7 @@ export default function superCodePay({ dispatch, type = 'order/createAndPay', fo
             () => {
               callback
                 ? callback()
-                : router.push(`/topup/temp?out_trade_no=${data.outTradeNo}`)
+                : router.replace(`/orderdetail?id=${data.outTradeNo}`)
             },
           );
         } else {
