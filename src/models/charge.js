@@ -1,5 +1,5 @@
 // import { Toast } from 'zarm';
-import * as services from '@/services/order';
+import * as services from '@/services/charge';
 
 export default {
   namespace: 'charge',
