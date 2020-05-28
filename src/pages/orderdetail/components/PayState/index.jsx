@@ -15,7 +15,7 @@ function PayState(props){
         <CutDown date={deadline+1000} onComplete={props.onComplete} />
         <div>等待付款，秒杀折扣将为您保留至倒计时结束</div>
       </div></>)}
-      {status==2&&(<><div className='paid'>
+      {status===2&&(<><div className='paid'>
         <div >  已支付</div>
         <div>
           <span>{payAmount}</span> 元 
@@ -23,6 +23,12 @@ function PayState(props){
       </div></>)}
       { ((status===3)||(status===4))&&(<><div className='invalid'>
         <div >  已失效</div>
+        <div>
+          <span>{payAmount}</span> 元 
+        </div>
+      </div></>)}
+      { (status===5)&&(<><div className='paid'>
+        <div >  已完成</div>
         <div>
           <span>{payAmount}</span> 元 
         </div>
