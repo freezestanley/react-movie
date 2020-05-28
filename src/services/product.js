@@ -40,7 +40,7 @@ export function getProductItems(data) {
       status: 2,
       productId: data,
     },
-  })
+  });
 }
 // 获取加购商品规格
 export function queryAdditionalProductItems(data) {
@@ -48,6 +48,16 @@ export function queryAdditionalProductItems(data) {
     url: '/queryAdditionalProductItems',
     serve: 'product',
     method: 'GET',
-    data
+    data,
+  });
+}
+
+// 获取商品分类
+export function queryProductsGroupByCategory() {
+  return request({
+    url: '/queryProductsGroupByCategory',
+    serve: 'product',
+    method: 'GET',
+    data: {},
   });
 }
