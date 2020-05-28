@@ -16,7 +16,7 @@ function RecommendBuy(props){
     <div className={style.beebuy}>
       <span>盎司会员都在买</span>
       <div className={style.beemore} onClick={ () => router.push('./')}>
-        更多 
+        更多商品 
         <img src={require('./images/arrow.svg')} alt=""/>
       </div>
     </div>

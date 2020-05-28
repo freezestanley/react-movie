@@ -14,8 +14,8 @@ export function querySeckillDetail({ id, ...rest }) {
 // 预约秒杀活动
 export function registerSeckill(params) {
   return request({
-    url: `/seckill/register`,
-    serve: 'charge',
+    url: `/register`,
+    serve: 'seckillOrder',
     method: 'POST',
     data: params,
   });

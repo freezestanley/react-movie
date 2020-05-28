@@ -36,7 +36,8 @@ export default {
         });
         return res.data;
       } else {
-        Toast.show(res.msg || '订单创建失败，请重新尝试')
+        Toast.show(res.msg || '订单创建失败，请重新尝试');
+        return false;
       }
     },
     *queryOrders({ payload }, { put, call }) {

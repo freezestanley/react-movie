@@ -32,7 +32,7 @@ export default ( {info})=>{
         <div className={styles.details}>
           <p className={styles.details_p1}>订单 : {info.orderId}</p>
            <p className={styles.details_p2}>时间 : {dayjs(info.orderTime).format('YYYY-MM-DD HH:mm:ss')}</p>
-          <p className={styles.details_p3}>规格 :{product1.productItemName} </p>
+          <p className={styles.details_p3}>规格 : {product1.productItemName} </p>
         </div>
       </div>
       {info.status!==4&&(<div className={styles.order_down}>
