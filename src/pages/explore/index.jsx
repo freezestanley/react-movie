@@ -45,10 +45,10 @@ export default connect(state => ({ explore: state.explore }))(({ dispatch, explo
           ...defaultCate,
           products: (hot || []).map(item => {
             return {
-              id: item.id,
+              id: item.bannerItem.id,
               logo: item.bannerCoverUrl,
-              name: 'todo',
-              desc: 'todo',
+              name: item.bannerItem.abbr,
+              desc: item.bannerItem.bottomCornerMark,
             };
           }),
         },
