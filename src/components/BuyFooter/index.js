@@ -93,6 +93,11 @@ export default withRouter(connect(state => ({ ...state.prePay, user: state.user,
       dispatch({ type: 'vipTip/setState', payload: { visible: true } })
     }
   }, [dispatch]);
+  useEffect(() => {
+    if(main.isOpenVIP) {
+      dispatch({ type: 'vipTip/setState', payload: { visible: false } })
+    }
+  }, [dispatch, main.isOpenVIP]);
   return [<div className={styles.buyFooter} key='footer' id="buy-footer-box">
     {isVipTipVisible && <div className={styles.vipTip} onClick={goToDesPositon}>开通会员 , 本单立省{main.savePrice}元</div>}
     <dl className={styles.home} onClick={goToHome}>
