@@ -14,6 +14,7 @@ const Separator = () => {
 const renderer = ({ hours, minutes, seconds }) => {
   return (
     <div className={styles['countdown']}>
+      <img src={require('./images/clock.svg')} />
       <Unit value={minutes} />
       <Separator />
       <Unit value={seconds} />
