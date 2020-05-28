@@ -114,8 +114,13 @@ export default connect(state => ({ explore: state.explore }))(({ history, dispat
                 <div className={styles['product-list']}>
                   {products.map((p, idx) => {
                     return (
-                      <div key={idx} className={styles['product-item']}>
-                        <Product {...p} />
+                      <div key={p.id} className={styles['product-item']}>
+                        <Product
+                          {...p}
+                          onClick={() => {
+                            history.push(`/topup?id=${p.id}`);
+                          }}
+                        />
                       </div>
                     );
                   })}
