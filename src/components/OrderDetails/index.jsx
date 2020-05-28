@@ -7,7 +7,7 @@ import styles from './index.less'
 export default ({ info = {}, productList = [] })=>{
   return(
     <div className={styles.orderdetail}>
-      <div className={styles.orderdetail_title}>{productList[0] && productList[0]['productName']}{productList[1]&&`+${productList[1]['productItemName']}`}</div>
+      <div className={styles.orderdetail_title}>{productList[0] && productList[0]['productName']}{productList[1]&&`+${productList[1]['productName']}`}</div>
       <div  className={styles.orderdetail_container}>
         <div>
           <span>订单号</span>
@@ -39,7 +39,7 @@ export default ({ info = {}, productList = [] })=>{
         </div>
         <div>
           <span>商品价格</span>
-          <span>{productList[1]['originalPrice']}</span>
+          <span>{productList[1]['amount']}</span>
         </div></>)}
         <div>
           <span>实际支付</span>
