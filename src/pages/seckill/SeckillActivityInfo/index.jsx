@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import dayjs from 'dayjs';
 import Layout from './Layout';
 import Product from './Product';
 import Button from './Button';
@@ -57,6 +58,7 @@ export default ({ info, mystock }) => {
     // 已售罄
     if (info.stock === 0) {
       if (info.nextBeginTimestamp) {
+        const nextTime = dayjs(info.nextBeginTimestamp).format('HH : mm');
         return (
           <Layout
             title={info.productName}
@@ -65,7 +67,7 @@ export default ({ info, mystock }) => {
           >
             <Product info={info} />
             <div className={styles['box']}>
-              <div className={styles['desc']}>秒杀活动已售罄，每天早上10 : 00开抢</div>
+              <div className={styles['desc']}>秒杀活动已售罄，每天早上{nextTime}开抢</div>
               <Button>查看该商品更多折扣</Button>
             </div>
           </Layout>

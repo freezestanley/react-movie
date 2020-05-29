@@ -13,15 +13,9 @@ export default connect(state => ({ seckill: state.seckill }))(props => {
     location: { query },
     seckill: { info },
   } = props;
-  console.log('info:', info);
 
-  const detail = useMemo(() => {
-    return info.detail || {};
-  }, [info]);
-
-  const mystock = useMemo(() => {
-    return info.mystock || 0;
-  }, [info]);
+  const detail = useMemo(() => info.detail, [info]);
+  const mystock = useMemo(() => info.mystock, [info]);
 
   const fetchData = useCallback(() => {
     dispatch({ type: 'seckill/getSeckillDetail', payload: { id: query.id } });
@@ -32,16 +26,18 @@ export default connect(state => ({ seckill: state.seckill }))(props => {
   }, [fetchData]);
 
   useEffect(() => {
-    dispatch({ type: 'prePay/setState', payload: { main: detail, type: 'seckill' } });
-  }, [detail]); // eslint-disable-line
+    dispatch({ type: 'prePay/setState', payload: { main: detail || {}, type: 'seckill' } });
+  }, [dispatch, detail]); // eslint-disable-line
 
   return (
     <div className={styles.seckillContainer}>
-      <ProductHead
-        corner={detail.cornerMark}
-        description={detail.productDescription}
-        imgUrl={detail.productImage}
-      />
+      {detail && (
+        <ProductHead
+          corner={detail.cornerMark}
+          description={detail.productDescription}
+          imgUrl={detail.productImage}
+        />
+      )}
       {detail && <SeckillActivityInfo info={detail} mystock={mystock} />}
       {detail && (
         <div className={styles.topupOther}>
