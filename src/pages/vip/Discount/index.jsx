@@ -1,5 +1,6 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import Product from './Product';
+import CateProducts from './CateProducts';
 import styles from './index.module.less';
 
 const products = new Array(8).fill().map((item, idx) => {
@@ -15,6 +16,7 @@ const products = new Array(8).fill().map((item, idx) => {
 
 export default () => {
   const getMore = useCallback(() => {}, []);
+  const [opened, setOpened] = useState(false);
 
   return (
     <div>
@@ -27,9 +29,14 @@ export default () => {
           );
         })}
       </div>
-      <div className={styles['more']} onClick={getMore}>
-        查看更多
-      </div>
+      {opened && (
+        <div className={styles['more-products']}>
+          <CateProducts />
+        </div>
+      )}
+      {/* <div className={styles['more']} onClick={() => setOpened(!opened)}>
+        {opened ? '收起' : '查看更多'}
+      </div> */}
     </div>
   );
 };

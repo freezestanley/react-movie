@@ -18,11 +18,19 @@ export default () => {
       <Section title="会员专享折扣" className={styles['discount']}>
         <Discount />
       </Section>
-      <Section title="会员专享秒杀" className={styles['seckill']}></Section>
+      <Section title="会员专享秒杀" className={styles['seckill']}>
+        <div style={{ lineHeight: '50px', textAlign: 'center', border: '1px solid green' }}>
+          todo
+        </div>
+      </Section>
       <Section title="更多特权正在上线中" className={styles['rights']}>
         <Rights />
       </Section>
-      <Section title="热门推荐" className={styles['recommend']}></Section>
+      <Section title="热门推荐" className={styles['recommend']}>
+        <div style={{ lineHeight: '50px', textAlign: 'center', border: '1px solid green' }}>
+          todo
+        </div>
+      </Section>
     </div>
   );
 };
