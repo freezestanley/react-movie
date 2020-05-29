@@ -4,6 +4,13 @@ import router from 'umi/router'
 
 import styles from './index.less'
 
+ function formatMoney(value, isSymbol) {
+  if (isSymbol) {
+    return value ? `￥${value}` : '¥0'
+  }
+  return  value ? `${value} 元` : '0元'
+}
+
 
 export default ({ info = {}, productList = [] })=>{
   const [isShow, setShow] = useState(false);
@@ -26,27 +33,27 @@ export default ({ info = {}, productList = [] })=>{
         {isShow&&<>
           {info.productOriginalPrice&&<div>
           <span>原价</span>
-          <span>{info.productOriginalPrice}</span>
+          <span>{formatMoney(info.productOriginalPrice)}</span>
         </div>}
 
         {info.memberDiscAmt > 0  && info.memberDiscAmt > (info.eventDiscAmt || 0) && 
           <div>
           <span>会员价</span>
-          <span>{ `-${info.memberDiscAmte}`}</span>
+          <span>{ `-${formatMoney(info.memberDiscAmte)}`}</span>
         </div>
         }
          {info.eventDiscAmt > 0  && info.eventDiscAmt > (info.memberDiscAmt || 0) && 
           <div>
           <span>{info.type===1?'活动价':(info.type===2?'秒杀价':'')}</span>
-          <span>{ `-${info.memberDiscAmte}`}</span>
+          <span>{ `-${formatMoney(info.memberDiscAmte)}`}</span>
         </div>}
         {info.buyMember&&info.memberAmount!==0&&<div>
           <span>会员价</span>
-          <span>{info.memberAmount}</span>
+          <span>{formatMoney(info.memberAmount)}</span>
         </div>}
         {info.buyMember&&info.memberPrice!=0&&<div>
           <span>会员费</span>
-          <span>{info.memberPrice}</span>
+          <span>{formatMoney(info.memberPrice)}</span>
         </div>}
         {info.buyMember&&info.memberExpiredTime&&<div>
           <span>过期时间</span>
@@ -63,12 +70,12 @@ export default ({ info = {}, productList = [] })=>{
         </div>
         <div>
           <span>换购价格</span>
-          <span>{productList[1]['amount']}</span>
+          <span>{formatMoney(productList[1]['amount'])}</span>
         </div></>)}
 
         <div>
           <span>实际支付</span>
-          <span>{info.totalAmount||''}</span>
+          <span>{formatMoney(info.totalAmount)}</span>
         </div>
 
         <div>
