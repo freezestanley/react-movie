@@ -8,6 +8,7 @@ import RecommendBuy from '@/components/RecommendBuy';
 import PayState from './components/PayState'
 import styles from './index.less'
 import TopupNote from './components/Card/TopupNote';
+import GiftCards from './components/GiftPacks'
 
 
 function OrderDetail(props){
@@ -16,12 +17,14 @@ function OrderDetail(props){
   useEffect(() => {
       dispatch({ type: 'order/queryOrderDetials', payload: orderId  });
   }, [dispatch,orderId]);
+  console.log(orderDetails)
   return(
     <div className={styles.myorder}>
       <PayState info={orderDetails} onComplete={()=>{ dispatch({ type: 'order/queryOrderDetials', payload: orderId  })}}/>
+     { orderDetails.status==2&& productList&&productList[0].type==3&&<GiftCards />}
       { ((orderDetails.status===5)&&orderDetails.orderCardList)&&<CardCharge info={orderDetails}/>}
       <OrderDetails info={orderDetails} productList={productList}/>
-      { ((orderDetails.status===5)&&orderDetails.orderCardList)&&<div className={styles.node}><TopupNote info={orderDetails.productId} /></div>}
+      {/* { ((orderDetails.status===5)&&orderDetails.orderCardList)&&<div className={styles.node}><TopupNote info={orderDetails.productId} /></div>} */}
       <RecommendBuy/>
     </div>
   )

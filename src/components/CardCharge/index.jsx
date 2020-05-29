@@ -7,28 +7,27 @@ import {connect} from 'dva'
 
 
 import styles from './index.less';
+
  const CardList=(info)=>{
  const { name, num, secret, expiredTime,way } = info.info;
    
    return(
     <div className ={styles.cardcharge}>
-      <div>
+      <div className ={styles.top}>
         <span>{name}</span>
         <span> 有效期至： {dayjs(expiredTime).format('YYYY-MM-DD ')}</span>
       </div>
-      <div dangerouslySetInnerHTML={{ __html:way }} /> 
-      {num&& <div>
+      {way&& <div  className={styles.details} dangerouslySetInnerHTML={{ __html:way }} /> }
+      {num&& <div  className={styles.cardcode}>
         <span>卡号</span>
         <span>{num}</span>
-        
         <CopyToClipboard text={num}
           onCopy={() => Toast.show('复制成功') }>
           <span>复制</span>
         </CopyToClipboard>
-       
       </div>}
     
-     {!num &&<div>
+     {!num &&<div className={styles.cardsecret}>
         <span>卡密</span>
         <a href={secret}>点击兑换</a>
         <CopyToClipboard text={secret}
@@ -36,7 +35,7 @@ import styles from './index.less';
           <span>复制</span>
         </CopyToClipboard>
       </div>}
-     {num&&<div>
+     {num&&<div className={styles.cardsecret}>
         <span>卡密</span>
         <span>{secret}</span>
          <CopyToClipboard text={secret}
@@ -100,6 +99,7 @@ function CardSecret(props){
     dispatch({ type: 'mainProduct/getmain', payload: {productId} });
   }, [dispatch,productId]);
   if(info.activationMethod){
+    console.log(info.activationMethod)
     const index =(info.activationMethod).indexOf('赠'||'')
     data[0]['way']=info.activationMethod.slice(0,index)
     data[1]['way']=info.activationMethod.slice(index)
@@ -109,10 +109,10 @@ function CardSecret(props){
     <>
       {data.map((item,index)=>{
         return (
-            <CardList  key ={index} info={item} />
-        )
-      })
-    }
+               <CardList  key ={index} info={item} />
+             )
+          })
+        }
     </>
   )
 }
