@@ -60,12 +60,13 @@ export default {
     },
 
     // 发送验证码
-    *loginOut(_, { put, call }) {
+    *loginOut({callback}, { put, call }) {
       const res = yield call(services.loginOut);
       if (res.code === '0000') {
         localStorage.clear();
         sessionStorage.clear();
       }
+      callback && callback(res)
     },
 
     // 发送验证码

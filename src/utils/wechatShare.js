@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import Taro from '@tarojs/taro';
+import { Toast } from 'zarm';
 import debounce from 'lodash/debounce';
 import { wxSignSignature } from '@services/global';
 
@@ -7,10 +7,7 @@ export const wechatShareSign = debounce(async function wechatShareSign(url) {
   const _data = await wxSignSignature({ url });
 
   if (!_data[0]) {
-    Taro.showToast({
-      title: _data[1],
-      icon: 'none',
-    });
+    Toast.show(_data[1]);
     return;
   }
   const data = _data[1];

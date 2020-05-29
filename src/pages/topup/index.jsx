@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useReducer } from 'react';
 import { connect } from 'dva';
 import withRouter from 'umi/withRouter';
@@ -7,20 +8,20 @@ import { ProductHead } from '@/components/Product';
 import PageStatus from '@/components/PageStatus';
 import RecommendBuy from '@/components/RecommendBuy';
 import BuyFooter from '@/components/BuyFooter';
-import { formValidate } from '@/utils/ants';
+import { formValidate, updateProductInfo } from '@/utils/ants';
 
 import CardPage from './card';
 import DirectPage from './direct';
 import styles from './index.less';
 
-export default connect(state => ({ productInfo: state.productDetail.info, isVIP: state.user.isVIP }))(withRouter(function TopupPage(props) {
+function TopupPage(props) {
   const [state, setState] = useReducer((o, n) => ({ ...o, ...n}), {
     isOpenVIP: false,
     productCorner: '',
     tabKey: '',
     specData: {},
   });
-  const { dispatch, location: { query }, productInfo, isVIP, history } = props;
+  const { dispatch, location: { query }, productInfo, isVIP, history, prePayForm, isUpdateProductInfo } = props;
   const { id } = query;
   // constructor的作用
   useEffect(() => {
@@ -29,7 +30,15 @@ export default connect(state => ({ productInfo: state.productDetail.info, isVIP:
       return
     }
     dispatch({ type: 'productDetail/getProductItems', payload: id });
-  }, [dispatch, id]); // eslint-disable-line
+  }, [dispatch, id]);
+
+  // 如果更换商品则更新商品信息
+  useEffect(() => {
+    if (prePayForm && prePayForm.productId !== +id) {
+      updateProductInfo(props)
+    }
+  }, [id, prePayForm])
+
   const { product = {}, queryProductItemDtoList = [] } = productInfo;
 
   if (!product) return <PageStatus>获取商品信息失败</PageStatus>;
@@ -39,16 +48,19 @@ export default connect(state => ({ productInfo: state.productDetail.info, isVIP:
   // console.log('[30] index.jsx: ', state);
 
   const handleChangeSpec = (specData) => {
-    console.log('[topup spec]: ', specData);
-    setState({ specData })
-    dispatch({
-      type: 'prePay/setState',
-      payload: {
-        type: 'product',
-        // type: 1：直充；2：卡密
-        main: { ...specData, productId: +id, type },
-      }
-    });
+    // console.log('[51] index.jsx: ', isUpdateProductInfo);
+    if (isUpdateProductInfo) {
+      // console.log('[topup spec]: ', specData);
+      setState({ specData })
+      dispatch({
+        type: 'prePay/setState',
+        payload: {
+          type: 'product',
+          // type: 1：直充；2：卡密
+          main: { ...specData, productId: +id, type, tabKey: state.tabKey },
+        }
+      });
+    }
   };
 
   return (
@@ -59,7 +71,10 @@ export default connect(state => ({ productInfo: state.productDetail.info, isVIP:
         imgUrl={image}
       />
       <ProductSpecGroup
+        defaultValue={prePayForm.tabKey}
         dataSource={queryProductItemDtoList}
+        dispatch={dispatch}
+        isUpdateProductInfo={isUpdateProductInfo}
         onChange={(tabKey) => {
           // const currData = queryProductItemDtoList[tabKey];
           setState({
@@ -73,9 +88,10 @@ export default connect(state => ({ productInfo: state.productDetail.info, isVIP:
           const _props = {
             dispatch,
             tabKey,
+            isVIP,
             dataSource: data,
             productSpecItems: currData ? currData.queryProductItemRespList : [],
-            isVIP,
+            defaultValue: prePayForm,
             onOpenVIP(data) {
               // console.log('[43] index.jsx: ', data);
               setState({ isOpenVIP: data });
@@ -90,6 +106,8 @@ export default connect(state => ({ productInfo: state.productDetail.info, isVIP:
                 {..._props}
                 accountTypeList={product.rechargeAccountType}
                 onChange={handleChangeSpec}
+                dispatch={dispatch}
+                isUpdateProductInfo={isUpdateProductInfo}
               />
             ),
             type === 2 && <CardPage key={2} {..._props} onChange={handleChangeSpec} />,
@@ -100,7 +118,14 @@ export default connect(state => ({ productInfo: state.productDetail.info, isVIP:
         <TopupNote nodes={detail || ''} />
       </div>
       <RecommendBuy />
-      <BuyFooter onValidate={() => formValidate(state.specData, type)} />
+      <BuyFooter isResetForm={false} onValidate={() => formValidate(state.specData, type)} />
     </>
   );
-}));
+}
+
+export default connect(state => ({
+  productInfo: state.productDetail.info,
+  isVIP: state.user.isVIP,
+  isUpdateProductInfo: state.global.isUpdateProductInfo,
+  prePayForm: state.prePay.main,
+}))(withRouter(TopupPage));

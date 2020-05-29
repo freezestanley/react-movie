@@ -33,6 +33,7 @@ export default {
         { path: '/active', component: '../pages/card/active', backgroundColor:'',title: '大礼包', footer:false  },
         { path: '/search', component: '../pages/search', backgroundColor:'white',title: '搜索',  },
         { path: '/vip', component: '../pages/vip' },
+        { path: '/userinfo', component: '../pages/userinfo', backgroundColor:'white',title: '个人信息',  },
         { path: '/testvip', component: '../pages/testvip' },
         { path: '/year', component: '../pages/card/active/year', backgroundColor:'',title: '大礼包', footer:false  },
         { path: '/halfyear', component: '../pages/card/active/halfyear', backgroundColor:'',title: '大礼包', footer:false  },

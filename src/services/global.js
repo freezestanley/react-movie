@@ -4,7 +4,7 @@ import request from '@/utils/request';
 export function wxSignSignature(data) {
   return request({
     url: '/signSignature',
-    serve: 'user',
+    serve: 'ance',
     method: 'POST',
     data,
   }).then(res => {

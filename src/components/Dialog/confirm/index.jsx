@@ -1,11 +1,9 @@
 import React, {useState}from 'react';
 import './index.less'
 import {Modal,Input} from 'zarm';
-export default ({onClick})=>{
+export default (props)=>{
   const [isShow, setShow ]= useState(true);
-  const handleClick = () => {
-    onClick && onClick();
-  }
+  
   const handleInput = e => {
     console.log(e) 
   }
@@ -26,7 +24,7 @@ export default ({onClick})=>{
         <Input className='code_enter_input'  onChange={handleInput} />
       </div> 
       <div className="code_sub" onClick={()=>{console.log(1)}}>
-      <button className='btn_cancle'onClick={handleClick} > 取消</button> <button className='btn_ensure'  > 提交</button>
+      <button className='btn_cancle'onClick={props.onCancel} > 取消</button> <button className='btn_ensure'>确认领取</button>
       </div>
     </Modal>
   )

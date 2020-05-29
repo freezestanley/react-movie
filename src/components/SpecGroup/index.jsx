@@ -8,15 +8,15 @@ import './index.less';
 export default function SpecGroup(props) {
   const data = props.dataSource || [];
   const [state, setState] = useReducer((o, n) => ({...o, ...n}), {
-    active: 0,
+    active: props.index || 0,
   })
   // 用来被依赖从而解决切换产品时首个选中item的数据更新
-  const firtItemName = (data && data[0] || {}).name
+  const firtItemName = (data && data[props.index || 0] || {}).name
   // console.log('[29] index.jsx: ', props);
-  const handleChange = (idx, item) => {
+  const handleChange = (idx, item, isChange) => {
     if (idx !== state.active) {
       setState({ active: idx })
-      props.onChange && props.onChange(idx, item)
+      props.onChange && props.onChange(idx, item, isChange)
     }
   }
   useEffect(() => {
@@ -33,7 +33,7 @@ export default function SpecGroup(props) {
             column={props.column}
             dataSource={item}
             active={state.active === idx}
-            onChange={handleChange}
+            onChange={(idx, item) => handleChange(idx, item, true)}
             name={item.name}
             payPrice={payPrice.price}
             price={item.price}

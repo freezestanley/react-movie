@@ -10,7 +10,7 @@ export const getTotalPrice = ({ main={}, type, attach, isVIP }) => {
   switch(type) {
     case 'product':
       const { specInfo={}, isOpenVIP, vipPrice }  = main;
-      price = paymentAmount(specInfo, isVIP, isOpenVIP).price + (isOpenVIP ? vipPrice : 0);
+      price = paymentAmount(specInfo, isVIP, isOpenVIP).price + ((isOpenVIP && !isVIP) ? vipPrice : 0);
       price = fmtPrice(price, 'number');
       break;
     case 'phone':

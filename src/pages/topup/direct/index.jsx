@@ -4,6 +4,7 @@ import SpecAndVIP from '@/components/SpecAndVIP';
 import SwitchAccount from '@/components/SwitchAccount';
 
 export default function DirectPage(props) {
+  const { defaultValue = {} } = props;
   const [state, setState] = useReducer((o, n) => ({ ...o, ...n}), {
     isOpenVIP: false,
     specIndex: 0,
@@ -32,12 +33,20 @@ export default function DirectPage(props) {
     <div>
       {/* tabKey-{props.tabKey} */}
       <SwitchAccount
+        defaultValue={props.defaultValue}
         onChange={handleAccount}
         accountTypeList={props.accountTypeList}
+        dispatch={props.dispatch}
+        isUpdateProductInfo={props.isUpdateProductInfo}
       />
       <SpecAndVIP
+        // prePay={props.prePay}
         dataSource={props.productSpecItems}
         onChange={handleSpec}
+        defaultValue={{
+          specIndex: defaultValue.specIndex,
+          isOpenVIP: defaultValue.isOpenVIP,
+        }}
       />
     </div>
   );

@@ -1,18 +1,19 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { connect } from 'dva';
 import router from 'umi/router';
-
 import { isWX } from '@/utils/tools';
 import CardPopup from '../components/CardPopup'
 import {address, store} from '../address'
 import Item from '../components/item'
 import {createPackageOrder} from './util'
-import top from '../img/year/year_01.png'
-import month from '../img/year/year_02.png'
+import year1 from '../img/year/year_01.png'
+import year2 from '../img/year/year_02.png'
+import year3 from '../img/year/year_03.png'
+import year4 from '../img/year/year_04.png'
+import year5 from '../img/year/year_05.png'
+import year6 from '../img/year/year_06.png'
 import foot from '../img/year/year.png'
-import author from '../img/year/year_03.png'
-import card1 from '../img/year/year_04.png'
-import card2 from '../img/year/year_05.png'
+
 import styles from '../style/active.less';
 
 const Active = ({
@@ -26,6 +27,7 @@ const Active = ({
     const box = useRef(null)
     const footer = useRef(null)
     const openClick = (e) => {
+        console.log(userId,'--userId')
         if(!userId) {
             const pathname = history.location.pathname;
             history.push({ pathname: '/login', query: { sourcePage: window.encodeURIComponent(pathname) } });
@@ -33,7 +35,7 @@ const Active = ({
         }
         //packageId 1年卡，2半年卡，3月卡
         createPackageOrder({data:{payAmount:129,packageId:1},dispatch,callback(){
-            console.log('年卡')
+            console.log('月卡')
         }})
     }
     const viewStoreList = (e) => {
@@ -61,9 +63,20 @@ const Active = ({
     }
     return (
         <div ref={box} className = {styles.Active} onScroll = {throttle(scrollClick, 30)}>
-            <img src={top} />
-            <img src={month} />
-            {
+            <img src={year1} />
+            <img src={year2} />
+            <img src={year3} />
+            <div className={styles.storelist} onClick={viewStoreList}>查看泰康拜博口腔门店列表</div>
+            <CardPopup 
+                visible = {visible}
+                CloseClick = {viewStoreList}
+                title = {'泰康拜博门店列表'}
+            >
+                <Item address={address} store={store}/>
+            </CardPopup>
+            <img src={year4} />
+            <img src={year5} />
+            {/* {
                 isWX ? (<img src={card1} />) : (
                     <div>
                         <img src={author} />
@@ -80,9 +93,9 @@ const Active = ({
             }
             {
                 isWX ? null : (<img src={card2} />)
-            }
+            } */}
+            <img src={year6} />
             <div className = {styles.info}>
-                <div className = {styles.title}>活动规则</div>
                 <div className = {styles.txt}>
                     每个月1号可以开始使用，当月不用视为过期作废
                     下单后3个商品将发放至订单详情内领取
