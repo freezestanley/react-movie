@@ -1,6 +1,9 @@
 import React from 'react';
+import {CopyToClipboard} from 'react-copy-to-clipboard';
+import {Toast} from 'zarm'
 import dayjs from 'dayjs'
 import map   from 'lodash/map' 
+
 
 import styles from './index.less';
  const CardList=(info)=>{
@@ -16,18 +19,29 @@ import styles from './index.less';
       {num&& <div>
         <span>卡号</span>
         <span>{num}</span>
-        <span>复制</span>
+        
+        <CopyToClipboard text={num}
+          onCopy={() => Toast.show('复制成功') }>
+          <span>复制</span>
+        </CopyToClipboard>
+       
       </div>}
     
      {!num &&<div>
         <span>卡密</span>
         <a href={secret}>点击兑换</a>
-        <span>复制</span>
+        <CopyToClipboard text={secret}
+          onCopy={() => Toast.show('复制成功') }>
+          <span>复制</span>
+        </CopyToClipboard>
       </div>}
      {num&&<div>
         <span>卡密</span>
         <span>{secret}</span>
-        <span>复制</span>
+        <CopyToClipboard text={secret}
+          onCopy={() => Toast.show('复制成功') }>
+          <span>复制</span>
+        </CopyToClipboard>
       </div>}
    </div>
    )
