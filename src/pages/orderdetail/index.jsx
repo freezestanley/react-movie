@@ -19,15 +19,13 @@ function OrderDetail(props){
       dispatch({ type: 'order/queryOrderDetials', payload: orderId  });
   }, [dispatch,orderId]);
   
-
-
   const productId=orderDetails&&OrderDetail.productId
   console.log(orderDetails)
   return(
     <div className={styles.myorder}>
       <PayState info={orderDetails} onComplete={()=>{ dispatch({ type: 'order/queryOrderDetials', payload: orderId  })}}/>
-      <OrderDetails info={orderDetails} productList={productList}/>
       { ((orderDetails.status===5)&&orderDetails.orderCardList)&&<CardCharge info={orderDetails}/>}
+      <OrderDetails info={orderDetails} productList={productList}/>
       { ((orderDetails.status===5)&&orderDetails.orderCardList)&&<div className={styles.node}><TopupNote info={orderDetails.productId} /></div>}
       <RecommendBuy/>
     </div>
