@@ -12,6 +12,7 @@ function SpecAndVIP(props) {
     specIndex: 0,
     specInfo: {},
     isOpenVIP: false,
+    hasVipPrice: true,
     vipPrice: null,
     savePrice: null,
   })
@@ -24,6 +25,7 @@ function SpecAndVIP(props) {
     setState({
       specIndex: active,
       specInfo: record,
+      hasVipPrice: record.membershipPrice !== null,
     });
 
     isChange && updateProductInfo(props);
@@ -51,7 +53,7 @@ function SpecAndVIP(props) {
         isOpenVIP={defaultValue.isOpenVIP}
         index={defaultValue.specIndex}
       />
-      {!order.hasVipOrder && !user.isVIP && (
+      {!order.hasVipOrder && !user.isVIP && state.hasVipPrice && (
         <OpenVIP
           {...rest}
           // savePrice={state.savePrice}
