@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { connect } from 'dva';
 import cns from 'classnames';
 import 'zarm/dist/zarm.min.css';
@@ -43,10 +43,12 @@ function Layout(props) {
     routesMap,
     title,
     hasBuyFooter,
-    tabPageList=[]
-  } } =props;
+    tabPageList=[],
+    
+  }, location, } =props;
   const { hasNavBar = false, footer, fullSize=false } = currRoute;
   const [deferredPrompt, setDeferredPrompt] = useState(null);
+  const ref = useRef();
   useEffect(() => {
     window.addEventListener('beforeinstallprompt', function (e) {
       // 将事件返回存储起来
@@ -115,6 +117,12 @@ function Layout(props) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [window.location.href, routesMap])
 
+  // scrollToTop
+  useEffect(() => {
+    if (location && ref.current) {
+      ref.current.scrollTop = 0
+    }
+  }, [location]);
   const _reg = (currRoute.path || '').replace('/', '_');
   const _classname = _reg === '_' ? '_home' : _reg;
   const hasTabBar = currRoute.type === 'tabBar';
@@ -134,7 +142,7 @@ function Layout(props) {
         )}
       </div>
 
-      <div className={cns('z_layout_cont', hasBuyFooter ? 'buy_footer_fix' : '')}>
+      <div className={cns('z_layout_cont', hasBuyFooter ? 'buy_footer_fix' : '')} ref={ref}>
         <div className={cns('z_layout_box', fullSize ? 'full_size' : '' )}>
           {props.children}
         </div>
