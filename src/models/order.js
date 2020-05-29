@@ -57,7 +57,8 @@ export default {
     *openMemberAccount({ payload }, { put, call }) {
       const res = yield call(services.createPackageOrder, payload);
       if (res.code === '0000') {
-        Toast.show('会员开通成功！')
+        // Toast.show('会员开通成功！')
+        return res.data;
       } else {
         Toast.show(res.msg || '开通会员失败，请重新尝试')
       }

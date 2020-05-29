@@ -33,6 +33,7 @@ export default function superCodePay({ dispatch, type = 'order/createAndPay', fo
         },
       }).then(res => {
         Loading.hide();
+        console.log('-----package res', res);
         if (!res) return;
         if (res.outTradeNo && !res.payLink && !res.prepayId) {
           router.replace(`/orderdetail?id=${res.outTradeNo}`);
