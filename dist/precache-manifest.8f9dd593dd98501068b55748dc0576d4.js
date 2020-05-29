@@ -1,10 +1,10 @@
 self.__precacheManifest = [
   {
-    "revision": "100338f1403d3b51bf65",
+    "revision": "8b668002d96c24829d53",
     "url": "/vendors.chunk.css"
   },
   {
-    "revision": "100338f1403d3b51bf65",
+    "revision": "8b668002d96c24829d53",
     "url": "/vendors.async.js"
   },
   {
@@ -24,15 +24,15 @@ self.__precacheManifest = [
     "url": "/p__card__active.async.js"
   },
   {
-    "revision": "4ee6f80f08ea10719f01",
+    "revision": "9aab905321e11a7d6ea1",
     "url": "/p__card__active__halfyear.async.js"
   },
   {
-    "revision": "cb423eb1fe19adb8fe26",
+    "revision": "dbc6e85cfad089e7b617",
     "url": "/p__card__active__month.async.js"
   },
   {
-    "revision": "3949fcfa5a05eceb9af5",
+    "revision": "e0b5b97191d5640d209d",
     "url": "/p__card__active__year.async.js"
   },
   {
@@ -96,19 +96,19 @@ self.__precacheManifest = [
     "url": "/p__my.async.js"
   },
   {
-    "revision": "255b1da9b27d4b62d0d4",
+    "revision": "5c6627cd046323cfb774",
     "url": "/p__orderdetail.chunk.css"
   },
   {
-    "revision": "255b1da9b27d4b62d0d4",
+    "revision": "5c6627cd046323cfb774",
     "url": "/p__orderdetail.async.js"
   },
   {
-    "revision": "9816ab34b772ffa02fdc",
+    "revision": "3224d9d5de61612abcbf",
     "url": "/p__orders.chunk.css"
   },
   {
-    "revision": "9816ab34b772ffa02fdc",
+    "revision": "3224d9d5de61612abcbf",
     "url": "/p__orders.async.js"
   },
   {
@@ -156,19 +156,19 @@ self.__precacheManifest = [
     "url": "/p__topup.async.js"
   },
   {
-    "revision": "64fd76afe388321f5ab9",
+    "revision": "c06b78f365ebd8475a8b",
     "url": "/p__topup__temp.chunk.css"
   },
   {
-    "revision": "64fd76afe388321f5ab9",
+    "revision": "c06b78f365ebd8475a8b",
     "url": "/p__topup__temp.async.js"
   },
   {
-    "revision": "d233a0f60c860ebe58b3",
+    "revision": "c139535ad01dc7dc4387",
     "url": "/umi.css"
   },
   {
-    "revision": "d233a0f60c860ebe58b3",
+    "revision": "c139535ad01dc7dc4387",
     "url": "/umi.js"
   },
   {
@@ -186,6 +186,10 @@ self.__precacheManifest = [
   {
     "revision": "3036ea9bf0ad496b0661d5cffd8b2dec",
     "url": "/static/month.3036ea9b.png"
+  },
+  {
+    "revision": "5fee03aa30ecd1f9363611cbdfb772d2",
+    "url": "/static/month_01.5fee03aa.png"
   },
   {
     "revision": "878aa27279926ccb2876d02eeec4b077",
@@ -208,6 +212,10 @@ self.__precacheManifest = [
     "url": "/static/QRcode.78839083.png"
   },
   {
+    "revision": "de5dfe618541290ed38a7d430c371387",
+    "url": "/static/month_05.de5dfe61.png"
+  },
+  {
     "revision": "e3ba843856316cb12a6914fb55db14dd",
     "url": "/static/me-bg.e3ba8438.png"
   },
@@ -220,8 +228,16 @@ self.__precacheManifest = [
     "url": "/static/halfyear_03.52f6814c.png"
   },
   {
+    "revision": "d889609ae0742f1f378c3c342bb14a3d",
+    "url": "/static/month_04.d889609a.png"
+  },
+  {
     "revision": "c8432287f6d3714cadd9e8a55c0bcf7e",
     "url": "/static/footer-bg.c8432287.png"
+  },
+  {
+    "revision": "f948ef85e0383533c5f7ace3e84225dc",
+    "url": "/static/month_02.f948ef85.png"
   },
   {
     "revision": "b3862597a9918a4c1b0f19afc5e31dfd",
@@ -252,6 +268,10 @@ self.__precacheManifest = [
     "url": "/static/year_04.e8f3ee05.png"
   },
   {
+    "revision": "015cd48134cd977f8db4b14cf9250f95",
+    "url": "/static/month_03.015cd481.png"
+  },
+  {
     "revision": "41e403468a8d64cc6666bb5719fb135c",
     "url": "/static/author.41e40346.png"
   },
@@ -276,24 +296,16 @@ self.__precacheManifest = [
     "url": "/index.html"
   },
   {
+    "revision": "02f6a5307a950c19ae9c7b3740c14d1c",
+    "url": "/icons/128.png"
+  },
+  {
     "revision": "ec2c01423c80d74465f63c3da5fe389b",
     "url": "/icons/144.png"
   },
   {
     "revision": "bd4990cb16d90b5b3d7bf579d01f4f28",
     "url": "/icons/256.png"
-  },
-  {
-    "revision": "4a93a04c8af0922475875657d511efa2",
-    "url": "/icons/192.png"
-  },
-  {
-    "revision": "02f6a5307a950c19ae9c7b3740c14d1c",
-    "url": "/icons/128.png"
-  },
-  {
-    "revision": "8b1c8020cc67ebf844a1615ad394999a",
-    "url": "/icons/android-chrome-192x192.png"
   },
   {
     "revision": "191074b6f2222c2440b0bb3a0c642364",
@@ -304,16 +316,16 @@ self.__precacheManifest = [
     "url": "/icons/android-chrome-152x152.png"
   },
   {
+    "revision": "4a93a04c8af0922475875657d511efa2",
+    "url": "/icons/192.png"
+  },
+  {
+    "revision": "8b1c8020cc67ebf844a1615ad394999a",
+    "url": "/icons/android-chrome-192x192.png"
+  },
+  {
     "revision": "d7e488ade6dbf67eef4668ddd15c5b1d",
     "url": "/icons/apple-touch-icon-152x152.png"
-  },
-  {
-    "revision": "7f791a77d6f2e2a30b570c2aa31fb7fa",
-    "url": "/icons/apple-touch-icon-120x120.png"
-  },
-  {
-    "revision": "719cb777b3c5dd6f5f2288e538c98df1",
-    "url": "/icons/apple-touch-icon-180x180.png"
   },
   {
     "revision": "f3b51acf7ce636366ba888475144b429",
@@ -324,6 +336,18 @@ self.__precacheManifest = [
     "url": "/icons/apple-touch-icon-60x60.png"
   },
   {
+    "revision": "7f791a77d6f2e2a30b570c2aa31fb7fa",
+    "url": "/icons/apple-touch-icon-120x120.png"
+  },
+  {
+    "revision": "719cb777b3c5dd6f5f2288e538c98df1",
+    "url": "/icons/apple-touch-icon-180x180.png"
+  },
+  {
+    "revision": "47cb723696508f2c5b8e5f704a31220f",
+    "url": "/icons/apple-touch-icon.png"
+  },
+  {
     "revision": "8abb1cc4c5b8dc8db59e3026d135eb1d",
     "url": "/icons/favicon-16x16.png"
   },
@@ -332,32 +356,28 @@ self.__precacheManifest = [
     "url": "/icons/apple-touch-icon-76x76.png"
   },
   {
-    "revision": "47cb723696508f2c5b8e5f704a31220f",
-    "url": "/icons/apple-touch-icon.png"
-  },
-  {
-    "revision": "af2204ea0c88aaab35511768985c8020",
-    "url": "/icons/mstile-150x150.png"
+    "revision": "b92ee177ec93f530d294b6ac137a95b2",
+    "url": "/icons/msapplication-icon-144x144.png"
   },
   {
     "revision": "18f17462b535693be93bc1184774c5c9",
     "url": "/icons/favicon-32x32.png"
   },
   {
+    "revision": "af2204ea0c88aaab35511768985c8020",
+    "url": "/icons/mstile-150x150.png"
+  },
+  {
     "revision": "9cc732a216a64fa60ccd6e6800643a75",
     "url": "/manifest.json"
   },
   {
-    "revision": "b92ee177ec93f530d294b6ac137a95b2",
-    "url": "/icons/msapplication-icon-144x144.png"
+    "revision": "17ce9d5e4c6f674e8654255db087e432",
+    "url": "/MP_verify_rKD1zGVtaanIQ8NY.txt"
   },
   {
     "revision": "f22d501a35a87d9f21701cb031f6ea17",
     "url": "/icons/safari-pinned-tab.svg"
-  },
-  {
-    "revision": "17ce9d5e4c6f674e8654255db087e432",
-    "url": "/MP_verify_rKD1zGVtaanIQ8NY.txt"
   },
   {
     "revision": "9ef055bcf0c4b1f0ac5663173730b010",
