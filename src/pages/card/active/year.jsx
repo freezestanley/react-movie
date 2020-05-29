@@ -16,13 +16,21 @@ import card2 from '../img/year/year_05.png'
 import styles from '../style/active.less';
 
 const Active = ({
-    dispatch
+    history,
+    dispatch,
+    user
 }) => {
+    const { userId } = user||{};
     const [visible, setVisible] = useState(false)
     const [showFooter, setShowFooter] = useState(false)
     const box = useRef(null)
     const footer = useRef(null)
     const openClick = (e) => {
+        if(!userId) {
+            const pathname = history.location.pathname;
+            history.push({ pathname: '/login', query: { sourcePage: window.encodeURIComponent(pathname) } });
+            return;
+        }
         //packageId 1年卡，2半年卡，3月卡
         createPackageOrder({data:{payAmount:129,packageId:1},dispatch,callback(){
             console.log('年卡')
@@ -92,4 +100,6 @@ const Active = ({
         </div>
     )
 }
-export default connect()(Active)
+export default connect(state => ({
+    user: state.user
+  }))(Active)
