@@ -32,7 +32,9 @@ export default ({ info }) => {
           </div>
           <div className={styles['gift']}>暂无</div>
           <div className={styles['stock']}>
-            <div className={styles['stock-value']}>剩余{info.stock}件</div>
+            <div className={styles['stock-value']}>
+              {percentage === 100 ? '已售罄' : `${parseInt(percentage)}%`}
+            </div>
             <div className={styles['stock-progress']} style={{ width: `${percentage}%` }}></div>
           </div>
         </div>

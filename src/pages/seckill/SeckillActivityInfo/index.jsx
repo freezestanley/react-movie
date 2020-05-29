@@ -58,7 +58,7 @@ export default ({ info, mystock }) => {
     // 已售罄
     if (info.stock === 0) {
       if (info.nextBeginTimestamp) {
-        const nextTime = dayjs(info.nextBeginTimestamp).format('HH : mm');
+        const nextTime = dayjs(info.nextBeginTimestamp).format('HH:mm');
         return (
           <Layout
             title={info.productName}
