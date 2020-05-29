@@ -117,7 +117,7 @@ export function createProductOrder({ data, dispatch, callback }) {
 }
 
 export async function createSeckillOrder ({ data, dispatch, callback }) {
-  const { eventCode, itemId, productId } = data;
+  const { eventCode, itemId, productId, discountPrice } = data;
   const registerRes = await seckillService.registerSeckill({ eventCode});
   if (registerRes.code === '0000' && registerRes.success) {
     const orderKeyRes = await services.getSeckillOrderKey({ eventCode });
@@ -128,6 +128,7 @@ export async function createSeckillOrder ({ data, dispatch, callback }) {
         eventCode,
         itemId,
         productId,
+        payAmount: discountPrice,
         quantity: 1,
         payType: 1
       };
