@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useEffect, useMemo, useRef } from 'react';
 import { connect } from 'dva';
+import Search from './Search';
 import Categories from './Categories';
 import Section from './Section';
 import Product from './Product';
@@ -88,13 +89,8 @@ export default connect(state => ({ explore: state.explore }))(({ history, dispat
 
   return (
     <div className={styles['page']}>
-      <div
-        className={styles['search']}
-        onClick={() => {
-          history.push('/search');
-        }}
-      >
-        搜索
+      <div className={styles['search']}>
+        <Search onClick={() => history.push('/search')} />
       </div>
       <div className={styles['cates']} ref={catesEleRef}>
         <Categories selected={selected} list={categories2use} onSelect={onCateSelected} />

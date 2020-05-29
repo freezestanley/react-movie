@@ -1,12 +1,13 @@
 import React, { useEffect, useReducer } from 'react';
 import cns from 'classnames';
-
+import { updateProductInfo } from '@/utils/ants';
 
 import './index.less';
 
-export default function ProductSpecGroup({ onChange, className, children, dataSource }) {
+export default function ProductSpecGroup(props) {
+  const { onChange, defaultValue, className, children, dataSource } = props;
   const [state, setState] = useReducer((o, n) => ({ ...o, ...n }), {
-    tab: '0',
+    tab: defaultValue || '0',
   })
   useEffect(() => {
     onChange && onChange(state.tab);
@@ -16,6 +17,7 @@ export default function ProductSpecGroup({ onChange, className, children, dataSo
   const handleTab = (key) => {
     if (key !== state.tab ) {
       setState({ tab: key })
+      updateProductInfo(props);
       onChange && onChange(key)
     }
   }

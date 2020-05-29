@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useReducer } from 'react';
 import { Input, Button, Toast } from 'zarm';
 import { connect } from 'dva';
@@ -17,6 +18,12 @@ function LoginPage(props) {
     phone: '',
     verificationCode: '',
   });
+  useEffect(() => {
+    props.dispatch({
+      type: 'global/setState',
+      payload: { isUpdateProductInfo: false },
+    })
+  }, [])
   useEffect(() => {
     if (state.phone && state.verificationCode) {
       setState({ disabled: false });

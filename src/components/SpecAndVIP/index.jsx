@@ -1,16 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useReducer } from 'react';
 import { connect } from 'dva';
+import { updateProductInfo } from '@/utils/ants';
 
 import SpecGroup from '../SpecGroup';
 import OpenVIP from '../OpenVIP';
 
 function SpecAndVIP(props) {
-  const { onOpenVIP, dispatch, order, user, ...rest } = props;
+  const { onOpenVIP, dispatch, order, user, defaultValue = {}, ...rest } = props;
   const [state, setState] = useReducer((o, n) => ({...o, ...n}), {
     specIndex: 0,
     specInfo: {},
     isOpenVIP: false,
+    hasVipPrice: true,
     vipPrice: null,
     savePrice: null,
   })
@@ -19,16 +21,18 @@ function SpecAndVIP(props) {
     setState({ ...data });
   }
 
-  const handleSpec = (active, record) => {
+  const handleSpec = (active, record={}, isChange) => {
     setState({
       specIndex: active,
       specInfo: record,
+      hasVipPrice: record.membershipPrice !== null,
     });
+
+    isChange && updateProductInfo(props);
   }
 
   useEffect(() => {
      props.onChange && props.onChange(state);
-     console.log('------ssss')
   }, [JSON.stringify(state)])
 
   useEffect(() => {
@@ -44,20 +48,26 @@ function SpecAndVIP(props) {
     <div>
       <SpecGroup
         {...rest}
-        isOpenVIP={state.isOpenVIP}
         onChange={handleSpec}
         isVIP={user.isVIP}
+        isOpenVIP={defaultValue.isOpenVIP}
+        index={defaultValue.specIndex}
       />
-      {!order.hasVipOrder && !user.isVIP && (
+      {!order.hasVipOrder && !user.isVIP && state.hasVipPrice && (
         <OpenVIP
           {...rest}
           // savePrice={state.savePrice}
           specInfo={state.specInfo}
           onChange={handleOpenVIP}
+          value={defaultValue.isOpenVIP}
         />
       )}
     </div>
   )
 }
 
-export default connect(state => ({ order: state.order, user: state.user }))(SpecAndVIP)
+export default connect(state => ({
+  order: state.order,
+  user: state.user,
+  isUpdateProductInfo: state.global.isUpdateProductInfo,
+}))(SpecAndVIP)

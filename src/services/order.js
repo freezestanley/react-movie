@@ -71,9 +71,18 @@ export function createSeckillOrder({ orderKey, ...rest }) {
 }
 
 // 单独购买会员
-export function createMemberOrder({ orderKey, ...rest }) {
+export function createMemberOrder(data) {
   return request({
     url: `/createMemberOrder`,
+    serve: 'order',
+    method: 'POST',
+    data: data
+  });
+}
+// 兑换会员
+export function exchangeMember({ exchangeCardNo, ...rest }) {
+  return request({
+    url: `/membership/exchange?exchangeCardNo=${exchangeCardNo}`,
     serve: 'order',
     method: 'POST',
     data: rest
@@ -90,4 +99,13 @@ export function createPackageOrder({ orderKey, ...rest }) {
   });
 }
 
+// 重新拉起支付
+export function relaunchPay({ orderKey, ...rest }) {
+  return request({
+    url: `/start`,
+    serve: 'pay',
+    method: 'POST',
+    data: rest
+  });
+}
 

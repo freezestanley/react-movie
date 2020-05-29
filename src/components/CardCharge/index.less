@@ -2,7 +2,7 @@
   margin: 5px 10px 5px 10px;
   background:rgba(255,255,255,1);
   border-radius:8px;
-  >div:first-child{
+  .top{
     padding-right: 18px;
     padding-left: 18px;
     display: flex;
@@ -27,8 +27,8 @@
       line-height:40px;
     }
   }
-  >div:nth-child(2){ 
-    height:71px;
+  .details{ 
+  
     margin-left:10px;
     margin-right: 10px;
     background:rgba(241,215,153,0.32);
@@ -40,7 +40,7 @@
     color:rgba(0,0,0,1);
     line-height:20px;
   }
-  >div:nth-child(3){
+  .cardcode{
     margin-left: 10px;
     margin-right: 10px;
     font-size:15px;
@@ -55,7 +55,7 @@
       height: 48px;
       width: 200px;
       word-wrap:break-word;
-      text-align: center;
+      
     }
     >span:nth-child(3){
       width:49px;
@@ -63,10 +63,11 @@
       text-align: center;
       background:linear-gradient(319deg,rgba(18,24,43,1) 0%,rgba(58,65,88,1) 100%);
       border-radius:2px;
-      color: rgba(255, 255, 255, 1)
+      color: rgba(255, 255, 255, 1);
+    
     }
   }
-  >div:last-child{
+  .cardsecret{
     margin-left: 10px;
     margin-right: 10px;
     height: 40px;
@@ -76,6 +77,11 @@
     font-family:PingFangSC-Regular,PingFang SC;
     font-weight:400;
     color:rgba(0,0,0,1);
+    >span:nth-child(2){
+      width: 200px;
+      text-align: left;
+    }
+    
     >a{
       text-decoration:none;
       color:#AB8442;

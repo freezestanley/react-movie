@@ -41,7 +41,7 @@ const ActivityCard = props => {
         </div>
       </div>
       <div className={styles['bottom-part']}>
-        <div className={styles['rest']}>{props.data.stock === 0 ? '已售罄' :`剩余${props.data.stock}件`}</div>
+        <div className={styles['rest']}>{props.data.stock === 0 ? '已售罄' : progress + '%'}</div>
         <div className={styles['progress']}>
           <div className={styles['progress-value']} style={{width: progress + '%'}}></div>
         </div>

@@ -14,6 +14,8 @@ import styles from './index.less'
 
 export default ({ info = {}, productList = [] })=>{
   const [isShow, setShow] = useState(false);
+  // ((info.status===6)||(productList[0]))&&setShow(!isShow)
+ 
   return(
     <div className={styles.orderdetail}>
       <div className={styles.orderdetail_title}>{productList[0] && productList[0]['productName']}{productList[1]&&`+${productList[1]['productName']}`}</div>

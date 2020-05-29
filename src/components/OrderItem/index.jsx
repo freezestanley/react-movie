@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+import { connect } from 'dva';
 import router from 'umi/router'
+import { reLanchPay } from '@/utils/handlePay';
 import dayjs from 'dayjs'
 import styles from './index.less';
-export default ( {info})=>{
+export default connect(state => state.user)(({info, dispatch})=>{
   let isShow
   let product1,product2
-  if( info.productList.length==2){
+  if( info.productList.length === 2){
     product1=info.productList[0]
     product2=info.productList[1]
     isShow=true
@@ -13,6 +15,13 @@ export default ( {info})=>{
     product1=info.productList[0]
     isShow=false;
   }
+  const relaunchPay = useCallback(() => {
+    const formData = {
+      orderId: info.orderId,
+      payType: 1,
+    };
+    reLanchPay({ dispatch, type: 'order/relaunchPay',  formData, callback() {} });
+  }, [dispatch, info.orderId]);
  
   return(
     <div className={styles.order}  >
@@ -48,11 +57,11 @@ export default ( {info})=>{
       </div>
       {info.status!==4&&info.status!==2&&(<div className={styles.order_down}>
         <div>
-          {info.status===1&&( <span className={styles.recharge}>支付</span> )}
+          {info.status===1&&( <span className={styles.recharge} onClick={relaunchPay}>支付</span> )}
           {info.staus===3&&(<span className={styles.concat}>联系客服</span>)}
           {info.status===5&&(<span className={styles.check} onClick={() => router.push(`./orderdetail?id=${info.orderId}`)}>查看卡密</span>)}
         </div>
       </div>)}
   </div>
   )
-}
+})

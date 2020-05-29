@@ -8,6 +8,7 @@ export default {
     orderInfo: {},
     orderDetails:{},
     productList: [],
+    myOrders:[]
   },
   reducers: {
     setState(state, { payload }) {
@@ -57,7 +58,8 @@ export default {
     *openMemberAccount({ payload }, { put, call }) {
       const res = yield call(services.createPackageOrder, payload);
       if (res.code === '0000') {
-        Toast.show('会员开通成功！')
+        // Toast.show('会员开通成功！')
+        return res.data;
       } else {
         Toast.show(res.msg || '开通会员失败，请重新尝试')
       }
@@ -65,6 +67,19 @@ export default {
     // 单独购买会员下单
     *createMemberOrder({ payload }, { put, call }) {
       const res = yield call(services.createMemberOrder, payload);
+      if (res.code === '0000') {
+        yield put({
+          type: 'setState',
+          payload: { orderInfo: res.data },
+        });
+        return res.data;
+      } else {
+        Toast.show(res.msg || '订单创建失败，请重新尝试')
+      }
+    },
+    // 重新支付
+    *relaunchPay({ payload }, { put, call }) {
+      const res = yield call(services.relaunchPay, payload);
       if (res.code === '0000') {
         yield put({
           type: 'setState',
@@ -85,6 +100,16 @@ export default {
         return res.data;
       }
     },
+    *queryMyOrders({ payload }, { put, call }) {
+      const res = yield call(services.queryOrders, payload);
+      if (res.code === '0000') {
+        yield put({
+          type: 'setState',
+          payload: { myOrders: res.data || [] },
+        });
+        return res.data;
+      }
+    },
     *queryOrderDetials({ payload }, { put, call }) {
       const res = yield call(services.queryOrderDetails, payload);
       if (res.code === '0000') {
@@ -97,6 +122,10 @@ export default {
         });
         return res.data;
       }
+    },
+    *exchangeMember({ payload }, { put, call }) {
+      const res = yield call(services.exchangeMember, payload);
+      return res
     },
   },
 };

@@ -11,7 +11,7 @@ const CardPaper = (props) => {
     const { data, total } = props.card
     useEffect(() => {
         if (userId) props.dispatch({ type: 'card/getCard', payload: { pageNo:1, pageSize: 100 } })
-    }, [userId])
+    }, [props, userId])
     const gotoHistory = (item) => {
         router.push('/history');
       }
