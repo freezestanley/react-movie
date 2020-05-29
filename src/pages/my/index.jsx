@@ -38,7 +38,6 @@ function MyPage(props){
     }})
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  console.log('middleBanners',middleBanners)
   return (
     <div className={styles.myPage}>
       <UserInfo user={props.user} />
