@@ -94,6 +94,7 @@ function CardSecret(props){
   const {orderCardList}=props.info
   const productId=orderCardList[0].productId
   const data=formatCard(orderCardList[0])
+  const [first={}, second={}] = data;
   const { mainProduct:{info={}},dispatch}=props; 
   useEffect(() => {
     dispatch({ type: 'mainProduct/getmain', payload: {productId} });
@@ -101,8 +102,8 @@ function CardSecret(props){
   if(info.activationMethod){
     console.log(info.activationMethod)
     const index =(info.activationMethod).indexOf('赠'||'')
-    data[0]['way']=info.activationMethod.slice(0,index)
-    data[1]['way']=info.activationMethod.slice(index)
+    first['way']=info.activationMethod.slice(0,index)
+    second['way']=info.activationMethod.slice(index)
   }
  
   return(
