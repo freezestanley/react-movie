@@ -88,3 +88,15 @@ export function exchangeMember({ exchangeCardNo, ...rest }) {
     data: rest
   });
 }
+
+// 购买大礼包  开通会员
+export function createPackageOrder({ orderKey, ...rest }) {
+  return request({
+    url: `/createPackageOrder`,
+    serve: 'order',
+    method: 'POST',
+    data: rest
+  });
+}
+
+

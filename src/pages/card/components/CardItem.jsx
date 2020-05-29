@@ -65,8 +65,8 @@ const recharge = [
 
 const cardItem = (props) => {
     const {border, state, btnTitle, btnClick, thirdStatus} = props
-    const {title, retitle, time } =  props.data
-    debugger
+    const {title, retitle, time, historyFlag } =  props.data
+    // debugger
     let result = {
         class: 'normal',
         txt: ''
@@ -74,7 +74,7 @@ const cardItem = (props) => {
     if (state === 0 && thirdStatus === 0) {
 
     } else {
-        result = (state === 3) ? recharge[thirdStatus - 1] : restate[state - 1]
+        result = (state === 3 && !historyFlag) ? recharge[thirdStatus - 1] : restate[state - 1]
     }
     
     

@@ -14,14 +14,11 @@ import HotRecommend from '@/components/HotRecommend';
 
 
 function MyPage(props){
-  const userInfo = props.user.userInfo;
   console.log('props',props);
   // console.log('[9] index.jsx: ', props.user);
   //  console.log(props.banner)
   // console.log('[8] index.jsx: ', props);
-  const handleExit = () => {
-    props.dispatch({ type: 'user/loginOut' })
-  }
+ 
   const middleBanners = filter(props.banner.list, item => item.bannerType === 2);
   const hotRecommendList = filter(props.banner.list, item => item.bannerType === 5);
   const exchangeSuccess = () => {

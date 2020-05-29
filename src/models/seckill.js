@@ -21,7 +21,7 @@ export default {
       const eventCode = detail.eventCode;
       yield put({
         type: 'setState',
-        payload: { info: { detail, mystock: 0 } },
+        payload: { info: { detail } },
       });
       const resRegister = yield call(service.registerSeckill, { eventCode });
       if (resRegister.code !== '0000') {

@@ -1,9 +1,11 @@
 import React, { useMemo } from 'react';
+import { vipDiscount } from '@/utils/ants';
 import styles from './index.less';
 
 export default ({ info }) => {
   const percentage = useMemo(() => {
-    return info.stock / info.quantity;
+    const sell = ((info.quantity - info.stock) / info.quantity) * 100;
+    return 60 + sell * 0.4;
   }, [info]);
 
   return (
@@ -21,7 +23,7 @@ export default ({ info }) => {
             </div>
           </div>
         </div>
-        <div className={styles['price-discount']}>{info.discount * 10}折</div>
+        <div className={styles['price-discount']}>{vipDiscount(info.discount)}折</div>
       </div>
       <div className={styles['main']}>
         <div className={styles['main-inner']}>
@@ -31,11 +33,10 @@ export default ({ info }) => {
           </div>
           <div className={styles['gift']}>暂无</div>
           <div className={styles['stock']}>
-            <div className={styles['stock-value']}>剩余{info.stock}件</div>
-            <div
-              className={styles['stock-progress']}
-              style={{ width: `${percentage * 100}%` }}
-            ></div>
+            <div className={styles['stock-value']}>
+              {percentage === 100 ? '已售罄' : `${parseInt(percentage)}%`}
+            </div>
+            <div className={styles['stock-progress']} style={{ width: `${percentage}%` }}></div>
           </div>
         </div>
       </div>

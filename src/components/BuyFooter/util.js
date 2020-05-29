@@ -116,8 +116,9 @@ export function createProductOrder({ data, dispatch, callback }) {
   superCodePay({ dispatch, formData, callback });
 }
 
+// 创建秒杀订单～
 export async function createSeckillOrder ({ data, dispatch, callback }) {
-  const { eventCode, itemId, productId } = data;
+  const { eventCode, itemId, productId, discountPrice } = data;
   const registerRes = await seckillService.registerSeckill({ eventCode});
   if (registerRes.code === '0000' && registerRes.success) {
     const orderKeyRes = await services.getSeckillOrderKey({ eventCode });
@@ -128,30 +129,11 @@ export async function createSeckillOrder ({ data, dispatch, callback }) {
         eventCode,
         itemId,
         productId,
+        payAmount: discountPrice,
         quantity: 1,
         payType: 1
       };
-      console.log('-----seckill order fromData', formData);
       superCodePay({ dispatch, type: 'order/createSeckillOrderAndPay',  formData, callback });
     }
   }
-  
-  
-  // if (orderKeyRes) {
-  //   services.createSeckillOrder({})
-  // }
-  // const payAmount = fmtPrice((main.price || 0) + (attach.payPrice || 0), 'number');
-  // const formData = {
-  //   productId: main.productId,
-  //   productItemId: main.id,
-  //   quantity: 1,
-  //   appendAccountType: 2,
-  //   appendProductId: attach.id,
-  //   appendProductItemId: attach.productItemId,
-  //   appendQuantity: 1,
-  //   payType: 1,
-  //   rechargeAccount	: main.rechargeAccount,
-  //   payAmount
-  // };
-  // superCodePay({ dispatch, formData: data, callback });
 }

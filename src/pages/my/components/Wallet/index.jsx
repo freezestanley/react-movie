@@ -15,7 +15,10 @@ const UserInfo = props => {
   const [visible, showVisible] = useState(false);
   const gotourl = type => {
     if(type === 'exchange'){
-      showVisible(true);
+      if(props.user.userId){
+        showVisible(true);
+
+      }
     }else if(type === 'card'){
       router.push('/card');
     }

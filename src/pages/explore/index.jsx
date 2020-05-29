@@ -8,11 +8,11 @@ import styles from './index.module.less';
 
 const defaultCate = {
   id: -1,
-  name: '热门推荐',
+  name: '全部',
   products: [],
 };
 
-export default connect(state => ({ explore: state.explore }))(({ dispatch, explore }) => {
+export default connect(state => ({ explore: state.explore }))(({ history, dispatch, explore }) => {
   const [selected, setSelected] = useState(defaultCate.id);
   const catesEleRef = useRef();
 
@@ -56,7 +56,7 @@ export default connect(state => ({ explore: state.explore }))(({ dispatch, explo
 
   const fetchData = useCallback(() => {
     dispatch({ type: 'explore/getCategories', payload: {} });
-    dispatch({ type: 'explore/getHotRecommends', payload: { bannerType: [4], pageSize: 8 } });
+    // dispatch({ type: 'explore/getHotRecommends', payload: { bannerType: [4], pageSize: 8 } });
   }, [dispatch]);
 
   useEffect(() => {
@@ -65,47 +65,70 @@ export default connect(state => ({ explore: state.explore }))(({ dispatch, explo
 
   const onCateSelected = useCallback(id => {
     setSelected(id);
-    const container = document.querySelector('.z_layout_cont');
-    const section = document.querySelector(`#section-${id}`);
 
-    const scrollTop = section.offsetTop - catesEleRef.current.offsetTop;
-    if (container.scrollTo) {
-      container.scrollTo({
-        top: scrollTop,
-        behavior: 'smooth',
-      });
+    const scroll = top => {
+      const container = document.querySelector('.z_layout_cont');
+      if (container.scrollTo) {
+        container.scrollTo({
+          top: top,
+          behavior: 'smooth',
+        });
+      } else {
+        container.scrollTop = top;
+      }
+    };
+
+    if (id === defaultCate.id) {
+      scroll(0);
     } else {
-      container.scrollTop = scrollTop;
+      const section = document.querySelector(`#section-${id}`);
+      scroll(section.offsetTop - catesEleRef.current.offsetTop);
     }
   }, []);
 
-  useEffect(() => {
-    console.log('explore:', explore);
-  }, [explore]);
-
   return (
     <div className={styles['page']}>
-      <div className={styles['search']}></div>
+      <div
+        className={styles['search']}
+        onClick={() => {
+          history.push('/search');
+        }}
+      >
+        搜索
+      </div>
       <div className={styles['cates']} ref={catesEleRef}>
         <Categories selected={selected} list={categories2use} onSelect={onCateSelected} />
       </div>
-      {categories2use.map(({ id, name, products }) => {
-        return (
-          <div key={id} id={`section-${id}`} className={styles['section']}>
-            <Section title={name} id={id}>
-              <div className={styles['product-list']}>
-                {products.map((p, idx) => {
-                  return (
-                    <div key={idx} className={styles['product-item']}>
-                      <Product {...p} />
-                    </div>
-                  );
-                })}
-              </div>
-            </Section>
-          </div>
-        );
-      })}
+      <div
+        style={{
+          height: '80px',
+          background: 'white',
+        }}
+      ></div>
+      {categories2use
+        .filter(item => item.id !== defaultCate.id)
+        .map(({ id, name, products }) => {
+          return (
+            <div key={id} id={`section-${id}`} className={styles['section']}>
+              <Section title={name}>
+                <div className={styles['product-list']}>
+                  {products.map((p, idx) => {
+                    return (
+                      <div key={p.id} className={styles['product-item']}>
+                        <Product
+                          {...p}
+                          onClick={() => {
+                            history.push(`/topup?id=${p.id}`);
+                          }}
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
+              </Section>
+            </div>
+          );
+        })}
     </div>
   );
 });

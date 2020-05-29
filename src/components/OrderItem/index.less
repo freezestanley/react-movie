@@ -1,49 +1,52 @@
 .order{
-  margin: 5px 10px 5px 10px;
+  margin: 6px 10px 0px 10px;
   margin-left: 10px;
-  padding-bottom: 5px;
+  padding-bottom: 15px;
   background:rgba(255,255,255,1);
   border-radius:8px;
+  overflow: hidden;
   .order_up{
-    position: relative;
-    height: 112px;
     border-width: 0.5px;
     .order_head{
-      position: relative;
+      display: flex;
+      justify-content: space-between;
       margin-left: 18px;
       padding-top: 16px;
       font-family:PingFangSC-Medium,PingFang SC;
       font-weight:500;
       color:rgba(0,0,0,1);
-      >img{
-        display: inline-block;
-        width: 24px;
-        height: 24px;
-        vertical-align: middle;
-        margin-bottom: 10px;
+      .headLeft{
+        >img{
+          display: inline-block;
+          width: 24px;
+          height: 24px;
+          vertical-align: middle;
+          margin-bottom: 10px;
+        }
+        .span_1{
+          display: inline-block;
+          width: 200px;
+          overflow:hidden;
+          text-overflow:ellipsis;
+          white-space:nowrap;
+          margin-left:6px;
+          height:16px;
+          font-size:16px;
+          line-height:16px;
+        }
+
       }
-      .span_1{
-        display: inline-block;
-        width: 218px;
-        overflow:hidden;
-        text-overflow:ellipsis;
-        white-space:nowrap;
-        margin-left:6px;
-        height:16px;
-        font-size:16px;
-        line-height:16px;
-      }
+     
       .pay{
+       
+        margin-right: 15px;
+        margin-top: 5px;
         display: inline-block;
-        position: absolute;
-        right: 15px;
-        top:23px;
-        height:11px;
+        height:24px;
         font-size:12px;
         font-family:PingFangSC-Medium,PingFang SC;
         font-weight:500;
-        
-        line-height:11px;
+        line-height:24px;
         .unpaid{
           color:rgba(255,154,82,1);
         }
@@ -58,34 +61,37 @@
         }
       }
     }
-    .up_p{
-      position: absolute;
-      margin: 0;
-      padding: 0;
-      right: 15px;
-      top:44px;
-      height:12px;
-      font-size:12px;
-      font-family:PingFangSC-Medium,PingFang SC;
-      font-weight:500;
-      color:rgba(0,0,0,1);
-      line-height:12px;
-    }
+  
     .details{
-     position: absolute;
-      top:46px;
-      height:12px;
       font-size:12px;
       font-family:PingFangSC-Regular,PingFang SC;
       font-weight:400;
       color:rgba(0,0,0,0.4);
       line-height:12px;
-      .details_p1{
-        margin:0;
-        padding: 0;
-        padding-left: 18px;
-        margin-top: 5px;
+      .detailsFirst{
+        display: flex;
+        justify-content:space-between;
+        .details_p1{
+          margin:0;
+          padding: 0;
+          padding-left: 18px;
+          margin-top: 5px;
+        }
+        .up_p{
+          text-align: right;
+          margin: 0;
+          padding: 0;
+          margin-right: 15px;;
+          height:12px;
+          font-size:12px;
+          font-family:PingFangSC-Medium,PingFang SC;
+          font-weight:500;
+          color:rgba(0,0,0,1);
+          line-height:12px;
+         }
+
       }
+     
       .details_p2{
         margin:0;
         padding: 0;
@@ -101,23 +107,23 @@
         text-overflow:ellipsis;
         white-space:nowrap;
         width: 300px;
-
       }
     }
   }
   .order_down{
+    margin-top: 20px;
     border-top: 1px solid rgba(225, 225, 225, 1);
      >div:first-child{
-       position: relative;
-        text-align: center;
-        height: 50px;
+        text-align: right;
+        height: 40px;
+        line-height: 50px;
+        margin-right: 15px;
         .recharge{
           display: inline-block;
           background:linear-gradient(313deg,rgba(166,124,56,1) 0%,rgba(234,209,149,1) 100%);
           width:85px;
           right: 15px;
           bottom:6px;
-          position: absolute;
           height: 30px;
           font-size:14px;
           font-family:PingFangSC-Medium,PingFang SC;
@@ -133,7 +139,6 @@
           width:85px;
           right: 15px;
           bottom:6px;
-          position: absolute;
           height: 30px;
           font-size:14px;
           font-family:PingFangSC-Medium,PingFang SC;
@@ -150,7 +155,6 @@
           width:85px;
           right: 15px;
           bottom:6px;
-          position: absolute;
           height: 30px;
           font-size:14px;
           font-family:PingFangSC-Medium,PingFang SC;

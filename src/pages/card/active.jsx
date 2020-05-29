@@ -51,7 +51,7 @@ const Active = () => {
                 isWX ? (<img src={card1} />) : (
                     <div>
                         <img src={author} />
-                        <div className={styles.storelist} onClick={viewStoreList}>查看门店列表</div>
+                        <div className={styles.storelist} onClick={viewStoreList}>查看泰康拜博口腔门店列表</div>
                         <CardPopup 
                             visible = {visible}
                             CloseClick = {viewStoreList}

@@ -54,6 +54,16 @@ export default {
         Toast.show(res.msg || '订单创建失败，请重新尝试')
       }
     },
+    //地推开通会员 购买大礼包
+    *openMemberAccount({ payload }, { put, call }) {
+      const res = yield call(services.createPackageOrder, payload);
+      if (res.code === '0000') {
+        // Toast.show('会员开通成功！')
+        return res.data;
+      } else {
+        Toast.show(res.msg || '开通会员失败，请重新尝试')
+      }
+    },
     // 单独购买会员下单
     *createMemberOrder({ payload }, { put, call }) {
       const res = yield call(services.createMemberOrder, payload);
