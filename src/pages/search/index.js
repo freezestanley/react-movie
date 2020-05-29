@@ -11,7 +11,7 @@ import styles from './index.module.less';
 const hotSearchList = [{ id: 1, name: 'Q币' }, { id: 16, name: '芒果TV' }, { id: 18 , name: '网易云音乐' }, ]
 
 export default connect(state => ({ list: state.products.list }))(withRouter(function(props) {
-  const { history, list, dispatch, location: { query: { keyword='' } } } = props;
+  const { history, list, dispatch, location: { query: { keyword='', sourcePage } } } = props;
   const [value, setValue] = useState(keyword);
   const debouncedSearchFn = useCallback(debounce((keyword) =>{
     dispatch({ type: 'products/getProducts', payload: { keyword, status: 2 } });
@@ -20,7 +20,11 @@ export default connect(state => ({ list: state.products.list }))(withRouter(func
     setValue(e.target.value)
   };
   const goToHome = () => {
-    history.push('/');
+    if (sourcePage){
+      history.replace({ pathname: window.decodeURIComponent(sourcePage) });
+    } else {
+      history.goBack();
+    }
   };
   const goToProductPage = (id) => {
     history.push({ pathname: '/topup', query: { id } })

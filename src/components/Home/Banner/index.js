@@ -21,7 +21,7 @@ class Banner extends React.Component {
   }
 
   goToSearchPage() {
-    this.props.history.push('/search')
+    this.props.history.push({pathname: '/search', query: { sourcePage: window.encodeURIComponent(`${window.location.pathname}${window.location.search}`) }})
   }
 
   render() {
