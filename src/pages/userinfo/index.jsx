@@ -17,7 +17,6 @@ const UserInfo = props => {
       
     } })
   }
-  console.log('avatar',props)
   return (
     <div className={style.userinfo}>
       <div className={style.row}>

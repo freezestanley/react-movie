@@ -14,10 +14,6 @@ import HotRecommend from '@/components/HotRecommend';
 
 
 function MyPage(props){
-  console.log('props',props);
-  // console.log('[9] index.jsx: ', props.user);
-  //  console.log(props.banner)
-  // console.log('[8] index.jsx: ', props);
 
   const middleBanners = filter(props.banner.list, item => item.bannerType === 2);
   const hotRecommendList = filter(props.banner.list, item => item.bannerType === 5);

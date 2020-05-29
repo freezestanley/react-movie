@@ -29,9 +29,9 @@ const UserInfo = props => {
         <div className={style['line']} />
         <div className={`${style[`text-box-${count}`]}`}>
           {
-            textArr.map(item => {
+            textArr.map((item,index) => {
               return (
-              <div className={style['slider-text']}>{item}</div>
+              <div key={index} className={style['slider-text']}>{item}</div>
               )
             })
           }
