@@ -14,32 +14,14 @@ import {formatDate} from '@/utils/tools'
 import React from 'react';
 import styles from './CardItem.less';
 
-const restate = [
-    {
-        txt: '未绑定',
-        class: 'unbind'
-    },
-    {
-        txt: '已绑定',
-        class: 'bind'
-    },
-    {  
-        txt: '已使用',
-        class: 'used'
-    },
-    {
-        txt: '已过期',
-        class: 'expire'
-    },
-    {
-        txt: '已销毁',
-        class: 'destory'
-    }
-]
 const recharge = [
     {
+        class: 'normal',
+        txt: ''
+    },
+    {
         txt: '充值中',
-        class: 'pay'
+        class: 'pay'  
     },
     {
         txt: '充值成功',
@@ -48,35 +30,40 @@ const recharge = [
     {
         txt: '充值失败',
         class: 'fail'
+    },
+
+    {
+        txt: '即将过期',
+        class: 'willexpire'
+    },
+    {
+        txt: '已过期',
+        class: 'expire'
+    },
+    {  
+        txt: '已使用',
+        class: 'used'
+    },
+    {
+        txt: '待生效',
+        class: 'waitused'
     }
 ]
 
-
-// `status` int(1) NOT NULL COMMENT '卡券状态：1-未绑定，2-已绑定，3-已使用，4-已过期，5-已销毁',
-// `third_recharge_status` int(1) DEFAULT NULL COMMENT '兑换的产品充值状态 1-充值中，2-充值成功，3-充值失败',
-
-  
-// if(ele.status == 3){
-// 	//展示充值状态
-// 	return ele.exchangeData.third_recharge_status;
-// } else {
-// 	return ele.status
-// }
-
 const cardItem = (props) => {
-    const {border, state, btnTitle, btnClick, thirdStatus} = props
-    const {title, retitle, time, historyFlag } =  props.data
-    // debugger
-    let result = {
-        class: 'normal',
-        txt: ''
-    }
-    if (state === 0 && thirdStatus === 0) {
+    const {border,  btnTitle, btnClick, thirdStatus} = props
+    const {title, retitle, time, historyFlag, status } =  props.data
+    debugger
+    // let result = {
+    //     class: 'normal',
+    //     txt: ''
+    // }
+    // if (state === 0 && thirdStatus === 0) {
 
-    } else {
-        result = (state === 3 && !historyFlag) ? recharge[thirdStatus - 1] : restate[state - 1]
-    }
-    
+    // } else {
+    //     // result = (state === 3 && !historyFlag) ? recharge[thirdStatus - 1] : restate[state - 1]
+    // }
+    let result = recharge[status]
     
     return (
         <div className={`${styles.cardItem} ${styles[result.class]} ${border ? styles.border : ''}`}

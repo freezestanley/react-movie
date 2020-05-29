@@ -4,7 +4,7 @@ import request from '@/utils/request';
 export function getCard({ ...rest }) {
     // debugger
   return request({
-    url: '/query',
+    url: '/queryUserView',
     serve: 'card',
     method: 'GET',
     data: rest

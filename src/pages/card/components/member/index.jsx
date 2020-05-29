@@ -8,9 +8,8 @@ import styles from './index.less';
 
 const CardMember = (props) => {
     const {visible, onMaskClick, afterOpen, afterClose, CloseClick} = props
-    const {state, name, account, paytime} = props.data
-    console.log(props.data,'member')
-    // debugger
+    const {status, name, account, paytime} = props.data
+    debugger
     return (
         <CardPopup
             visible = {visible}
@@ -34,11 +33,12 @@ const CardMember = (props) => {
                         <div>充值状态</div>
                         <div>
                             {
-                                state !== 3 ? '成功' : (<span className={styles.fail}>充值失败</span>)}
+                                status === 2 ? '成功' : 
+                                status === 3 ? (<span className={styles.fail}>充值失败</span>) : ''}
                         </div>
                     </div>
                 </div>
-                { state !== 3 ? null : (<div  className={styles.goldBtn}>联系客服</div>)}
+                { status === 3 ? (<div  className={styles.goldBtn}>联系客服</div>) : ''}
             </div>
     </CardPopup>)
 }

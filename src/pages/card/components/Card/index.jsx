@@ -3,6 +3,7 @@ import Member from '../member'
 import Change from '../change'
 import Copy from '../copy'
 import Item from '../CardItem'
+import router from 'umi/router'
 
 const Card = (props) => {
     const {
@@ -10,13 +11,17 @@ const Card = (props) => {
         btnTitle,
         data,
         step,
-        closeHandler
+        clickHandler
     } = props
-    // debugger
     const [visible, setVisible] = useState(false)
     const btnClick = (e) => {
         setVisible(!visible)
-        if (closeHandler) closeHandler(e)
+        if (clickHandler) clickHandler(e)
+    }
+    const jumpClick = (e) => {
+        setVisible(!visible)
+        if (clickHandler) clickHandler(e)
+        router.push('/memberrecharge')
     }
     return (
         <>
@@ -24,7 +29,7 @@ const Card = (props) => {
                 border = {border}
                 state = {data.state} 
                 btnTitle = {btnTitle}
-                btnClick = {btnClick}
+                btnClick = {step === 'jump' ? jumpClick : btnClick}
                 thirdStatus = {data.thirdStatus}
                 data ={data}
             />
@@ -45,7 +50,6 @@ const Card = (props) => {
                 CloseClick = {btnClick}
                 data = {data}
             />) : null}
-
         </>
         )
 }
