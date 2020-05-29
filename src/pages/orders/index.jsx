@@ -117,7 +117,7 @@ class Index extends Component {
     })
   }
   appendDa=()=>{
-    const {data,dataSource}=this.state;
+    const {data}=this.state;
     let temp=[]
     if(!data)return
     data.map((item)=>{
