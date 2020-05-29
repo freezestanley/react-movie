@@ -23,27 +23,38 @@ const CardPaper = (props) => {
             <div>
                 {
                     data.map((ele, idx, arr) => {
-                        let next = null
+                        let next = ''
                         debugger
-                        if (ele.couponType === 6) { // 会员
-                            next = 'change'
-                        } else {
-                            if (ele.exchangeData.productType === 1) { //  直充
-                                if (ele.status === 2) { // 去直充
-                                    next = 'jump'
-                                } else if (ele.status === 3) { // 卡密成功
-                                    
-                                    if (ele.exchangeData.thirdRechargeStatus === 2) { // 充值成功
-                                        next = 'member'
-                                    } 
-                                    if (ele.exchangeData.thirdRechargeStatus === 3) { // 充值失败
-                                        next = 'member'
-                                    }
-                                }
-                            } else if (ele.exchangeData.productType === 2) { // 卡密
-                                next = 'copy'
-                            }
-                        }
+                        let couponType = ele.couponType,
+                            productType = ele.exchangeData.productType,
+                            status = ele.status,
+                            thirdRechargeStatus = ele.exchangeData.thirdRechargeStatus
+
+                        next = (couponType === 6) ? 'change' :  // 会员
+                                (productType === 2) ? 'copy' :  // 卡密
+                                 (productType === 1 && status === 2) ? 'jump' : // 直充
+                                  (productType === 1 && status === 3 && thirdRechargeStatus === 1) ? '' : 'member'
+
+
+
+                        // if (couponType === 6) { // 会员
+                        //     next = 'change'
+                        // } else {
+                        //     if (productType === 1) { //  直充
+                        //         if (status === 2) { // 去直充
+                        //             next = 'jump'
+                        //         } else if (status === 3) { // 卡密成功
+                        //             if (thirdRechargeStatus === 2) { // 充值成功
+                        //                 next = 'member'
+                        //             } 
+                        //             if (thirdRechargeStatus === 3) { // 充值失败
+                        //                 next = 'member'
+                        //             }
+                        //         }
+                        //     } else if (productType === 2) { // 卡密
+                        //         next = 'copy'
+                        //     }
+                        // }
                         return (
                         <Card 
                             key = {idx.toString()}
@@ -54,7 +65,7 @@ const CardPaper = (props) => {
                                 title: ele.couponTitle,
                                 retitle: ele.packageName, 
                                 time: ele.couponEndDate, 
-                                state: ele.status,// 'fail', === 3 ? ele.exchangeData.thirdRechargeStatus : ele.status
+                                state: ele.status,
                                 thirdStatus: ele.exchangeData.thirdRechargeStatus,
                                 name: ele.exchangeData.productName,
                                 account: ele.exchangeData.rechargeAccount,
