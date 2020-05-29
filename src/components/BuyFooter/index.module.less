@@ -16,13 +16,26 @@
     right: 0;
     width:162px;
     height:77px;
-    background:linear-gradient(322deg,rgba(166,124,56,1) 0%,rgba(234,209,149,1) 100%);
+    background:linear-gradient(315deg,rgba(130,128,124,1) 0%,rgba(218,215,208,1) 100%);
     box-shadow:0px -4px 12px 0px rgba(0,0,0,0.16),0px -4px 16px 0px rgba(0,33,69,0.16);
     border-radius:24px 0px 0px 0px;
     font-size: 19px;
     text-align: center;
     line-height: 67px;
     color: @black;
+    &.active{
+      background:linear-gradient(322deg,rgba(166,124,56,1) 0%,rgba(234,209,149,1) 100%);
+      box-shadow:0px -4px 12px 0px rgba(0,0,0,0.16),0px -4px 16px 0px rgba(0,33,69,0.16);
+    }
+    .question{
+      margin-left: 2px;
+      width: 14px;
+      height: 14px;
+      position: relative;
+      top: -2px;
+      display: inline-block;
+      vertical-align: middle;
+    }
   }
   .content{
     padding: 15px;

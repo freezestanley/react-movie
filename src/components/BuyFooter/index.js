@@ -5,6 +5,7 @@ import { connect } from 'dva';
 import '@/assets/svgIcon/home.svg';
 import { Popup } from 'zarm';
 import { fmtPrice } from '@/utils/tools';
+import cns from 'classnames';
 
 import { vipDiscount } from '@/utils/ants';
 import styles from './index.module.less';
@@ -13,16 +14,18 @@ import { ReactComponent as HomeSvg } from './img/home.svg';
 import { ReactComponent as CloseSvg } from './img/close.svg';
 import { ReactComponent as PromptSvg } from './img/prompt.svg';
 import { ReactComponent as SafeSvg } from './img/safe.svg';
+// import { ReactComponent as QuestionSvg } from './img/question.svg';
 import { getTotalPrice, getDiscountInfo, createPhoneOrder, createProductOrder, createSeckillOrder } from './util';
 
 
 export default withRouter(connect(state => ({ ...state.prePay, user: state.user, vipTip: state.vipTip  }))(function(props) {
-  const { history, main, attach, type, dispatch, onValidate, user, vipTip={} } = props;
+  const { history, main, attach, type, dispatch, onValidate, user, vipTip={}, isShowDetail=true, info } = props;
   const { isVIP, userId } = user;
   const [visible, setVisible]=useState(false);
   const totalPrice = getTotalPrice({ main, attach, type, isVIP });
   const discountInfo = getDiscountInfo({ main, attach, type, isVIP });
   const isVipTipVisible = type === 'product' && main.savePrice >0 && !isVIP && !main.isOpenVIP && vipTip.visible
+  const btnInfo = info || { name: '立即购买', active: true };
   const toggleFn = (val) =>{
     setVisible(val);
   };
@@ -109,9 +112,12 @@ export default withRouter(connect(state => ({ ...state.prePay, user: state.user,
     </dl>
     <div className={styles.content}>
       <div className={styles.total} dangerouslySetInnerHTML={{ __html: '合计'+fmtPrice(totalPrice, 'tag') }}></div>
-      {totalPrice > 0 && <div className={styles.saleDetail} onClick={toggleFn.bind(null, true)}>优惠明细<PromptSvg className={styles.questionIcon} /></div>}
+      {isShowDetail && <div className={styles.saleDetail} onClick={toggleFn.bind(null, true)}>优惠明细<PromptSvg className={styles.questionIcon} /></div>}
     </div>
-    <div className={styles.btn} onClick={startPayFn}>立即支付</div>
+    <div className={cns(styles.btn, btnInfo.active ? styles.active : '')} onClick={btnInfo.active ? startPayFn : () => {}}>
+      <span>{btnInfo.name}</span>
+      {/* <QuestionSvg className={styles.question}/> */}
+    </div>
   </div>, <Popup
     key='payInfo'
     direction="bottom"

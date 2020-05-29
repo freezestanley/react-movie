@@ -1,11 +1,12 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useCallback } from 'react';
+import withRouter from 'umi/withRouter';
 import dayjs from 'dayjs';
 import Layout from './Layout';
 import Product from './Product';
 import Button from './Button';
 import styles from './index.less';
 
-export default ({ info, mystock }) => {
+export default withRouter(({ info, mystock, isVIP, history }) => {
   const offset = useMemo(() => {
     if (info) {
       return Date.now() - info.currTimestamp;
@@ -13,6 +14,11 @@ export default ({ info, mystock }) => {
       return 0;
     }
   }, [info]);
+
+  const goToProductPage = useCallback(() => {
+    const { productId } = info;
+    history.push({ pathname: '/topup', query: {id: productId} });
+  }, [info, history]);
 
   // 未开始
   if (info.currStatus === 2) {
@@ -49,7 +55,20 @@ export default ({ info, mystock }) => {
           <Product info={info} />
           <div className={styles['box']}>
             <div className={styles['desc']}>您已达到今日购买上限</div>
-            <Button>查看该商品更多折扣</Button>
+            <Button onClick={goToProductPage}>查看该商品更多折扣</Button>
+          </div>
+        </Layout>
+      );
+    }
+
+    // vip专享
+    if (!isVIP && info.onlyForVip === 'Y') {
+      return (
+        <Layout title={info.productName}>
+          <Product info={info} />
+          <div className={styles['box']}>
+            <div className={styles['desc']}>本秒杀活动仅限会员参与</div>
+            <Button onClick={() => { history.push('/vip') }}>马上去开通会员</Button>
           </div>
         </Layout>
       );
@@ -68,7 +87,7 @@ export default ({ info, mystock }) => {
             <Product info={info} />
             <div className={styles['box']}>
               <div className={styles['desc']}>秒杀活动已售罄，每天早上{nextTime}开抢</div>
-              <Button>查看该商品更多折扣</Button>
+              <Button onClick={goToProductPage}>查看该商品更多折扣</Button>
             </div>
           </Layout>
         );
@@ -78,7 +97,7 @@ export default ({ info, mystock }) => {
             <Product info={info} />
             <div className={styles['box']}>
               <div className={styles['desc']}>秒杀活动已售罄</div>
-              <Button>查看该商品更多折扣</Button>
+              <Button onClick={goToProductPage}>查看该商品更多折扣</Button>
             </div>
           </Layout>
         );
@@ -94,4 +113,4 @@ export default ({ info, mystock }) => {
   }
 
   return null;
-};
+});
