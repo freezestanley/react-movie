@@ -1,13 +1,14 @@
-import React from 'react';
+import React ,{useEffect}from 'react';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import {Toast} from 'zarm'
 import dayjs from 'dayjs'
 import map   from 'lodash/map' 
+import {connect} from 'dva'
 
 
 import styles from './index.less';
  const CardList=(info)=>{
- const { name, num, secret, expiredTime } = info.info;
+ const { name, num, secret, expiredTime,way } = info.info;
    
    return(
     <div className ={styles.cardcharge}>
@@ -15,7 +16,7 @@ import styles from './index.less';
         <span>{name}</span>
         <span> 有效期至： {dayjs(expiredTime).format('YYYY-MM-DD ')}</span>
       </div>
-      <div> 激活方式：请通过"订单详情"页面点击链接备份激活方式：请通过"订单详情"页面点击链接备份</div>
+      <div dangerouslySetInnerHTML={{ __html:way }} /> 
       {num&& <div>
         <span>卡号</span>
         <span>{num}</span>
@@ -38,7 +39,7 @@ import styles from './index.less';
      {num&&<div>
         <span>卡密</span>
         <span>{secret}</span>
-        <CopyToClipboard text={secret}
+         <CopyToClipboard text={secret}
           onCopy={() => Toast.show('复制成功') }>
           <span>复制</span>
         </CopyToClipboard>
@@ -47,7 +48,7 @@ import styles from './index.less';
    )
    
  }
-export default (props)=>{
+function CardSecret(props){
   const formatCard = (card) => {
     const { giftNo={}, giftSecret, cardNo, cardSecret, expiredTime, productName } = card;
     const mainProduct = {};
@@ -92,15 +93,27 @@ export default (props)=>{
    return [mainProduct].concat(giftProductList);
   }
   const {orderCardList}=props.info
+  const productId=orderCardList[0].productId
   const data=formatCard(orderCardList[0])
+  const { mainProduct:{info={}},dispatch}=props; 
+  useEffect(() => {
+    dispatch({ type: 'mainProduct/getmain', payload: {productId} });
+  }, [dispatch,productId]);
+  if(info.activationMethod){
+    const index =(info.activationMethod).indexOf('赠'||'')
+    data[0]['way']=info.activationMethod.slice(0,index)
+    data[1]['way']=info.activationMethod.slice(index)
+  }
+ 
   return(
     <>
       {data.map((item,index)=>{
         return (
-          <CardList  key ={index} info={item}/>
+            <CardList  key ={index} info={item} />
         )
       })
     }
     </>
   )
 }
+export default connect(state=>state)(CardSecret)

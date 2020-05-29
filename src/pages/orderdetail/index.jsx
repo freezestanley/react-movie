@@ -13,14 +13,9 @@ import TopupNote from './components/Card/TopupNote';
 function OrderDetail(props){
   const {location: { query = {} } ,order:{orderDetails, productList },mainProduct:{info={}},dispatch}=props;
   const orderId = query.id;
- 
- 
   useEffect(() => {
       dispatch({ type: 'order/queryOrderDetials', payload: orderId  });
   }, [dispatch,orderId]);
-  
-  const productId=orderDetails&&OrderDetail.productId
-  console.log(orderDetails)
   return(
     <div className={styles.myorder}>
       <PayState info={orderDetails} onComplete={()=>{ dispatch({ type: 'order/queryOrderDetials', payload: orderId  })}}/>
