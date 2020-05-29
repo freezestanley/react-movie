@@ -15,7 +15,7 @@ import { ReactComponent as CloseSvg } from './img/close.svg';
 import { ReactComponent as PromptSvg } from './img/prompt.svg';
 import { ReactComponent as SafeSvg } from './img/safe.svg';
 // import { ReactComponent as QuestionSvg } from './img/question.svg';
-import { getTotalPrice, getDiscountInfo, createPhoneOrder, createProductOrder, createSeckillOrder } from './util';
+import { getTotalPrice, getDiscountInfo, createPhoneOrder, createProductOrder, createSeckillOrder, rePayOrder } from './util';
 
 
 export default withRouter(connect(state => ({ ...state.prePay, user: state.user, vipTip: state.vipTip  }))(function(props) {
@@ -42,6 +42,7 @@ export default withRouter(connect(state => ({ ...state.prePay, user: state.user,
     }
   };
   const startPayFn = useCallback(() => {
+    console.log('------11111')
     if (!userId) {
       const sourcePage = window.encodeURIComponent(`${window.location.pathname}${window.location.search}`);
       history.push({ pathname: '/login', query: { sourcePage  } });
@@ -68,9 +69,12 @@ export default withRouter(connect(state => ({ ...state.prePay, user: state.user,
           break;
         case 'phone':
           data = { main, attach };
-          createPhoneOrder({ data, dispatch, callback: ()=>{
-            history.push('/orders');
-          }})
+          createPhoneOrder({ data, dispatch})
+          break;
+        case 'order':
+          data = main;
+          console.log('----data', data);
+          rePayOrder({ data, dispatch})
           break;
         default:
           data = main;

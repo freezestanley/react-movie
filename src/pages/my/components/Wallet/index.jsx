@@ -42,7 +42,7 @@ const UserInfo = props => {
           <img src={integral} alt='service' />
           <div className={style['menu-name']}>积分</div>
         </div>
-        <ExchangeDialog visible={visible} onCancel={() => showVisible(false)} dispatch={props.dispatch} />
+        <ExchangeDialog visible={visible} onCancel={() => showVisible(false)} dispatch={props.dispatch} onSuccess={props.onSuccess} />
       
    
     </div>
