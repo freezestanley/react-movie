@@ -76,6 +76,39 @@ export default function superCodePay({ dispatch, type = 'order/createAndPay', fo
   })
 }
 
+
+export function AntiCheat({ dispatch, type, formData, callback }) {
+  Loading.show();
+  window.__SuperCode && window.__SuperCode.show({
+    serverDomain: superCodeURL,
+    onFinaly() {
+      Loading.hide();
+    },
+    onSuccess(data) {
+      Loading.hide();
+      Loading.show({ content: <ActivityIndicator size="lg" /> });
+      const _data = data.data;
+
+      const openId = Store.get('openId');
+      if (openId) formData.openId = openId;
+      dispatch({
+        type: type,
+        payload: {
+          ...formData,
+          // 反欺诈
+          did: _data.did,
+          sid: _data.scene,
+          token: _data.token,
+        },
+      }).then(res => {
+        Loading.hide();
+        callback && callback(res)
+      
+      })
+    }
+  })
+}
+
 export function superCodePayV1({ dispatch, type = 'order/createAndPay', formData, callback }) {
   window.__SuperCode && window.__SuperCode.show({
     serverDomain: superCodeURL,

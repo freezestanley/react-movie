@@ -8,6 +8,7 @@ export default {
     orderInfo: {},
     orderDetails:{},
     productList: [],
+    myOrders:[]
   },
   reducers: {
     setState(state, { payload }) {
@@ -76,6 +77,16 @@ export default {
         return res.data;
       }
     },
+    *queryMyOrders({ payload }, { put, call }) {
+      const res = yield call(services.queryOrders, payload);
+      if (res.code === '0000') {
+        yield put({
+          type: 'setState',
+          payload: { myOrders: res.data || [] },
+        });
+        return res.data;
+      }
+    },
     *queryOrderDetials({ payload }, { put, call }) {
       const res = yield call(services.queryOrderDetails, payload);
       if (res.code === '0000') {
@@ -88,6 +99,10 @@ export default {
         });
         return res.data;
       }
+    },
+    *exchangeMember({ payload }, { put, call }) {
+      const res = yield call(services.exchangeMember, payload);
+      return res
     },
   },
 };
