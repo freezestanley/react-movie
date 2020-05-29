@@ -60,7 +60,7 @@ function TopupPage(props) {
         payload: {
           type: 'product',
           // type: 1：直充；2：卡密
-          main: { ...specData, productId: +id, type },
+          main: { ...specData, productId: +id, type, tabKey: state.tabKey },
         }
       });
     }
@@ -74,7 +74,10 @@ function TopupPage(props) {
         imgUrl={image}
       />
       <ProductSpecGroup
+        defaultValue={prePayForm.tabKey}
         dataSource={queryProductItemDtoList}
+        dispatch={dispatch}
+        isUpdateProductInfo={isUpdateProductInfo}
         onChange={(tabKey) => {
           // const currData = queryProductItemDtoList[tabKey];
           setState({
