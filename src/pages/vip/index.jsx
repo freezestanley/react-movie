@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Baseinfo from './Baseinfo';
 import Section from './Section';
 import ZeroBuy from './ZeroBuy';
@@ -7,11 +7,17 @@ import Rights from './Rights';
 import styles from './index.module.less';
 
 export default () => {
+  const [info, setInfo] = useState();
+
+  useEffect(() => {
+    setInfo({
+      // todo: '2021-12-21',
+    });
+  }, []);
+
   return (
     <div className={styles['page']}>
-      <div className={styles['baseinfo']}>
-        <Baseinfo></Baseinfo>
-      </div>
+      <div className={styles['baseinfo']}>{info && <Baseinfo info={info} />}</div>
       <Section title="健康权益0元购" className={styles['zerobuy']}>
         <ZeroBuy />
       </Section>

@@ -4,12 +4,12 @@ import Card from './Card';
 import Features from './Features';
 import styles from './index.module.less';
 
-export default () => {
+export default ({ info }) => {
   return (
     <Fragment>
       <div className={styles['main']}>
         <Header />
-        <Card />
+        <Card info={info} />
       </div>
       <div className={styles['features']}>
         <Features />
