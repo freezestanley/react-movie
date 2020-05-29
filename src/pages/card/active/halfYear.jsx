@@ -10,10 +10,10 @@ import Item from '../components/item'
 import {createPackageOrder} from './util'
 import top from '../img/halfyear/halfyear_01.png'
 import month from '../img/halfyear/halfyear_02.png'
-import foot from '../img/halfyear/halfyear_03.png'
-import author from '../img/halfyear/halfyear_04.png'
-import card1 from '../img/halfyear/halfyear_05.png'
-import card2 from '../img/halfyear/halfyear_06.png'
+import foot from '../img/halfyear/halfyear.png'
+import author from '../img/halfyear/halfyear_03.png'
+import card1 from '../img/halfyear/halfyear_04.png'
+import card2 from '../img/halfyear/halfyear_05.png'
 import styles from '../style/active.less';
 
 const Active = ({
