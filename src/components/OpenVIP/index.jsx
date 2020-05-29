@@ -10,7 +10,7 @@ import './index.less';
 
 function OpenVIP(props) {
   const ref = useRef();
-  const { onChange, value = false, vipPrice, specInfo } = props;
+  const { onChange, value = false, user, vipPrice, specInfo } = props;
   const [state, setState] = useReducer((o, n) => ({...o, ...n}), {
     checked: false,
     membershipInfo: {},
@@ -22,11 +22,11 @@ function OpenVIP(props) {
 
   // 会员价格信息
   useEffect(() => {
-    const data = props.membershipList;
+    const data = user.membershipList || [];
     if (data.length > 0) {
       setState({ membershipInfo: data[0] })
     }
-  }, [props.membershipList])
+  }, [user.membershipList])
 
   useEffect(() => {
     // props.dispatch({ type: 'user/getMembershipList' });
@@ -51,8 +51,12 @@ function OpenVIP(props) {
     });
   }, [state.checked, JSON.stringify(specInfo)])
 
-  const handleChange = () => {
+  const handleChange = (isChange) => {
     setState({ checked: !state.checked });
+    isChange && !props.isUpdateProductInfo && props.dispatch({
+      type: 'global/setState',
+      payload: { isUpdateProductInfo: true },
+    })
   }
 
   return (
@@ -73,7 +77,7 @@ function OpenVIP(props) {
             <div className="t2">白金卡</div><br />
             <div className="t3">本单立省{fmtPrice(diffMoney(specInfo), 'CN')}</div>
           </div>
-          <div className="t4" onClick={handleChange}>
+          <div className="t4" onClick={() => handleChange(true)}>
             <span className="t4-1" dangerouslySetInnerHTML={{ __html: fmtPrice(vipPrice || state.membershipInfo.lowerPrice, 'tag') }} />
             <Corner className="time-limit">限时</Corner>
             <Checkbox className="open-vip-check" checked={state.checked} />
@@ -84,4 +88,7 @@ function OpenVIP(props) {
   );
 }
 
-export default connect(state => state.user)(OpenVIP);
+export default connect(state => ({
+  user: state.user,
+  isUpdateProductInfo: state.global.isUpdateProductInfo,
+}))(OpenVIP);

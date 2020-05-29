@@ -18,7 +18,7 @@ function MyPage(props){
   // console.log('[9] index.jsx: ', props.user);
   //  console.log(props.banner)
   // console.log('[8] index.jsx: ', props);
- 
+
   const middleBanners = filter(props.banner.list, item => item.bannerType === 2);
   const hotRecommendList = filter(props.banner.list, item => item.bannerType === 5);
   const exchangeSuccess = () => {
@@ -44,7 +44,7 @@ function MyPage(props){
       <UserInfo user={props.user} />
       <MenuList orders={props.order.myOrders} />
       { !props.user.isVIP && <VipAdv />}
-       
+
       {
         props.user.isVIP ?
         <React.Fragment>
@@ -76,9 +76,9 @@ function MyPage(props){
         { !isEmpty(hotRecommendList) && <HotRecommend bannerList={hotRecommendList} />}
 
       </div>
-     
-      
-    
+
+
+
     </div>
   );
 }

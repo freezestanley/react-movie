@@ -6,7 +6,8 @@ export default {
     routesMap: [],
     tabPageList: [],
     currRoute: {},
-    hasBuyFooter: false
+    hasBuyFooter: false,
+    isUpdateProductInfo: true,
   },
   reducers: {
     setState(state, { payload }) {

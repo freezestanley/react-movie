@@ -15,16 +15,26 @@ function fmtList(data) {
 }
 
 export default function SwitchAccount(props) {
+  const { defaultValue = {} } = props;
   const [state, setState] = useReducer((o, n) => ({ ...o, ...n }), {
     accountTypeList: [],
     accountTypeName: '',
-    accountType: null,
+    accountType: defaultValue.accountType,
     index: 0,
-    account: '',
+    account: defaultValue.account || '',
     QQInfo: {},
     onInput: true,
   })
   const accountTypeList = props.accountTypeList;
+
+  const updateState = () => {
+    if (!props.isUpdateProductInfo && props.dispatch) {
+      props.dispatch({
+        type: 'global/setState',
+        payload: { isUpdateProductInfo: true },
+      })
+    }
+  }
 
   useEffect(() => {
     if (accountTypeList && accountTypeList.length > 0) {
@@ -47,6 +57,7 @@ export default function SwitchAccount(props) {
   }, [state.account, state.accountType])
 
   const handleSwitch = () => {
+    updateState();
     const isFirst = state.index === 0;
     const _idx = isFirst ? 1 : 0;
     const _record = state.accountTypeList[_idx];
@@ -63,6 +74,7 @@ export default function SwitchAccount(props) {
     // console.log(e)
     setState({ account: e })
     handleQQInfo(e, state);
+    updateState();
   }
 
   const handleQQInfo = useCallback(debounce((val, state) => {

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, useCallback } from 'react';
 import withRouter from 'umi/withRouter';
 import { connect } from 'dva';
@@ -89,10 +90,10 @@ export default withRouter(connect(state => ({ ...state.prePay, user: state.user,
     dispatch({ type: 'global/setState', payload: { hasBuyFooter: true } });
     return () => {
       dispatch({ type: 'global/setState', payload: { hasBuyFooter: false } });
-      dispatch({ type: 'prePay/resetState' });
+      props.isResetForm && dispatch({ type: 'prePay/resetState' });
       dispatch({ type: 'vipTip/setState', payload: { visible: true } })
     }
-  }, [dispatch]);
+  }, []);
   useEffect(() => {
     if(main.isOpenVIP) {
       dispatch({ type: 'vipTip/setState', payload: { visible: false } })
