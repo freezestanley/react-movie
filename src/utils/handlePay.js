@@ -116,7 +116,7 @@ export function AntiCheat({ dispatch, type, formData, callback }) {
 }
 
 // 重新拉起支付
-export function reLanchPay({ dispatch, type = 'order/reLanchPay', formData, callback }) {
+export function reLanchPay({ dispatch, type = 'order/relaunchPay', formData, callback }) {
   const openId = Store.get('openId');
   if (openId) formData.openId = openId;
   dispatch({
