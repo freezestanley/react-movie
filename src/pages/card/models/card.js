@@ -15,87 +15,87 @@ export default {
     // login
     *getCard({ payload }, { put, call }) {
       debugger
-    //   let res = yield call(services.getCard, payload);
-    let res = {
-        "data": [
-              {
-                "batchNo": "string",
-                "bindDate": "2020-05-28T07:10:36.948Z",
-                "bindOrderId": 0,
-                "bindUserId": 0,
-                "bindUserName": "string",
-                "couponAmount": 0,
-                "couponBeginDate": "2020-05-28T07:10:36.948Z",
-                "couponCardCode": "string",
-                "couponCardPassword": "string",
-                "couponEndDate": "2020-05-28T07:10:36.948Z",
-                "couponName": "string",
-                "couponNo": "string",
-                "couponTitle": "string",
-                "couponType": 0,
-                "creator": "string",
-                "exchangeData": {
-                  "cardNo": "string",
-                  "cardRemark": "string",
-                  "cardSecret": "string",
-                  "couponId": 0,
-                  "couponNo": "string",
-                  "creator": "string",
-                  "gmtCreated": "2020-05-28T07:10:36.948Z",
-                  "gmtModified": "2020-05-28T07:10:36.948Z",
-                  "id": 0,
-                  "isDeleted": "string",
-                  "modifier": "string",
-                  "otherData": "string",
-                  "productId": 0,
-                  "productItemId": 0,
-                  "productItemName": "string",
-                  "productName": "string",
-                  "productRemark": "string",
-                  "productType": 1,
-                  "rechargeAccount": "string",
-                  "rechargeDate": "2020-05-28T07:10:36.948Z",
-                  "thirdRechargeStatus": 3
-                },
-                "gmtCreated": "2020-05-28T07:10:36.948Z",
-                "gmtModified": "2020-05-28T07:10:36.948Z",
-                "id": 0,
-                "image": "string",
-                "isDeleted": "string",
-                "lockFlag": true,
-                "modifier": "string",
-                "ownerId": 0,
-                "ownerName": "string",
-                "packageName": "string",
-                "productData": [
-                  {
-                    "creator": "string",
-                    "gmtCreated": "2020-05-28T07:10:36.948Z",
-                    "gmtModified": "2020-05-28T07:10:36.948Z",
-                    "id": 0,
-                    "isDeleted": "string",
-                    "modifier": "string",
-                    "productId": 0,
-                    "productItemId": 0,
-                    "productItemName": "string",
-                    "productName": "string",
-                    "productType": 2,
-                    "templateId": 0,
-                    "templateNo": "string"
-                  }
-                ],
-                "productRange": 0,
-                "remark": "string",
-                "status": 3,
-                "templateId": 0,
-                "templateNo": "string",
-                "usedDate": "2020-05-28T07:10:36.948Z",
-                "usedOrderId": 0,
-                "usedUserId": 0,
-                "usedUserName": "string"
-              }
-        ]
-    }
+      let res = yield call(services.getCard, payload);
+    // let res = {
+    //     "data": [
+    //           {
+    //             "batchNo": "string",
+    //             "bindDate": "2020-05-28T07:10:36.948Z",
+    //             "bindOrderId": 0,
+    //             "bindUserId": 0,
+    //             "bindUserName": "string",
+    //             "couponAmount": 0,
+    //             "couponBeginDate": "2020-05-28T07:10:36.948Z",
+    //             "couponCardCode": "string",
+    //             "couponCardPassword": "string",
+    //             "couponEndDate": "2020-05-28T07:10:36.948Z",
+    //             "couponName": "string",
+    //             "couponNo": "string",
+    //             "couponTitle": "string",
+    //             "couponType": 0,
+    //             "creator": "string",
+    //             "exchangeData": {
+    //               "cardNo": "string",
+    //               "cardRemark": "string",
+    //               "cardSecret": "string",
+    //               "couponId": 0,
+    //               "couponNo": "string",
+    //               "creator": "string",
+    //               "gmtCreated": "2020-05-28T07:10:36.948Z",
+    //               "gmtModified": "2020-05-28T07:10:36.948Z",
+    //               "id": 0,
+    //               "isDeleted": "string",
+    //               "modifier": "string",
+    //               "otherData": "string",
+    //               "productId": 0,
+    //               "productItemId": 0,
+    //               "productItemName": "string",
+    //               "productName": "string",
+    //               "productRemark": "string",
+    //               "productType": 1,
+    //               "rechargeAccount": "string",
+    //               "rechargeDate": "2020-05-28T07:10:36.948Z",
+    //               "thirdRechargeStatus": 3
+    //             },
+    //             "gmtCreated": "2020-05-28T07:10:36.948Z",
+    //             "gmtModified": "2020-05-28T07:10:36.948Z",
+    //             "id": 0,
+    //             "image": "string",
+    //             "isDeleted": "string",
+    //             "lockFlag": true,
+    //             "modifier": "string",
+    //             "ownerId": 0,
+    //             "ownerName": "string",
+    //             "packageName": "string",
+    //             "productData": [
+    //               {
+    //                 "creator": "string",
+    //                 "gmtCreated": "2020-05-28T07:10:36.948Z",
+    //                 "gmtModified": "2020-05-28T07:10:36.948Z",
+    //                 "id": 0,
+    //                 "isDeleted": "string",
+    //                 "modifier": "string",
+    //                 "productId": 0,
+    //                 "productItemId": 0,
+    //                 "productItemName": "string",
+    //                 "productName": "string",
+    //                 "productType": 2,
+    //                 "templateId": 0,
+    //                 "templateNo": "string"
+    //               }
+    //             ],
+    //             "productRange": 0,
+    //             "remark": "string",
+    //             "status": 3,
+    //             "templateId": 0,
+    //             "templateNo": "string",
+    //             "usedDate": "2020-05-28T07:10:36.948Z",
+    //             "usedOrderId": 0,
+    //             "usedUserId": 0,
+    //             "usedUserName": "string"
+    //           }
+    //     ]
+    // }
     console.log(res,'res---')
       // debugger
       yield put({ type: 'setState', payload: { data: res.data } });
