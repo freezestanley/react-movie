@@ -7,7 +7,7 @@ import { isWX } from '@/utils/tools';
 import CardPopup from '../components/CardPopup'
 import {address, store} from '../address'
 import Item from '../components/item'
-
+import {createPackageOrder} from './util'
 import top from '../img/halfyear/halfyear_01.png'
 import month from '../img/halfyear/halfyear_02.png'
 import foot from '../img/halfyear/halfyear_03.png'
@@ -16,12 +16,18 @@ import card1 from '../img/halfyear/halfyear_05.png'
 import card2 from '../img/halfyear/halfyear_06.png'
 import styles from '../style/active.less';
 
-const Active = () => {
+const Active = ({
+    dispatch
+}) => {
     const [visible, setVisible] = useState(false)
     const [showFooter, setShowFooter] = useState(false)
     const box = useRef(null)
     const footer = useRef(null)
     const openClick = (e) => {
+        //packageId 1年卡，2半年卡，3月卡
+        createPackageOrder({data:{payAmount:79,packageId:2},dispatch,callback(){
+            console.log('半年卡')
+        }})
     }
     const viewStoreList = (e) => {
         setVisible(!visible)
@@ -87,4 +93,4 @@ const Active = () => {
         </div>
     )
 }
-export default Active
+export default connect()(Active)
