@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { vipDiscount } from '@/utils/ants';
 import styles from './index.less';
 
 export default ({ info }) => {
@@ -22,7 +23,7 @@ export default ({ info }) => {
             </div>
           </div>
         </div>
-        <div className={styles['price-discount']}>{info.discount * 10}折</div>
+        <div className={styles['price-discount']}>{vipDiscount(info.discount)}折</div>
       </div>
       <div className={styles['main']}>
         <div className={styles['main-inner']}>
