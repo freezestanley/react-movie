@@ -3,7 +3,7 @@ import React, { useEffect, useReducer, useRef } from 'react';
 import { Checkbox } from 'zarm';
 import { connect } from 'dva';
 import { fmtPrice, getOffsetTopBy } from '@/utils/tools';
-import { diffMoney } from '@/utils/ants';
+import { diffMoney, updateProductInfo } from '@/utils/ants';
 
 import Corner from '../Corner';
 import './index.less';
@@ -53,10 +53,7 @@ function OpenVIP(props) {
 
   const handleChange = (isChange) => {
     setState({ checked: !state.checked });
-    isChange && !props.isUpdateProductInfo && props.dispatch({
-      type: 'global/setState',
-      payload: { isUpdateProductInfo: true },
-    })
+    isChange && updateProductInfo(props);
   }
 
   return (

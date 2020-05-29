@@ -8,7 +8,7 @@ import { ProductHead } from '@/components/Product';
 import PageStatus from '@/components/PageStatus';
 import RecommendBuy from '@/components/RecommendBuy';
 import BuyFooter from '@/components/BuyFooter';
-import { formValidate } from '@/utils/ants';
+import { formValidate, updateProductInfo } from '@/utils/ants';
 
 import CardPage from './card';
 import DirectPage from './direct';
@@ -35,10 +35,7 @@ function TopupPage(props) {
   // 如果更换商品则更新商品信息
   useEffect(() => {
     if (prePayForm && prePayForm.productId !== +id) {
-      props.dispatch({
-        type: 'global/setState',
-        payload: { isUpdateProductInfo: true },
-      })
+      updateProductInfo(props)
     }
   }, [id, prePayForm])
 

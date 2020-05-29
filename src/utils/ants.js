@@ -2,6 +2,14 @@ import { Toast } from 'zarm';
 
 const notNull = data => data !== null;
 
+// 更新redux中的商品信息
+export const updateProductInfo = (props) => {
+  !props.isUpdateProductInfo && props.dispatch({
+    type: 'global/setState',
+    payload: { isUpdateProductInfo: true },
+  })
+}
+
 // 商品角标
 const fmtMask = num => num ? `${`${(num * 100).toFixed(2)}`.replace(/(0)*(\.)*0*$/, '')}折起` : '';
 export const productCornerMark = (data = [], isVIP, isOpenVIP) => {

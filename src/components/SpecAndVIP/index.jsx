@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useReducer } from 'react';
 import { connect } from 'dva';
+import { updateProductInfo } from '@/utils/ants';
 
 import SpecGroup from '../SpecGroup';
 import OpenVIP from '../OpenVIP';
@@ -15,14 +16,6 @@ function SpecAndVIP(props) {
     savePrice: null,
   })
 
-  // 如果状态改变，则更新商品信息
-  const updateState = () => {
-    !props.isUpdateProductInfo && props.dispatch({
-      type: 'global/setState',
-      payload: { isUpdateProductInfo: true },
-    })
-  }
-
   const handleOpenVIP = (data) => {
     setState({ ...data });
   }
@@ -33,7 +26,7 @@ function SpecAndVIP(props) {
       specInfo: record,
     });
 
-    isChange && updateState();
+    isChange && updateProductInfo(props);
   }
 
   useEffect(() => {

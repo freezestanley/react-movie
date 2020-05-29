@@ -2,7 +2,7 @@
 import React, { useEffect, useReducer, useCallback } from 'react';
 import { Input } from 'zarm';
 import debounce from 'lodash/debounce';
-import  { formatAccountStr, isQQ } from '@/utils/ants';
+import  { formatAccountStr, isQQ, updateProductInfo } from '@/utils/ants';
 import { getQQInfo } from '@/services/user';
 
 import './index.less';
@@ -28,11 +28,8 @@ export default function SwitchAccount(props) {
   const accountTypeList = props.accountTypeList;
 
   const updateState = () => {
-    if (!props.isUpdateProductInfo && props.dispatch) {
-      props.dispatch({
-        type: 'global/setState',
-        payload: { isUpdateProductInfo: true },
-      })
+    if (props.dispatch) {
+      updateProductInfo(props);
     }
   }
 

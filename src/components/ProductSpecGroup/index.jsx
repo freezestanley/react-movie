@@ -1,6 +1,6 @@
 import React, { useEffect, useReducer } from 'react';
 import cns from 'classnames';
-
+import { updateProductInfo } from '@/utils/ants';
 
 import './index.less';
 
@@ -17,10 +17,7 @@ export default function ProductSpecGroup(props) {
   const handleTab = (key) => {
     if (key !== state.tab ) {
       setState({ tab: key })
-      !props.isUpdateProductInfo && props.dispatch({
-        type: 'global/setState',
-        payload: { isUpdateProductInfo: true },
-      })
+      updateProductInfo(props);
       onChange && onChange(key)
     }
   }
