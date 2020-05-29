@@ -18,6 +18,8 @@ const UserInfo = props => {
       router.push('userinfo');
     }else if(type === 'service'){
       setCodeVisible(true)
+    }else if(type === 'vip'){
+      router.push('vip')
     }
   }
   const [codeVisible, setCodeVisible] = useState(false);
@@ -29,7 +31,7 @@ const UserInfo = props => {
           <img src={menu_order} alt='order' />
           <div className={style['menu-name']}>我的订单</div>
         </div>
-        <div className={style['menu-item']} onClick={() => gotourl('order')}>
+        <div className={style['menu-item']} onClick={() => gotourl('vip')}>
           <img src={menu_vip} alt='vip' />
           <div className={style['menu-name']}>会员专区</div>
         </div>
@@ -52,7 +54,7 @@ const UserInfo = props => {
             <div className={style['topay-text']}>您尚有进行中的订单未支付哦</div>
           </div>
           
-          <div className={style['btn-topay']}>去支付</div>
+          <div className={style['btn-topay']} onClick={() => router.push('./orders')}>去支付</div>
         </div>
       }
        <QRcode visible={codeVisible} onClose={e=>{

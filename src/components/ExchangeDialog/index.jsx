@@ -2,20 +2,19 @@ import React, {useState}from 'react';
 import './index.less'
 import {Modal,Input,Toast} from 'zarm';
 import cancel from './images/close.png'
-import {exchangeMember} from '@/services/order';
 import {AntiCheat} from '@/utils/handlePay';
 
 export default (props)=>{
   const visible = props.visible;
-  const [exchangeCardNo, setExchangeCardNo] = useState('')
+  const [couponCardCode, setExchangeCardNo] = useState('')
   const [exchangeSuccess, setExchangeSuccess] = useState(false);
   const onSubmit = () => {
     AntiCheat({
       dispatch: props.dispatch,
       formData:{
-        exchangeCardNo
+        couponCardCode
       },
-      type:'order/exchangeMember',
+      type:'coupon/exchangeMember',
       callback: (res) => {
         console.log('res',res);
         if(res.code !== '0000'){

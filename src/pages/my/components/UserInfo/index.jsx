@@ -15,7 +15,7 @@ const UserInfo = props => {
           <div className={style['phone-info']}>
             <div className={style['phone']}>{user.userInfo.mobileNumber}</div>
             {
-             user.isVIP ?  <img className={style['baijinvip']} src={baijinvip} alt='vip' /> : <div className={style['gotomember']}>开通会员<div className={style['rightarr']} /></div>
+             user.isVIP ?  <img className={style['baijinvip']} src={baijinvip} alt='vip' /> : <div className={style['gotomember']} onClick={() => router.push('/vip')}>开通会员<div className={style['rightarr']} /></div>
             
             }
           </div>

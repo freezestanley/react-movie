@@ -2,11 +2,19 @@ import React from 'react';
 import style from './index.less';
 import { connect } from 'dva';
 import { Toast } from 'zarm';
+import router from 'umi/router';
 
 const UserInfo = props => {
   const handleExit = () => {
     props.dispatch({ type: 'user/loginOut',callback:() => {
-      Toast.show('退出成功')
+      Toast.show({
+        content: '退出成功',
+        stayTime: 1500,
+        afterClose: () => {
+          router.replace('/my')
+        }
+      });
+      
     } })
   }
   console.log('avatar',props)

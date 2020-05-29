@@ -17,7 +17,8 @@ const UserInfo = props => {
     if(type === 'exchange'){
       if(props.user.userId){
         showVisible(true);
-
+      }else{
+        router.push('/login')
       }
     }else if(type === 'card'){
       router.push('/card');
