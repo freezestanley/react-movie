@@ -220,7 +220,7 @@ export default {
 
         ]
       }
-    console.log(res,'res---')
+    
       // debugger
       yield put({ type: 'setState', payload: { data: res.data, total: res.historyCouponCount } });
       // return res;
