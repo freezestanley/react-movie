@@ -15,7 +15,7 @@ importScripts("/workbox-v3.6.3/workbox-sw.js");
 workbox.setConfig({modulePathPrefix: "/workbox-v3.6.3"});
 
 importScripts(
-  "/precache-manifest.8eaa198fe14987c2cc73a36e2c3a75ca.js"
+  "/precache-manifest.c800354562afbb758288529223295305.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "ants-app"});
