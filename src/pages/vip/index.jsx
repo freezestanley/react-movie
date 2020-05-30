@@ -12,6 +12,7 @@ import Discount from './Discount';
 import Rights from './Rights';
 import styles from './index.module.less';
 
+
 export default connect(state => ({banner: state.banner, productDetail: state.productDetail, products: state.products.list}))((props) => {
   const { dispatch, productDetail, products } = props;
   const vipSeckillList = filter(productDetail.eventList, item => item.onlyForVip === 'Y');

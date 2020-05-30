@@ -34,7 +34,7 @@ export default ({ info = {}, productList = [] })=>{
           <span>产品规格</span>
           <span>{productList[0] && productList[0]['productItemName']}</span>
         </div>}
-        {(info.status===6||isShow)&&<>
+        {((productList&&productList[0].type===3)||info.status===6||isShow)&&<>
           {info.productOriginalPrice&&<div>
           <span>原价</span>
           <span>{formatMoney(info.productOriginalPrice)}</span>
