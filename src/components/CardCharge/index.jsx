@@ -99,10 +99,7 @@ function CardSecret(props){
     dispatch({ type: 'mainProduct/getmain', payload: {productId} });
   }, [dispatch,productId]);
   if(info.activationMethod){
-    console.log(info.activationMethod)
-    const index =(info.activationMethod).indexOf('赠'||'')
-    data[0]['way']=info.activationMethod.slice(0,index)
-    data[1]['way']=info.activationMethod.slice(index)
+    data[0]['way']=info.activationMethod
   }
  
   return(
