@@ -1,10 +1,10 @@
 self.__precacheManifest = [
   {
-    "revision": "c616eb5a03b43ea32b32",
+    "revision": "9c66da7bc3cd80611903",
     "url": "/vendors.chunk.css"
   },
   {
-    "revision": "c616eb5a03b43ea32b32",
+    "revision": "9c66da7bc3cd80611903",
     "url": "/vendors.async.js"
   },
   {
@@ -16,7 +16,7 @@ self.__precacheManifest = [
     "url": "/layouts__common.async.js"
   },
   {
-    "revision": "95b60f2272fc1e1fd289",
+    "revision": "38fc630448282ea35e4b",
     "url": "/p__card.async.js"
   },
   {
@@ -40,7 +40,7 @@ self.__precacheManifest = [
     "url": "/p__card__history.async.js"
   },
   {
-    "revision": "e135b84edcdea3f1b93c",
+    "revision": "bc75ca3d895c10e09e62",
     "url": "/p__card__models__card.js.async.js"
   },
   {
@@ -52,11 +52,11 @@ self.__precacheManifest = [
     "url": "/p__charge.async.js"
   },
   {
-    "revision": "d249960df7eaec71cbe1",
+    "revision": "18077cce48e6516af2db",
     "url": "/p__explore.chunk.css"
   },
   {
-    "revision": "d249960df7eaec71cbe1",
+    "revision": "18077cce48e6516af2db",
     "url": "/p__explore.async.js"
   },
   {
@@ -96,19 +96,19 @@ self.__precacheManifest = [
     "url": "/p__my.async.js"
   },
   {
-    "revision": "65b4fb96480017c0c9e0",
+    "revision": "a3529c3233e4794ac47d",
     "url": "/p__orderdetail.chunk.css"
   },
   {
-    "revision": "65b4fb96480017c0c9e0",
+    "revision": "a3529c3233e4794ac47d",
     "url": "/p__orderdetail.async.js"
   },
   {
-    "revision": "1aed02c269be2d9f965d",
+    "revision": "03787ef5375e1efc3498",
     "url": "/p__orders.chunk.css"
   },
   {
-    "revision": "1aed02c269be2d9f965d",
+    "revision": "03787ef5375e1efc3498",
     "url": "/p__orders.async.js"
   },
   {
@@ -172,11 +172,11 @@ self.__precacheManifest = [
     "url": "/p__userinfo.async.js"
   },
   {
-    "revision": "a58e9caaa00c2c8ee2c4",
+    "revision": "06fbfe8a9cb0cc0013aa",
     "url": "/p__vip.chunk.css"
   },
   {
-    "revision": "a58e9caaa00c2c8ee2c4",
+    "revision": "06fbfe8a9cb0cc0013aa",
     "url": "/p__vip.async.js"
   },
   {
@@ -336,24 +336,8 @@ self.__precacheManifest = [
     "url": "/icons/192.png"
   },
   {
-    "revision": "ec2c01423c80d74465f63c3da5fe389b",
-    "url": "/icons/144.png"
-  },
-  {
-    "revision": "0efa5a654f225a5a603396a7f7aa8518",
-    "url": "/icons/android-chrome-152x152.png"
-  },
-  {
     "revision": "8b1c8020cc67ebf844a1615ad394999a",
     "url": "/icons/android-chrome-192x192.png"
-  },
-  {
-    "revision": "d7e488ade6dbf67eef4668ddd15c5b1d",
-    "url": "/icons/apple-touch-icon-152x152.png"
-  },
-  {
-    "revision": "f3b51acf7ce636366ba888475144b429",
-    "url": "/icons/android-chrome-512x512.png"
   },
   {
     "revision": "191074b6f2222c2440b0bb3a0c642364",
@@ -364,16 +348,28 @@ self.__precacheManifest = [
     "url": "/icons/apple-touch-icon-120x120.png"
   },
   {
-    "revision": "98e177e60162bc26af57a5fdd65ab69e",
-    "url": "/icons/apple-touch-icon-60x60.png"
+    "revision": "0efa5a654f225a5a603396a7f7aa8518",
+    "url": "/icons/android-chrome-152x152.png"
+  },
+  {
+    "revision": "ec2c01423c80d74465f63c3da5fe389b",
+    "url": "/icons/144.png"
+  },
+  {
+    "revision": "f3b51acf7ce636366ba888475144b429",
+    "url": "/icons/android-chrome-512x512.png"
+  },
+  {
+    "revision": "d7e488ade6dbf67eef4668ddd15c5b1d",
+    "url": "/icons/apple-touch-icon-152x152.png"
   },
   {
     "revision": "719cb777b3c5dd6f5f2288e538c98df1",
     "url": "/icons/apple-touch-icon-180x180.png"
   },
   {
-    "revision": "8abb1cc4c5b8dc8db59e3026d135eb1d",
-    "url": "/icons/favicon-16x16.png"
+    "revision": "98e177e60162bc26af57a5fdd65ab69e",
+    "url": "/icons/apple-touch-icon-60x60.png"
   },
   {
     "revision": "47cb723696508f2c5b8e5f704a31220f",
@@ -382,6 +378,10 @@ self.__precacheManifest = [
   {
     "revision": "bbedf478fa6adc4b1c8faa146a262bd2",
     "url": "/icons/apple-touch-icon-76x76.png"
+  },
+  {
+    "revision": "8abb1cc4c5b8dc8db59e3026d135eb1d",
+    "url": "/icons/favicon-16x16.png"
   },
   {
     "revision": "18f17462b535693be93bc1184774c5c9",
