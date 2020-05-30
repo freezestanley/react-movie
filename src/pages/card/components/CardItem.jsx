@@ -53,7 +53,7 @@ const recharge = [
 const cardItem = (props) => {
     const {border,  btnTitle, btnClick, thirdStatus} = props
     const {title, retitle, time, historyFlag, status } =  props.data
-    debugger
+    // debugger
     // let result = {
     //     class: 'normal',
     //     txt: ''

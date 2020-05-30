@@ -8,15 +8,18 @@ import Card from './components/Card'
 
 const CardPaper = (props) => {
     const { userId } = props.user
-    const { data, total } = props.card
+    const { data, total,historyCards } = props.card
     useEffect(() => {
-        if (userId) props.dispatch({ type: 'card/getCard', payload: { pageNo:1, pageSize: 100 } })
-    }, [props, userId])
+        if (userId) {
+            props.dispatch({ type: 'card/getCard', payload: { pageNo:1, pageSize: 100,isHistoryFlag: false } })
+            props.dispatch({ type: 'card/getHistoryCard', payload: { pageNo:1, pageSize: 100,isHistoryFlag: true } })
+        }
+    }, [userId])
     const gotoHistory = (item) => {
         router.push('/history');
       }
     const clickHandler = () => {
-        debugger
+        // debugger
         if (userId) props.dispatch({ type: 'card/getCard', payload: { pageNo:1, pageSize: 100 } })
     }
     return (
@@ -120,7 +123,7 @@ const CardPaper = (props) => {
                 <div 
                     className={styles.historyCard}
                     onClick={(e)=>gotoHistory(e)}
-                >历史卡券({ total })</div>
+                >历史卡券({ (historyCards||[]).length })</div>
             </div>
             
         </div>

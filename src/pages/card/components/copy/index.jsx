@@ -13,7 +13,7 @@ import styles from './index.less'
 
 const CardPw = (props) => {
     const {visible, onMaskClick, afterOpen, afterClose, CloseClick} = props
-    const {state, name, codeNo, paytime, cardNo, remark} = props.data
+    const {state, name, codeNo, paytime, cardNo, remark, historyFlag} = props.data
     const copyCardNo = (e) => {
         if(copy(e)){
             Toast.show('复制成功')

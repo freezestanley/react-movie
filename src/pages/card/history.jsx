@@ -7,47 +7,87 @@ import styles from './style/index.less';
 import Card from './components/Card'
 
 const HistoryCard = ({
-    user,
     card,
+    user,
     dispatch
 }) => {
-    const { userId } = user||{};
-    const {historyCards=[], data} = card||{};
+    const { historyCards = [] } = card || {};
+    const { userId } = user
+
     useEffect(() => {
-        if (userId) dispatch({ type: 'card/getHistoryCard', payload: { pageNo:1, pageSize: 100, isHistoryFlag: true } })
-    }, [dispatch, userId])
-    
-    console.log(historyCards,'historyCards--')
+        if (userId) {
+            dispatch({ type: 'card/getHistoryCard', payload: { pageNo:1, pageSize: 100,isHistoryFlag: true } })
+        }
+    }, [userId])
+
     return (
         <div className={styles.history}>
             <div className={styles.title}>历史卡券</div>
             {
                 historyCards.map((ele, idx, arr) => {
-                    const {exchangeData,couponTitle,packageName,couponEndDate,status} = ele
-                    let cardExchangeData = exchangeData||{}
+                    let next = ''
+                    let result = {
+                        title: ele.couponTitle,
+                        retitle: ele.productName,
+                        time: ele.endDate,
+                        name: '',
+                        cardNo: '',
+                        paytime: '',
+                        remark: '',
+                        account: '',
+                        codeNo: '',
+                        status: ele.viewStatus || 0,
+                        historyFlag: true 
+                    }
+
+                    if (ele.viewStatus === 7) {
+
+                    } else if (ele.viewStatus === 4) {
+                        if (ele.category === 1) {
+                            next = 'change'
+                            result.name = ele.productName
+                            result.cardNo = ele.couponCode
+                            result.paytime = ele.endDate
+                            result.remark = ele.couponRemark
+                        } else {
+                            next = 'jump'
+                        }
+                    } else {
+                        if (ele.hasDetail) {
+                            if (ele.category === 1) {
+                                next = 'change'
+                                result.name = ele.productName
+                                result.cardNo = ele.couponCode
+                                result.paytime = ele.endDate
+                                result.remark = ele.couponRemark
+                            } else if (ele.category === 2) {
+                                if (ele.rechargeStatus !== 1) {
+                                    next = 'member'
+                                    result.name = ele.productName
+                                    result.account = ele.rechargeAccount
+                                    result.paytime = ele.rechargeDate
+                                    // result.status = ele.rechargeStatus
+                                }
+
+                            } else if (ele.category === 3) {
+                                next = 'copy'
+                                result.name = ele.productName
+                                result.cardNo = ele.cardNo
+                                result.codeNo = ele.cardSecret
+                                result.remark = ele.cardRemark
+                            }
+                        } else {
+
+                        }
+                    }
+
                     return (
                         <Card
-                            key = {idx.toString()}
+                            key={idx.toString()}
                             border
-                            // btnTitle = {(ele.status === 3 && ele.exchangeData.thirdRechargeStatus === 3) ? '联系客服' : null}
-                            data = {{
-                                title: couponTitle,
-                                retitle: packageName, 
-                                time: couponEndDate, 
-                                state: status,// 'fail', === 3 ? ele.exchangeData.thirdRechargeStatus : ele.status
-                                thirdStatus: cardExchangeData.thirdRechargeStatus,
-                                name: cardExchangeData.productName,
-                                account: cardExchangeData.rechargeAccount,
-                                paytime: cardExchangeData.rechargeDate,
-                                codeNo: cardExchangeData.cardSecret,
-                                cardNo: cardExchangeData.cardNO,
-                                remark: cardExchangeData.cardRemark,
-                                historyFlag: true
-                            }}
-                            step = 'member'
-                        >
-                        </Card>
-                    )
+                            data={result}
+                            step={next}
+                        />)
                 })
             }
         </div>
@@ -57,4 +97,4 @@ const HistoryCard = ({
 export default connect(state => ({
     card: state.card,
     user: state.user
-  }))(HistoryCard);
+}))(HistoryCard);
