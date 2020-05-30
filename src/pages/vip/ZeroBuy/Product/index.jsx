@@ -1,9 +1,20 @@
 import React from 'react';
+import withRouter from 'umi/withRouter';
+import { getSourcePageStr } from '@/utils/tools';
+import { connect } from 'dva';
 import styles from './index.module.less';
 
-export default ({ name, logo, price }) => {
+export default withRouter(connect(state => ({ user: state.user }))(({ name, user, logo, price, id, history }) => {
+  const onClickFn = () => {
+    const { userId } = user;
+    if (userId) {
+      history.push({ pathname: '/topup', query: { id } });
+    } else {
+      history.push({ pathname: '/login', query: { sourcePage: getSourcePageStr() } });
+    }
+  };
   return (
-    <div className={styles['product']}>
+    <div className={styles['product']} onClick={onClickFn}>
       <div className={styles['name']}>
         {name}
         <span className={styles['tag']}>会员专享</span>
@@ -17,4 +28,4 @@ export default ({ name, logo, price }) => {
       </div>
     </div>
   );
-};
+}));
