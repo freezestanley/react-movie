@@ -2,6 +2,32 @@ import { Toast } from 'zarm';
 import numeral from 'numeral';
 import dayjs from 'dayjs';
 
+export function mapRouter(oData) {
+  const _routes = [];
+  function _mapRouter(data) {
+    // console.log('[12] index.jsx: ', data);
+    if (Array.isArray(data)) {
+      data.forEach(item => {
+        if (item.path) {
+          if (item.routes && Array.isArray(item.routes)) {
+            item.routes.forEach((item2) => {
+              if (item2.path && !item2.routes) {
+                _routes.push(item2);
+              } else {
+                _mapRouter(item2);
+              }
+            })
+          } else {
+            _routes.push(item);
+          }
+        }
+      })
+    }
+  }
+  _mapRouter(oData);
+  return _routes;
+}
+
 export const fmtPrice = (data, type) => {
   // if (data < 0 || !/[\d.]/.test(data)) {
   //   return `¥0`;

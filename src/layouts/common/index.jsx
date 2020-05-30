@@ -1,53 +1,38 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { connect } from 'dva';
+import isEmpty from 'lodash/isEmpty';
+import Redirect from 'umi/Redirect';
 import cns from 'classnames';
 import 'zarm/dist/zarm.min.css';
-import { BrowserInfo, Store } from '@/utils/tools';
+import { BrowserInfo, Store, mapRouter, Query } from '@/utils/tools';
 import weChatAuth from '@/utils/weChatAuth';
 import VConsole from 'vconsole';
+import GlobalLoading from '@/components/GlobalLoading';
 import getEnv from '@/utils/env';
 import TabNavItem from './TabNavItem';
 import './index.less';
 
-function mapRouter(oData) {
-  const _routes = [];
-  function _mapRouter(data) {
-    // console.log('[12] index.jsx: ', data);
-    if (Array.isArray(data)) {
-      data.forEach(item => {
-        if (item.path) {
-          if (item.routes && Array.isArray(item.routes)) {
-            item.routes.forEach((item2) => {
-              if (item2.path && !item2.routes) {
-                _routes.push(item2);
-              } else {
-                _mapRouter(item2);
-              }
-            })
-          } else {
-            _routes.push(item);
-          }
-        }
-      })
-    }
-  }
-  _mapRouter(oData);
-  return _routes;
-}
+ // 反欺诈
+ let s = 'b61f4b29a9b2#test#support'; // 测试ID
+ if (/vip.zhongan.io$/.test(window.location.origin)) {
+   s = 'a8987701693f#prd#support'; // 生产ID
+ }
+ window.__SuperCode = window.SuperCode && new window.SuperCode({
+   scene: s
+ });
 
 function Layout(props) {
   const isWx = BrowserInfo.isWeixin;
-  // const store = props.global;
   const { global: {
     currRoute,
     routesMap,
     title,
     hasBuyFooter,
     tabPageList=[],
-    
-  }, location, } =props;
-  const { hasNavBar = false, footer, fullSize=false } = currRoute;
+  }, location, user } =props;
+  const { hasNavBar = false, footer, fullSize=false, isNeedLogin } = currRoute;
   const [deferredPrompt, setDeferredPrompt] = useState(null);
+  const [loading, setLoading] = useState(true);
   const ref = useRef();
   useEffect(() => {
     window.addEventListener('beforeinstallprompt', function (e) {
@@ -62,7 +47,6 @@ function Layout(props) {
           alert(choiceResult.outcome);
       });
       }
-
   });
   },[])
   useEffect(() => {
@@ -73,33 +57,29 @@ function Layout(props) {
   },[])
 
   useEffect(() => {
-    props.dispatch({ type: 'user/checkLogin' }).then(valid => {
-      // 非法时清除旧的token
-      if (!valid) {
-        Store.remove('token');
+    if (routesMap.length === 0) {
+      const _routes = mapRouter(props.route.routes);
+      props.dispatch({ type: 'global/setState', payload: { routesMap: _routes }})
+    }
+    // 微信授权
+    if (isWx && !Store.get('openId')) {
+      weChatAuth(code => props.dispatch({ type: 'user/wxLogin', payload: { code }}))
+    }
+    (async function init() {
+      try{
+        const valid = props.dispatch({ type: 'user/checkLogin' });
+        if (!valid) {
+          Store.remove('token');
+        }
+        // 获取用户信息
+        await props.dispatch({ type: 'user/getUserInfo', hasToast: false });
+        // 获取会员等级
+        await props.dispatch({ type: 'user/getMembershipList' });
+      } catch(e) {
+      } finally{
+        setLoading(false);
       }
-      // 反欺诈
-      let s = 'b61f4b29a9b2#test#support'; // 测试ID
-      if (/vip.zhongan.io$/.test(window.location.origin)) {
-        s = 'a8987701693f#prd#support'; // 生产ID
-      }
-      window.__SuperCode = window.SuperCode && new window.SuperCode({
-        scene: s
-      });
-
-      // 获取会员等级
-      props.dispatch({ type: 'user/getMembershipList' });
-      // 获取用户信息
-      props.dispatch({ type: 'user/getUserInfo', hasToast: false })
-      // 微信授权
-      if (isWx && !Store.get('openId')) {
-        weChatAuth(code => props.dispatch({ type: 'user/wxLogin', payload: { code }}))
-      }
-      if (routesMap.length === 0) {
-        const _routes = mapRouter(props.route.routes);
-        props.dispatch({ type: 'global/setState', payload: { routesMap: _routes }})
-      }
-    });
+    })();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -123,13 +103,21 @@ function Layout(props) {
       ref.current.scrollTop = 0
     }
   }, [location]);
+
   const _reg = (currRoute.path || '').replace('/', '_');
   const _classname = _reg === '_' ? '_home' : _reg;
   const hasTabBar = currRoute.type === 'tabBar';
-  // console.log('[65] index.jsx: ', currPage);
   const isGray = currRoute.backgroundColor === 'gray';
 
-  if (!BrowserInfo.isPhone) return '请使用手机进行访问';
+  if (loading) {
+    return <GlobalLoading text="页面加载中"/>
+  }
+  if (isNeedLogin && isEmpty(user.userInfo)) {
+    const { query, pathname } = location
+    const queryString = Query.stringify(query);
+    const sourcePage = `${pathname}${queryString ? '?' : ''}${queryString}`
+    return <Redirect to={{ pathname: '/login', query: { sourcePage } }}/>
+  }
   return (
     <div className={cns('z_layout', `z${_classname}_page`)} style={{ backgroundColor: isGray ? 'var(--layout-bg)' : '#fff' }}>
       <div className='z_header_box'>
@@ -162,9 +150,8 @@ function Layout(props) {
         )}
         {/* { hasBuyFooter && <BuyFooter /> } */}
       </div>
-
     </div>
   )
 }
 
-export default connect(state => state)(Layout)
+export default connect(state => ({ global: state.global, user: state.user }))(Layout)
