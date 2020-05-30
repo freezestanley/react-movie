@@ -53,11 +53,11 @@ export function queryAdditionalProductItems(data) {
 }
 
 // 获取商品分类
-export function queryProductsGroupByCategory() {
+export function queryProductsGroupByCategory(data) {
   return request({
     url: '/queryProductsGroupByCategory',
     serve: 'product',
     method: 'GET',
-    data: {},
+    data,
   });
 }

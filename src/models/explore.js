@@ -14,6 +14,7 @@ export default {
   },
   effects: {
     *getCategories({ payload }, { put, call }) {
+      console.log('-----payload', payload);
       const res = yield call(productService.queryProductsGroupByCategory, payload);
       if (res.code !== '0000') {
         return;

@@ -11,6 +11,8 @@ import GlobalLoading from '@/components/GlobalLoading';
 import getEnv from '@/utils/env';
 import TabNavItem from './TabNavItem';
 import './index.less';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
  // 反欺诈
  let s = 'b61f4b29a9b2#test#support'; // 测试ID
@@ -65,6 +67,10 @@ function Layout(props) {
     if (isWx && !Store.get('openId')) {
       weChatAuth(code => props.dispatch({ type: 'user/wxLogin', payload: { code }}))
     }
+    props.dispatch({ type: 'banner/getBanner', payload: {
+      bannerType:[1,2,3,4,5],
+      pageSize: 100,
+    } });
     (async function init() {
       try{
         const valid = props.dispatch({ type: 'user/checkLogin' });
