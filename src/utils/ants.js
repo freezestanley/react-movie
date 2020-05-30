@@ -102,6 +102,22 @@ export const formatAccountStr = (account, type) => {
     case 3: str = '微信号'; break;
     case 4: str = '微博昵称'; break;
     case 5: str = '抖音号'; break;
+    case 6: str = '斗鱼昵称'; break;
+    case 7:
+      return [
+        {
+          title: '战网商品通行证',
+          placeholder: '请输入战网商品通行证',
+          type: 7,
+          required: false,
+        },
+        {
+          title: '魔兽世界账号',
+          placeholder: '请输入魔兽世界账号',
+          type: 7,
+          required: true,
+        },
+      ];
     default: break;
   }
   if (!type) {

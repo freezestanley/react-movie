@@ -30,6 +30,16 @@ function TopupPage(props) {
       return
     }
     dispatch({ type: 'productDetail/getProductItems', payload: id });
+
+    // return () => {
+    //   dispatch({
+    //     type: 'prePay/setState',
+    //     payload: {
+    //       type: 'product',
+    //       main: {},
+    //     }
+    //   });
+    // }
   }, [dispatch, id]);
 
   // 如果更换商品则更新商品信息
@@ -48,9 +58,9 @@ function TopupPage(props) {
   // console.log('[30] index.jsx: ', state);
 
   const handleChangeSpec = (specData) => {
-    // console.log('[51] index.jsx: ', isUpdateProductInfo);
+    console.log('[topup spec]', specData);
     if (isUpdateProductInfo) {
-      // console.log('[topup spec]: ', specData);
+      // console.log('[topup spec redux]: ', specData);
       setState({ specData })
       dispatch({
         type: 'prePay/setState',
@@ -104,7 +114,7 @@ function TopupPage(props) {
               <DirectPage
                 key={1}
                 {..._props}
-                accountTypeList={product.rechargeAccountType}
+                accountTypeList={product.rechargeAccountType || []}
                 onChange={handleChangeSpec}
                 dispatch={dispatch}
                 isUpdateProductInfo={isUpdateProductInfo}
@@ -118,7 +128,10 @@ function TopupPage(props) {
         <TopupNote nodes={detail || ''} />
       </div>
       <RecommendBuy />
-      <BuyFooter isResetForm={false} onValidate={() => formValidate(state.specData, type)} />
+      <BuyFooter
+        // isResetForm={false}
+        onValidate={() => formValidate(state.specData, type)}
+      />
     </>
   );
 }

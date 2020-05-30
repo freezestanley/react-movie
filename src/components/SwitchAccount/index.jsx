@@ -92,6 +92,8 @@ export default function SwitchAccount(props) {
 
   const len = state.accountTypeList.length;
 
+  // console.log('[95] index.jsx: ', state.accountType);
+
   return (
     <div className="z_switch_account">
       <div className="z_switch_head">

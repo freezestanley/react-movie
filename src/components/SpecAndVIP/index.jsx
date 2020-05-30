@@ -21,7 +21,7 @@ function SpecAndVIP(props) {
     setState({ ...data });
   }
 
-  const handleSpec = (active, record={}, isChange) => {
+  const handleSpec = (active, record = {}, isChange) => {
     setState({
       specIndex: active,
       specInfo: record,
@@ -59,7 +59,7 @@ function SpecAndVIP(props) {
           // savePrice={state.savePrice}
           specInfo={state.specInfo}
           onChange={handleOpenVIP}
-          value={defaultValue.isOpenVIP}
+          // value={defaultValue.isOpenVIP}
         />
       )}
     </div>

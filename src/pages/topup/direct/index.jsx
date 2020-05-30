@@ -2,6 +2,7 @@
 import React, { useEffect, useReducer } from 'react';
 import SpecAndVIP from '@/components/SpecAndVIP';
 import SwitchAccount from '@/components/SwitchAccount';
+import MulitAccount from '@/components/MulitAccount';
 
 export default function DirectPage(props) {
   const { defaultValue = {} } = props;
@@ -29,16 +30,39 @@ export default function DirectPage(props) {
     })
   }
 
+  const handleMulitAccount = (data) => {
+    if (data.accountType === 7) {
+      setState({
+        ...data,
+        account: [data.account0, data.account1]
+      });
+    }
+  }
+
+  const _type = props.accountTypeList[0] || 0;
+
   return (
     <div>
       {/* tabKey-{props.tabKey} */}
-      <SwitchAccount
-        defaultValue={props.defaultValue}
-        onChange={handleAccount}
-        accountTypeList={props.accountTypeList}
-        dispatch={props.dispatch}
-        isUpdateProductInfo={props.isUpdateProductInfo}
-      />
+      {(_type^7) ? (
+        <SwitchAccount
+          defaultValue={props.defaultValue}
+          onChange={handleAccount}
+          accountTypeList={props.accountTypeList}
+          dispatch={props.dispatch}
+          isUpdateProductInfo={props.isUpdateProductInfo}
+        />
+      ) : null}
+      {/* 魔兽世界 */}
+      {_type === 7 && (
+        <MulitAccount
+          defaultValue={props.defaultValue}
+          accountType={_type}
+          onChange={handleMulitAccount}
+          dispatch={props.dispatch}
+          isUpdateProductInfo={props.isUpdateProductInfo}
+        />
+      )}
       <SpecAndVIP
         // prePay={props.prePay}
         dataSource={props.productSpecItems}
