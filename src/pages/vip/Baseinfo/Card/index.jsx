@@ -1,26 +1,26 @@
 import React, { Fragment } from 'react';
 import { connect } from 'dva';
 import superCodePay from '@/utils/handlePay';
+import { formatDate } from '@/utils/tools';
 import styles from './index.module.less';
 
 export default connect(state =>({ user: state.user }))(({ info, dispatch, user }) => {
-  const { membershipList:[vipInfo={}] } = user
+  const { membershipList:[vipInfo={}], isVIP, userInfo } = user
   const buyVip = () => {
     const formData = {
       payAmount: vipInfo.lowerPrice,
       payType: 1,
     }
     superCodePay({ dispatch, type: 'order/createMemberOrder',  formData, callback(){
-      alert(1111);
     } });
   };
   return (
     <div className={styles['card']}>
       <div className={styles['card-inner']}>
-        <div className={styles['name']}>蜜蜂会员白金卡</div>
+        <div className={styles['name']}>盎司会员白金卡</div>
         <div className={styles['desc']}>全场商品会员价5折起</div>
-        {info.todo ? (
-          <div className={styles['expireTime']}>{info.todo}到期</div>
+        {isVIP ? (
+          <div className={styles['expireTime']}>{formatDate(userInfo.membershipExpiredTime, 'YYYY-MM-DD')}到期</div>
         ) : (
           <Fragment>
             <div className={styles['price']}>

@@ -23,10 +23,6 @@ function MyPage(props){
     })
   }
   useEffect(() => {
-    props.dispatch({ type: 'banner/getBanner', payload: {
-      bannerType:[2,5],
-      pageSize: 100,
-    } });
     props.dispatch({type:'order/queryMyOrders',payload:{
       pageNo:1,
       pageSize:10,

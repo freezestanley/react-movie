@@ -56,8 +56,7 @@ export default connect(state => ({ explore: state.explore }))(({ history, dispat
   }, [hot, categories]);
 
   const fetchData = useCallback(() => {
-    dispatch({ type: 'explore/getCategories', payload: {} });
-    // dispatch({ type: 'explore/getHotRecommends', payload: { bannerType: [4], pageSize: 8 } });
+    dispatch({ type: 'explore/getCategories', payload: { status: 2 } });
   }, [dispatch]);
 
   useEffect(() => {
