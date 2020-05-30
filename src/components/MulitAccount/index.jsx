@@ -33,10 +33,17 @@ export default function MulitAccount(props) {
     } else {
       flag = false;
     }
-    const _data = { ...state, [`account${data.index}`]: data.value, isFinished: flag };
+    const _data = { ...state, [`account${data.index}`]: data.value || '', isFinished: flag };
     setState(_data);
     props.onChange && props.onChange(_data);
   }
+
+  useEffect(() => {
+    props.onChange && props.onChange({
+      account: [],
+      accountType: props.accountType
+    });
+  }, [props.accountType])
 
   // console.log('[31] index.jsx: ', state);
 

@@ -109,13 +109,15 @@ export const formatAccountStr = (account, type) => {
           title: '战网商品通行证',
           placeholder: '请输入战网商品通行证',
           type: 7,
-          required: false,
+          required: true,
+          key: 'account0',
         },
         {
           title: '魔兽世界账号',
           placeholder: '请输入魔兽世界账号',
           type: 7,
           required: true,
+          key: 'account1',
         },
       ];
     case 8: str = '酷我ID'; break;
@@ -135,7 +137,7 @@ export const formatAccountStr = (account, type) => {
 // 账号校验
 export const formValidate = (data) => {
   const val = data.account;
-  if (!val) {
+  if (typeof data.account === 'string' && !val) {
     Toast.show(formatAccountStr(data.accountType));
     return false;
   }
@@ -149,6 +151,17 @@ export const formValidate = (data) => {
     case 2:
       if (!/^1\d{10}$/.test(val)) {
         Toast.show('手机号码格式错误');
+        return false;
+      }
+      return true;
+    case 7:
+      const d = data.account || [];
+      if (!d[0]) {
+        Toast.show('请输入战网商品通行证');
+        return false;
+      }
+      if (!d[1]) {
+        Toast.show('请输入魔兽世界账号');
         return false;
       }
       return true;
