@@ -21,7 +21,7 @@ function SpecAndVIP(props) {
     setState({ ...data });
   }
 
-  const handleSpec = (active, record, isChange) => {
+  const handleSpec = (active, record={}, isChange) => {
     setState({
       specIndex: active,
       specInfo: record,

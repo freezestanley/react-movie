@@ -99,4 +99,13 @@ export function createPackageOrder({ orderKey, ...rest }) {
   });
 }
 
+// 重新拉起支付
+export function relaunchPay({ orderKey, ...rest }) {
+  return request({
+    url: `/start`,
+    serve: 'pay',
+    method: 'POST',
+    data: rest
+  });
+}
 

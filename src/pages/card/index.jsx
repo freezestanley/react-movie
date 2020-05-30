@@ -8,14 +8,15 @@ import Card from './components/Card'
 
 const CardPaper = (props) => {
     const { userId } = props.user
-    const { data } = props.card
+    const { data, total } = props.card
     useEffect(() => {
         if (userId) props.dispatch({ type: 'card/getCard', payload: { pageNo:1, pageSize: 100 } })
     }, [props, userId])
     const gotoHistory = (item) => {
         router.push('/history');
       }
-    const closeHandler = () => {
+    const clickHandler = () => {
+        debugger
         if (userId) props.dispatch({ type: 'card/getCard', payload: { pageNo:1, pageSize: 100 } })
     }
     return (
@@ -24,56 +25,67 @@ const CardPaper = (props) => {
                 {
                     data.map((ele, idx, arr) => {
                         let next = ''
-                        debugger
-                        let couponType = ele.couponType,
-                            productType = ele.exchangeData.productType,
-                            status = ele.status,
-                            thirdRechargeStatus = ele.exchangeData.thirdRechargeStatus
+                        let result = {
+                            title: ele.couponTitle,
+                            retitle: ele.productName, 
+                            time: ele.endDate, 
+                            name: '',
+                            cardNo: '',
+                            paytime: '',
+                            remark: '',
+                            account: '',
+                            codeNo: '',
+                            status: ele.viewStatus || 0
+                        }
 
-                        next = (couponType === 6) ? 'change' :  // 会员
-                                (productType === 2) ? 'copy' :  // 卡密
-                                 (productType === 1 && status === 2) ? 'jump' : // 直充
-                                  (productType === 1 && status === 3 && thirdRechargeStatus === 1) ? '' : 'member'
+                        if (ele.viewStatus === 7) {
+                            
+                        } else if(ele.viewStatus === 4){
+                            if (ele.category === 1) {
+                                next = 'change'
+                                result.name = ele.productName
+                                result.cardNo = ele.couponCode
+                                result.paytime = ele.endDate
+                                result.remark = ele.couponRemark           
+                            } else {
+                                next = 'jump'
+                            }
+                        } else {
+                            if (ele.hasDetail) {
+                                if (ele.category === 1) {
+                                    next = 'change'
+                                    result.name = ele.productName
+                                    result.cardNo = ele.couponCode
+                                    result.paytime = ele.endDate
+                                    result.remark = ele.couponRemark 
+                                } else if (ele.category === 2) {
+                                    if (ele.rechargeStatus !== 1) {
+                                        next = 'member'
+                                        result.name = ele.productName
+                                        result.account = ele.rechargeAccount
+                                        result.paytime = ele.rechargeDate
+                                        // result.status = ele.rechargeStatus
+                                    }
 
+                                } else if (ele.category === 3) {
+                                    next = 'copy'
+                                    result.name = ele.productName
+                                    result.cardNo = ele.cardNo
+                                    result.codeNo = ele.cardSecret
+                                    result.remark = ele.cardRemark 
+                                }
+                            } else {
 
+                            }
+                        }
 
-                        // if (couponType === 6) { // 会员
-                        //     next = 'change'
-                        // } else {
-                        //     if (productType === 1) { //  直充
-                        //         if (status === 2) { // 去直充
-                        //             next = 'jump'
-                        //         } else if (status === 3) { // 卡密成功
-                        //             if (thirdRechargeStatus === 2) { // 充值成功
-                        //                 next = 'member'
-                        //             } 
-                        //             if (thirdRechargeStatus === 3) { // 充值失败
-                        //                 next = 'member'
-                        //             }
-                        //         }
-                        //     } else if (productType === 2) { // 卡密
-                        //         next = 'copy'
-                        //     }
-                        // }
                         return (
                         <Card 
                             key = {idx.toString()}
                             border
-                            btnTitle = {(ele.status === 3 && ele.exchangeData.thirdRechargeStatus === 3) ? '联系客服' : null}
-                            closeHandler = {closeHandler}
-                            data = {{
-                                title: ele.couponTitle,
-                                retitle: ele.packageName, 
-                                time: ele.couponEndDate, 
-                                state: ele.status,
-                                thirdStatus: ele.exchangeData.thirdRechargeStatus,
-                                name: ele.exchangeData.productName,
-                                account: ele.exchangeData.rechargeAccount,
-                                paytime: ele.exchangeData.rechargeDate,
-                                codeNo: ele.exchangeData.cardSecret,
-                                cardNo: ele.exchangeData.cardNO,
-                                remark: ele.exchangeData.cardRemark
-                            }}
+                            btnTitle = {(next === 'member' && result.status === 3) ? '联系客服' : null}
+                            clickHandler = {clickHandler}
+                            data = { result }
                             step = { next }
                         />)
                     })
@@ -108,7 +120,7 @@ const CardPaper = (props) => {
                 <div 
                     className={styles.historyCard}
                     onClick={(e)=>gotoHistory(e)}
-                >历史卡券(10)</div>
+                >历史卡券({ total })</div>
             </div>
             
         </div>

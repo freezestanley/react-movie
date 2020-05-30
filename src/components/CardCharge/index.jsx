@@ -94,6 +94,7 @@ function CardSecret(props){
   const {orderCardList}=props.info
   const productId=orderCardList[0].productId
   const data=formatCard(orderCardList[0])
+  const [first={}, second={}] = data;
   const { mainProduct:{info={}},dispatch}=props; 
   useEffect(() => {
     dispatch({ type: 'mainProduct/getmain', payload: {productId} });

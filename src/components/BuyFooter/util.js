@@ -1,7 +1,7 @@
 
 import { paymentAmount } from '@/utils/ants';
 import { fmtPrice } from '@/utils/tools';
-import superCodePay from '@/utils/handlePay';
+import superCodePay, { reLanchPay } from '@/utils/handlePay';
 import * as services from '@/services/order';
 import * as seckillService from '@/services/seckill';
 //  价格展示逻辑
@@ -18,6 +18,9 @@ export const getTotalPrice = ({ main={}, type, attach, isVIP }) => {
       break;
     case 'seckill':
       price = (main.discountPrice || 0);
+      break;
+    case 'order': 
+      price = main.payAmount;
       break;
     default:
       break;
@@ -136,4 +139,11 @@ export async function createSeckillOrder ({ data, dispatch, callback }) {
       superCodePay({ dispatch, type: 'order/createSeckillOrderAndPay',  formData, callback });
     }
   }
+}
+
+// 重新支付
+export function rePayOrder ({ data, dispatch, callback }) {
+  const { orderId } = data;
+  const formData = { orderId, payType: 1 };
+  reLanchPay({ dispatch, type: 'order/relaunchPay', formData, callback });
 }
