@@ -11,7 +11,7 @@ import { isPhone, Store } from '@/utils/tools';
 import styles from './index.less';
 
 function LoginPage(props) {
-  const { location: { query: { sourcePage='' } } } = props;
+  const { location: { query: { sourcePage='' } }, user: { userId } } = props;
   const [state, setState] = useReducer((o, n) => ({ ...o, ...n }), {
     isRegistered: true,
     disabled: true,
@@ -89,16 +89,21 @@ function LoginPage(props) {
       .then(isOk => {
         if (isOk) {
           props.dispatch({ type: 'user/getUserInfo', hasToast: false })
-          if (sourcePage) {
-            let sourceUrl = window.decodeURIComponent(sourcePage);
-            sourceUrl = sourceUrl.indexOf('?') !== -1 ? `${sourceUrl}&ref=login` : `${sourceUrl}?ref=login`;
-            router.push(sourceUrl);
-          } else {
-            router.push('/');
-          }
+          
         }
       });
   };
+  useEffect(() => {
+    if (userId) {
+      if (sourcePage) {
+        let sourceUrl = window.decodeURIComponent(sourcePage);
+        sourceUrl = sourceUrl.indexOf('?') !== -1 ? `${sourceUrl}&ref=login` : `${sourceUrl}?ref=login`;
+        router.push(sourceUrl);
+      } else {
+        router.push('/');
+      }
+    }
+  }, [userId]);
   return (
     <div className={cns(styles.loginPage)}>
       <div className="phone-control">
@@ -140,4 +145,5 @@ function LoginPage(props) {
 
 export default connect(state => ({
   loading: state.loading.effects['user/login'],
+  user: state.user
 }))(LoginPage);

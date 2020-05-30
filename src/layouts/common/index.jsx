@@ -112,8 +112,8 @@ function Layout(props) {
   if (loading) {
     return <GlobalLoading text="页面加载中"/>
   }
-  if (isNeedLogin && isEmpty(user.userInfo)) {
-    const { query, pathname } = location
+  const { query, pathname } = location;
+  if (isNeedLogin && isEmpty(user.userInfo) && pathname!== '/login') {
     const queryString = Query.stringify(query);
     const sourcePage = `${pathname}${queryString ? '?' : ''}${queryString}`
     return <Redirect to={{ pathname: '/login', query: { sourcePage } }}/>
