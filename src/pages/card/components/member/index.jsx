@@ -6,6 +6,11 @@ import CardPopup from '../CardPopup';
 import {formatDate} from '@/utils/tools';
 import styles from './index.less';
 
+const statusTxt = {
+    1:'充值中',
+    2:'成功',
+    3:'充值失败'
+}
 const CardMember = (props) => {
     const {visible, onMaskClick, afterOpen, afterClose, CloseClick} = props
     const {status, name, account, paytime,historyFlag} = props.data
@@ -33,8 +38,9 @@ const CardMember = (props) => {
                         <div>充值状态</div>
                         <div>
                             {
-                                status === 2 ? '成功' : 
-                                status === 3 ? (<span className={styles.fail}>充值失败</span>) : ''}
+                                status !== 3 ? statusTxt[status] :
+                                <span className={styles.fail}>{statusTxt[status]}</span>
+                            }
                         </div>
                     </div>
                 </div>

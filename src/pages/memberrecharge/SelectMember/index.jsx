@@ -2,15 +2,10 @@ import React ,{useReducer}from 'react';
 import  './index.less';
 import {  Select, Toast } from 'zarm';
 
-const SINGLE_DATA = [
-  { value: '1', label: '选项一' },
-  { value: '2', label: '选项二' },
-];
-
-export default () => {
+export default (props) => {
   const [state, setState] = useReducer((o, n) => ({ ...o, ...n }), {
     value: '',
-    dataSource: SINGLE_DATA,
+    dataSource: (props.data||[]).map(item=>({value:item.productItemId,label:item.productName +' - '+ item.productItemName})),
   })
   return (
     <div className='sel'  >
@@ -18,12 +13,13 @@ export default () => {
         <span>请选择您想要的会员卡</span><br/>
       </div>
       <Select
-        value={state.value}
+        // value={state.value}
         dataSource={state.dataSource}
         onOk={(selected) => {
-          console.log('Picker onOk: ', selected);
-          state.value = selected.map(item => item.value);
-          setState({value:state.value})
+          console.log(selected,'ds')
+          const {value,label} = selected[0];
+          const {rechargeAccountType} = (props.data||[]).find(item=>item.productItemId==value)||{}
+          props.onChange&&props.onChange({productItemId:value,rechargeAccountType,title:label})
         }}
       />
     </div>
