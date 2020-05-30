@@ -1,10 +1,14 @@
-import React, { useCallback } from 'react';
+import React, { useCallback ,useState} from 'react';
 import { connect } from 'dva';
 import router from 'umi/router'
+
 import { reLanchPay } from '@/utils/handlePay';
 import dayjs from 'dayjs'
 import styles from './index.less';
+import QRcode from '@/components/Home/Banner/QRcode';
+
 export default connect(state => state.user)(({info, dispatch})=>{
+  const [codeVisible, setCodeVisible] = useState(false);
   let isShow
   let product1,product2
   if( info.productList.length === 2){
@@ -58,9 +62,12 @@ export default connect(state => state.user)(({info, dispatch})=>{
       {info.status!==4&&info.status!==2&&(<div className={styles.order_down}>
         <div>
           {info.status===1&&( <span className={styles.recharge} onClick={relaunchPay}>支付</span> )}
-          {info.staus===3&&(<span className={styles.concat}>联系客服</span>)}
+          {((info.status===3)||(info.status===6))&&(<span onClick={()=>{ setCodeVisible(true)}}  className={styles.concat}>联系客服</span>)}
           {info.status===5&&(<span className={styles.check} onClick={() => router.push(`./orderdetail?id=${info.orderId}`)}>查看卡密</span>)}
         </div>
+        <QRcode visible={codeVisible} onClose={e=>{
+        setCodeVisible(false)
+        }}/>
       </div>)}
   </div>
   )

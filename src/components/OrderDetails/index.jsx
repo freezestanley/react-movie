@@ -3,6 +3,7 @@ import dayjs from 'dayjs';
 import router from 'umi/router'
 
 import styles from './index.less'
+import QRcode from '@/components/Home/Banner/QRcode';
 
  function formatMoney(value, isSymbol) {
   if (isSymbol) {
@@ -13,7 +14,9 @@ import styles from './index.less'
 
 
 export default ({ info = {}, productList = [] })=>{
+  console.log(info.status)
   const [isShow, setShow] = useState(false);
+  const [codeVisible, setCodeVisible] = useState(false);
   // ((info.status===6)||(productList[0]))&&setShow(!isShow)
  
   return(
@@ -41,29 +44,26 @@ export default ({ info = {}, productList = [] })=>{
         {info.memberDiscAmt > 0  && info.memberDiscAmt > (info.eventDiscAmt || 0) && 
           <div>
           <span>会员价</span>
-          <span>{ `-${formatMoney(info.memberDiscAmte)}`}</span>
+          <span>{ `-${formatMoney(info.memberDiscAmt)}`}</span>
         </div>
         }
          {info.eventDiscAmt > 0  && info.eventDiscAmt > (info.memberDiscAmt || 0) && 
           <div>
           <span>{info.type===1?'活动价':(info.type===2?'秒杀价':'')}</span>
-          <span>{ `-${formatMoney(info.memberDiscAmte)}`}</span>
+          <span>{ `-${formatMoney(info.memberDiscAmt)}`}</span>
         </div>}
-        {info.buyMember&&info.memberAmount!==0&&<div>
-          <span>会员价</span>
-          <span>{formatMoney(info.memberAmount)}</span>
-        </div>}
-        {info.buyMember&&info.memberPrice!=0&&<div>
+        {((info.buyMember)&&(info.memberPrice!==0))&&<div>
           <span>会员费</span>
           <span>{formatMoney(info.memberPrice)}</span>
         </div>}
-        {info.buyMember&&info.memberExpiredTime&&<div>
-          <span>过期时间</span>
-          <span>{dayjs(info.memberExpiredTime).format('YYYY-MM-DD')}</span>
-        </div>}
+      
         {info.buyMember&&(info.type===3||info.type===4)&&<div>
           <span>购买方式</span>
           <span>{info.type===3?"兑换码":info.type===4?'赠送':''}</span>
+        </div>}
+        {info.status===7&&(info.cancelTime)&&<div>
+          <span>退款时间</span>
+          <span>{dayjs(info.cancelTime).format('YYYY-MM-DD')}</span>
         </div>}
 
        { (productList[0].productId==19)&&(productList[1]) && (<><div>
@@ -77,13 +77,17 @@ export default ({ info = {}, productList = [] })=>{
 
         <div>
           <span>实际支付</span>
-          <span>{formatMoney(info.totalAmount)}</span>
+          <span>{formatMoney(info.payAmount)}</span>
         </div>
 
         <div>
           <span>时间</span>
           <span>{dayjs(info.orderTime).format('YYYY-MM-DD')}</span>
         </div></>}
+        {info.buyMember&&info.memberExpiredTime&&<div>
+          <span>过期时间</span>
+          <span>{dayjs(info.memberExpiredTime).format('YYYY-MM-DD')}</span>
+        </div>}
       </div>
       {info.status!==6&&<div className={styles.ShowMore}>
         <span onClick={()=>{setShow(!isShow)}}>{isShow?'收起详情':'显示详情'}
@@ -91,9 +95,12 @@ export default ({ info = {}, productList = [] })=>{
        { !isShow&& <img src={require('./images/down.svg')} alt=""/>}</span>
        <div onClick={()=>{router.push('./explore')}}>查看更多折扣商品</div>
       </div>}
-      { (info.status===6 && info.rechargeAccount && info.orderCardLis === null) && <div className={styles.concat}>
+      { (info.status===6 && info.rechargeAccount) && <div className={styles.concat}>
         <img src={require('./images/concat.svg')} alt=""/>
-        <span>联系客服</span>
+        <span onClick={()=>{ setCodeVisible(true)}}>联系客服</span>
+        <QRcode visible={codeVisible} onClose={e=>{
+        setCodeVisible(false)
+      }}/>
       </div>}
     </div>
 

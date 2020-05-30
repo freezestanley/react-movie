@@ -20,7 +20,7 @@ function RecommendBuy(props){
         <img src={require('./images/arrow.svg')} alt=""/>
       </div>
     </div>
-    <div >
+    <div  className={style.recommend}>
       {list.map((item,index) => <RecommendItem key={index} info={item} />)}
     </div>
   </div>

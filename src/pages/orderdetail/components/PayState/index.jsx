@@ -33,6 +33,36 @@ function PayState(props){
           <span>{payAmount}</span> 元 
         </div>
       </div></>)}
+      { (status===6)&&(<><div className='failed'>
+        <div >  充值失败</div>
+        <div>
+          <span>{payAmount}</span> 元 
+        </div>
+      </div></>)}
+      { (status===7)&&(<><div className='invalid'>
+        <div >  已退款</div>
+        <div>
+          <span>{payAmount}</span> 元 
+        </div>
+      </div></>)}
+      { (status===8)&&(<><div className='invalid'>
+        <div >  部分退款</div>
+        <div>
+          <span>{payAmount}</span> 元 
+        </div>
+      </div></>)}
+      { (status===10)&&(<><div className='invalid'>
+        <div >  退款中</div>
+        <div>
+          <span>{payAmount}</span> 元 
+        </div>
+      </div></>)}
+      { (status===11)&&(<><div  className='upaid'>
+        <div >  退款失败</div>
+        <div>
+          <span>{payAmount}</span> 元 
+        </div>
+      </div></>)}
     </div>
   )
 }
