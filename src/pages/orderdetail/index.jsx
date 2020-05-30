@@ -1,5 +1,6 @@
 import React,{useEffect} from 'react';
 import { connect } from 'dva';
+import filter from 'lodash/filter';
 
 import CardCharge from '@/components/CardCharge'
 import OrderDetails from '@/components/OrderDetails';
@@ -8,6 +9,7 @@ import PayState from './components/PayState'
 import styles from './index.less'
 import GiftCards from './components/GiftPacks'
 import BuyFooter from '@/components/BuyFooter';
+import HotRecommend from '@/components/HotRecommend';
 
 function OrderDetail(props){
   const {location: { query = {} } ,order:{orderDetails, productList },mainProduct:{info={}},dispatch}=props;
@@ -21,6 +23,19 @@ function OrderDetail(props){
     dispatch({ type: 'prePay/setState', payload: { main: orderDetails, type: 'order' } })
   }, [orderDetails, dispatch]);
   console.log(orderDetails)
+  const hotRecommendList = filter(props.banner.list, item => item.bannerType === 5);
+  useEffect(() => {
+    props.dispatch({ type: 'banner/getBanner', payload: {
+      bannerType:[2,5],
+      pageSize: 100,
+    } });
+    props.dispatch({type:'order/queryMyOrders',payload:{
+      pageNo:1,
+      pageSize:10,
+      status:1
+    }})
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return(
     [<div className={styles.myorder} key="content">
@@ -30,6 +45,9 @@ function OrderDetail(props){
       <OrderDetails info={orderDetails} productList={productList}/>
       {/* { ((orderDetails.status===5)&&orderDetails.orderCardList)&&<div className={styles.node}><TopupNote info={orderDetails.productId} /></div>} */}
       <RecommendBuy/>
+      {[1,2,6].includes(orderDetails.status)&&<div className={styles.hot}>
+        <HotRecommend bannerList={hotRecommendList} />
+      </div>}
     </div>, orderDetails.status === 1 ? <BuyFooter isShowDetail={false} onValidate={() => true} /> : null ]
   )
 }

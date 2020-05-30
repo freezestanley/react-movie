@@ -36,7 +36,7 @@ function PayState(props){
       { (status===6)&&(<><div className='failed'>
         <div >  充值失败</div>
         <div>
-          <span>{payAmount}</span> 元 
+          <span> </span> 
         </div>
       </div></>)}
       { (status===7)&&(<><div className='invalid'>

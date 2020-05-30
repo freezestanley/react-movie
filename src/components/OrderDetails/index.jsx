@@ -17,8 +17,7 @@ export default ({ info = {}, productList = [] })=>{
   console.log(info.status)
   const [isShow, setShow] = useState(false);
   const [codeVisible, setCodeVisible] = useState(false);
-  // ((info.status===6)||(productList[0]))&&setShow(!isShow)
- 
+
   return(
     <div className={styles.orderdetail}>
       <div className={styles.orderdetail_title}>{productList[0] && productList[0]['productName']}{productList[1]&&`+${productList[1]['productName']}`}</div>
@@ -35,7 +34,7 @@ export default ({ info = {}, productList = [] })=>{
           <span>产品规格</span>
           <span>{productList[0] && productList[0]['productItemName']}</span>
         </div>}
-        {isShow&&<>
+        {(info.status===6||isShow)&&<>
           {info.productOriginalPrice&&<div>
           <span>原价</span>
           <span>{formatMoney(info.productOriginalPrice)}</span>
