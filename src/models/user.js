@@ -65,6 +65,14 @@ export default {
       if (res.code === '0000') {
         localStorage.clear();
         sessionStorage.clear();
+        yield put({
+          type: 'setState',
+          payload: {
+            userInfo: {},
+            isVIP: false,
+            userId:''
+          }
+        })
       }
       callback && callback(res)
     },

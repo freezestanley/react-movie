@@ -11,13 +11,8 @@ const ActivityCard = props => {
     progress = 60 + (sell * 0.4);
   }
   const onClickFn = useCallback(() => {
-    if (userId) {
-      history.push(`/seckill?id=${props.data.id}`);
-    } else {
-      const pathname = history.location.pathname;
-      history.push({ pathname: '/login', query: { sourcePage: window.encodeURIComponent(pathname) } });
-    }
-  }, [history, props.data.id, userId]);
+    history.push(`/seckill?id=${props.data.id}`);
+  }, [props.data.id, history]);
   return (
     <div className={styles['acitivity-card']} onClick={onClickFn}>
       <div className={styles['main-part']}>
