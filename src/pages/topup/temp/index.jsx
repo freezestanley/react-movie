@@ -4,6 +4,7 @@ import useInterval from '@/hooks/useInterval';
 import { Query } from '@/utils/tools';
 import { orderInfo } from '@/services/order';
 import { wxPayLink } from '@/utils/handlePay';
+import GlobalLoading from '@/components/GlobalLoading';
 
 import styles from './index.less';
 
@@ -41,10 +42,16 @@ export default function TopupTemp() {
   );
 
   const handlePayAgain = () => {
-    let _link = wxPayLink({ outTradeNo: orderId, payLink: paylink })
+    let _link = wxPayLink({ outTradeNo: orderId, payLink: paylink });
     //  window.location = paylink;
      window.location.href = _link;
   };
+
+  console.log('[50] index.jsx: ', state.count);
+
+  if (!state.isOk && state.count !== 7) {
+    return <GlobalLoading text="数据加载中..." />;
+  }
 
   return (
     <div className={styles.wxpay}>
