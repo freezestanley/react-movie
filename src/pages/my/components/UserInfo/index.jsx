@@ -1,4 +1,5 @@
-import React,{useState} from 'react';
+import React from 'react';
+import { getSourcePageStr } from '@/utils/tools'
 
 import style from './index.less'
 import baijinvip from '../../images/baijinvip.png';
@@ -15,7 +16,7 @@ const UserInfo = props => {
           <div className={style['phone-info']}>
             <div className={style['phone']}>{user.userInfo.mobileNumber}</div>
             {
-             user.isVIP ?  <img className={style['baijinvip']} src={baijinvip} alt='vip' /> : <div className={style['gotomember']} onClick={() => router.push('/vip')}>开通会员<div className={style['rightarr']} /></div>
+             user.isVIP ?  <img className={style['baijinvip']} src={baijinvip} alt='vip' /> : <div className={style['gotomember']} onClick={() => router.push({pathname:'/vip'})}>开通会员<div className={style['rightarr']} /></div>
             
             }
           </div>
@@ -24,7 +25,7 @@ const UserInfo = props => {
         (
           <div className={style['me-content']}>
           <img className={style['avatar']} alt='' src={nologin} />
-          <div className={style['phone-info']} onClick={() => router.push('/login')}>
+          <div className={style['phone-info']} onClick={() => router.push({ pathname:'/login', query: { sourcePage: getSourcePageStr()}})}>
             <div className={style['phone']}>点击登录/注册</div>
           </div>
         </div>

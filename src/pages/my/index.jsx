@@ -61,7 +61,7 @@ function MyPage(props){
         <div className={styles['recommend-title']}>
           <Title name='热门推荐' />
         </div>
-        <HotRecommend />}
+        <HotRecommend />
       </div>
     </div>
   );
