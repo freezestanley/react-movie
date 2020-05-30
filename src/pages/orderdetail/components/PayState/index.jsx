@@ -51,13 +51,13 @@ function PayState(props){
           <span>{payAmount}</span> 元 
         </div>
       </div></>)}
-      { (status===10)&&(<><div className='invalid'>
+      { (status===10)&&(<><div className='unpaid'>
         <div >  退款中</div>
         <div>
           <span>{payAmount}</span> 元 
         </div>
       </div></>)}
-      { (status===11)&&(<><div  className='upaid'>
+      { (status===11)&&(<><div  className='failed'>
         <div >  退款失败</div>
         <div>
           <span>{payAmount}</span> 元 

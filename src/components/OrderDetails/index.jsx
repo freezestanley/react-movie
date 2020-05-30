@@ -14,7 +14,7 @@ import QRcode from '@/components/Home/Banner/QRcode';
 
 
 export default ({ info = {}, productList = [] })=>{
-  console.log(info.status)
+  
   const [isShow, setShow] = useState(false);
   const [codeVisible, setCodeVisible] = useState(false);
 
