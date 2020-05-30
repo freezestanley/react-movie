@@ -130,7 +130,7 @@ function TopupPage(props) {
       <RecommendBuy />
       <BuyFooter
         // isResetForm={false}
-        onValidate={() => formValidate(state.specData, type)}
+        onValidate={() => type === 1 && formValidate(state.specData)}
       />
     </>
   );

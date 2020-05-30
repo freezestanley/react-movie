@@ -118,6 +118,10 @@ export const formatAccountStr = (account, type) => {
           required: true,
         },
       ];
+    case 8: str = '酷我ID'; break;
+    case 9: str = '酷狗号'; break;
+    case 10: str = '邮箱'; break;
+    case 11: str = '迅雷用户名'; break;
     default: break;
   }
   if (!type) {
@@ -129,30 +133,27 @@ export const formatAccountStr = (account, type) => {
 };
 
 // 账号校验
-export const formValidate = (data, type) => {
-  if (type === 1) {
-    const val = data.account;
-    if (!val) {
-      Toast.show(formatAccountStr(data.accountType));
-      return false;
-    }
-    switch (data.accountType) {
-      case 1:
-        if (!/[1-9][0-9]{4,}/.test(val)) {
-          Toast.show('QQ号不合法');
-          return false;
-        }
-        return true;
-      case 2:
-        if (!/^1\d{10}$/.test(val)) {
-          Toast.show('手机号码格式错误');
-          return false;
-        }
-        return true;
-      default: return true;
-    }
+export const formValidate = (data) => {
+  const val = data.account;
+  if (!val) {
+    Toast.show(formatAccountStr(data.accountType));
+    return false;
   }
-  return true;
+  switch (data.accountType) {
+    case 1:
+      if (!/[1-9][0-9]{4,}/.test(val)) {
+        Toast.show('QQ号不合法');
+        return false;
+      }
+      return true;
+    case 2:
+      if (!/^1\d{10}$/.test(val)) {
+        Toast.show('手机号码格式错误');
+        return false;
+      }
+      return true;
+    default: return true;
+  }
 }
 
 export const isQQ = type => type === 1;

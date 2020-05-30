@@ -19,7 +19,7 @@ import { getTotalPrice, getDiscountInfo, createPhoneOrder, createProductOrder, c
 
 
 export default withRouter(connect(state => ({ ...state.prePay, user: state.user, vipTip: state.vipTip  }))(function(props) {
-  const { history, main, attach, type, dispatch, onValidate, user, vipTip={}, isShowDetail=true, info } = props;
+  const { history, main, attach, type, dispatch, onValidate, user, vipTip={}, isShowDetail=true, isResetForm = true, info } = props;
   const { isVIP, userId } = user;
   const [visible, setVisible]=useState(false);
   const totalPrice = getTotalPrice({ main, attach, type, isVIP });
@@ -97,7 +97,7 @@ export default withRouter(connect(state => ({ ...state.prePay, user: state.user,
     dispatch({ type: 'global/setState', payload: { hasBuyFooter: true } });
     return () => {
       dispatch({ type: 'global/setState', payload: { hasBuyFooter: false } });
-      props.isResetForm && dispatch({ type: 'prePay/resetState' });
+      isResetForm && dispatch({ type: 'prePay/resetState' });
       dispatch({ type: 'vipTip/setState', payload: { visible: true } })
     }
   }, []);

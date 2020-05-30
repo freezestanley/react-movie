@@ -94,7 +94,7 @@ export default function SwitchAccount(props) {
 
   // console.log('[95] index.jsx: ', state.accountType);
 
-  return (
+  return len < 3 && (
     <div className="z_switch_account">
       <div className="z_switch_head">
         <div>充值账号</div>

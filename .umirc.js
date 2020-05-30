@@ -17,7 +17,7 @@ export default {
         // isNeedLogin: 路由是否需要登陆
         // fullsize: 是否需要占用整个视窗
         { path: '/login', component: '../pages/login', title: '盎司登陆' },
-        { path: '/topup', component: '../pages/topup', backgroundColor: 'gray', hasNavBar: false},
+        { path: '/topup', component: '../pages/topup', title: '充值', backgroundColor: 'gray', hasNavBar: false},
         { path: '/topup/temp', component: '../pages/topup/temp', backgroundColor: 'gray', hasNavBar: false},
         { path: '/', type: 'tabBar', component: '../pages/home', title: '首页', hasNavBar: false },
         { path: '/explore', type: 'tabBar', component: '../pages/explore', title: '发现', backgroundColor:'gray' },
