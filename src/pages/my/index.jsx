@@ -1,6 +1,5 @@
-import React,{useEffect, useState} from 'react';
+import React,{useEffect} from 'react';
 import { connect } from 'dva';
-import router from 'umi/router';
 import styles from './index.less';
 import UserInfo from './components/UserInfo'
 import MenuList from './components/MenuList'
@@ -16,7 +15,6 @@ import HotRecommend from '@/components/HotRecommend';
 function MyPage(props){
 
   const middleBanners = filter(props.banner.list, item => item.bannerType === 2);
-  const hotRecommendList = filter(props.banner.list, item => item.bannerType === 5);
   const exchangeSuccess = () => {
     props.dispatch({
       type: 'user/getUserInfo'
@@ -62,14 +60,9 @@ function MyPage(props){
       <div className={styles['recommend-container']}>
         <div className={styles['recommend-title']}>
           <Title name='热门推荐' />
-
         </div>
-        { !isEmpty(hotRecommendList) && <HotRecommend bannerList={hotRecommendList} />}
-
+        <HotRecommend />}
       </div>
-
-
-
     </div>
   );
 }

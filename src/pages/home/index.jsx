@@ -29,7 +29,7 @@ function Home ({ dispatch,bannerList, ...rest }) {
       { !isEmpty(hotRecommendList) && (
         <React.Fragment>
           <div className={styles['title']}>热门推荐</div>
-          <HotRecommend bannerList={hotRecommendList} />
+          <HotRecommend />
         </React.Fragment>
       )}
     </div>
