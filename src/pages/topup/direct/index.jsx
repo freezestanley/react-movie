@@ -34,7 +34,7 @@ export default function DirectPage(props) {
     if (data.accountType === 7) {
       setState({
         ...data,
-        account: [data.account0, data.account1]
+        account: [data.account0 || '', data.account1 || '']
       });
     }
   }

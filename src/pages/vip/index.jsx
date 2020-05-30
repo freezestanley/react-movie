@@ -12,11 +12,9 @@ import Discount from './Discount';
 import Rights from './Rights';
 import styles from './index.module.less';
 
-
-export default connect(state => ({banner: state.banner, productDetail: state.productDetail, products: state.products.list}))((props) => {
+export default connect(state => ({productDetail: state.productDetail, products: state.products.list}))((props) => {
   const { dispatch, productDetail, products } = props;
   const vipSeckillList = filter(productDetail.eventList, item => item.onlyForVip === 'Y');
-  const hotRecommendList = filter(props.banner.list, item => item.bannerType === 5);
   const saleList = filter(products, item => includes([12,16,56,18,17,4,54,25], item.id));
   useEffect(() => {
     dispatch({ type: 'productDetail/getEventList', payload: {} });
@@ -39,7 +37,7 @@ export default connect(state => ({banner: state.banner, productDetail: state.pro
         <Rights />
       </Section>
       <Section title="热门推荐" className={styles['recommend']}>
-      { !isEmpty(hotRecommendList) && <HotRecommend bannerList={hotRecommendList} />}
+        <HotRecommend/>
       </Section>
     </div>
   );

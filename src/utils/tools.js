@@ -202,3 +202,8 @@ export const formatDate = (t,type='YYYY-MM-DD HH:mm:ss') => {
   if(!t) return t;
   return dayjs(t).format(type)
 }
+
+export const getSourcePageStr = () => {
+  const { pathname, search } = window.location;
+  return window.encodeURIComponent(`${pathname}${search}`);
+};

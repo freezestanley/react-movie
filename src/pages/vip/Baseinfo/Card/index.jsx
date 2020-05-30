@@ -1,12 +1,18 @@
 import React, { Fragment } from 'react';
 import { connect } from 'dva';
+import withRouter from 'umi/withRouter';
 import superCodePay from '@/utils/handlePay';
 import { formatDate } from '@/utils/tools';
 import styles from './index.module.less';
 
-export default connect(state =>({ user: state.user }))(({ info, dispatch, user }) => {
-  const { membershipList:[vipInfo={}], isVIP, userInfo } = user
+export default connect(state =>({ user: state.user }))(withRouter(({ info, dispatch, user, history }) => {
+  const { membershipList:[vipInfo={}], isVIP, userId, userInfo } = user
   const buyVip = () => {
+    if (!userId) {
+      const sourcePage = window.encodeURIComponent(`${window.location.pathname}${window.location.search}`);
+      history.push({ pathname: '/login', query: { sourcePage } });
+      return;
+    }
     const formData = {
       payAmount: vipInfo.lowerPrice,
       payType: 1,
@@ -38,4 +44,4 @@ export default connect(state =>({ user: state.user }))(({ info, dispatch, user }
       </div>
     </div>
   );
-});
+}));

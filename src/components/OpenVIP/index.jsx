@@ -2,6 +2,7 @@
 import React, { useEffect, useReducer, useRef } from 'react';
 import { Checkbox } from 'zarm';
 import { connect } from 'dva';
+import router from 'umi/router';
 import { fmtPrice, getOffsetTopBy } from '@/utils/tools';
 import { diffMoney, updateProductInfo } from '@/utils/ants';
 
@@ -65,7 +66,7 @@ function OpenVIP(props) {
             className="vip-tip"
             src={require('./img/tip.svg')}
             // TODO
-            onClick={() => console.log('[vip tip]')}
+            onClick={() => router.push('/vip')}
             alt=""
           />
         </div>

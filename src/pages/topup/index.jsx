@@ -30,16 +30,6 @@ function TopupPage(props) {
       return
     }
     dispatch({ type: 'productDetail/getProductItems', payload: id });
-
-    // return () => {
-    //   dispatch({
-    //     type: 'prePay/setState',
-    //     payload: {
-    //       type: 'product',
-    //       main: {},
-    //     }
-    //   });
-    // }
   }, [dispatch, id]);
 
   // 如果更换商品则更新商品信息
@@ -130,7 +120,7 @@ function TopupPage(props) {
       <RecommendBuy />
       <BuyFooter
         // isResetForm={false}
-        onValidate={() => type === 1 && formValidate(state.specData)}
+        onValidate={() => type === 1 ? formValidate(state.specData) : true}
       />
     </>
   );

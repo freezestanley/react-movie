@@ -1,16 +1,10 @@
 import React, { Component } from 'react';
-import Slider from "react-slick";
-
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-
-// import sample from '@/assets/sample.png';
+import { connect } from 'dva';
 import styles from './index.less';
 import router from 'umi/router';
-import sample from '@/assets/sample.png';
 
 
-export default class AsNavFor extends Component {
+class AsNavFor extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -50,7 +44,6 @@ export default class AsNavFor extends Component {
             </div>
           )
         }
-      
         <div className={styles['list-content']}>
           {
             (bannerList || []).map((item,index) => {
@@ -76,3 +69,4 @@ export default class AsNavFor extends Component {
     );
   }
 }
+export default connect(state => ({ bannerList: state.banner.list }))(AsNavFor)
