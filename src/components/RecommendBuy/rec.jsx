@@ -3,7 +3,7 @@ import styles from './rec.less'
 import router from 'umi/router';
 export default (props ) => {
   const allData=props.info
-  const data=allData.bannerItem
+  const data=allData.bannerItem || {}
   return (
     <div className={styles['acitivity-card']} onClick={() => router.push(allData.bannerLinkUrl)} >
       <div className={styles['main-part']}>

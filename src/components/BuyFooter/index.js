@@ -146,7 +146,7 @@ export default withRouter(connect(state => ({ ...state.prePay, user: state.user,
       {discountAmount < 0 && <div className={styles.infoItem}>
         <div className={styles.label}>{discountLabel}</div>
         <div className={styles.valueBox} >
-          <span className={styles.prompt}>本单享{vipDiscount(discount)}折优惠</span>
+          <span className={styles.prompt}>本单享{discount ? `${vipDiscount(discount)}折优惠` : '白金会员权益' }</span>
           <div className={styles.value} dangerouslySetInnerHTML={{ __html: fmtPrice(discountAmount, 'tag') }}></div>
         </div>
       </div>}

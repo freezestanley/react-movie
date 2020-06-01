@@ -6,8 +6,7 @@ import hotel from './images/hotel.png'
 import memberday from './images/memberday.png'
 import zerobuy from './images/zerobuy.png'
 
-const icon =
-  'https://za-www-prd.oss-cn-hzfinance.aliyuncs.com/576bd8ad-cb4e-443a-8abc-56a0968fdd5f%E8%85%BE%E8%AE%AF%E8%A7%86%E9%A2%91.png';
+
 
 const rights = [
   {
@@ -31,7 +30,7 @@ const rights = [
 export default () => {
   return (
     <div className={styles['right-list']}>
-      {rights.map(({ icon, name }) => {
+      {rights.map(({ icon, name }, idx) => {
         return (
           <div className={styles['right-item']}>
             <img className={styles['icon']} src={icon} alt=''/>

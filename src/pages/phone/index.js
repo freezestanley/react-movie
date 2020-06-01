@@ -16,7 +16,7 @@ export default connect(state => ({
   phone: state.phone,
   phoneForm: state.phoneForm
 }))(function(props) {
-const { phone: { product={}, productItems=[], attachList=[] }, phoneForm: { main, attach, rechargeAccount }, dispatch } =props;
+const { phone: { product={}, productItems=[], attachList=[] }, phoneForm: { main, attach={}, rechargeAccount }, dispatch } =props;
   useEffect(() => {
     (async function() {
       await dispatch({ type: 'phone/getAttachList', payload: { productId: 19 } });
@@ -26,9 +26,15 @@ const { phone: { product={}, productItems=[], attachList=[] }, phoneForm: { main
   const onSelectFn = (idx) => {
     dispatch({ type: 'phoneForm/setState', payload: { main: productItems[idx] } });
   };
-  const onSelectAddtionFn = (idx) => {
-    dispatch({ type: 'phoneForm/setState', payload: { attach: attachList[idx] } });
-  };
+  const onSelectAddtionFn = useCallback((idx) => {
+    if(isEmpty(attach)) {
+      dispatch({ type: 'phoneForm/setState', payload: { attach: { ...attachList[idx], idx } } });
+    } else {
+      if (attach.idx === idx){
+        dispatch({ type: 'phoneForm/setState', payload: { attach: {} } });
+      }
+    }
+  }, [dispatch, attach]); // eslint-disable-line
   const onInputChange = (value) => {
     dispatch({ type: 'phoneForm/setState', payload: { rechargeAccount: value } });
   };

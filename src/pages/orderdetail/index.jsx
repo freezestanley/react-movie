@@ -24,10 +24,6 @@ function OrderDetail(props){
   }, [orderDetails, dispatch]);
   const hotRecommendList = filter(props.banner.list, item => item.bannerType === 5);
   useEffect(() => {
-    props.dispatch({ type: 'banner/getBanner', payload: {
-      bannerType:[2,5],
-      pageSize: 100,
-    } });
     props.dispatch({type:'order/queryMyOrders',payload:{
       pageNo:1,
       pageSize:10,
