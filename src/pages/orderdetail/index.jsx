@@ -40,7 +40,7 @@ function OrderDetail(props){
       <OrderDetails info={orderDetails} productList={productList}/>
       {/* { ((orderDetails.status===5)&&orderDetails.orderCardList)&&<div className={styles.node}><TopupNote info={orderDetails.productId} /></div>} */}
       {orderDetails.status!==1&&<RecommendBuy/>}
-      {[2,6].includes(orderDetails.status)&&<div className={styles.hot}>
+      {[2,4,6].includes(orderDetails.status)&&<div className={styles.hot}>
         <HotRecommend bannerList={hotRecommendList} />
       </div>}
     </div>, orderDetails.status === 1 ? <BuyFooter  key ='buy' isShowDetail={false} onValidate={() => true} /> : null ]
