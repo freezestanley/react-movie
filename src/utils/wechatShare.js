@@ -1,9 +1,9 @@
 /* eslint-disable no-undef */
 import { Toast } from 'zarm';
 import debounce from 'lodash/debounce';
-import { wxSignSignature } from '@services/global';
+import { wxSignSignature } from '@/services/global';
 
-export const wechatShareSign = debounce(async function wechatShareSign(url) {
+export const wechatShareConfig = debounce(async function(url = window.location.href) {
   const _data = await wxSignSignature({ url });
 
   if (!_data[0]) {
