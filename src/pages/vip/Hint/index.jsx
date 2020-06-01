@@ -36,7 +36,7 @@ export default function ({ visible, onClose }) {
                   </div>
                 </div>
                 <div className={styles.bottom}>
-                    <Icon type='wrong-round' className={styles.icon} onClick={()=> onClose(false)}/>
+                    <div  className={styles.icon} onClick={()=> onClose(false)}>我知道了</div>
                 </div>
             </div>
         </Popup>
