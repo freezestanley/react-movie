@@ -6,6 +6,7 @@ import { connect } from 'dva';
 import map from 'lodash/map';
 // import { Input } from 'zarm';
 import { ReactComponent as SearchSvgIcon } from '@/assets/svg/search.svg';
+import * as service from '@/services/product';
 import styles from './index.module.less';
 
 const hotSearchList = [{ id: 1, name: 'Q币' }, { id: 16, name: '芒果TV' }, { id: 18 , name: '网易云音乐' }, ]
@@ -15,6 +16,7 @@ export default connect(state => ({ list: state.products.list }))(withRouter(func
   const [value, setValue] = useState(keyword);
   const debouncedSearchFn = useCallback(debounce((keyword) =>{
     dispatch({ type: 'products/getProducts', payload: { keyword, status: 2 } });
+    service.increaseHotKeyword({ keyword });
   }, 200, { leading: false, trailing: true }), []); // eslint-disable-line
   const onInputChange = (e) => {
     setValue(e.target.value)
