@@ -6,6 +6,7 @@ import style from './index.less';
 
 function RecommendBuy(props){
   const { recommend: {list=[]}, dispatch } =props
+  console.log(list)
   useEffect(() => {
     (async function() {
       await dispatch({ type: 'recommend/getBanner', payload: { bannerType: [6] } });
