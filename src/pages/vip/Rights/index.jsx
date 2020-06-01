@@ -32,7 +32,7 @@ export default () => {
     <div className={styles['right-list']}>
       {rights.map(({ icon, name }, idx) => {
         return (
-          <div className={styles['right-item']}>
+          <div className={styles['right-item']} key={idx}>
             <img className={styles['icon']} src={icon} alt=''/>
             <div className={styles['name']}>{name}</div>
           </div>
