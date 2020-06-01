@@ -63,19 +63,18 @@ export function queryProductsGroupByCategory(data) {
 }
 
 // 添加热搜
-export function increaseHotKeyword(data) {
+export function increaseHotKeyword({ keyword }) {
   return request({
-    url: '/hotkeyword/increase',
+    url: `/hotkeyword/increase?keyword=${keyword}`,
     serve: 'product',
     method: 'POST',
-    data,
   });
 }
 
 // 查询热搜
 export function queryHotSearch(data) {
   return request({
-    url: '/hotkeyword/queryTop',
+    url: `/hotkeyword/queryTop`,
     serve: 'product',
     method: 'GET',
     data,
