@@ -17,6 +17,7 @@ export default ({ info = {}, productList = [] })=>{
   
   const [isShow, setShow] = useState(false);
   const [codeVisible, setCodeVisible] = useState(false);
+  console.log(info.status)
   return(
     <div className={styles.orderdetail}>
       <div className={styles.orderdetail_title}>{productList[0] && productList[0]['productName']}{productList[1]&&`+${productList[1]['productName']}`}</div>
@@ -87,7 +88,8 @@ export default ({ info = {}, productList = [] })=>{
           <span>{dayjs(info.memberExpiredTime).format('YYYY-MM-DD')}</span>
         </div>}
       </div>
-      {(info.status!==6)||(info.status!==1)&&<div className={styles.ShowMore}>
+    
+      {[2,3,5,7,8,9,10,11].includes(info.status)&&<div className={styles.ShowMore}>
         <span onClick={()=>{setShow(!isShow)}}>{isShow?'收起详情':'显示详情'}
        { isShow&& <img src={require('./images/up.svg')} alt=""/> }
        { !isShow&& <img src={require('./images/down.svg')} alt=""/>}</span>
