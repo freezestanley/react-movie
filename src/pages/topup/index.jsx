@@ -44,12 +44,12 @@ function TopupPage(props) {
   if (!product) return <GlobalLoading text="获取商品信息失败，请稍后尝试" />;
   if (props.loading) return <GlobalLoading text="正在获取商品信息..." />;
 
-  const { topCornerMark, description, name, detail, type, image } = product;
+  const { topCornerMark, description, detail, type, image } = product;
 
   // console.log('[30] index.jsx: ', state);
 
   const handleChangeSpec = (specData) => {
-    console.log('[topup spec]', specData);
+    // console.log('[topup spec]', specData);
     if (isUpdateProductInfo) {
       // console.log('[topup spec redux]: ', specData);
       setState({ specData })

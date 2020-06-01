@@ -61,7 +61,7 @@ function OpenVIP(props) {
     <div className="open-vip" ref={ref}>
       <div className="open-vip-cont">
         <div className="t1">
-          <span>开通立省，可与满减折扣同享</span>
+          <span>开通立省，可与折扣同享</span>
           <img
             className="vip-tip"
             src={require('./img/tip.svg')}

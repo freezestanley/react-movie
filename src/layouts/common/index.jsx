@@ -7,9 +7,10 @@ import 'zarm/dist/zarm.min.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
+import FloatMenu from '@/components/FloatMenu';
 import { BrowserInfo, Store, mapRouter, Query } from '@/utils/tools';
 import weChatAuth from '@/utils/weChatAuth';
-import { wechatShareConfig } from '@/utils/wechatShare';
+import wechatShare, { wechatShareConfig } from '@/utils/wechatShare';
 import VConsole from 'vconsole';
 import GlobalLoading from '@/components/GlobalLoading';
 import getEnv from '@/utils/env';
@@ -123,7 +124,12 @@ function Layout(props) {
   useEffect(() => {
     // iOS微信分享config
     wechatShareConfig();
-  }, []);
+
+    // wechatShare({
+    //   title: '',
+    //   desc: '',
+    // })
+  }, [])
 
   const _reg = (currRoute.path || '').replace('/', '_');
   const _classname = _reg === '_' ? '_home' : _reg;
@@ -179,6 +185,7 @@ function Layout(props) {
           </div>
         </div>
       )}
+      {!hasTabBar && !hasBuyFooter && <FloatMenu />}
     </React.Fragment>
   );
 }

@@ -29,7 +29,7 @@ export default function wechatShare({
   title = '盎司会员',
   desc = '',
   link = window.location.href,
-  imgUrl = `${window.location.origin}/static/images/logo.png`,
+  imgUrl = `${window.location.origin}/logo.png`,
   onSuccess,
 }) {
   wx.ready(function () {   //需在用户可能点击分享按钮前就先调用

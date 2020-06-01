@@ -25,9 +25,9 @@ export default connect(state => state.user)(({info, dispatch})=>{
       orderId: info.orderId,
       payType: 1,
     };
-    reLanchPay({ dispatch, type: 'order/relaunchPay',  formData, callback() {} });
+    reLanchPay({ dispatch, type: 'order/relaunchPay',  formData });
   }, [dispatch, info.orderId]);
- 
+
   return(
     <div className='order'  >
       <div className='order_up' onClick={() => router.push(`./orderdetail?id=${info.orderId}`)}>
@@ -38,7 +38,7 @@ export default connect(state => state.user)(({info, dispatch})=>{
             <span className='span_1'>{product1.productName}{isShow&&(`+${product2.productName}`)}</span>
           </div>
          <div className='pay'>
-            {info.status===1&&(<span className='unpaid'>待支付 </span>)} 
+            {info.status===1&&(<span className='unpaid'>待支付 </span>)}
             {info.status===3&&(<span className='chagrefailed'>支付失败</span>)}
             {info.status===2&&(<span className='paid'>已支付</span>)}
             {info.status===4&&(<span className='outtime'>已失效</span> )}
@@ -51,7 +51,7 @@ export default connect(state => state.user)(({info, dispatch})=>{
             {info.status===11&&(<span className='chagrefailed'>退款失败</span> )}
          </div>
         </div>
-       
+
         <div className='details'>
           <div className='detailsFirst'>
              <p className='details_p1'>订单 : {info.orderId}</p> <p className='up_p'>¥ {info.payAmount}</p>
@@ -60,7 +60,7 @@ export default connect(state => state.user)(({info, dispatch})=>{
           {product1.productItemName&&<p className='details_p3'>规格 : {product1.productItemName} </p>}
         </div>
       </div>
- 
+
       {(info.status!==4&&info.status!==2)&&(<div  className={`order_down  ${(info.status===5&&info.rechargeAccount)?'order_down_copy':''} `}>
         <div className='orderdownup'>
           {info.status===1&&( <span className='recharge' onClick={relaunchPay}>支付</span> )}

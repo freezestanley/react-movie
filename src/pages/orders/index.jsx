@@ -41,7 +41,7 @@ class Index extends Component {
   }
 
   componentDidMount() {
-   
+
     this.appendData()
 
   }
@@ -49,6 +49,8 @@ class Index extends Component {
     this.mounted = false;
     document.body.style.overflow = 'auto';
   }
+
+
 
   refreshData = () => {
     if (!this.mounted) return;
@@ -94,7 +96,7 @@ class Index extends Component {
       }
       })
      }
-     
+
 
  appendData =()=> {
     queryOrders({}).then((res)=>{
@@ -104,7 +106,7 @@ class Index extends Component {
         if(!data)return
         data.map((item)=>{
           dataSource.push(<Order key={item.orderId} info={item} ></Order>);
-        }) 
+        })
         this.setState({ dataSource:dataSource });
       }
     })
