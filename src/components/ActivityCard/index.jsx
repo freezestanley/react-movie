@@ -8,7 +8,7 @@ const ActivityCard = props => {
   let progress = 0;
   if(props.data.stock !== 0){
     const sell = ((props.data.quantity-props.data.stock)/props.data.quantity) * 100;
-    progress = 60 + (sell * 0.4);
+    progress = parseInt(60 + (sell * 0.4));
   }
   const onClickFn = useCallback(() => {
     history.push(`/seckill?id=${props.data.id}`);
