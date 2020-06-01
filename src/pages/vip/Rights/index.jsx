@@ -1,24 +1,28 @@
 import React from 'react';
 import styles from './index.module.less';
 
-const icon =
-  'https://za-www-prd.oss-cn-hzfinance.aliyuncs.com/576bd8ad-cb4e-443a-8abc-56a0968fdd5f%E8%85%BE%E8%AE%AF%E8%A7%86%E9%A2%91.png';
+import fly from './images/fly.png'
+import hotel from './images/hotel.png'
+import memberday from './images/memberday.png'
+import zerobuy from './images/zerobuy.png'
+
+
 
 const rights = [
   {
-    icon,
+    icon:memberday,
     name: '会员日',
   },
   {
-    icon,
+    icon:zerobuy,
     name: '0元购',
   },
   {
-    icon,
+    icon:fly,
     name: '航空权益',
   },
   {
-    icon,
+    icon:hotel,
     name: '酒店权益',
   },
 ];
@@ -26,10 +30,10 @@ const rights = [
 export default () => {
   return (
     <div className={styles['right-list']}>
-      {rights.map(({ icon, name }) => {
+      {rights.map(({ icon, name }, idx) => {
         return (
-          <div className={styles['right-item']}>
-            <img className={styles['icon']} src={icon} />
+          <div className={styles['right-item']} key={idx}>
+            <img className={styles['icon']} src={icon} alt=''/>
             <div className={styles['name']}>{name}</div>
           </div>
         );

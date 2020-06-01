@@ -61,19 +61,6 @@ export default withRouter(({ info, mystock, isVIP, history }) => {
       );
     }
 
-    // vip专享
-    if (!isVIP && info.onlyForVip === 'Y') {
-      return (
-        <Layout title={info.productName}>
-          <Product info={info} />
-          <div className={styles['box']}>
-            <div className={styles['desc']}>本秒杀活动仅限会员参与</div>
-            <Button onClick={() => { history.push('/vip') }}>马上去开通会员</Button>
-          </div>
-        </Layout>
-      );
-    }
-
     // 已售罄
     if (info.stock === 0) {
       if (info.nextBeginTimestamp) {
@@ -102,6 +89,19 @@ export default withRouter(({ info, mystock, isVIP, history }) => {
           </Layout>
         );
       }
+    }
+
+    // vip专享
+    if (!isVIP && info.onlyForVip === 'Y') {
+      return (
+        <Layout title={info.productName}>
+          <Product info={info} />
+          <div className={styles['box']}>
+            <div className={styles['desc']}>本秒杀活动仅限会员参与</div>
+            <Button onClick={() => { history.push('/vip') }}>马上去开通会员</Button>
+          </div>
+        </Layout>
+      );
     }
 
     // 正常进行中
