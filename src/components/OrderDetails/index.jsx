@@ -17,7 +17,6 @@ export default ({ info = {}, productList = [] })=>{
   
   const [isShow, setShow] = useState(false);
   const [codeVisible, setCodeVisible] = useState(false);
-  console.log(productList)
   return(
     <div className={styles.orderdetail}>
       <div className={styles.orderdetail_title}>{productList[0] && productList[0]['productName']}{productList[1]&&`+${productList[1]['productName']}`}</div>
