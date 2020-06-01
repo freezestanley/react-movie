@@ -6,6 +6,7 @@ import { reLanchPay } from '@/utils/handlePay';
 import dayjs from 'dayjs'
 import styles from './index.less';
 import QRcode from '@/components/Home/Banner/QRcode';
+import GiftBag from './images/giftbag.png'
 
 export default connect(state => state.user)(({info, dispatch})=>{
   const [codeVisible, setCodeVisible] = useState(false);
@@ -32,7 +33,7 @@ export default connect(state => state.user)(({info, dispatch})=>{
       <div className={styles.order_up} onClick={() => router.push(`./orderdetail?id=${info.orderId}`)}>
         <div className={styles.order_head}>
           <div className={styles.headLeft}>
-            <img  src={info.productList[0].image}alt=''/>
+            <img  src={info.productList[0].image ||GiftBag}alt=''/>
             {(isShow&&!!(product2.image))&&(<img  src={info.productList[1].image} alt=''/>)}
             <span className={styles.span_1}>{product1.productName}{isShow&&(`+${product2.productName}`)}</span>
           </div>
@@ -42,12 +43,12 @@ export default connect(state => state.user)(({info, dispatch})=>{
             {info.status===2&&(<span className={styles.paid}>已支付</span>)}
             {info.status===4&&(<span className={styles.outtime}>已失效</span> )}
             {info.status===5&&(<span className={styles.paid}>已完成</span> )}
-            {info.status===6&&(<span className={styles.outtime}>充值失败</span> )}
+            {info.status===6&&(<span className={styles.chagrefailed}>充值失败</span> )}
             {info.status===7&&(<span className={styles.outtime}>已退款</span> )}
-            {info.status===8&&(<span className={styles.outtime}>部分退款</span> )}
-            {info.status===9&&(<span className={styles.outtime}>部分成功</span> )}
-            {info.status===10&&(<span className={styles.outtime}>退款中</span> )}
-            {info.status===11&&(<span className={styles.outtime}>退款失败</span> )}
+            {info.status===8&&(<span className={styles.paid}>部分退款</span> )}
+            {info.status===9&&(<span className={styles.paid}>部分成功</span> )}
+            {info.status===10&&(<span className={styles.paid}>退款中</span> )}
+            {info.status===11&&(<span className={styles.chagrefailed}>退款失败</span> )}
          </div>
         </div>
        

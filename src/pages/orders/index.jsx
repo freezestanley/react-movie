@@ -24,7 +24,6 @@ const LOAD_STATE = {
 };
 class Index extends Component {
   mounted = true;
-   page=1
   constructor(props){
     super(props)
     this.state = {
@@ -56,11 +55,9 @@ class Index extends Component {
     this.setState({page:1})
      queryOrders({}).then((res)=>{
        this.setState({ refreshing: REFRESH_STATE.loading });
-      //  console.log(60)
-      //  console.log(res)
       if(res.code==='0000'){
-        this.setState({data:res.data,pageNo:1})
-        this.appendDa()
+        this.setState({data:res.data,page:1})
+        this.appendOrder()
         this.setState({
           refreshing: REFRESH_STATE.success,
         });
@@ -73,7 +70,6 @@ class Index extends Component {
     })
   }
 
-  // 模拟加载更多数据
   loadData = () => {
     const {data,page,dataSource}=this.state
     this.setState({ loading: LOAD_STATE.loading });
@@ -87,14 +83,11 @@ class Index extends Component {
           return
         }
         data.concat(res.data)
-        this.setState({data:data})
         res.data.map((item)=>{
           dataSource.push(<Order key={item.orderId} info={item} ></Order>);
         })
-        this.setState({page:page+1})
-        this.setState({dataSource})
         let loading = LOAD_STATE.success;
-        this.setState({ loading })
+        this.setState({page:page+1,dataSource:dataSource,loading:loading,data:data})
       }else{
         let loading = LOAD_STATE.complete;
         this.setState({ loading })
@@ -103,7 +96,7 @@ class Index extends Component {
      }
      
 
-  appendData=()=> {
+ appendData =()=> {
     queryOrders({}).then((res)=>{
       if(res.code==='0000'){
         this.setState({data:res.data})
@@ -116,7 +109,7 @@ class Index extends Component {
       }
     })
   }
-  appendDa=()=>{
+  appendOrder=()=>{
     const {data}=this.state;
     let temp=[]
     if(!data)return
