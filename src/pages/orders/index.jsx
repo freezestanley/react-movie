@@ -56,11 +56,9 @@ class Index extends Component {
     this.setState({page:1})
      queryOrders({}).then((res)=>{
        this.setState({ refreshing: REFRESH_STATE.loading });
-      //  console.log(60)
-      //  console.log(res)
       if(res.code==='0000'){
         this.setState({data:res.data,pageNo:1})
-        this.appendDa()
+        this.appendOrder()
         this.setState({
           refreshing: REFRESH_STATE.success,
         });
@@ -87,14 +85,11 @@ class Index extends Component {
           return
         }
         data.concat(res.data)
-        this.setState({data:data})
         res.data.map((item)=>{
           dataSource.push(<Order key={item.orderId} info={item} ></Order>);
         })
-        this.setState({page:page+1})
-        this.setState({dataSource})
         let loading = LOAD_STATE.success;
-        this.setState({ loading })
+        this.setState({page:page+1,dataSource:dataSource,loading:loading,data:data})
       }else{
         let loading = LOAD_STATE.complete;
         this.setState({ loading })
@@ -116,7 +111,7 @@ class Index extends Component {
       }
     })
   }
-  appendDa=()=>{
+  appendOrder=()=>{
     const {data}=this.state;
     let temp=[]
     if(!data)return

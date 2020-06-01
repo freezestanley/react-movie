@@ -43,12 +43,12 @@ export default connect(state => state.user)(({info, dispatch})=>{
             {info.status===2&&(<span className={styles.paid}>已支付</span>)}
             {info.status===4&&(<span className={styles.outtime}>已失效</span> )}
             {info.status===5&&(<span className={styles.paid}>已完成</span> )}
-            {info.status===6&&(<span className={styles.outtime}>充值失败</span> )}
+            {info.status===6&&(<span className={styles.chagrefailed}>充值失败</span> )}
             {info.status===7&&(<span className={styles.outtime}>已退款</span> )}
-            {info.status===8&&(<span className={styles.outtime}>部分退款</span> )}
-            {info.status===9&&(<span className={styles.outtime}>部分成功</span> )}
-            {info.status===10&&(<span className={styles.outtime}>退款中</span> )}
-            {info.status===11&&(<span className={styles.outtime}>退款失败</span> )}
+            {info.status===8&&(<span className={styles.paid}>部分退款</span> )}
+            {info.status===9&&(<span className={styles.paid}>部分成功</span> )}
+            {info.status===10&&(<span className={styles.paid}>退款中</span> )}
+            {info.status===11&&(<span className={styles.chagrefailed}>退款失败</span> )}
          </div>
         </div>
        
