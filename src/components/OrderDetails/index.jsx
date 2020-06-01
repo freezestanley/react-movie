@@ -17,6 +17,7 @@ export default ({ info = {}, productList = [] })=>{
   
   const [isShow, setShow] = useState(false);
   const [codeVisible, setCodeVisible] = useState(false);
+  console.log(productList)
   return(
     <div className={styles.orderdetail}>
       <div className={styles.orderdetail_title}>{productList[0] && productList[0]['productName']}{productList[1]&&`+${productList[1]['productName']}`}</div>
@@ -33,7 +34,7 @@ export default ({ info = {}, productList = [] })=>{
           <span>产品规格</span>
           <span>{productList[0] && productList[0]['productItemName']}</span>
         </div>}
-        {((productList&&(productList[0] || {}).type===3||info.status===6||info.status==1||info.status==4||isShow)&&<>
+        {((productList&&(productList[0] || {}).type===3||info.status===6||info.status===1||info.status===4||isShow)&&<>
           {info.productOriginalPrice&&<div>
           <span>原价</span>
           <span>{formatMoney(info.productOriginalPrice)}</span>
@@ -64,7 +65,7 @@ export default ({ info = {}, productList = [] })=>{
           <span>{dayjs(info.cancelTime).format('YYYY-MM-DD')}</span>
         </div>}
 
-       { (productList[0].productId==19)&&(productList[1]) && (<><div>
+       { (productList[0].productId===19)&&(productList[1]) && (<><div>
           <span>换购商品</span>
           <span>{productList[1]['productName']}</span>
         </div>
