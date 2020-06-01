@@ -27,14 +27,19 @@ const Active = ({
     const box = useRef(null)
     const footer = useRef(null)
     const openClick = (e) => {
-        console.log(userId,'--userId')
+        const {location} = history;
+        const {query} = location || {}
+        const {distributorNo='D2020052711557777'} = query
+        console.log(distributorNo,'distributorNo')
         if(!userId) {
-            const pathname = history.location.pathname;
-            history.push({ pathname: '/login', query: { sourcePage: window.encodeURIComponent(pathname) } });
+            const {pathname,search} = history.location;
+            let sourcePage = window.encodeURIComponent(pathname+search)
+            console.log(sourcePage,'pathname,search')
+            history.push({ pathname: '/login', query: { sourcePage } });
             return;
         }
         //packageId 1年卡，2半年卡，3月卡
-        createPackageOrder({data:{payAmount:129,packageId:1},dispatch,callback(){
+        createPackageOrder({data:{payAmount:129,packageId:1,distributorNo},dispatch,callback(){
             console.log('月卡')
         }})
     }
