@@ -48,7 +48,7 @@ export default connect(state => ({ seckill: state.seckill, user: state.user }))(
         </div>
       )}
       <RecommendBuy />
-      <BuyFooter onValidate={() => true} isShowDetail={false} info={btnInfo} />
+      <BuyFooter onValidate={() => true} isShowDetail={true} info={btnInfo} />
     </div>
   );
 });
