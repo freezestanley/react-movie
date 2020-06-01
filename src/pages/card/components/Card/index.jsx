@@ -1,5 +1,6 @@
 import React, { useEffect, useReducer, useState } from 'react';
 import { connect } from 'dva'
+import {Session} from '@/utils/tools'
 import Member from '../member'
 import Change from '../change'
 import Copy from '../copy'
@@ -22,6 +23,7 @@ const Card = (props) => {
     }
     const jumpClick = (e) => {
         console.log(data,'data--')
+        Session.set('cardProductItem',data)
         dispatch({type:'card/setState',payload:{cardProductItem:data}})
         setVisible(!visible)
         if (clickHandler) clickHandler(e)

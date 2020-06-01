@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'dva';
 import router from 'umi/router'
 import { Toast } from 'zarm';
+import {Session} from '@/utils/tools'
 import './index.less';
 import Button from './Button'
 import Dialog from '@/components/Dialog';
@@ -9,22 +10,23 @@ import { AntiCheat } from '@/utils/handlePay';
 import SwitchAccount from '@/components/SwitchAccount';
 import SelectMember from './SelectMember'
 import TobBack from './TopBack'
-const mock = {
-  title: ' 盎司白金视听年卡',
-  content: ' 7月券·热门会员月卡多选一 '
-}
+
 const Index = ({
   card,
   dispatch,
   user
 }) => {
   const { userId } = user
-  const { cardProductItem  } = card || {}
+  const cardProductItem = Session.get('cardProductItem') || (card.cardProductItem||{})
   const { productData, couponCode, couponTitle, productName } = cardProductItem || {}
   const [productItem, setProductItem] = useState({})
   const [accountTypeList, setAccountTypeList] = useState([])
   const [countItem, setCountType] = useState()
   const [cardVisible, showVisible] = useState(false)
+
+  
+  console.log(Session.get('cardProductItem'),userId,'seeesii')
+  console.log((card||{}).cardProductItem,'card')
 
   useEffect(() => {
     const { rechargeAccountType } = productItem;
@@ -33,16 +35,20 @@ const Index = ({
     }
   }, [productItem])
 
-  // console.log(productItem, accountTypeList, 'productItem', countItem, 'countType')
-
   const handlePull = () => {
+    if(!userId) {
+      router.push('/login')
+      return;
+    }
     const {productItemId} = productItem;
     const {account,accountType} = countItem;
-    if(!productItemId && !account && !accountType) {
+    console.log(countItem,!account,!accountType,!productItemId,'countItem')
+    if(!productItemId || !account || !accountType) {
       Toast.show('请填写完整')
-      return false;
+      return;
     }
     showVisible(true)
+    
   }
   // debugger
   const onExchangeCard = () => {

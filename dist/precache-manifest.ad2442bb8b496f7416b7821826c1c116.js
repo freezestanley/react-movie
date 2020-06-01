@@ -4,7 +4,7 @@ self.__precacheManifest = [
     "url": "/static/pen.d7641861.png"
   },
   {
-    "revision": "d30655f36a8ecb330216",
+    "revision": "c13174a482fcef42b113",
     "url": "/vendors.chunk.css"
   },
   {
@@ -120,7 +120,7 @@ self.__precacheManifest = [
     "url": "/static/halfyear_02.878aa272.png"
   },
   {
-    "revision": "d30655f36a8ecb330216",
+    "revision": "c13174a482fcef42b113",
     "url": "/vendors.async.js"
   },
   {
@@ -140,11 +140,11 @@ self.__precacheManifest = [
     "url": "/static/year_05.cbddfe74.png"
   },
   {
-    "revision": "9a7090d317ecec743476",
+    "revision": "d29030bbcd7e8b1c3b69",
     "url": "/umi.js"
   },
   {
-    "revision": "9a7090d317ecec743476",
+    "revision": "d29030bbcd7e8b1c3b69",
     "url": "/umi.css"
   },
   {
@@ -152,15 +152,15 @@ self.__precacheManifest = [
     "url": "/p__explore.chunk.css"
   },
   {
-    "revision": "11419dc29661a351295d",
+    "revision": "19a89116fed34cc563f0",
     "url": "/p__topup.chunk.css"
   },
   {
-    "revision": "0644031a18179531f7fb",
+    "revision": "752af67f348d2c583859",
     "url": "/p__topup__temp.chunk.css"
   },
   {
-    "revision": "0644031a18179531f7fb",
+    "revision": "752af67f348d2c583859",
     "url": "/p__topup__temp.async.js"
   },
   {
@@ -172,11 +172,11 @@ self.__precacheManifest = [
     "url": "/p__userinfo.async.js"
   },
   {
-    "revision": "3f0557cba4eddce41df4",
+    "revision": "ca6317aee04141df463d",
     "url": "/p__vip.chunk.css"
   },
   {
-    "revision": "3f0557cba4eddce41df4",
+    "revision": "ca6317aee04141df463d",
     "url": "/p__vip.async.js"
   },
   {
@@ -188,7 +188,7 @@ self.__precacheManifest = [
     "url": "/p__testvip.async.js"
   },
   {
-    "revision": "11419dc29661a351295d",
+    "revision": "19a89116fed34cc563f0",
     "url": "/p__topup.async.js"
   },
   {
@@ -212,15 +212,15 @@ self.__precacheManifest = [
     "url": "/p__successbuy.chunk.css"
   },
   {
-    "revision": "a658e3ea8a88c015aae2",
+    "revision": "62fb9b4c22224b988d3d",
     "url": "/p__card__active.async.js"
   },
   {
-    "revision": "4d5a281132eaf37601e8",
+    "revision": "e80cd753c36f9144db4d",
     "url": "/p__phone.async.js"
   },
   {
-    "revision": "4d5a281132eaf37601e8",
+    "revision": "e80cd753c36f9144db4d",
     "url": "/p__phone.chunk.css"
   },
   {
@@ -232,8 +232,8 @@ self.__precacheManifest = [
     "url": "/p__search.chunk.css"
   },
   {
-    "revision": "bbedf478fa6adc4b1c8faa146a262bd2",
-    "url": "/icons/apple-touch-icon-76x76.png"
+    "revision": "98e177e60162bc26af57a5fdd65ab69e",
+    "url": "/icons/apple-touch-icon-60x60.png"
   },
   {
     "revision": "91e1fc04bdcc5847694d",
@@ -248,19 +248,19 @@ self.__precacheManifest = [
     "url": "/p__orders.chunk.css"
   },
   {
-    "revision": "8abb1cc4c5b8dc8db59e3026d135eb1d",
-    "url": "/icons/favicon-16x16.png"
+    "revision": "bbedf478fa6adc4b1c8faa146a262bd2",
+    "url": "/icons/apple-touch-icon-76x76.png"
   },
   {
-    "revision": "f02def4800eb3f52c9de",
+    "revision": "7d3694bcf92fd378ffd2",
     "url": "/p__memberrecharge.chunk.css"
   },
   {
-    "revision": "e30fe51469bd7479519e",
+    "revision": "877ca87522feb888a883",
     "url": "/p__my.async.js"
   },
   {
-    "revision": "e30fe51469bd7479519e",
+    "revision": "877ca87522feb888a883",
     "url": "/p__my.chunk.css"
   },
   {
@@ -276,11 +276,11 @@ self.__precacheManifest = [
     "url": "/p__home.chunk.css"
   },
   {
-    "revision": "539beb6f2807278ea901",
+    "revision": "d112df9a093593814593",
     "url": "/p__login.async.js"
   },
   {
-    "revision": "539beb6f2807278ea901",
+    "revision": "d112df9a093593814593",
     "url": "/p__login.chunk.css"
   },
   {
@@ -288,20 +288,20 @@ self.__precacheManifest = [
     "url": "/p__home__models__home.js.async.js"
   },
   {
-    "revision": "f02def4800eb3f52c9de",
+    "revision": "7d3694bcf92fd378ffd2",
     "url": "/p__memberrecharge.async.js"
   },
   {
-    "revision": "8b1c8020cc67ebf844a1615ad394999a",
-    "url": "/icons/android-chrome-192x192.png"
+    "revision": "7f791a77d6f2e2a30b570c2aa31fb7fa",
+    "url": "/icons/apple-touch-icon-120x120.png"
   },
   {
     "revision": "58881533ae1a310f6a0d",
     "url": "/p__home.async.js"
   },
   {
-    "revision": "7f791a77d6f2e2a30b570c2aa31fb7fa",
-    "url": "/icons/apple-touch-icon-120x120.png"
+    "revision": "8b1c8020cc67ebf844a1615ad394999a",
+    "url": "/icons/android-chrome-192x192.png"
   },
   {
     "revision": "b021e6cb633258adb33a",
@@ -320,11 +320,11 @@ self.__precacheManifest = [
     "url": "/p__charge.async.js"
   },
   {
-    "revision": "af2204ea0c88aaab35511768985c8020",
-    "url": "/icons/mstile-150x150.png"
+    "revision": "b92ee177ec93f530d294b6ac137a95b2",
+    "url": "/icons/msapplication-icon-144x144.png"
   },
   {
-    "revision": "fefc676b951ef50ec4ff",
+    "revision": "012e3e9f07a124b306ec",
     "url": "/layouts__common.chunk.css"
   },
   {
@@ -348,7 +348,7 @@ self.__precacheManifest = [
     "url": "/index.html"
   },
   {
-    "revision": "fefc676b951ef50ec4ff",
+    "revision": "012e3e9f07a124b306ec",
     "url": "/layouts__common.async.js"
   },
   {
@@ -356,24 +356,24 @@ self.__precacheManifest = [
     "url": "/icons/android-chrome-152x152.png"
   },
   {
+    "revision": "8abb1cc4c5b8dc8db59e3026d135eb1d",
+    "url": "/icons/favicon-16x16.png"
+  },
+  {
+    "revision": "af2204ea0c88aaab35511768985c8020",
+    "url": "/icons/mstile-150x150.png"
+  },
+  {
     "revision": "18f17462b535693be93bc1184774c5c9",
     "url": "/icons/favicon-32x32.png"
   },
   {
-    "revision": "b92ee177ec93f530d294b6ac137a95b2",
-    "url": "/icons/msapplication-icon-144x144.png"
+    "revision": "47cb723696508f2c5b8e5f704a31220f",
+    "url": "/icons/apple-touch-icon.png"
   },
   {
     "revision": "719cb777b3c5dd6f5f2288e538c98df1",
     "url": "/icons/apple-touch-icon-180x180.png"
-  },
-  {
-    "revision": "98e177e60162bc26af57a5fdd65ab69e",
-    "url": "/icons/apple-touch-icon-60x60.png"
-  },
-  {
-    "revision": "47cb723696508f2c5b8e5f704a31220f",
-    "url": "/icons/apple-touch-icon.png"
   },
   {
     "revision": "d7e488ade6dbf67eef4668ddd15c5b1d",
