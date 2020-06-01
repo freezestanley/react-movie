@@ -121,7 +121,7 @@ function TopupPage(props) {
       <RecommendBuy />
       <BuyFooter
         // isResetForm={false}
-        btnInfo={ type=== 3 ? { name: '已下架', active: false } : undefined }
+        info={ type=== 3 ? { name: '已下架', active: false } : undefined }
         onValidate={() => type === 1 ? formValidate(state.specData) : true}
       />
     </>

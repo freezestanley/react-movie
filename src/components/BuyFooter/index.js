@@ -42,7 +42,6 @@ export default withRouter(connect(state => ({ ...state.prePay, user: state.user,
     }
   };
   const startPayFn = useCallback(() => {
-    console.log('------11111')
     if (!userId) {
       const sourcePage = window.encodeURIComponent(`${window.location.pathname}${window.location.search}`);
       history.push({ pathname: '/login', query: { sourcePage  } });

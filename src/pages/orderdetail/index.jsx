@@ -43,7 +43,7 @@ function OrderDetail(props){
       {[2,4,6].includes(orderDetails.status)&&<div className={styles.hot}>
         <HotRecommend bannerList={hotRecommendList} />
       </div>}
-    </div>, orderDetails.status === 1 ? <BuyFooter  key ='buy' isShowDetail={false} onValidate={() => true} /> : null ]
+    </div>, orderDetails.status === 1 ? <BuyFooter  key ='buy' info={{ name: '立即支付', active: true }} isShowDetail={false} onValidate={() => true} /> : null ]
   )
 }
 export default connect(state=>state)(OrderDetail)
