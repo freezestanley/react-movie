@@ -3,6 +3,7 @@ import map from 'lodash/map';
 import withRouter from 'umi/withRouter';
 import Product from './Product';
 import styles from './index.module.less';
+import router from 'umi/router'
 
 export default withRouter((props) => {
   const { list, history } = props;
@@ -26,6 +27,7 @@ export default withRouter((props) => {
             </div>
           );
         })}
+        <div className={styles['more']} onClick={() => {router.replace('/explore')}}>查看更多</div>
       </div>
     </div>
   );

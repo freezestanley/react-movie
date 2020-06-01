@@ -18,13 +18,13 @@ import { ReactComponent as AnchorSvg } from './img/anchor.svg';
 import { getTotalPrice, getDiscountInfo, createPhoneOrder, createProductOrder, createSeckillOrder, rePayOrder } from './util';
 
 
-export default withRouter(connect(state => ({ ...state.prePay, user: state.user, vipTip: state.vipTip  }))(function(props) {
-  const { history, main, attach, type, dispatch, onValidate, user, vipTip={}, isShowDetail=true, isResetForm = true, info } = props;
+export default withRouter(connect(state => ({ ...state.prePay, user: state.user, vipTip: state.vipTip, hasVipOrder: state.order.hasVipOrder  }))(function(props) {
+  const { history, main, attach, type, dispatch, onValidate, user, vipTip={}, isShowDetail=true, isResetForm = true, info, hasVipOrder } = props;
   const { isVIP, userId } = user;
   const [visible, setVisible]=useState(false);
   const totalPrice = getTotalPrice({ main, attach, type, isVIP });
   const discountInfo = getDiscountInfo({ main, attach, type, isVIP });
-  const isVipTipVisible = type === 'product' && main.savePrice >0 && !isVIP && !main.isOpenVIP && vipTip.visible
+  const isVipTipVisible = type === 'product' && main.savePrice >0 && !isVIP && !main.isOpenVIP && !hasVipOrder && vipTip.visible
   const btnInfo = info || { name: '立即购买', active: true };
   const toggleFn = (val) =>{
     setVisible(val);
