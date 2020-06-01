@@ -3,6 +3,7 @@ import { connect } from 'dva';
 import { Input, Toast } from 'zarm';
 import debounce from 'lodash/debounce';
 import map from 'lodash/map';
+import findIndex from 'lodash/findIndex';
 import isEmpty from 'lodash/isEmpty';
 import styles from './index.module.less';
 import SpecItem from '@/components/Phone/FeeItem'
@@ -26,15 +27,18 @@ const { phone: { product={}, productItems=[], attachList=[] }, phoneForm: { main
   const onSelectFn = (idx) => {
     dispatch({ type: 'phoneForm/setState', payload: { main: productItems[idx] } });
   };
-  const onSelectAddtionFn = useCallback((idx) => {
+  const onSelectAddtionFn = (idx) => {
     if(isEmpty(attach)) {
-      dispatch({ type: 'phoneForm/setState', payload: { attach: { ...attachList[idx], idx } } });
+      dispatch({ type: 'phoneForm/setState', payload: { attach: attachList[idx] } });
     } else {
-      if (attach.idx === idx){
+      const originIdx = findIndex(attachList, item => item.id === attach.id);
+      if (originIdx === idx){
         dispatch({ type: 'phoneForm/setState', payload: { attach: {} } });
+      } else {
+        dispatch({ type: 'phoneForm/setState', payload: { attach: attachList[idx] } });
       }
     }
-  }, [dispatch, attach]); // eslint-disable-line
+  }; // eslint-disable-line
   const onInputChange = (value) => {
     dispatch({ type: 'phoneForm/setState', payload: { rechargeAccount: value } });
   };
@@ -83,6 +87,6 @@ const { phone: { product={}, productItems=[], attachList=[] }, phoneForm: { main
       <TopupNote nodes={product.detail || ''} />
     </div>
     <RecommendBuy />
-    <BuyFooter onValidate={validate} />
+    <BuyFooter onValidate={validate} isShowDetail={!isEmpty(main) || !isEmpty(attach)} />
   </div>);
 })

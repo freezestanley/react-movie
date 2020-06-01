@@ -1,6 +1,7 @@
 
 import { paymentAmount } from '@/utils/ants';
 import { fmtPrice } from '@/utils/tools';
+import isEmpty from 'lodash/isEmpty';
 import superCodePay, { reLanchPay } from '@/utils/handlePay';
 import * as services from '@/services/order';
 import * as seckillService from '@/services/seckill';
@@ -59,7 +60,7 @@ export const getDiscountInfo = ({ main, type, attach, isVIP }) => {
         type,
         itemName: main.name,
         originPrice: main.price,
-        attachProductName: `${attach.title}${attach.productItemName}`,
+        attachProductName: isEmpty(attach) ? '' : `${attach.title}${attach.productItemName}`,
         attachPrice: attach.payPrice
       };
       break;
