@@ -12,7 +12,7 @@ import BuyFooter from '@/components/BuyFooter';
 import HotRecommend from '@/components/HotRecommend';
 
 function OrderDetail(props){
-  const {location: { query = {} } ,order:{orderDetails, productList },mainProduct:{info={}},dispatch}=props;
+  const {location: { query = {} } ,order:{orderDetails, productList },dispatch}=props;
   const orderId = query.id;
   useEffect(() => {
       dispatch({ type: 'order/queryOrderDetials', payload: orderId  });
