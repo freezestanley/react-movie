@@ -61,3 +61,23 @@ export function queryProductsGroupByCategory(data) {
     data,
   });
 }
+
+// 添加热搜
+export function increaseHotKeyword({ keyword }) {
+  return request({
+    url: `/hotkeyword/increase?keyword=${keyword}`,
+    serve: 'product',
+    method: 'POST',
+  });
+}
+
+// 查询热搜
+export function queryHotSearch(data) {
+  return request({
+    url: `/hotkeyword/queryTop`,
+    serve: 'product',
+    method: 'GET',
+    data,
+  });
+}
+

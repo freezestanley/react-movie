@@ -6,12 +6,13 @@ import { connect } from 'dva';
 import map from 'lodash/map';
 // import { Input } from 'zarm';
 import { ReactComponent as SearchSvgIcon } from '@/assets/svg/search.svg';
+import * as service from '@/services/product';
 import styles from './index.module.less';
 
-const hotSearchList = [{ id: 1, name: 'Q币' }, { id: 16, name: '芒果TV' }, { id: 18 , name: '网易云音乐' }, ]
+// const hotSearchList = [{ id: 1, name: 'Q币' }, { id: 16, name: '芒果TV' }, { id: 18 , name: '网易云音乐' }, ]
 
-export default connect(state => ({ list: state.products.list }))(withRouter(function(props) {
-  const { history, list, dispatch, location: { query: { keyword='', sourcePage } } } = props;
+export default connect(state => ({ list: state.products.list, hotList: state.search.list }))(withRouter(function(props) {
+  const { history, list, hotList, dispatch, location: { query: { keyword='', sourcePage } } } = props;
   const [value, setValue] = useState(keyword);
   const debouncedSearchFn = useCallback(debounce((keyword) =>{
     dispatch({ type: 'products/getProducts', payload: { keyword, status: 2 } });
@@ -26,12 +27,20 @@ export default connect(state => ({ list: state.products.list }))(withRouter(func
       history.goBack();
     }
   };
-  const goToProductPage = (id) => {
-    history.push({ pathname: '/topup', query: { id } })
+  const goToProductPage = ({ id, name }) => {
+    service.increaseHotKeyword({ keyword: name });
+    history.push({ pathname: '/topup', query: { id } });
   }
+  const goToProductPageV2 = (id) => {
+    history.push({ pathname: '/topup', query: { id } });
+  }
+
   useEffect(() => {
     debouncedSearchFn(value || 'empty');
   }, [debouncedSearchFn, value]);
+  useEffect(() => {
+    dispatch({ type: 'search/getTopSearch', payload: {} });
+  }, [dispatch]);
   return (<div className={styles.searchPage}>
     <div className={styles.search}>
       <div className={styles.cancel} onClick={goToHome}>取消</div>
@@ -45,11 +54,11 @@ export default connect(state => ({ list: state.products.list }))(withRouter(func
     {isEmpty(list) && <div className={styles.hotSearch}>
       <h2>热门搜索</h2>
       <ol className={styles.hotList}>
-        {map(hotSearchList, (hItem, hIdx) => (<li key={hIdx} onClick={goToProductPage.bind(this, hItem.id)}>{hItem.name}</li>))}
+        {map(hotList, (hItem, hIdx) => (<li key={hIdx} onClick={goToProductPageV2.bind(this, hItem.id)}>{hItem.keyword}</li>))}
       </ol>
     </div>}
     {!isEmpty(list) && <ol className={styles.resultList}>
-      {map(list, (item, idx) => (<li key={idx} className={styles.listItem} onClick={goToProductPage.bind(this, item.id)}>
+      {map(list, (item, idx) => (<li key={idx} className={styles.listItem} onClick={goToProductPage.bind(this, item)}>
         <SearchSvgIcon className={styles.innerIcon} />
         <span className={styles.text}>{item.name}</span>
       </li>))}
