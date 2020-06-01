@@ -128,7 +128,7 @@ class Index extends Component {
 
   render() {
     const {  refreshing, loading, dataSource } = this.state;
-    const style ={ position: 'relative', overflowY: 'auto', height: '100%'};
+    const style ={ position: 'relative', overflowY: 'auto', height: '100%' };
     return (
         <Pull
           style={style}
@@ -141,6 +141,7 @@ class Index extends Component {
             distance: 200,
             handler: this.loadData,
           }}
+          className={styles.orders}
         >
           {dataSource}
         </Pull>

@@ -4,24 +4,27 @@ import isEmpty from 'lodash/isEmpty';
 import Redirect from 'umi/Redirect';
 import cns from 'classnames';
 import 'zarm/dist/zarm.min.css';
-import { BrowserInfo, Store, mapRouter, Query } from '@/utils/tools';
-import weChatAuth from '@/utils/weChatAuth';
-import VConsole from 'vconsole';
-import GlobalLoading from '@/components/GlobalLoading';
-import getEnv from '@/utils/env';
-import TabNavItem from './TabNavItem';
-import './index.less';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
- // 反欺诈
- let s = 'b61f4b29a9b2#test#support'; // 测试ID
- if (/vip.zhongan.io$/.test(window.location.origin)) {
-   s = 'a8987701693f#prd#support'; // 生产ID
- }
- window.__SuperCode = window.SuperCode && new window.SuperCode({
-   scene: s
- });
+import { BrowserInfo, Store, mapRouter, Query } from '@/utils/tools';
+import weChatAuth from '@/utils/weChatAuth';
+import { wechatShareConfig } from '@/utils/wechatShare';
+import VConsole from 'vconsole';
+import GlobalLoading from '@/components/GlobalLoading';
+import getEnv from '@/utils/env';
+
+import TabNavItem from './TabNavItem';
+import './index.less';
+
+// 反欺诈
+let s = 'b61f4b29a9b2#test#support'; // 测试ID
+if (/vip.zhongan.io$/.test(window.location.origin)) {
+  s = 'a8987701693f#prd#support'; // 生产ID
+}
+window.__SuperCode = window.SuperCode && new window.SuperCode({
+  scene: s
+});
 
 function Layout(props) {
   const isWx = BrowserInfo.isWeixin;
@@ -32,7 +35,7 @@ function Layout(props) {
     hasBuyFooter,
     tabPageList=[],
   }, location, user } =props;
-  const { hasNavBar = false, footer, fullSize=false, isNeedLogin } = currRoute;
+  const { hasNavBar = false, footer, fullSize = false, isNeedLogin } = currRoute;
   const [deferredPrompt, setDeferredPrompt] = useState(null);
   const [loading, setLoading] = useState(true);
   const ref = useRef();
@@ -109,6 +112,11 @@ function Layout(props) {
       ref.current.scrollTop = 0
     }
   }, [location]);
+
+  useEffect(() => {
+    // iOS微信分享config
+    wechatShareConfig();
+  }, [])
 
   const _reg = (currRoute.path || '').replace('/', '_');
   const _classname = _reg === '_' ? '_home' : _reg;

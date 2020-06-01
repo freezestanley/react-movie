@@ -1,4 +1,3 @@
-import { useState, useEffect, useRef } from 'react';
 import { Popup, Icon } from 'zarm';
 import styles from './index.less';
 import code from '@/assets/QRcode.png';

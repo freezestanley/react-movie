@@ -207,3 +207,8 @@ export const getSourcePageStr = () => {
   const { pathname, search } = window.location;
   return window.encodeURIComponent(`${pathname}${search}`);
 };
+export const phoneMask = (str) => {
+  let pat=/(\d{3})\d*(\d{4})/
+  let result =str.replace(pat,'$1****$2');
+  return result;
+}

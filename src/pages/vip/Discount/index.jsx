@@ -6,6 +6,7 @@ import styles from './index.module.less';
 
 export default withRouter((props) => {
   const { list, history } = props;
+  console.log(list)
   const goToDetail =(id) => {
     history.push({ pathname: '/topup', query: { id } });
   }

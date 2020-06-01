@@ -33,7 +33,7 @@ export default ({ info = {}, productList = [] })=>{
           <span>产品规格</span>
           <span>{productList[0] && productList[0]['productItemName']}</span>
         </div>}
-        {((productList&&(productList[0] || {}).type===3||info.status===6||info.status==1||info.status==4||isShow)&&<>
+        {((productList&&(productList[0] || {}).type===3||info.status===6||info.status===1||isShow)&&<>
           {info.productOriginalPrice&&<div>
           <span>原价</span>
           <span>{formatMoney(info.productOriginalPrice)}</span>
@@ -64,7 +64,7 @@ export default ({ info = {}, productList = [] })=>{
           <span>{dayjs(info.cancelTime).format('YYYY-MM-DD')}</span>
         </div>}
 
-       { (productList[0].productId==19)&&(productList[1]) && (<><div>
+       { (productList[0].productId===19)&&(productList[1]) && (<><div>
           <span>换购商品</span>
           <span>{productList[1]['productName']}</span>
         </div>
@@ -88,7 +88,7 @@ export default ({ info = {}, productList = [] })=>{
         </div>}
       </div>
     
-      {[2,3,5,7,8,9,10,11].includes(info.status)&&<div className={styles.ShowMore}>
+      {[2,3,4,5,7,8,9,10,11].includes(info.status)&&<div className={styles.ShowMore}>
         <span onClick={()=>{setShow(!isShow)}}>{isShow?'收起详情':'显示详情'}
        { isShow&& <img src={require('./images/up.svg')} alt=""/> }
        { !isShow&& <img src={require('./images/down.svg')} alt=""/>}</span>

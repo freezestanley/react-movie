@@ -24,10 +24,6 @@ function OrderDetail(props){
   }, [orderDetails, dispatch]);
   const hotRecommendList = filter(props.banner.list, item => item.bannerType === 5);
   useEffect(() => {
-    props.dispatch({ type: 'banner/getBanner', payload: {
-      bannerType:[2,5],
-      pageSize: 100,
-    } });
     props.dispatch({type:'order/queryMyOrders',payload:{
       pageNo:1,
       pageSize:10,
@@ -43,11 +39,11 @@ function OrderDetail(props){
       { ((orderDetails.status===5)&&orderDetails.orderCardList)&&<CardCharge info={orderDetails}/>}
       <OrderDetails info={orderDetails} productList={productList}/>
       {/* { ((orderDetails.status===5)&&orderDetails.orderCardList)&&<div className={styles.node}><TopupNote info={orderDetails.productId} /></div>} */}
-      <RecommendBuy/>
-      {[1,2,6].includes(orderDetails.status)&&<div className={styles.hot}>
+      {orderDetails.status!==1&&<RecommendBuy/>}
+      {[2,4,6].includes(orderDetails.status)&&<div className={styles.hot}>
         <HotRecommend bannerList={hotRecommendList} />
       </div>}
-    </div>, orderDetails.status === 1 ? <BuyFooter isShowDetail={false} onValidate={() => true} /> : null ]
+    </div>, orderDetails.status === 1 ? <BuyFooter  key ='buy' isShowDetail={false} onValidate={() => true} /> : null ]
   )
 }
 export default connect(state=>state)(OrderDetail)

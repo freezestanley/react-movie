@@ -14,7 +14,7 @@ import { ReactComponent as HomeSvg } from './img/home.svg';
 import { ReactComponent as CloseSvg } from './img/close.svg';
 import { ReactComponent as PromptSvg } from './img/prompt.svg';
 import { ReactComponent as SafeSvg } from './img/safe.svg';
-// import { ReactComponent as QuestionSvg } from './img/question.svg';
+import { ReactComponent as AnchorSvg } from './img/anchor.svg';
 import { getTotalPrice, getDiscountInfo, createPhoneOrder, createProductOrder, createSeckillOrder, rePayOrder } from './util';
 
 
@@ -107,7 +107,9 @@ export default withRouter(connect(state => ({ ...state.prePay, user: state.user,
     }
   }, [dispatch, main.isOpenVIP]);
   return [<div className={styles.buyFooter} key='footer' id="buy-footer-box">
-    {isVipTipVisible && <div className={styles.vipTip} onClick={goToDesPositon}>开通会员 , 本单立省{main.savePrice}元</div>}
+    {isVipTipVisible && <div className={styles.vipTip} onClick={goToDesPositon}>
+      开通会员 , 本单立省{main.savePrice}元<AnchorSvg className={styles.anchor}/>
+    </div>}
     <dl className={styles.home} onClick={goToHome}>
       <dt className={styles.homeIcon}>
         <HomeSvg />
@@ -146,7 +148,7 @@ export default withRouter(connect(state => ({ ...state.prePay, user: state.user,
       {discountAmount < 0 && <div className={styles.infoItem}>
         <div className={styles.label}>{discountLabel}</div>
         <div className={styles.valueBox} >
-          <span className={styles.prompt}>本单享{vipDiscount(discount)}折优惠</span>
+          <span className={styles.prompt}>本单享{discount ? `${vipDiscount(discount)}折优惠` : '白金会员权益' }</span>
           <div className={styles.value} dangerouslySetInnerHTML={{ __html: fmtPrice(discountAmount, 'tag') }}></div>
         </div>
       </div>}
