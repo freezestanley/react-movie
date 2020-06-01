@@ -22,7 +22,7 @@ function OrderDetail(props){
   useEffect(() => {
     dispatch({ type: 'prePay/setState', payload: { main: orderDetails, type: 'order' } })
   }, [orderDetails, dispatch]);
-  // console.log(orderDetails)
+  console.log(orderDetails)
   const hotRecommendList = filter(props.banner.list, item => item.bannerType === 5);
   useEffect(() => {
     props.dispatch({ type: 'banner/getBanner', payload: {

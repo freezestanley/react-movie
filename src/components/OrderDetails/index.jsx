@@ -17,7 +17,6 @@ export default ({ info = {}, productList = [] })=>{
   
   const [isShow, setShow] = useState(false);
   const [codeVisible, setCodeVisible] = useState(false);
-
   return(
     <div className={styles.orderdetail}>
       <div className={styles.orderdetail_title}>{productList[0] && productList[0]['productName']}{productList[1]&&`+${productList[1]['productName']}`}</div>
@@ -34,7 +33,7 @@ export default ({ info = {}, productList = [] })=>{
           <span>产品规格</span>
           <span>{productList[0] && productList[0]['productItemName']}</span>
         </div>}
-        {((productList&&productList[0].type===3)||info.status===6||isShow)&&<>
+        {((productList&&(productList[0] || {}).type===3||info.status===6||info.status==1||isShow)&&<>
           {info.productOriginalPrice&&<div>
           <span>原价</span>
           <span>{formatMoney(info.productOriginalPrice)}</span>
@@ -82,13 +81,13 @@ export default ({ info = {}, productList = [] })=>{
         <div>
           <span>时间</span>
           <span>{dayjs(info.orderTime).format('YYYY-MM-DD')}</span>
-        </div></>}
+        </div></>)}
         {info.buyMember&&info.memberExpiredTime&&<div>
           <span>过期时间</span>
           <span>{dayjs(info.memberExpiredTime).format('YYYY-MM-DD')}</span>
         </div>}
       </div>
-      {info.status!==6&&<div className={styles.ShowMore}>
+      {(info.status!==6)||(info.status!==1)&&<div className={styles.ShowMore}>
         <span onClick={()=>{setShow(!isShow)}}>{isShow?'收起详情':'显示详情'}
        { isShow&& <img src={require('./images/up.svg')} alt=""/> }
        { !isShow&& <img src={require('./images/down.svg')} alt=""/>}</span>
