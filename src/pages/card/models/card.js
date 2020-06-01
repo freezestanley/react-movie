@@ -5,6 +5,8 @@ export default {
   namespace: 'card',
   state: {
       data: [],
+      historyCards:[],
+      cardProductItem:{},//领取券码的详情信息
   },
   reducers: {
     setState(state, { payload }) {
@@ -220,7 +222,7 @@ export default {
 
       //   ]
       // }
-    console.log(res,'res---')
+    // console.log(res,'res---')
       // debugger
       yield put({ type: 'setState', payload: { data: res.data, total: res.historyCouponCount } });
       // return res;
@@ -247,7 +249,7 @@ export default {
     *exchangeCard({ payload }, { put, call }) {
       const res = yield call(services.exchangeCard, payload);
       return res
-    },  
+    }, 
 
   },
   subscriptions: {

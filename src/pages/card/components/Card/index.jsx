@@ -1,4 +1,5 @@
 import React, { useEffect, useReducer, useState } from 'react';
+import { connect } from 'dva'
 import Member from '../member'
 import Change from '../change'
 import Copy from '../copy'
@@ -11,6 +12,7 @@ const Card = (props) => {
         btnTitle,
         data,
         step,
+        dispatch,
         clickHandler
     } = props
     const [visible, setVisible] = useState(false)
@@ -19,6 +21,8 @@ const Card = (props) => {
         if (clickHandler) clickHandler(e)
     }
     const jumpClick = (e) => {
+        console.log(data,'data--')
+        dispatch({type:'card/setState',payload:{cardProductItem:data}})
         setVisible(!visible)
         if (clickHandler) clickHandler(e)
         router.push('/memberrecharge')
@@ -53,4 +57,7 @@ const Card = (props) => {
         </>
         )
 }
-export default Card
+export default connect(state => ({
+    card: state.card,
+    user: state.user
+}))(Card);

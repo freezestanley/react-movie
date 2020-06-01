@@ -16,7 +16,7 @@ const HistoryCard = ({
 
     useEffect(() => {
         if (userId) {
-            dispatch({ type: 'card/getHistoryCard', payload: { pageNo:1, pageSize: 100,isHistoryFlag: true } })
+            dispatch({ type: 'card/getHistoryCard', payload: { pageNo: 1, pageSize: 100, isHistoryFlag: true } })
         }
     }, [userId])
 
@@ -27,17 +27,18 @@ const HistoryCard = ({
                 historyCards.map((ele, idx, arr) => {
                     let next = ''
                     let result = {
+                        ...ele,
                         title: ele.couponTitle,
                         retitle: ele.productName,
                         time: ele.endDate,
                         name: '',
-                        cardNo: '',
+                        cardNo: ele.couponCode,
                         paytime: '',
                         remark: '',
                         account: '',
                         codeNo: '',
                         status: ele.viewStatus || 0,
-                        historyFlag: true 
+
                     }
 
                     if (ele.viewStatus === 7) {
@@ -61,14 +62,11 @@ const HistoryCard = ({
                                 result.paytime = ele.endDate
                                 result.remark = ele.couponRemark
                             } else if (ele.category === 2) {
-                                if (ele.rechargeStatus !== 1) {
-                                    next = 'member'
-                                    result.name = ele.productName
-                                    result.account = ele.rechargeAccount
-                                    result.paytime = ele.rechargeDate
-                                    // result.status = ele.rechargeStatus
-                                }
-
+                                next = 'member'
+                                result.name = ele.productName
+                                result.account = ele.rechargeAccount
+                                result.paytime = ele.rechargeDate
+                                result.status = ele.rechargeStatus
                             } else if (ele.category === 3) {
                                 next = 'copy'
                                 result.name = ele.productName

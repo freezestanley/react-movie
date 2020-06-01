@@ -4,8 +4,6 @@ import router from 'umi/router';
 import styles from './style/index.less';
 import Card from './components/Card'
 
-
-
 const CardPaper = (props) => {
     const { userId } = props.user
     const { data, total,historyCards } = props.card
@@ -20,25 +18,27 @@ const CardPaper = (props) => {
       }
     const clickHandler = () => {
         // debugger
-        if (userId) props.dispatch({ type: 'card/getCard', payload: { pageNo:1, pageSize: 100 } })
+        // if (userId) props.dispatch({ type: 'card/getCard', payload: { pageNo:1, pageSize: 100, isHistoryFlag: false } })
     }
     return (
         <div className={styles.card}>
             <div>
                 {
-                    data.map((ele, idx, arr) => {
+                    (data||[]).map((ele, idx, arr) => {
                         let next = ''
                         let result = {
+                            ...ele,
                             title: ele.couponTitle,
                             retitle: ele.productName, 
                             time: ele.endDate, 
                             name: '',
-                            cardNo: '',
+                            cardNo: ele.couponCode,
                             paytime: '',
                             remark: '',
                             account: '',
                             codeNo: '',
-                            status: ele.viewStatus || 0
+                            status: ele.viewStatus || 0,
+                            
                         }
 
                         if (ele.viewStatus === 7) {
@@ -54,6 +54,8 @@ const CardPaper = (props) => {
                                 next = 'jump'
                             }
                         } else {
+                            // category 1 兑换 2.直冲 3. 卡密
+                            // rechargeStatus 1 充值中 2 充值成功 3 充值失败
                             if (ele.hasDetail) {
                                 if (ele.category === 1) {
                                     next = 'change'
@@ -62,14 +64,11 @@ const CardPaper = (props) => {
                                     result.paytime = ele.endDate
                                     result.remark = ele.couponRemark 
                                 } else if (ele.category === 2) {
-                                    if (ele.rechargeStatus !== 1) {
-                                        next = 'member'
-                                        result.name = ele.productName
-                                        result.account = ele.rechargeAccount
-                                        result.paytime = ele.rechargeDate
-                                        // result.status = ele.rechargeStatus
-                                    }
-
+                                    next = 'member'
+                                    result.name = ele.productName
+                                    result.account = ele.rechargeAccount
+                                    result.paytime = ele.rechargeDate
+                                    result.status = ele.rechargeStatus
                                 } else if (ele.category === 3) {
                                     next = 'copy'
                                     result.name = ele.productName
@@ -93,31 +92,6 @@ const CardPaper = (props) => {
                         />)
                     })
                 }
-                {/* <Card 
-                    border
-                    btnTitle = '联系客服'
-                    data = {aa}
-                    step = 'copy'
-                />
-                <Card 
-                    border
-                    data = {bb}
-                    step = 'change'
-                />
-                <Card 
-                    border
-                    data = {cc}
-                    step = 'member'
-                />
-                <Card 
-                    border
-                    data = {dd}
-                    step = 'member'
-                />
-                <Card 
-                    border
-                    data = {ee}
-                /> */}
             </div>
             <div >
                 <div 
