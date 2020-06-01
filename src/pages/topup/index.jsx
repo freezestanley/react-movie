@@ -5,7 +5,7 @@ import withRouter from 'umi/withRouter';
 import TopupNote from '@/components/Card/TopupNote';
 import ProductSpecGroup from '@/components/ProductSpecGroup';
 import { ProductHead } from '@/components/Product';
-import PageStatus from '@/components/PageStatus';
+import GlobalLoading from '@/components/GlobalLoading';
 import RecommendBuy from '@/components/RecommendBuy';
 import BuyFooter from '@/components/BuyFooter';
 import { formValidate, updateProductInfo } from '@/utils/ants';
@@ -41,7 +41,8 @@ function TopupPage(props) {
 
   const { product = {}, queryProductItemDtoList = [] } = productInfo;
 
-  if (!product) return <PageStatus>获取商品信息失败</PageStatus>;
+  if (!product) return <GlobalLoading text="获取商品信息失败，请稍后尝试" />;
+  if (props.loading) return <GlobalLoading text="正在获取商品信息..." />;
 
   const { topCornerMark, description, name, detail, type, image } = product;
 
@@ -132,4 +133,5 @@ export default connect(state => ({
   isVIP: state.user.isVIP,
   isUpdateProductInfo: state.global.isUpdateProductInfo,
   prePayForm: state.prePay.main,
+  loading: state.loading.effects['productDetail/getProductItems'],
 }))(withRouter(TopupPage));
