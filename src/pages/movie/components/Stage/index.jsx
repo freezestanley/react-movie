@@ -8,18 +8,18 @@ import styles from './style/index.less';
  * 3 损坏
  * 4 情侣座
  */
-// const site = [
-//     [1,0,1,0,1,0,0,1,1,1,1,0,1,1,3,1,2,2,1],
-//     [2,2,2,1,1,1,0,0,1,0,1,0,3,0,0,1,2,2,1],
-//     [4,4,1,4,4,0,1,1,2,2,3,3,3,1,3,2,1,2,1],
-//     [4,4,1,4,4,0,1,1,2,2,3,3,3,1,3,2,1,2,1],
-//     [4,4,1,4,4,0,1,1,2,2,3,3,3,1,3,2,1,2,1]
-// ]
 const site = [
-    [1,0,1,0,1,0],
-    [1,0,1,0,1,0],
-    [3,3,1,3,1,0]
+    [2,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,2],
+    [2,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,2],
+    [2,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,2],
+    [2,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,2],  
+    [2,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,2]
 ]
+// const site = [
+//     [1,0,1,0,1,0,1,0,1,0,1],
+//     [1,0,1,0,1,1,3,3,1,3,1],
+//     [3,3,1,3,1,0,1,0,1,0,1]
+// ]
 const Stage = (props) => {
     let re = null,pageX = 0,pageY = 0,moveX = 0,moveY = 0;
     let currX = 0, currY =0;
@@ -27,12 +27,18 @@ const Stage = (props) => {
     const screenRef = useRef(null)
     const stageRef = useRef(null)
     const innerStage = useRef(null)
+    const [bigState, setBigState] = useState(false)
     useEffect(()=>{
-        let rate = 1
-                        
-        
-        innerStage.current.style.setProperty('--scale', `${rate}`);
+        debugger
+        console.log('0')
+        let rate = (document.body.clientWidth < innerStage.current.getClientRects()[0].width) ? (document.body.clientWidth / (innerStage.current.getClientRects()[0].width+50)) : 1
+        screenRef.current.style.setProperty('--scale', `${rate}`);
         siteLine.current.style.setProperty('--scale', `${rate}`);
+        // if (document.body.clientWidth < innerStage.current.getClientRects()[0].width) {
+        //     setBigState(true)
+        // } else {
+        //     setBigState(false)
+        // }
     }, [])
     let touchStart = (e) => {
         e.preventDefault();
@@ -96,9 +102,45 @@ const Stage = (props) => {
                         onTouchStart={touchStart} 
                         onTouchMove={touchMove}
                         onTouchEnd={touchEnd}
-                        
+                        // style = {{width: `${20*site[0].length}px`}}
                     >
-                        <div className={styles.innerStage}
+                        <div ref = {innerStage} className={styles.siteTable}>
+                        {
+                            site.map((ele,idx,arr) => {
+                                return (
+                                    <div  key={`${idx}a`}>
+                                        {ele.map((e,i,ar) => {
+                                            switch (e) {
+                                                case 0:
+                                                    re = null
+                                                    break;
+                                                case 1:
+                                                    re = styles.empty
+                                                    break;
+                                                case 2:
+                                                    re = styles.site
+                                                    break;
+                                                case 3:
+                                                    re = styles.fixed
+                                                    break;
+                                                case 4:
+                                                    re = styles.loveleft
+                                                    if (ar[i-1] === 4) {
+                                                        re = styles.loveright
+                                                    }
+                                                    break;
+                                            }
+                                            return (
+                                            <div key={`${i}b`} className={re}>
+                                            </div>)
+                                        })}
+                                    </div>
+                                )
+                            })
+                        }
+                        </div>
+
+                        {/* <div className={bigState? styles.innerBigStage : styles.innerStage}
                             ref = {innerStage}
                             style = {{width: `${20*site[0].length}px`}}
                         >
@@ -135,7 +177,7 @@ const Stage = (props) => {
                                 )
                             })
                         }
-                        </div>
+                        </div> */}
                     </div>
                 </div>
 

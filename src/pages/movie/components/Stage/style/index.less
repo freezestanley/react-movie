@@ -15,6 +15,8 @@
     height: 100%;
     .content{
         position: relative;
+        display: flex;
+        justify-content: center;
     }
     .screen{
         border-top: 25px solid #dfdfdf;
@@ -44,6 +46,7 @@
         font-size: 13px;
         // top: 77PX;
         transform: translateY(var(--transformY)) scale(var(--scale));
+        transform-origin: 0 0;
         li{
             height: 20PX;
             width: 15PX;
@@ -51,39 +54,62 @@
         }
     }
     .viewStage{
-        &:before{
-            content: ' ';
-            border-right: 2px dashed #ddd;
-            // transform: translateX(50%);
-            position: absolute;
-            width: 0px;
-            height: 150%;
-            left: 50%;
-            z-index: 1;
-            margin: -25PX 0 0 0;
-            // margin: -30px 0;
-        }
-        transform-origin:0 0;
+
+        // &:before{
+        //     content: ' ';
+        //     border-right: 2px dashed #ddd;
+        //     // transform: translateX(50%);
+        //     position: absolute;
+        //     width: 0px;
+        //     height: 150%;
+        //     left: 50%;
+        //     z-index: 1;
+        //     margin: -25PX 0 0 0;
+        //     // margin: -30px 0;
+        // }
+        transform-origin:50% 0;
         transform: translate(var(--transformX), var(--transformY)) scale(var(--scale));
-        .innerStage{
-            transform: scale(var(--scale));
-            // background: url('../images/line.jpg') repeat-y;
-            // background-position: top center;
-            // background-size: 1% 5%;
-            position: relative;
-            // padding: 30PX 0;
-            // transition: all .1s;
-            
-            margin: 0 auto;
-            
+
+        .siteTable{
+            display: flex;
+            justify-items: center;
+            flex-direction: column;
             & > div{
                 display: flex;
                 flex-wrap: nowrap;
+                &>div{
+                    flex: 0 0 20px;
+                    width: 20PX;
+                    height: 20PX;
+                }
+            }
+        }
+
+
+
+
+
+        .innerStage{
+            transform: scale(var(--scale)) translateX(0%);
+            left: 0%;
+        }
+        .innerBigStage{
+            transform: scale(var(--scale)) translateX(-50%);
+            left: 50%;
+        }
+        .innerStage,.innerBigStage{
+            position: relative;
+            margin: 0 auto;
+            
+            & > div{
+                // display: flex;
+                // flex-wrap: nowrap;
+                display: table-row;
                 z-index: 10;
                 position: relative;
                 & > div{
                     flex:0 0 20px;
-                    display: inline-block;
+                    display: table-cell;
                     width: 20PX;
                     height: 20PX;
                     overflow: hidden;
