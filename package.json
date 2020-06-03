@@ -21,6 +21,7 @@
     "react-copy-to-clipboard": "^5.0.2",
     "react-countdown": "^2.2.1",
     "react-dom": "^16.8.6",
+    "react-draggable": "^4.4.2",
     "react-helmet": "^6.0.0",
     "react-slick": "^0.26.1",
     "slick-carousel": "^1.8.1",

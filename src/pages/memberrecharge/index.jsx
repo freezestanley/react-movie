@@ -17,7 +17,7 @@ const Index = ({
   user
 }) => {
   const { userId } = user
-  const cardProductItem = Session.get('cardProductItem') || (card.cardProductItem||{})
+  const cardProductItem = Session.get('cardProductItem') || (card && card.cardProductItem ? card.cardProductItem : {})
   const { productData, couponCode, couponTitle, productName } = cardProductItem || {}
   const [productItem, setProductItem] = useState({})
   const [accountTypeList, setAccountTypeList] = useState([])

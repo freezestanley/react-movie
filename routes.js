@@ -33,6 +33,7 @@ module.exports = [
       { path: '/year', component: '../pages/card/active/year', backgroundColor:'',title: '大礼包', footer:false  },
       { path: '/halfyear', component: '../pages/card/active/halfyear', backgroundColor:'',title: '大礼包', footer:false  },
       { path: '/month', component: '../pages/card/active/month', backgroundColor:'',title: '大礼包', footer:false  },
+      { path: '/movie', component: '../pages/movie', backgroundColor:'',title: 'movie', footer:false  },
     ],
   }
 ]
