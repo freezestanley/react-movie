@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState, useRef } from 'react';
+import React, { useEffect, useReducer, useState, useRef, useDebugValue } from 'react';
 import styles from './style/index.less';
 
 /**
@@ -9,11 +9,34 @@ import styles from './style/index.less';
  * 4 情侣座
  */
 const site = [
-    [2,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,2],
-    [2,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,2],
-    [2,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,2],
-    [2,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,2],  
-    [2,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,2]
+    [2,1,1,1,1,1,1,2,1,1,1,1,1,1,2],
+    [2,1,1,1,1,1,1,2,1,1,1,1,1,1,2],
+    [2,1,1,1,1,1,1,2,1,1,1,1,1,1,2],
+    [2,1,1,1,1,1,1,2,1,1,1,1,1,1,2], 
+    [2,1,1,1,1,1,1,2,1,1,1,1,1,1,2],
+    [2,1,1,1,1,1,1,2,1,1,1,1,1,1,2],
+    [2,1,1,1,1,1,1,2,1,1,1,1,1,1,2],
+    [2,1,1,1,1,1,1,2,1,1,1,1,1,1,2], 
+    [2,1,1,1,1,1,1,2,1,1,1,1,1,1,2],
+    [2,1,1,1,1,1,1,2,1,1,1,1,1,1,2],
+    [2,1,1,1,1,1,1,2,1,1,1,1,1,1,2],
+    [2,1,1,1,1,1,1,2,1,1,1,1,1,1,2], 
+    [2,1,1,1,1,1,1,2,1,1,1,1,1,1,2],
+    [2,1,1,1,1,1,1,2,1,1,1,1,1,1,2],
+    [2,1,1,1,1,1,1,2,1,1,1,1,1,1,2],
+    [2,1,1,1,1,1,1,2,1,1,1,1,1,1,2], 
+    [2,1,1,1,1,1,1,2,1,1,1,1,1,1,2],
+    [2,1,1,1,1,1,1,2,1,1,1,1,1,1,2],
+    [2,1,1,1,1,1,1,2,1,1,1,1,1,1,2],
+    [2,1,1,1,1,1,1,2,1,1,1,1,1,1,2], 
+    [2,1,1,1,1,1,1,2,1,1,1,1,1,1,2],
+    [2,1,1,1,1,1,1,2,1,1,1,1,1,1,2],
+    [2,1,1,1,1,1,1,2,1,1,1,1,1,1,2],
+    [2,1,1,1,1,1,1,2,1,1,1,1,1,1,2], 
+    [2,1,1,1,1,1,1,2,1,1,1,1,1,1,2],
+    [2,1,1,1,1,1,1,2,1,1,1,1,1,1,2],
+    [2,1,1,1,1,1,1,2,1,1,1,1,1,1,2],
+    [2,1,1,1,1,1,1,2,1,1,1,1,1,1,2],  
 ]
 // const site = [
 //     [1,0,1,0,1,0,1,0,1,0,1],
@@ -27,26 +50,26 @@ const Stage = (props) => {
     const screenRef = useRef(null)
     const stageRef = useRef(null)
     const innerStage = useRef(null)
-    const [bigState, setBigState] = useState(false)
+    const content = useRef(null)
+    const [zoom, setZoom] = useState(false)
     useEffect(()=>{
         debugger
         console.log('0')
         let rate = (document.body.clientWidth < innerStage.current.getClientRects()[0].width) ? (document.body.clientWidth / (innerStage.current.getClientRects()[0].width+50)) : 1
         screenRef.current.style.setProperty('--scale', `${rate}`);
         siteLine.current.style.setProperty('--scale', `${rate}`);
-        // if (document.body.clientWidth < innerStage.current.getClientRects()[0].width) {
-        //     setBigState(true)
-        // } else {
-        //     setBigState(false)
-        // }
     }, [])
-    let touchStart = (e) => {
-        e.preventDefault();
+    let clickHandler = (e) => {
+        let rate = 1.2
+        screenRef.current.style.setProperty('--scale', `${rate}`);
+        siteLine.current.style.setProperty('--scale', `${rate}`);
+        setZoom(true)
+    }
+    let touchStartHandler = (e) => {
         pageX = e.touches[0].pageX
         pageY = e.touches[0].pageY
     }
-    let touchMove = (e) => {
-        e.preventDefault();
+    let touchMoveHandler = (e) => {
         moveX = e.touches[0].pageX - pageX
         moveY = e.touches[0].pageY - pageY
         pageX = e.touches[0].pageX
@@ -58,27 +81,38 @@ const Stage = (props) => {
         siteLine.current.style.setProperty('--transformY', `${currY}px`);
         
     }
-    let touchEnd = (e) => {
-        e.preventDefault();
+    let touchEndHandler = (e) => {
         let viewstage = screenRef.current
         let stage = stageRef.current
         let rect = viewstage.getClientRects()
         let stageRect = stage.getClientRects()
-        let rage = 50
-        let rightLimit = -((rect[0].width + rage) - stageRect[0].width)
-        let bottomLimit = -((rect[0].height + rage) - stageRect[0].height)
-        // if (currX > rage) {
-        //     currX = rage
-        // } else if (currX <= rightLimit) {
-        //     currX = rightLimit
-        // }
-        // if (currY > rage/2) {
-        //     currY = 0
-        // } else if (currY <= bottomLimit) {
-        //     currY = bottomLimit
-        // }
-        currY = 0
-        currX = 0
+        let contentRect = content.current.getClientRects()
+        let innerRect = innerStage.current.getClientRects()
+        if (zoom){
+            debugger
+            let xLeftLimit = rect[0].width/2 - 100
+            let xRightLimit = -(rect[0].width/2 - 100)
+            if (currX <= xRightLimit) {
+                currX = xRightLimit
+            } else if (currX >= xLeftLimit) {
+                currX = xLeftLimit
+            }
+            let yTopLimit = 0;
+            if (currY >= yTopLimit) {
+                currY = 0
+            } else {
+                if(innerRect[0].height > contentRect[0].height) {
+                    currY = -(innerRect[0].height - contentRect[0].height) - 100
+                } else {
+                    currY = 0
+                }
+            }
+        } else {
+            currY = 0
+            currX = 0
+        }
+        
+        
         viewstage.style.setProperty('--transformX', `${currX}px`);
         viewstage.style.setProperty('--transformY', `${currY}px`);
         siteLine.current.style.setProperty('--transformY', `${currY}px`);
@@ -88,7 +122,7 @@ const Stage = (props) => {
                 <div className={styles.screen} alt="屏幕方向"></div>
             
 
-                <div className={styles.content}>
+                <div className={styles.content} ref={content}>
                     <ul className={styles.lineLeft} ref={siteLine}>
                         {
                             site.map((ele,idx,arr) => {
@@ -99,12 +133,13 @@ const Stage = (props) => {
                         }
                     </ul>
                     <div className={styles.viewStage} ref={screenRef} 
-                        onTouchStart={touchStart} 
-                        onTouchMove={touchMove}
-                        onTouchEnd={touchEnd}
-                        // style = {{width: `${20*site[0].length}px`}}
+                        onTouchStart={touchStartHandler} 
+                        onTouchMove={touchMoveHandler}
+                        onTouchEnd={touchEndHandler}
+                        onClick={(e)=>clickHandler(e)}
                     >
-                        <div ref = {innerStage} className={styles.siteTable}>
+                        <div ref = {innerStage} 
+                        className={styles.siteTable}>
                         {
                             site.map((ele,idx,arr) => {
                                 return (

@@ -17,6 +17,7 @@
         position: relative;
         display: flex;
         justify-content: center;
+        height: 100%;
     }
     .screen{
         border-top: 25px solid #dfdfdf;
@@ -26,9 +27,11 @@
         text-align: center;
         position: relative;
         z-index: 99;
+        line-height: 0;
+        margin-bottom: 30px;
         &:before{
             content: attr(alt);
-            transform: translateY(-24px);
+            transform: translateY(-13PX);
             display: block;
             color:#fff;
         }
@@ -74,9 +77,24 @@
             display: flex;
             justify-items: center;
             flex-direction: column;
+            position: relative;
+            &:before{
+                content: " ";
+                border-right: 0.14286rem dashed #ccc;
+                height: 110%;
+                width: 0px;
+                position: absolute;
+                left: 50%;
+                transform: translate(0%, -20PX);
+                transform-origin: 50% 0;
+                padding: 20px 0;
+                z-index: 1;
+            }
             & > div{
                 display: flex;
                 flex-wrap: nowrap;
+                position: relative;
+                z-index: 10;
                 &>div{
                     flex: 0 0 20px;
                     width: 20PX;
