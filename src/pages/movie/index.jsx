@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { connect } from 'dva';
 import router from 'umi/router';
 import styles from './style/index.less';
@@ -16,9 +16,13 @@ const site = [
 ]
 
 const Movie = (props) => {
-    const [ num, setNum ] = useState(11111)
-    const getSiteHandler = (e) => {
-    }
+    const [ num, setNum ] = useState([])
+
+    const getSiteHandler = useCallback((e) => {
+        setNum(e)
+        console.log('getSiteHandler')
+        console.log(num)
+    })
     return (
         <div className={styles.movie}>
             <div className={styles.title}>3D MAX 最新电影</div>

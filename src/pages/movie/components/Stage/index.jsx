@@ -24,6 +24,10 @@ const Stage = (props) => {
         siteLine.current.style.setProperty('--scale', `${rate}`);
     }, [])
 
+    useEffect(()=>{
+        console.log('stage useEffect')
+        siteEvent(state.value)
+    }, [state, siteEvent])
     
     let clickHandler = (e) => {
         let rate = 1.8
@@ -82,6 +86,7 @@ const Stage = (props) => {
         viewstage.style.setProperty('--transformY', `${currY}px`);
         siteLine.current.style.setProperty('--transformY', `${currY}px`);
     }
+    console.log('stage')
     return (
             <div className={styles.stage} ref={stageRef}>
                 <Detail />
