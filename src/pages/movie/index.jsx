@@ -19,10 +19,10 @@ const Movie = (props) => {
     const [ num, setNum ] = useState([])
 
     const getSiteHandler = useCallback((e) => {
-        setNum(e)
         console.log('getSiteHandler')
         console.log(num)
-    })
+        setNum(e.slice())
+    }, [])
     return (
         <div className={styles.movie}>
             <div className={styles.title}>3D MAX 最新电影</div>
@@ -36,7 +36,11 @@ const Movie = (props) => {
                 <div>选中的座位:</div>
                 <div>
                     {
-                       num
+                       num.map((e, idx, arr) => {
+                         return (<div key={`${idx}a`}>
+                             {e.info}
+                         </div>)
+                       })
                     }
                 </div>
             </div>
