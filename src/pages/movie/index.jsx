@@ -3,12 +3,33 @@ import { connect } from 'dva';
 import router from 'umi/router';
 import styles from './style/index.less';
 import Stage from './components/Stage'
+const site = [
+    [
+        {id:1,state:4,info:'1排1座'},
+        {id:2,state:4,info:'1排2座'},
+        {id:3,state:1,info:'1排3座'},
+        {id:4,state:3,info:'1排4座'},
+        {id:5,state:1,info:'1排5座'},
+        {id:1,state:4,info:'1排6座'},
+        {id:2,state:4,info:'1排7座'},
+    ]
+]
 
 const Movie = (props) => {
     return (
         <div className={styles.movie}>
-            123123123123a s d f s
-            <Stage />
+            <div className={styles.title}>3D MAX 最新电影</div>
+            <div className={styles.movieDetail}>
+                <div>2019-03-06(周五)</div>
+                <div>16:50</div>
+                <div>4号厅</div>
+            </div>
+            <Stage site={site}/>
+            <div className={styles.choose}>
+                <div>选中的座位</div>
+                <div></div>
+            </div>
+            <div className={styles.btn}>确定选座</div>
         </div>
     )
 }

@@ -1,66 +1,35 @@
-import React, { useEffect, useReducer, useState, useRef, useDebugValue } from 'react';
+import React, { useEffect, useState, useRef, useReducer, createContext, useContext } from 'react';
 import styles from './style/index.less';
+import Single from '../Site/Single'
+import Multi from '../Site/Multi'
+import Detail from '../Site/Detail'
+import { reducer, defaultState } from '../context'
 
-/**
- * 0 空走廊
- * 1 空座位
- * 2 已选座位
- * 3 损坏
- * 4 情侣座
- */
-const site = [
-    [2,1,1,1,1,1,1,2,1,1,1,1,1,1,2],
-    [2,1,1,1,1,1,1,2,1,1,1,1,1,1,2],
-    [2,1,1,1,1,1,1,2,1,1,1,1,1,1,2],
-    [2,1,1,1,1,1,1,2,1,1,1,1,1,1,2], 
-    [2,1,1,1,1,1,1,2,1,1,1,1,1,1,2],
-    [2,1,1,1,1,1,1,2,1,1,1,1,1,1,2],
-    [2,1,1,1,1,1,1,2,1,1,1,1,1,1,2],
-    [2,1,1,1,1,1,1,2,1,1,1,1,1,1,2], 
-    [2,1,1,1,1,1,1,2,1,1,1,1,1,1,2],
-    [2,1,1,1,1,1,1,2,1,1,1,1,1,1,2],
-    [2,1,1,1,1,1,1,2,1,1,1,1,1,1,2],
-    [2,1,1,1,1,1,1,2,1,1,1,1,1,1,2], 
-    [2,1,1,1,1,1,1,2,1,1,1,1,1,1,2],
-    [2,1,1,1,1,1,1,2,1,1,1,1,1,1,2],
-    [2,1,1,1,1,1,1,2,1,1,1,1,1,1,2],
-    [2,1,1,1,1,1,1,2,1,1,1,1,1,1,2], 
-    [2,1,1,1,1,1,1,2,1,1,1,1,1,1,2],
-    [2,1,1,1,1,1,1,2,1,1,1,1,1,1,2],
-    [2,1,1,1,1,1,1,2,1,1,1,1,1,1,2],
-    [2,1,1,1,1,1,1,2,1,1,1,1,1,1,2], 
-    [2,1,1,1,1,1,1,2,1,1,1,1,1,1,2],
-    [2,1,1,1,1,1,1,2,1,1,1,1,1,1,2],
-    [2,1,1,1,1,1,1,2,1,1,1,1,1,1,2],
-    [2,1,1,1,1,1,1,2,1,1,1,1,1,1,2], 
-    [2,1,1,1,1,1,1,2,1,1,1,1,1,1,2],
-    [2,1,1,1,1,1,1,2,1,1,1,1,1,1,2],
-    [2,1,1,1,1,1,1,2,1,1,1,1,1,1,2],
-    [2,1,1,1,1,1,1,2,1,1,1,1,1,1,2],  
-]
-// const site = [
-//     [1,0,1,0,1,0,1,0,1,0,1],
-//     [1,0,1,0,1,1,3,3,1,3,1],
-//     [3,3,1,3,1,0,1,0,1,0,1]
-// ]
+export const Context = createContext(null)
+
 const Stage = (props) => {
-    let re = null,pageX = 0,pageY = 0,moveX = 0,moveY = 0;
-    let currX = 0, currY =0;
-    const siteLine = useRef(null)
-    const screenRef = useRef(null)
-    const stageRef = useRef(null)
-    const innerStage = useRef(null)
-    const content = useRef(null)
-    const [zoom, setZoom] = useState(false)
+    let pageX = 0,pageY = 0,moveX = 0,moveY = 0,currX = 0, currY =0;
+    const { site } = props,
+        siteLine = useRef(null),
+        screenRef = useRef(null),
+        stageRef = useRef(null),
+        innerStage = useRef(null),
+        content = useRef(null),
+        [zoom, setZoom] = useState(false),
+        [state, dispatch] = useReducer(reducer, defaultState)
+    
     useEffect(()=>{
-        debugger
-        console.log('0')
         let rate = (document.body.clientWidth < innerStage.current.getClientRects()[0].width) ? (document.body.clientWidth / (innerStage.current.getClientRects()[0].width+50)) : 1
         screenRef.current.style.setProperty('--scale', `${rate}`);
         siteLine.current.style.setProperty('--scale', `${rate}`);
     }, [])
+
+    useEffect(()=>{
+        debugger
+    }, [state])
+    
     let clickHandler = (e) => {
-        let rate = 1.2
+        let rate = 1.8
         screenRef.current.style.setProperty('--scale', `${rate}`);
         siteLine.current.style.setProperty('--scale', `${rate}`);
         setZoom(true)
@@ -89,7 +58,6 @@ const Stage = (props) => {
         let contentRect = content.current.getClientRects()
         let innerRect = innerStage.current.getClientRects()
         if (zoom){
-            debugger
             let xLeftLimit = rect[0].width/2 - 100
             let xRightLimit = -(rect[0].width/2 - 100)
             if (currX <= xRightLimit) {
@@ -119,10 +87,11 @@ const Stage = (props) => {
     }
     return (
             <div className={styles.stage} ref={stageRef}>
-                <div className={styles.screen} alt="屏幕方向"></div>
-            
-
-                <div className={styles.content} ref={content}>
+                {state.value.length}
+                <Detail />
+                <div className={styles.stageBox}>
+                    <div className={styles.screen} alt="屏幕方向"></div>
+                    <div className={styles.content} ref={content}>
                     <ul className={styles.lineLeft} ref={siteLine}>
                         {
                             site.map((ele,idx,arr) => {
@@ -138,85 +107,33 @@ const Stage = (props) => {
                         onTouchEnd={touchEndHandler}
                         onClick={(e)=>clickHandler(e)}
                     >
-                        <div ref = {innerStage} 
-                        className={styles.siteTable}>
-                        {
-                            site.map((ele,idx,arr) => {
-                                return (
-                                    <div  key={`${idx}a`}>
-                                        {ele.map((e,i,ar) => {
-                                            switch (e) {
-                                                case 0:
-                                                    re = null
-                                                    break;
-                                                case 1:
-                                                    re = styles.empty
-                                                    break;
-                                                case 2:
-                                                    re = styles.site
-                                                    break;
-                                                case 3:
-                                                    re = styles.fixed
-                                                    break;
-                                                case 4:
-                                                    re = styles.loveleft
-                                                    if (ar[i-1] === 4) {
-                                                        re = styles.loveright
+                        <Context.Provider value={{state, dispatch: dispatch}}>
+                            <div ref = {innerStage} 
+                            className={styles.siteTable}>
+                            {
+                                site.map((ele,idx,arr) => {
+                                    return (
+                                        <div  key={`${idx}a`}>
+                                            {ele.map((e,i,ar) => {
+                                                if (e.state === 4 || e.state === 7 ) {
+                                                    if (ar[i-1] && (ar[i-1].state === 4 || ar[i-1].state === 7)) {
+                                                    } else {
+                                                        return (<Multi  key={`${i}b`} data={e} />)
                                                     }
-                                                    break;
-                                            }
-                                            return (
-                                            <div key={`${i}b`} className={re}>
-                                            </div>)
-                                        })}
-                                    </div>
-                                )
-                            })
-                        }
-                        </div>
-
-                        {/* <div className={bigState? styles.innerBigStage : styles.innerStage}
-                            ref = {innerStage}
-                            style = {{width: `${20*site[0].length}px`}}
-                        >
-                        {
-                            site.map((ele,idx,arr) => {
-                                return (
-                                    <div  key={`${idx}a`}>
-                                        {ele.map((e,i,ar) => {
-                                            switch (e) {
-                                                case 0:
-                                                    re = null
-                                                    break;
-                                                case 1:
-                                                    re = styles.empty
-                                                    break;
-                                                case 2:
-                                                    re = styles.site
-                                                    break;
-                                                case 3:
-                                                    re = styles.fixed
-                                                    break;
-                                                case 4:
-                                                    re = styles.loveleft
-                                                    if (ar[i-1] === 4) {
-                                                        re = styles.loveright
-                                                    }
-                                                    break;
-                                            }
-                                            return (
-                                            <div key={`${i}b`} className={re}>
-                                            </div>)
-                                        })}
-                                    </div>
-                                )
-                            })
-                        }
-                        </div> */}
+                                                } else {
+                                                    return (<Single key={`${i}b`} data={e} />)
+                                                }
+                                                
+                                            })}
+                                        </div>
+                                    )
+                                })
+                            }
+                            </div>
+                        </Context.Provider>
                     </div>
                 </div>
-
-
+                </div>
             </div>
     )
 }
