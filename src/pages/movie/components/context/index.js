@@ -3,7 +3,6 @@ export const defaultState = {
 }
 
 export function reducer(state, action) {
-    debugger
     let idx = state.value.indexOf(action.payload.data)
     if (idx === -1) {
         state.value.push(action.payload.data)
