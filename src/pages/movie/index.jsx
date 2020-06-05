@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'dva';
 import router from 'umi/router';
 import styles from './style/index.less';
@@ -16,6 +16,9 @@ const site = [
 ]
 
 const Movie = (props) => {
+    const [ num, setNum ] = useState(11111)
+    const getSiteHandler = (e) => {
+    }
     return (
         <div className={styles.movie}>
             <div className={styles.title}>3D MAX 最新电影</div>
@@ -24,10 +27,14 @@ const Movie = (props) => {
                 <div>16:50</div>
                 <div>4号厅</div>
             </div>
-            <Stage site={site}/>
-            <div className={styles.choose}>
-                <div>选中的座位</div>
-                <div></div>
+            <Stage site={site} siteEvent = {getSiteHandler}/>
+            <div className={styles.choose} >
+                <div>选中的座位:</div>
+                <div>
+                    {
+                       num
+                    }
+                </div>
             </div>
             <div className={styles.btn}>确定选座</div>
         </div>

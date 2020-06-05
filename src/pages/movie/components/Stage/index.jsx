@@ -9,7 +9,7 @@ export const Context = createContext(null)
 
 const Stage = (props) => {
     let pageX = 0,pageY = 0,moveX = 0,moveY = 0,currX = 0, currY =0;
-    const { site } = props,
+    const { site, siteEvent } = props,
         siteLine = useRef(null),
         screenRef = useRef(null),
         stageRef = useRef(null),
@@ -24,9 +24,6 @@ const Stage = (props) => {
         siteLine.current.style.setProperty('--scale', `${rate}`);
     }, [])
 
-    useEffect(()=>{
-        debugger
-    }, [state])
     
     let clickHandler = (e) => {
         let rate = 1.8
@@ -87,7 +84,6 @@ const Stage = (props) => {
     }
     return (
             <div className={styles.stage} ref={stageRef}>
-                {state.value.length}
                 <Detail />
                 <div className={styles.stageBox}>
                     <div className={styles.screen} alt="屏幕方向"></div>
