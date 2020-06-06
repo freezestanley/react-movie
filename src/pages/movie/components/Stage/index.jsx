@@ -228,7 +228,7 @@ const Stage = (props) => {
         content = useRef(null),
         [zoom, setZoom] = useState(false),
         [state, dispatch] = useReducer(reducer, defaultState)
-    
+
     useEffect(()=>{
         let rate = (document.body.clientWidth < innerStage.current.getClientRects()[0].width) ? (document.body.clientWidth / (innerStage.current.getClientRects()[0].width+50)) : 1
         screenRef.current.style.setProperty('--scale', `${rate}`);
@@ -239,7 +239,7 @@ const Stage = (props) => {
         console.log('stage useEffect')
         siteEvent(state.value)
     }, [state, siteEvent])
-    
+
     let clickHandler = (e) => {
         let rate = 1.8
         screenRef.current.style.setProperty('--scale', `${rate}`);
@@ -260,7 +260,7 @@ const Stage = (props) => {
         screenRef.current.style.setProperty('--transformX', `${currX}px`);
         screenRef.current.style.setProperty('--transformY', `${currY}px`);
         siteLine.current.style.setProperty('--transformY', `${currY}px`);
-        
+
     }
     let touchEndHandler = (e) => {
         let viewstage = screenRef.current
@@ -291,8 +291,8 @@ const Stage = (props) => {
             currY = 0
             currX = 0
         }
-        
-        
+
+
         viewstage.style.setProperty('--transformX', `${currX}px`);
         viewstage.style.setProperty('--transformY', `${currY}px`);
         siteLine.current.style.setProperty('--transformY', `${currY}px`);
@@ -313,14 +313,14 @@ const Stage = (props) => {
                             })
                         }
                     </ul>
-                    <div className={styles.viewStage} ref={screenRef} 
-                        onTouchStart={touchStartHandler} 
+                    <div className={styles.viewStage} ref={screenRef}
+                        onTouchStart={touchStartHandler}
                         onTouchMove={touchMoveHandler}
-                        onTouchEnd={touchEndHandler}
+                        // onTouchEnd={touchEndHandler}
                         onClick={(e)=>clickHandler(e)}
                     >
                         <Context.Provider value={{state, dispatch: dispatch}}>
-                            <div ref = {innerStage} 
+                            <div ref = {innerStage}
                             className={styles.siteTable}>
                             {
                                 site.map((ele,idx,arr) => {
@@ -335,7 +335,7 @@ const Stage = (props) => {
                                                 } else {
                                                     return (<Single key={`${i}b`} data={e} />)
                                                 }
-                                                
+
                                             })}
                                         </div>
                                     )

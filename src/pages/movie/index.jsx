@@ -223,8 +223,8 @@ const Movie = (props) => {
         console.log('getSiteHandler')
         console.log(num)
         setNum(e.slice())
-    }, [])
-    
+    }, [num])
+
     return (
         <div className={styles.movie}>
             <div className={styles.title}>3D MAX 最新电影</div>
@@ -235,7 +235,6 @@ const Movie = (props) => {
             </div>
 
             <Stage site={site} siteEvent = {getSiteHandler}/>
-
 
             <div className={styles.choose} >
                 <div className={styles.chooseTitle}>选中的座位:</div>
