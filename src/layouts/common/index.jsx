@@ -185,7 +185,7 @@ function Layout(props) {
           </div>
         </div>
       )}
-      {!hasTabBar && !hasBuyFooter && <FloatMenu />}
+      {/* {!hasTabBar && !hasBuyFooter && <FloatMenu />} */}
     </React.Fragment>
   );
 }
