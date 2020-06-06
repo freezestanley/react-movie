@@ -220,8 +220,6 @@ const Movie = (props) => {
     const [ num, setNum ] = useState([])
 
     const getSiteHandler = useCallback((e) => {
-        console.log('getSiteHandler')
-        console.log(num)
         setNum(e.slice())
     }, [])
     

@@ -21,7 +21,7 @@ const SITETYPE = [
     null,
     styles.fixed,
 ]
-const Site = (props) => {
+const Multi = (props) => {
     const stageContext = useContext(Context)
     const { state } = props.data
     const [type, setType] = useState(state)
@@ -49,4 +49,4 @@ const Site = (props) => {
     )
 }
 
-export default Site;
+export default React.memo(Multi);

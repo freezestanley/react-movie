@@ -17,7 +17,7 @@ const SITETYPE = [
     styles.loveleft,
     styles.sited
 ]
-const Site = (props) => {
+const Single = (props) => {
     const stageContext = useContext(Context)
     const { state } = props.data
     const [type, setType] = useState(state)
@@ -39,4 +39,4 @@ const Site = (props) => {
     )
 }
 
-export default Site;
+export default React.memo(Single);
