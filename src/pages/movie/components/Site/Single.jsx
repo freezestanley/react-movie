@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 import styles from './style/index.less';
 import { Context } from '../Stage';
 /**
@@ -19,6 +19,7 @@ const SITETYPE = [
 ]
 const Single = (props) => {
     const stageContext = useContext(Context)
+    const domRef = useRef(null)
     const { state } = props.data
     const [type, setType] = useState(state)
     const clickHandler = (e) => {
@@ -33,10 +34,11 @@ const Single = (props) => {
     let disabled = [0, 3, 5, 7].includes(state)
     return (
         <div 
+            ref = {domRef}
             className={SITETYPE[type]}
             onClick = {disabled ? null : clickHandler}
         ></div>
     )
 }
 
-export default React.memo(Single);
+export default React.memo(Single, (prevProps, nextProps)=>false);

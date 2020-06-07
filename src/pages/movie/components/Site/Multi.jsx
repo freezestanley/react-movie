@@ -49,4 +49,4 @@ const Multi = (props) => {
     )
 }
 
-export default React.memo(Multi);
+export default React.memo(Multi, (prevProps, nextProps) => false);

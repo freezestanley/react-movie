@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState, useRef, } from 'react';
+import React from 'react';
 import styles from './style/index.less';
 const Detail = (e) => {
     return (
@@ -11,4 +11,4 @@ const Detail = (e) => {
         </div>
     )
 }
-export default Detail;
+export default React.memo(Detail,(c,n)=> false);

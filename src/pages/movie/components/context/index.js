@@ -3,11 +3,11 @@ export const defaultState = {
 }
 
 export function reducer(state, action) {
-    let idx = state.value.indexOf(action.payload.data)
-    if (idx === -1) {
-        state.value.push(action.payload.data)
-    } else {
+    let idx = state.value.findIndex(ele => action.payload.data.id === ele.id)
+    if (idx >= 0) {
         state.value.splice(idx, 1)
+    } else {
+        state.value.push(action.payload.data)
     }
     
     switch(action.type) {
