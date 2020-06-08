@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 import styles from './style/index.less';
 import { Context } from '../Stage';
 /**
@@ -24,13 +24,15 @@ const SITETYPE = [
 const Multi = (props) => {
     const stageContext = useContext(Context)
     const { state } = props.data
+    const domRef = useRef(null)
     const [type, setType] = useState(state)
     const clickHandler = (e) => {
         setType(type === 4 ? 6 : 4)
         stageContext.dispatch({
             type: "REDUCE_NUM",
             payload: {
-                data: props.data
+                data: props.data,
+                current: domRef.current
             }
         })  
     }
@@ -38,6 +40,7 @@ const Multi = (props) => {
     return (
         <>
             <div 
+                ref = {domRef}
                 className={type === 4 ? styles.loveleft : type === 7 ? styles.unlovedleft : styles.lovedleft}
                 onClick = {disabled ? null : clickHandler}
             ></div>

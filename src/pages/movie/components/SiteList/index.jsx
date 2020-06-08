@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState, useRef, useReducer, createContext, useContext } from 'react';
+import React from 'react';
 import styles from './style/index.less';
 
 const SiteList = (props) => {

@@ -27,7 +27,8 @@ const Single = (props) => {
         stageContext.dispatch({
             type: "REDUCE_NUM",
             payload: {
-                data: props.data
+                data: props.data,
+                current: domRef.current
             }
         }) 
     }

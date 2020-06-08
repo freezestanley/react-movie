@@ -1,8 +1,10 @@
 export const defaultState = {
-    value: []
+    value: [],
+    currentDom: null
 }
 
 export function reducer(state, action) {
+    state.currentDom = action.payload.current
     let idx = state.value.findIndex(ele => action.payload.data.id === ele.id)
     if (idx >= 0) {
         state.value.splice(idx, 1)

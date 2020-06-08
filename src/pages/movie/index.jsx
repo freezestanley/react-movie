@@ -38,6 +38,16 @@ const site = row => {
             {id:`${n}-26`,state:1,info:`${n}排5座`},
             {id:`${n}-27`,state:4,info:`${n}排6座`},
             {id:`${n}-28`,state:4,info:`${n}排7座`},
+            {id:`${n}-29`,state:1,info:`${n}排5座`},
+            {id:`${n}-30`,state:4,info:`${n}排6座`},
+            {id:`${n}-31`,state:4,info:`${n}排7座`},
+            {id:`${n}-32`,state:4,info:`${n}排1座`},
+            {id:`${n}-33`,state:4,info:`${n}排2座`},
+            {id:`${n}-34`,state:1,info:`${n}排3座`},
+            {id:`${n}-35`,state:3,info:`${n}排4座`},
+            {id:`${n}-36`,state:1,info:`${n}排5座`},
+            {id:`${n}-37`,state:4,info:`${n}排6座`},
+            {id:`${n}-38`,state:4,info:`${n}排7座`},
         ]
     })
 }
@@ -50,7 +60,7 @@ const Movie = (props) => {
         // result = e.slice()
     },[])
 
-    const data = site(6);
+    const data = site(20);
 
     return (
         <div className={styles.movie}>
