@@ -40,6 +40,11 @@ const Stage = (props) => {
         let rate = (document.body.clientWidth < innerStage.current.getClientRects()[0].width) ? (document.body.clientWidth / (innerStage.current.getClientRects()[0].width+50)) : 1
         screenRef.current.style.setProperty('--scale', `${rate}`);
         siteLine.current.style.setProperty('--scale', `${rate}`);
+
+        screenRef.current.addEventListener('touchmove', touchMoveHandler, {
+            passive: false
+        })
+
     }, [])
 
     useEffect(()=>{
@@ -156,7 +161,7 @@ const Stage = (props) => {
                     </ul>
                     <div className={styles.viewStage} ref={screenRef}
                         onTouchStart={touchStartHandler}
-                        onTouchMove={touchMoveHandler}
+                        // onTouchMove={touchMoveHandler}
                         onTouchEnd={touchEndHandler}
                         onClick={(e)=>clickHandler(e)}
                     >
