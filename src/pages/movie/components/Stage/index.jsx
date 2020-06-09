@@ -37,7 +37,8 @@ const Stage = (props) => {
         [isFollow, setFollow] = useState(true)  // 点击放大时的跟随
     
     useEffect(()=>{ // 渲染后屏幕缩放
-        let rate = (document.body.clientWidth < innerStage.current.getClientRects()[0].width) ? (document.body.clientWidth / (innerStage.current.getClientRects()[0].width+50)) : 1
+        debugger
+        let rate = (content.current.getClientRects()[0].width < innerStage.current.getClientRects()[0].width) ? (content.current.getClientRects()[0].width / (innerStage.current.getClientRects()[0].width+50)) : 1
         screenRef.current.style.setProperty('--scale', `${rate}`);
         siteLine.current.style.setProperty('--scale', `${rate}`);
         stageRef.current.addEventListener('touchmove', (e)=>{
