@@ -107,13 +107,14 @@ const Stage = (props) => {
         setZoom(true)
     }
     let touchStartHandler = (e) => { // 拖动开始
+        e.preventDefault()
         pageX = e.touches[0].pageX
         pageY = e.touches[0].pageY
         currX = parseInt(screenRef.current.style.getPropertyValue('--transformX')) || 0;
         currY = parseInt(screenRef.current.style.getPropertyValue('--transformY')) || 0;
-        
     }
     let touchMoveHandler = (e) => { // 拖动移动
+        e.preventDefault()
         currX = parseInt(screenRef.current.style.getPropertyValue('--transformX')) || 0;
         currY = parseInt(screenRef.current.style.getPropertyValue('--transformY')) || 0;
         moveX = e.touches[0].pageX - pageX
@@ -128,6 +129,7 @@ const Stage = (props) => {
 
     }
     let touchEndHandler = (e) => { // touch 抬手
+        e.preventDefault()
         let rage = limitRage()
         currX = parseInt(screenRef.current.style.getPropertyValue('--transformX')) || 0;
         currY = parseInt(screenRef.current.style.getPropertyValue('--transformY')) || 0;
