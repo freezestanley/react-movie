@@ -40,8 +40,18 @@ const Stage = (props) => {
         let rate = (document.body.clientWidth < innerStage.current.getClientRects()[0].width) ? (document.body.clientWidth / (innerStage.current.getClientRects()[0].width+50)) : 1
         screenRef.current.style.setProperty('--scale', `${rate}`);
         siteLine.current.style.setProperty('--scale', `${rate}`);
-
+        stageRef.current.addEventListener('touchmove', (e)=>{
+            e.preventDefault()
+        }, {
+            passive: false
+        })
+        screenRef.current.addEventListener('touchstart', touchStartHandler, {
+            passive: false
+        })
         screenRef.current.addEventListener('touchmove', touchMoveHandler, {
+            passive: false
+        })
+        screenRef.current.addEventListener('touchend', touchEndHandler, {
             passive: false
         })
 
@@ -161,9 +171,9 @@ const Stage = (props) => {
                         }
                     </ul>
                     <div className={styles.viewStage} ref={screenRef}
-                        onTouchStart={touchStartHandler}
+                        // onTouchStart={touchStartHandler}
                         // onTouchMove={touchMoveHandler}
-                        onTouchEnd={touchEndHandler}
+                        // onTouchEnd={touchEndHandler}
                         onClick={(e)=>clickHandler(e)}
                     >
                         <Context.Provider value={{state, dispatch: dispatch}}>
