@@ -25,6 +25,7 @@ export const Context = createContext(null) // 私有state
 let pageX = 0,pageY = 0
 const Stage = (props) => {
     let moveX = 0,moveY = 0,currX = 0, currY =0;
+    let time = null
     const { site, siteEvent } = props,
         siteLine = useRef(null),    // 侧边座位排数
         screenRef = useRef(null),   
@@ -62,8 +63,9 @@ const Stage = (props) => {
         if (isFollow) {
             screenFollow()      // 第一次放大时的跟踪
         }
-        setTouch(true)          // preview 显示
-        setTimeout(()=>{
+        setTouch(true) 
+        window.clearTimeout(time)         // preview 显示
+        time = setTimeout(()=>{
             setTouch(false)     // 4秒后preview 隐藏
         }, 4000)
     }, [state, siteEvent])
