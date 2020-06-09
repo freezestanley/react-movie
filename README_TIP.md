@@ -1,4 +1,6 @@
 #
+![avatar](https://recinema.netlify.app/preview.png)
+
 This is an [demo link](https://recinema.netlify.app/)
 
 
