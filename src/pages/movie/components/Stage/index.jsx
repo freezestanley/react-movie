@@ -118,6 +118,7 @@ const Stage = (props) => {
         currY = parseInt(screenRef.current.style.getPropertyValue('--transformY')) || 0;
     }
     let touchMoveHandler = (e) => { // 拖动移动
+        e.preventDefault()
         currX = parseInt(screenRef.current.style.getPropertyValue('--transformX')) || 0;
         currY = parseInt(screenRef.current.style.getPropertyValue('--transformY')) || 0;
         moveX = e.touches[0].pageX - pageX
