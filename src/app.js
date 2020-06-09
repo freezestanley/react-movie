@@ -13,8 +13,7 @@ export const dva = {
 // 路由变化钩子
 export function onRouteChange({ location, routes, action }) {
   // Android微信分享
-  if (BrowserInfo.isAndroid) {
-    wechatShareConfig();
-  }
-  // console.log('-----location', location);
+  // if (BrowserInfo.isAndroid) {
+  //   wechatShareConfig();
+  // }
 }

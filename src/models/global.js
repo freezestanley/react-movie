@@ -3,11 +3,6 @@ export default {
   namespace: 'global',
   state: {
     title: '',
-    routesMap: [],
-    tabPageList: [],
-    currRoute: {},
-    hasBuyFooter: false,
-    isUpdateProductInfo: true,
   },
   reducers: {
     setState(state, { payload }) {
@@ -15,11 +10,5 @@ export default {
     },
   },
   effects: {
-    *title({ payload }, { put }) {
-      yield put({
-        type: 'setState',
-        payload: { title: payload },
-      })
-    }
   },
 };
