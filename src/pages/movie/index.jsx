@@ -13,39 +13,16 @@ const site = row => {
             {id:`${n}-3`,state:4,info:`${n}排3座`},
             {id:`${n}-4`,state:4,info:`${n}排4座`},
             {id:`${n}-5`,state:4,info:`${n}排5座`},
-            {id:`${n}-6`,state:4,info:`${n}排6座`},
-            {id:`${n}-7`,state:4,info:`${n}排7座`},
+            {id:`${n}-6`,state:0,info:`${n}排6座`},
+            {id:`${n}-7`,state:0,info:`${n}排7座`},
             {id:`${n}-8`,state:4,info:`${n}排1座`},
             {id:`${n}-9`,state:4,info:`${n}排2座`},
-            {id:`${n}-10`,state:1,info:`${n}排3座`},
-            {id:`${n}-11`,state:3,info:`${n}排4座`},
-            {id:`${n}-12`,state:1,info:`${n}排5座`},
-            {id:`${n}-13`,state:4,info:`${n}排6座`},
-            {id:`${n}-14`,state:4,info:`${n}排7座`},
-            {id:`${n}-15`,state:4,info:`${n}排1座`},
-            {id:`${n}-16`,state:4,info:`${n}排2座`},
-            {id:`${n}-17`,state:1,info:`${n}排3座`},
-            {id:`${n}-18`,state:3,info:`${n}排4座`},
-            {id:`${n}-19`,state:1,info:`${n}排5座`},
-            {id:`${n}-20`,state:4,info:`${n}排6座`},
-            {id:`${n}-21`,state:4,info:`${n}排7座`},
-            {id:`${n}-22`,state:4,info:`${n}排1座`},
-            {id:`${n}-23`,state:4,info:`${n}排2座`},
-            {id:`${n}-24`,state:1,info:`${n}排3座`},
-            {id:`${n}-25`,state:3,info:`${n}排4座`},
-            {id:`${n}-26`,state:1,info:`${n}排5座`},
-            {id:`${n}-27`,state:4,info:`${n}排6座`},
-            {id:`${n}-28`,state:4,info:`${n}排7座`},
-            {id:`${n}-29`,state:1,info:`${n}排5座`},
-            {id:`${n}-30`,state:4,info:`${n}排6座`},
-            {id:`${n}-31`,state:4,info:`${n}排7座`},
-            {id:`${n}-32`,state:4,info:`${n}排1座`},
-            {id:`${n}-33`,state:4,info:`${n}排2座`},
-            {id:`${n}-34`,state:1,info:`${n}排3座`},
-            {id:`${n}-35`,state:3,info:`${n}排4座`},
-            {id:`${n}-36`,state:1,info:`${n}排5座`},
-            {id:`${n}-37`,state:4,info:`${n}排6座`},
-            {id:`${n}-38`,state:4,info:`${n}排7座`},
+            {id:`${n}-10`,state:2,info:`${n}排1座`},
+            {id:`${n}-11`,state:3,info:`${n}排2座`},
+            {id:`${n}-12`,state:3,info:`${n}排2座`},
+            {id:`${n}-13`,state:5,info:`${n}排2座`},
+            {id:`${n}-14`,state:5,info:`${n}排2座`},
+            {id:`${n}-15`,state:7,info:`${n}排2座`},
         ]
     })
 }
@@ -59,7 +36,7 @@ const Movie = (props) => {
         // result = e.slice()
     },[])
 
-    const data = site(2);
+    const data = site(20);
     // const data = site
 
     return (

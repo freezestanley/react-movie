@@ -37,7 +37,6 @@ const Stage = (props) => {
         [isFollow, setFollow] = useState(true)  // 点击放大时的跟随
     
     useEffect(()=>{ // 渲染后屏幕缩放
-        debugger
         let rate = (content.current.getClientRects()[0].width < innerStage.current.getClientRects()[0].width) ? (content.current.getClientRects()[0].width / (innerStage.current.getClientRects()[0].width+50)) : 1
         screenRef.current.style.setProperty('--scale', `${rate}`);
         siteLine.current.style.setProperty('--scale', `${rate}`);
@@ -91,7 +90,7 @@ const Stage = (props) => {
     let limitRage = () => {    // 获取容器拖动的最大区域
         let contentRect = content.current.getClientRects()
         let innerRect = innerStage.current.getClientRects()
-        let limit = zoom ? 50 : 10  // 放大时候边距50 缩小时为10
+        let limit = 80
         return {
             width: innerRect[0].width + limit * 2,
             height: innerRect[0].height + limit * 2,

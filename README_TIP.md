@@ -1,5 +1,5 @@
 #
-This is an [example link](https://recinema.netlify.app/)
+This is an [demo link](https://recinema.netlify.app/)
 
 
 ```
