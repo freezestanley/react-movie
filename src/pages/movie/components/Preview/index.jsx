@@ -1,21 +1,18 @@
-import React, { useEffect } from 'react';
-import styles from './style/index.less';
 /**
- * 0 空走廊
- * 1 空座位
- * 2 已选座位
- * 3 已售
- * 4 情侣座
- * 5 已选情侣座
- * 6 已售情侣座
- * 7 损坏
+ * Preview 座位屏幕预览小图
+ * props:
+ *    data: 座位数据
+ *  choose: 获取选中的座位
+ *    show: 控制Preview是否现实
  */
+import React from 'react';
+import styles from './style/index.less';
 
 export default function Preview(props) {
   const {data, choose, show } = props
   
-  const sitType = (e) => {
-    let type = null
+  const sitType = (e) => {  // 根据状态来现实座位的状态
+    let type = null         // 默认是空
     if (e === 7 || e === 3 || e === 6) {
       type = styles.red
     }
@@ -38,7 +35,7 @@ export default function Preview(props) {
                 let block = sitType(ele.state)
                 if (choose && choose.value.length > 0 ) {
                   let state = choose.value.findIndex((e) => {
-                    return e.id === ele.id
+                    return e.id === ele.id      // 判断选中的座位的ID
                   })
                   if (state >= 0) {
                     block = sitType(2)

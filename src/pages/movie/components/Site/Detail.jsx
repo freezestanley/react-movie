@@ -1,3 +1,8 @@
+/**
+ * Detail 座位状态信息
+ * props:
+ *  
+ */
 import React from 'react';
 import styles from './style/index.less';
 const Detail = (e) => {
