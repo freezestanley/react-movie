@@ -1,20 +1,18 @@
 import React, { useState, useCallback } from 'react';
 import { connect } from 'dva';
-import router from 'umi/router';
 import styles from './style/index.less';
 import Stage from './components/Stage';
-import Preview from './components/Preview';
 import SiteList from './components/SiteList'
 
 const site = row => {
     return new Array(row).fill(0).map((_, idx) => {
         const n = idx + 1;
         return [
-            {id:`${n}-1`,state:4,info:`${n}排1座`},
+            {id:`${n}-1`,state:1,info:`${n}排1座`},
             {id:`${n}-2`,state:4,info:`${n}排2座`},
-            {id:`${n}-3`,state:1,info:`${n}排3座`},
-            {id:`${n}-4`,state:3,info:`${n}排4座`},
-            {id:`${n}-5`,state:1,info:`${n}排5座`},
+            {id:`${n}-3`,state:4,info:`${n}排3座`},
+            {id:`${n}-4`,state:4,info:`${n}排4座`},
+            {id:`${n}-5`,state:4,info:`${n}排5座`},
             {id:`${n}-6`,state:4,info:`${n}排6座`},
             {id:`${n}-7`,state:4,info:`${n}排7座`},
             {id:`${n}-8`,state:4,info:`${n}排1座`},
@@ -52,6 +50,7 @@ const site = row => {
     })
 }
 
+
 const Movie = (props) => {
     const [ num, setNum ] = useState([])
     
@@ -60,7 +59,8 @@ const Movie = (props) => {
         // result = e.slice()
     },[])
 
-    const data = site(20);
+    const data = site(2);
+    // const data = site
 
     return (
         <div className={styles.movie}>
@@ -70,9 +70,6 @@ const Movie = (props) => {
                 <div>16:50</div>
                 <div>4号厅</div>
             </div>
-
-            {/* {num.length > 0 && <Preview site={data} choose={num} />} */}
-
             <Stage site={data} siteEvent = {getSiteHandler}/>
 
             <SiteList data = {num} />

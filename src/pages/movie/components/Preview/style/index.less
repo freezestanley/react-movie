@@ -1,25 +1,53 @@
+:global{
+  @keyframes fadeIn {
+      0% { opacity: 1; }
+      50% { opacity: 1; }
+      100% { opacity: 0; }
+  }
+}
 .preview {
-  position: fixed;
-  width: 360px;
-  height: 120px;
-  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 999;
+  transform: scale(0.6);
   top: 0;
   left: 0;
-  z-index: 100;
+  float: left;
+  transform-origin: 0 0;
+  min-width: 250px;
+  min-height: 150px;
+  padding: 5px;
+  opacity: 0;
+  animation: fadeIn 3s;
+  
 
-  .sitebox {
-    .row {
-      height: 16px;
-    }
-    .item {
-      width: 8px;
-      height: 8px;
-      background: #fff;
-      display: inline-block;
+
+  & > div{
+    display: flex;
+    flex-wrap: nowrap;
+    position: relative;
+    justify-content: center;
+    & > div{
+      width:5px;
+      height: 5px;
+      overflow: hidden;
       margin: 2px;
     }
   }
-  .checked {
-    background: red !important;
+  .loved{
+    width: 14px;
+    height: 5px;
+  }
+  .white{
+    background: #fff;
+    opacity: .5;
+  }
+  .green{
+    background: #32e81e;
+    opacity: .8;
+  }
+  .red{
+    background: #f00;
+    opacity: .5;
   }
 }

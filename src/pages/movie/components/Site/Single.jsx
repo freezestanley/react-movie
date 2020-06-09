@@ -5,9 +5,11 @@ import { Context } from '../Stage';
  * 0 空走廊
  * 1 空座位
  * 2 已选座位
- * 3 损坏
+ * 3 已售
  * 4 情侣座
- * 5 选中座位
+ * 5 已选情侣座
+ * 6 已售情侣座
+ * 7 损坏
  */
 const SITETYPE = [
     null,
@@ -25,7 +27,7 @@ const Single = (props) => {
     const clickHandler = (e) => {
         setType(type === 1 ? 2 : 1)
         stageContext.dispatch({
-            type: "REDUCE_NUM",
+            type: "CHANG_SIT",
             payload: {
                 data: props.data,
                 current: domRef.current
