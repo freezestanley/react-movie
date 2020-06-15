@@ -1,3 +1,6 @@
+/**
+ * useDragger hooks
+ */
 import { useEffect, useRef} from 'react'
 
 const useDragger = (target, 
@@ -105,7 +108,7 @@ const useDragger = (target,
         target.current.style.setProperty('--transformY', `${deps[2]}px`);
     }, [...deps])
 
-    
+
     let stop = () =>{
         target.current.removeEventListener(start.current)
         target.current.removeEventListener(move.current)
