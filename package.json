@@ -1,5 +1,5 @@
 {
-  "name": "ants-app",
+  "name": "react-movie",
   "private": true,
   "scripts": {
     "start": "PORT=10087 umi dev",

@@ -19,7 +19,6 @@ import Multi from '../Site/Multi'
 import Detail from '../Site/Detail'
 import Preview from '../Preview'
 import { reducer, defaultState } from '../context'
-import useDragger from '@/hooks/useDragger'
 
 export const Context = createContext(null) // 私有state
 
@@ -47,12 +46,22 @@ const Stage = (props) => {
         }, {
             passive: false
         })
+        screenRef.current.addEventListener('touchstart', touchStartHandler, {
+            passive: false
+        })
+        screenRef.current.addEventListener('touchmove', touchMoveHandler, {
+            passive: false
+        })
+        screenRef.current.addEventListener('touchend', touchEndHandler, {
+            passive: false
+        })
+
     }, [])
 
     useEffect(()=>{
         siteEvent(state.value)  // 获取选中的座位信息
         if (isFollow) {
-            // screenFollow()      // 第一次放大时的跟踪
+            screenFollow()      // 第一次放大时的跟踪
         }
         setTouch(true) 
         window.clearTimeout(time)         // preview 显示
@@ -61,8 +70,6 @@ const Stage = (props) => {
         }, 4000)
     }, [state, siteEvent])
 
-
-    
     let sitFilter = useMemo(() => { // data数据过滤 过滤 情人座位。连续4，4 =》 4
         let state = false
         let result = []
@@ -98,35 +105,17 @@ const Stage = (props) => {
                     contentRect[0].width / 2 - (innerRect[0].width + limit * 2) / 2 : 0,
         }
     }
-    
-    const startHandler = () => {
-        debugger
+    let screenFollow = () => {  // 获取当前选中的座位并在舞台上现实
+        if( state.currentDom && state.currentDom.dom && state.currentDom.dom.getClientRects()[0]) {
+            let currentRect = state.currentDom.dom.getClientRects()[0]
+            currX = -(currentRect.left  - content.current.getClientRects()[0].width/2)
+            screenRef.current.style.setProperty('--transformX', `${currX}px`);
+            currY = -(currentRect.top - content.current.getClientRects()[0].top) + 30
+            screenRef.current.style.setProperty('--transformY', `${currY}px`);
+            touchEndHandler()   // 防止在舞台上坐标 超过最大的可移动范围
+            setFollow(false)
+        }
     }
-    const moveHandler = () => {
-        debugger
-    }
-    const endHandler = () => {
-        debugger
-    }
-    const [stop] = useDragger(screenRef, limitRage, [1, 0, 0], true, startHandler, moveHandler, endHandler)
-
-    
-
-
-
-
-
-    // let screenFollow = () => {  // 获取当前选中的座位并在舞台上现实
-    //     if( state.currentDom && state.currentDom.dom && state.currentDom.dom.getClientRects()[0]) {
-    //         let currentRect = state.currentDom.dom.getClientRects()[0]
-    //         currX = -(currentRect.left  - content.current.getClientRects()[0].width/2)
-    //         screenRef.current.style.setProperty('--transformX', `${currX}px`);
-    //         currY = -(currentRect.top - content.current.getClientRects()[0].top) + 30
-    //         screenRef.current.style.setProperty('--transformY', `${currY}px`);
-    //         touchEndHandler()   // 防止在舞台上坐标 超过最大的可移动范围
-    //         setFollow(false)
-    //     }
-    // }
     let clickHandler = (e) => { // 点击后座位放大
         if(zoom) return
         let rate = 1.8
@@ -134,37 +123,37 @@ const Stage = (props) => {
         siteLine.current.style.setProperty('--scale', `${rate}`);
         setZoom(true)
     }
-    // let touchStartHandler = (e) => { // 拖动开始
-    //     pageX = e.touches[0].pageX
-    //     pageY = e.touches[0].pageY
-    //     currX = parseInt(screenRef.current.style.getPropertyValue('--transformX')) || 0;
-    //     currY = parseInt(screenRef.current.style.getPropertyValue('--transformY')) || 0;
-    // }
-    // let touchMoveHandler = (e) => { // 拖动移动
-    //     e.preventDefault()
-    //     currX = parseInt(screenRef.current.style.getPropertyValue('--transformX')) || 0;
-    //     currY = parseInt(screenRef.current.style.getPropertyValue('--transformY')) || 0;
-    //     moveX = e.touches[0].pageX - pageX
-    //     moveY = e.touches[0].pageY - pageY
-    //     pageX = e.touches[0].pageX
-    //     pageY = e.touches[0].pageY
-    //     currX += moveX;
-    //     currY += moveY;
-    //     screenRef.current.style.setProperty('--transformX', `${currX}px`);
-    //     screenRef.current.style.setProperty('--transformY', `${currY}px`);
-    //     siteLine.current.style.setProperty('--transformY', `${currY}px`);
+    let touchStartHandler = (e) => { // 拖动开始
+        pageX = e.touches[0].pageX
+        pageY = e.touches[0].pageY
+        currX = parseInt(screenRef.current.style.getPropertyValue('--transformX')) || 0;
+        currY = parseInt(screenRef.current.style.getPropertyValue('--transformY')) || 0;
+    }
+    let touchMoveHandler = (e) => { // 拖动移动
+        e.preventDefault()
+        currX = parseInt(screenRef.current.style.getPropertyValue('--transformX')) || 0;
+        currY = parseInt(screenRef.current.style.getPropertyValue('--transformY')) || 0;
+        moveX = e.touches[0].pageX - pageX
+        moveY = e.touches[0].pageY - pageY
+        pageX = e.touches[0].pageX
+        pageY = e.touches[0].pageY
+        currX += moveX;
+        currY += moveY;
+        screenRef.current.style.setProperty('--transformX', `${currX}px`);
+        screenRef.current.style.setProperty('--transformY', `${currY}px`);
+        siteLine.current.style.setProperty('--transformY', `${currY}px`);
 
-    // }
-    // let touchEndHandler = (e) => { // touch 抬手
-    //     let rage = limitRage()
-    //     currX = parseInt(screenRef.current.style.getPropertyValue('--transformX')) || 0;
-    //     currY = parseInt(screenRef.current.style.getPropertyValue('--transformY')) || 0;
-    //     currX = currX >= rage.maxX ? rage.maxX : currX < rage.minX ? rage.minX : currX
-    //     currY = currY >= rage.maxY ? rage.maxY : currY < rage.minY ? rage.minY : currY
-    //     screenRef.current.style.setProperty('--transformX', `${currX}px`);
-    //     screenRef.current.style.setProperty('--transformY', `${currY}px`);
-    //     siteLine.current.style.setProperty('--transformY', `${currY}px`);
-    // }
+    }
+    let touchEndHandler = (e) => { // touch 抬手
+        let rage = limitRage()
+        currX = parseInt(screenRef.current.style.getPropertyValue('--transformX')) || 0;
+        currY = parseInt(screenRef.current.style.getPropertyValue('--transformY')) || 0;
+        currX = currX >= rage.maxX ? rage.maxX : currX < rage.minX ? rage.minX : currX
+        currY = currY >= rage.maxY ? rage.maxY : currY < rage.minY ? rage.minY : currY
+        screenRef.current.style.setProperty('--transformX', `${currX}px`);
+        screenRef.current.style.setProperty('--transformY', `${currY}px`);
+        siteLine.current.style.setProperty('--transformY', `${currY}px`);
+    }
    
 
     return (
