@@ -102,6 +102,7 @@ const useDragger = (target,
             passive: false
         })
     }, [])
+    
     useEffect(()=>{ 
         target.current.style.setProperty('--scale', `${deps[0]}`);
         target.current.style.setProperty('--transformX', `${deps[1]}px`);
