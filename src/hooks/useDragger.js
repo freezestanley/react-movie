@@ -26,7 +26,7 @@ const useDragger = (target,
         re_pageY = 0,
         re_size  = 1,
         distance = 0;
-    debugger
+        
     let touchStartHandler = function (e) {
         e.preventDefault()
         if (zoom && e.touches[1]) {
@@ -102,7 +102,7 @@ const useDragger = (target,
             passive: false
         })
     }, [])
-    
+
     useEffect(()=>{ 
         target.current.style.setProperty('--scale', `${deps[0]}`);
         target.current.style.setProperty('--transformX', `${deps[1]}px`);

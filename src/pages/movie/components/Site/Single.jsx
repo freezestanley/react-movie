@@ -23,6 +23,7 @@ const Single = (props) => {
     const { state } = props.data
     const [type, setType] = useState(state)     // 座位状态
     const clickHandler = (e) => {
+        debugger
         setType(type === 1 ? 2 : 1)             // 座位状态 1 空座位 2 已选座位
         stageContext.dispatch({                 // 出发reducer dispatch CHANG_SIT
             type: "CHANG_SIT",
