@@ -26,6 +26,7 @@ const useZoom = (target,
         // e.preventDefault()
         if (e.touches[1]) {
         // if (true) {
+                e.preventDefault()
                 pageX = Math.floor(e.touches[0].pageX) // 手指1
                 pageY = Math.floor(e.touches[0].pageY) 
                 re_pageX = Math.floor(e.touches[1].pageX) // 手指2
@@ -42,6 +43,7 @@ const useZoom = (target,
         let m_distance, result
         if (e.touches[1]) {
         // if (true) {
+                e.preventDefault()
                 pageX = Math.floor(e.touches[0].pageX) // 手指1
                 pageY = Math.floor(e.touches[0].pageY) 
                 re_pageX = Math.floor(e.touches[1].pageX) // 手指2
@@ -54,11 +56,12 @@ const useZoom = (target,
                 // re_size = Math.floor(result*100)/100
                 result = Math.floor(result * 100) / 100
         } 
-        moveEvent(e, {size: re_size, s: `${m_distance} || ${distance} || ${result} || ${re_size}`})
+        moveEvent(e, {size: result, s: `${m_distance} || ${distance} || ${result} || ${re_size}`})
     }
     let touchEndHandler = function (e) {
         // e.preventDefault()
         if (e.touches[1]) {
+            e.preventDefault()
             // re_size = target.current.style.getPropertyValue('--scale')
             re_size = re_size >= 1.8 ? 1.8 : re_size <= .7 ? .7 : re_size
             
