@@ -70,13 +70,13 @@ const Stage = (props) => {
     const [ Y, setY ] = useState(0)
     const [ bb, setBb] = useState(1)
 
-    useZoom(content,  (e, d) => {}, (e, d) => {
-        setBb(d.size)
-        console.log(d)
-    }, (e, d) => {
-        setBb(d.size)
-        console.log(d)
-    })
+    // useZoom(content,  (e, d) => {}, (e, d) => {
+    //     setBb(d.size)
+    //     console.log(d)
+    // }, (e, d) => {
+    //     setBb(d.size)
+    //     console.log(d)
+    // })
 
     
 
@@ -153,7 +153,7 @@ const Stage = (props) => {
         siteLine.current.style.setProperty('--transformY', `${d.y}px`);
     }
 
-    const [stop] = useDragger(screenRef, limitRage, [bb, X, Y], false, startHandler, moveHandler, endHandler)
+    const [stop] = useDragger(screenRef, limitRage, [bb, X, Y], true, startHandler, moveHandler, endHandler)
 
     useTransform(siteLine, [bb, 0, Y])
     
