@@ -24,27 +24,29 @@ const useZoom = (target,
 
     let touchStartHandler = function (e) {
         // e.preventDefault()
-        if (e.touches[1]) {
+        // if (e.touches[1]) {
+        if (true) {
                 pageX = Math.floor(e.touches[0].pageX) // 手指1
                 pageY = Math.floor(e.touches[0].pageY) 
-                re_pageX = Math.floor(e.touches[1].pageX) // 手指2
-                re_pageY = Math.floor(e.touches[1].pageY)
-                // re_pageX = 10
-                // re_pageY = 10
+                // re_pageX = Math.floor(e.touches[1].pageX) // 手指2
+                // re_pageY = Math.floor(e.touches[1].pageY)
+                re_pageX = 10
+                re_pageY = 10
                 distance = Math.floor(Math.sqrt(Math.pow((re_pageX - pageX ), 2) + Math.pow((re_pageY - pageY ), 2)))
-                re_size = target.current.style.getPropertyValue('--scale')
+                re_size = target.current.style.getPropertyValue('--scale') || 1
         } 
         startEvent(e, {size: re_size, x: currX, y: currY})
     }
     let touchMoveHandler = function (e) {
         // e.preventDefault()
-        if (e.touches[1]) {
+        // if (e.touches[1]) {
+        if (true) {
                 pageX = Math.floor(e.touches[0].pageX) // 手指1
                 pageY = Math.floor(e.touches[0].pageY) 
-                re_pageX = Math.floor(e.touches[1].pageX) // 手指2
-                re_pageY = Math.floor(e.touches[1].pageY)
-                // re_pageX = 10
-                // re_pageY = 10
+                // re_pageX = Math.floor(e.touches[1].pageX) // 手指2
+                // re_pageY = Math.floor(e.touches[1].pageY)
+                re_pageX = 10
+                re_pageY = 10
                 let m_distance = Math.floor(Math.sqrt(Math.pow((re_pageX - pageX ), 2) + Math.pow((re_pageY - pageY ), 2)))
                 let result = (Math.floor(m_distance) / distance) * re_size
                 // result = result >= 1.85 ? 1.85 : result <= .8 ? .8 : result
