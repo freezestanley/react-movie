@@ -179,7 +179,7 @@ const Stage = (props) => {
                         {
                             sitFilter.map((ele,idx,arr) => {
                                 return (
-                                    <li key={`${idx}d`}>{idx}</li>
+                                    <li key={`${idx}${Math.random()}`}>{idx}</li>
                                 )
                             })
                         }
@@ -193,7 +193,7 @@ const Stage = (props) => {
                             {
                                 sitFilter.map((ele,idx,arr) => {
                                     return (
-                                        <div  key={`${idx}a`}>
+                                        <div  key={`${idx}${Math.random()}`}>
                                             {ele.map((e,i,ar) => {
                                                 if (e.state === 4 || e.state === 7 ) {
                                                     return (<Multi  key={`${i}b`} data={e}/>)

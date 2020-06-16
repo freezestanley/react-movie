@@ -30,7 +30,7 @@ export default function Preview(props) {
         {
           data.map((element, idx) => {
             return (
-            <div key={`${idx}`}>
+            <div key={`${idx}${Math.random()}`}>
               {element.map((ele) => {
                 let block = sitType(ele.state)
                 if (choose && choose.value.length > 0 ) {
@@ -43,7 +43,7 @@ export default function Preview(props) {
                 }
                 
                 return (
-                  <div key={`${ele.id}`}
+                  <div key={`${ele.id}${Math.random()}`}
                     className = {`${block} ${ele.state === 4 ? styles.loved : null}`}
                   >
                   </div>
