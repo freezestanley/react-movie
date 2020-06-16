@@ -5,7 +5,7 @@ import { useEffect, useRef} from 'react'
 
 const useDragger = (target, 
                     limit, 
-                    deps = [], 
+                    deps = [],  // zoom  X Y 
                     zoom = false,
                     startEvent = () => {}, 
                     moveEvent = () => {}, 
@@ -44,6 +44,7 @@ const useDragger = (target,
             currX = Math.floor(parseInt(target.current.style.getPropertyValue('--transformX'))) || 0;
             currY = Math.floor(parseInt(target.current.style.getPropertyValue('--transformY'))) || 0;
         }
+        startEvent(e, {size: re_size, x: currX, y: currY})
     }
     let touchMoveHandler = function (e) {
         // e.preventDefault()
@@ -71,6 +72,7 @@ const useDragger = (target,
             target.current.style.setProperty('--transformX', `${currX}px`);
             target.current.style.setProperty('--transformY', `${currY}px`);
         }
+        moveEvent(e, {size: re_size, x: currX, y: currY})
     }
     let touchEndHandler = function (e) {
         // e.preventDefault()
@@ -89,6 +91,7 @@ const useDragger = (target,
             target.current.style.setProperty('--transformX', `${currX}px`);
             target.current.style.setProperty('--transformY', `${currY}px`);
         }
+        endEvent(e, {size: re_size, x: currX, y: currY})
     }
 
     useEffect(()=>{ 

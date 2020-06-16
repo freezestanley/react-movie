@@ -20,6 +20,7 @@ import Detail from '../Site/Detail'
 import Preview from '../Preview'
 import { reducer, defaultState } from '../context'
 import useDragger from '@/hooks/useDragger'
+import useTransform from '@/hooks/useTransform'
 
 export const Context = createContext(null) // 私有state
 
@@ -38,16 +39,16 @@ const Stage = (props) => {
         [isTouch, setTouch] = useState(false),  // 是否触摸
         [isFollow, setFollow] = useState(true)  // 点击放大时的跟随
     
-    useEffect(()=>{ // 渲染后屏幕缩放
-        let rate = (content.current.getClientRects()[0].width < innerStage.current.getClientRects()[0].width) ? (content.current.getClientRects()[0].width / (innerStage.current.getClientRects()[0].width+50)) : 1
-        screenRef.current.style.setProperty('--scale', `${rate}`);
-        siteLine.current.style.setProperty('--scale', `${rate}`);
-        stageRef.current.addEventListener('touchmove', (e)=>{
-            e.preventDefault()
-        }, {
-            passive: false
-        })
-    }, [])
+    // useEffect(()=>{ // 渲染后屏幕缩放
+    //     let rate = (content.current.getClientRects()[0].width < innerStage.current.getClientRects()[0].width) ? (content.current.getClientRects()[0].width / (innerStage.current.getClientRects()[0].width+50)) : 1
+    //     screenRef.current.style.setProperty('--scale', `${rate}`);
+    //     siteLine.current.style.setProperty('--scale', `${rate}`);
+    //     stageRef.current.addEventListener('touchmove', (e)=>{
+    //         e.preventDefault()
+    //     }, {
+    //         passive: false
+    //     })
+    // }, [])
 
     useEffect(()=>{
         siteEvent(state.value)  // 获取选中的座位信息
@@ -62,7 +63,24 @@ const Stage = (props) => {
     }, [state, siteEvent])
 
 
-    
+
+
+
+
+    const [ size, setSize] = useState(1)
+    const [ X, setX ] = useState(0)
+    const [ Y, setY ] = useState(0)
+
+    useEffect(()=>{ // 渲染后屏幕缩放
+        let rate = (content.current.getClientRects()[0].width < innerStage.current.getClientRects()[0].width) ? (content.current.getClientRects()[0].width / (innerStage.current.getClientRects()[0].width+50)) : 1
+        setSize(rate)
+        stageRef.current.addEventListener('touchmove', (e)=>{
+            e.preventDefault()
+        }, {
+            passive: false
+        })
+    }, [])
+
     let sitFilter = useMemo(() => { // data数据过滤 过滤 情人座位。连续4，4 =》 4
         let state = false
         let result = []
@@ -99,19 +117,41 @@ const Stage = (props) => {
         }
     }
     
-    const startHandler = () => {
-        debugger
+    const startHandler = (e, d) => {
+        // setSize(d.size)
+        // setX(d.x)
+        // setY(d.y)
     }
-    const moveHandler = () => {
-        debugger
+    const moveHandler = (e, d) => {
+        // setSize(d.size)
+        // setX(d.x)
+        // debugger
+        // setTimeout(() => setY(d.y), 10)
+        console.log('move:' + d.y)
+        // setY(d.y)
+        setSize(d.size)
+        siteLine.current.style.setProperty('--transformY', `${d.y}px`);
     }
-    const endHandler = () => {
-        debugger
+    const endHandler = (e, d) => {
+        // setSize(d.size)
+        // setX(d.x)
+        // setTimeout(() => setY(d.y), 10)
+        // console.log('end:' + d.y)
+        // setY(d.y)
+        setSize(d.size)
+        siteLine.current.style.setProperty('--transformY', `${d.y}px`);
     }
-    const [stop] = useDragger(screenRef, limitRage, [1, 0, 0], true, startHandler, moveHandler, endHandler)
 
+    const [stop] = useDragger(screenRef, limitRage, [size, X, Y], true, startHandler, moveHandler, endHandler)
+
+    useTransform(siteLine, [size, 0, Y])
     
-
+    let clickHandler = (e) => { // 点击后座位放大
+        if(zoom) return
+        let rate = 1.4
+        setSize(rate)
+        setZoom(true)
+    }
 
 
 
@@ -127,14 +167,14 @@ const Stage = (props) => {
     //         setFollow(false)
     //     }
     // }
-    let clickHandler = (e) => { // 点击后座位放大
-        debugger
-        if(zoom) return
-        let rate = 1.4
-        screenRef.current.style.setProperty('--scale', `${rate}`);
-        siteLine.current.style.setProperty('--scale', `${rate}`);
-        setZoom(true)
-    }
+    // let clickHandler = (e) => { // 点击后座位放大
+    //     debugger
+    //     if(zoom) return
+    //     let rate = 1.4
+    //     screenRef.current.style.setProperty('--scale', `${rate}`);
+    //     siteLine.current.style.setProperty('--scale', `${rate}`);
+    //     setZoom(true)
+    // }
     // let touchStartHandler = (e) => { // 拖动开始
     //     pageX = e.touches[0].pageX
     //     pageY = e.touches[0].pageY
