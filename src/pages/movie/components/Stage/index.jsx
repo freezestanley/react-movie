@@ -71,10 +71,10 @@ const Stage = (props) => {
     const [ bb, setBb] = useState(1)
 
     useZoom(content,  (e, d) => {}, (e, d) => {
-        setBb(d.s)
+        setBb(d.size)
         console.log(d)
     }, (e, d) => {
-        setBb(d.s)
+        setBb(d.size)
         console.log(d)
     })
 
