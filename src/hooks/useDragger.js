@@ -28,7 +28,7 @@ const useDragger = (target,
         distance = 0;
 
     let touchStartHandler = function (e) {
-        e.preventDefault()
+        // e.preventDefault()
         if (zoom && e.touches[1]) {
                 pageX = Math.floor(e.touches[0].pageX) // 手指1
                 pageY = Math.floor(e.touches[0].pageY) 
@@ -47,7 +47,7 @@ const useDragger = (target,
         startEvent(e, {size: re_size, x: currX, y: currY})
     }
     let touchMoveHandler = function (e) {
-        e.preventDefault()
+        // e.preventDefault()
         if (zoom && e.touches[1]) {
                 pageX = Math.floor(e.touches[0].pageX) // 手指1
                 pageY = Math.floor(e.touches[0].pageY) 
@@ -75,7 +75,7 @@ const useDragger = (target,
         moveEvent(e, {size: re_size, x: currX, y: currY})
     }
     let touchEndHandler = function (e) {
-        e.preventDefault()
+        // e.preventDefault()
         if (zoom && e.touches[1]) {
             re_size = target.current.style.getPropertyValue('--scale')
             re_size = re_size >= 1.8 ? 1.8 : re_size <= .7 ? .7 : re_size
@@ -95,15 +95,18 @@ const useDragger = (target,
     }
 
     useEffect(()=>{ 
-        start.current = target.current.addEventListener('touchstart', touchStartHandler, {
-            passive: false
-        })
-        move.current = target.current.addEventListener('touchmove', touchMoveHandler, {
-            passive: false
-        })
-        end.current = target.current.addEventListener('touchend', touchEndHandler, {
-            passive: false
-        })
+        // start.current = target.current.addEventListener('touchstart', touchStartHandler, {
+        //     passive: false
+        // })
+        // move.current = target.current.addEventListener('touchmove', touchMoveHandler, {
+        //     passive: false
+        // })
+        // end.current = target.current.addEventListener('touchend', touchEndHandler, {
+        //     passive: false
+        // })
+        start.current = target.current.addEventListener('touchstart', touchStartHandler)
+        move.current = target.current.addEventListener('touchmove', touchMoveHandler)
+        end.current = target.current.addEventListener('touchend', touchEndHandler)
     }, [])
 
     useEffect(()=>{ 
