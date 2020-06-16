@@ -24,6 +24,7 @@ import useTransform from '@/hooks/useTransform'
 import useZoom from '@/hooks/useZoom'
 
 export const Context = createContext(null) // 私有state
+let x,y,s=0
 
 let pageX = 0,pageY = 0
 const Stage = (props) => {
@@ -136,11 +137,15 @@ const Stage = (props) => {
     const moveHandler = (e, d) => {
         // setSize(d.size)
         // setX(d.x)
+        // setY(d.y)
         // debugger
         // setTimeout(() => setY(d.y), 10)
-        console.log('move:' + d.y)
+        // console.log('move:' + d.y)
         // setY(d.y)
         // setSize(d.size)
+        x = d.x
+        y = d.y
+        s = d.size
         siteLine.current.style.setProperty('--transformY', `${d.y}px`);
     }
     const endHandler = (e, d) => {
@@ -150,12 +155,16 @@ const Stage = (props) => {
         // console.log('end:' + d.y)
         // setY(d.y)
         // setSize(d.size)
+        x = d.x
+        y = d.y
+        s = d.size
+        debugger
         siteLine.current.style.setProperty('--transformY', `${d.y}px`);
     }
 
-    const [stop] = useDragger(screenRef, limitRage, [bb, X, Y], true, startHandler, moveHandler, endHandler)
+    const [stop] = useDragger(screenRef, limitRage, [bb, 0, 0], true, startHandler, moveHandler, endHandler)
 
-    useTransform(siteLine, [bb, 0, Y])
+    useTransform(siteLine, [bb, 0, 0])
     
     let clickHandler = (e) => { // 点击后座位放大
         if(zoom) return
@@ -164,64 +173,10 @@ const Stage = (props) => {
         setZoom(true)
     }
 
-
-
-
-    // let screenFollow = () => {  // 获取当前选中的座位并在舞台上现实
-    //     if( state.currentDom && state.currentDom.dom && state.currentDom.dom.getClientRects()[0]) {
-    //         let currentRect = state.currentDom.dom.getClientRects()[0]
-    //         currX = -(currentRect.left  - content.current.getClientRects()[0].width/2)
-    //         screenRef.current.style.setProperty('--transformX', `${currX}px`);
-    //         currY = -(currentRect.top - content.current.getClientRects()[0].top) + 30
-    //         screenRef.current.style.setProperty('--transformY', `${currY}px`);
-    //         touchEndHandler()   // 防止在舞台上坐标 超过最大的可移动范围
-    //         setFollow(false)
-    //     }
-    // }
-    // let clickHandler = (e) => { // 点击后座位放大
-    //     debugger
-    //     if(zoom) return
-    //     let rate = 1.4
-    //     screenRef.current.style.setProperty('--scale', `${rate}`);
-    //     siteLine.current.style.setProperty('--scale', `${rate}`);
-    //     setZoom(true)
-    // }
-    // let touchStartHandler = (e) => { // 拖动开始
-    //     pageX = e.touches[0].pageX
-    //     pageY = e.touches[0].pageY
-    //     currX = parseInt(screenRef.current.style.getPropertyValue('--transformX')) || 0;
-    //     currY = parseInt(screenRef.current.style.getPropertyValue('--transformY')) || 0;
-    // }
-    // let touchMoveHandler = (e) => { // 拖动移动
-    //     e.preventDefault()
-    //     currX = parseInt(screenRef.current.style.getPropertyValue('--transformX')) || 0;
-    //     currY = parseInt(screenRef.current.style.getPropertyValue('--transformY')) || 0;
-    //     moveX = e.touches[0].pageX - pageX
-    //     moveY = e.touches[0].pageY - pageY
-    //     pageX = e.touches[0].pageX
-    //     pageY = e.touches[0].pageY
-    //     currX += moveX;
-    //     currY += moveY;
-    //     screenRef.current.style.setProperty('--transformX', `${currX}px`);
-    //     screenRef.current.style.setProperty('--transformY', `${currY}px`);
-    //     siteLine.current.style.setProperty('--transformY', `${currY}px`);
-
-    // }
-    // let touchEndHandler = (e) => { // touch 抬手
-    //     let rage = limitRage()
-    //     currX = parseInt(screenRef.current.style.getPropertyValue('--transformX')) || 0;
-    //     currY = parseInt(screenRef.current.style.getPropertyValue('--transformY')) || 0;
-    //     currX = currX >= rage.maxX ? rage.maxX : currX < rage.minX ? rage.minX : currX
-    //     currY = currY >= rage.maxY ? rage.maxY : currY < rage.minY ? rage.minY : currY
-    //     screenRef.current.style.setProperty('--transformX', `${currX}px`);
-    //     screenRef.current.style.setProperty('--transformY', `${currY}px`);
-    //     siteLine.current.style.setProperty('--transformY', `${currY}px`);
-    // }
-   
-
     return (
             <div className={styles.stage} ref={stageRef}>
-                <div>{bb} ||0000 {size}</div>
+                {/* <div>{bb} ||0000 {size}</div> */}
+                <div>size: {s} x: {x} y: {y}</div>
                 <Detail />
                 <div className={styles.stageBox}>
                     <Preview data={sitFilter} choose={state} show={isTouch} />
