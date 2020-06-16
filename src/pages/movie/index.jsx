@@ -30,7 +30,7 @@ const Movie = (props) => {
         // result = e.slice()
     },[])
 
-    const data = site(10);
+    const data = site(20);
     // const data = site
 
     
