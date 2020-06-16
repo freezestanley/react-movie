@@ -65,20 +65,20 @@ const Stage = (props) => {
 
 
 
-
-    const [ bb, setBb] = useState(1)
-    useZoom(content,  (e, d) => {
-
-    }, (e, d) => {
-        setBb(d.size)
-        console.log(d)
-    }, (e, d) => {
-
-    })
-
     const [ size, setSize] = useState(1)
     const [ X, setX ] = useState(0)
     const [ Y, setY ] = useState(0)
+    const [ bb, setBb] = useState(1)
+    
+    useZoom(content,  (e, d) => {}, (e, d) => {
+        setBb(d.size)
+        console.log(d)
+    }, (e, d) => {
+        setBb(d.size)
+        console.log(d)
+    })
+
+    
 
     useEffect(()=>{ // 渲染后屏幕缩放
         let rate = (content.current.getClientRects()[0].width < innerStage.current.getClientRects()[0].width) ? (content.current.getClientRects()[0].width / (innerStage.current.getClientRects()[0].width+50)) : 1
@@ -153,7 +153,7 @@ const Stage = (props) => {
         siteLine.current.style.setProperty('--transformY', `${d.y}px`);
     }
 
-    const [stop] = useDragger(screenRef, limitRage, [size, X, Y], true, startHandler, moveHandler, endHandler)
+    const [stop] = useDragger(screenRef, limitRage, [size, X, Y], false, startHandler, moveHandler, endHandler)
 
     useTransform(siteLine, [size, 0, Y])
     
