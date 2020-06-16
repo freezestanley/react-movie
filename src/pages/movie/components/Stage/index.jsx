@@ -121,6 +121,8 @@ const Stage = (props) => {
         // setSize(d.size)
         // setX(d.x)
         // setY(d.y)
+        setSize(d.size)
+        siteLine.current.style.setProperty('--transformY', `${d.y}px`);
     }
     const moveHandler = (e, d) => {
         // setSize(d.size)
