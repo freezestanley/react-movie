@@ -45,7 +45,7 @@ const useZoom = (target,
                 re_pageY = Math.floor(e.touches[1].pageY)
                 // re_pageX = 10
                 // re_pageY = 10
-                let m_distance = Math.floor(Math.sqrt(Math.pow((re_pageX - pageX ), 2) + Math.pow((re_pageY - pageY ), 2))/10)
+                let m_distance = Math.floor(Math.sqrt(Math.pow((re_pageX - pageX ), 2) + Math.pow((re_pageY - pageY ), 2)))
                 let result = (Math.floor(m_distance) / distance) * re_size
                 result = result >= 1.85 ? 1.85 : result <= .8 ? .8 : result
                 re_size = Math.floor(result*100)/100
