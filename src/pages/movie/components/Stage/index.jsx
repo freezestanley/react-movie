@@ -130,7 +130,7 @@ const Stage = (props) => {
         // setSize(d.size)
         // setX(d.x)
         // setY(d.y)
-        setSize(d.size)
+        // setSize(d.size)
         siteLine.current.style.setProperty('--transformY', `${d.y}px`);
     }
     const moveHandler = (e, d) => {
@@ -140,7 +140,7 @@ const Stage = (props) => {
         // setTimeout(() => setY(d.y), 10)
         console.log('move:' + d.y)
         // setY(d.y)
-        setSize(d.size)
+        // setSize(d.size)
         siteLine.current.style.setProperty('--transformY', `${d.y}px`);
     }
     const endHandler = (e, d) => {
@@ -149,13 +149,13 @@ const Stage = (props) => {
         // setTimeout(() => setY(d.y), 10)
         // console.log('end:' + d.y)
         // setY(d.y)
-        setSize(d.size)
+        // setSize(d.size)
         siteLine.current.style.setProperty('--transformY', `${d.y}px`);
     }
 
-    const [stop] = useDragger(screenRef, limitRage, [size, X, Y], false, startHandler, moveHandler, endHandler)
+    const [stop] = useDragger(screenRef, limitRage, [bb, X, Y], false, startHandler, moveHandler, endHandler)
 
-    useTransform(siteLine, [size, 0, Y])
+    useTransform(siteLine, [bb, 0, Y])
     
     let clickHandler = (e) => { // 点击后座位放大
         if(zoom) return
