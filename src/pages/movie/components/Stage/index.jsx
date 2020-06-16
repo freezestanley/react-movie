@@ -21,6 +21,7 @@ import Preview from '../Preview'
 import { reducer, defaultState } from '../context'
 import useDragger from '@/hooks/useDragger'
 import useTransform from '@/hooks/useTransform'
+import useZoom from '@/hooks/useZoom'
 
 export const Context = createContext(null) // 私有state
 
@@ -65,7 +66,15 @@ const Stage = (props) => {
 
 
 
+    const [ bb, setBb] = useState(1)
+    useZoom(content,  (e, d) => {
 
+    }, (e, d) => {
+        setBb(b.size)
+        console.log(d)
+    }, (e, d) => {
+
+    })
 
     const [ size, setSize] = useState(1)
     const [ X, setX ] = useState(0)
@@ -212,7 +221,7 @@ const Stage = (props) => {
 
     return (
             <div className={styles.stage} ref={stageRef}>
-                <div>{size}</div>
+                <div>{bb} || {size}</div>
                 <Detail />
                 <div className={styles.stageBox}>
                     <Preview data={sitFilter} choose={state} show={isTouch} />
