@@ -71,10 +71,10 @@ const Stage = (props) => {
     const [ bb, setBb] = useState(1)
 
     useZoom(content,  (e, d) => {}, (e, d) => {
-        setBb(d.size)
+        setBb(d)
         console.log(d)
     }, (e, d) => {
-        setBb(d.size)
+        setBb(d)
         console.log(d)
     })
 
@@ -221,7 +221,7 @@ const Stage = (props) => {
 
     return (
             <div className={styles.stage} ref={stageRef}>
-                <div>{bb} ||---- {size}</div>
+                <div>{bb.s} ||---- {size}</div>
                 <Detail />
                 <div className={styles.stageBox}>
                     <Preview data={sitFilter} choose={state} show={isTouch} />
