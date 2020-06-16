@@ -185,9 +185,6 @@ const Stage = (props) => {
                         }
                     </ul>
                     <div className={styles.viewStage} ref={screenRef}
-                        // onTouchStart={touchStartHandler}
-                        // onTouchMove={touchMoveHandler}
-                        // onTouchEnd={touchEndHandler}
                         onClick={(e)=>clickHandler(e)}
                     >
                         <Context.Provider value={{state, dispatch: dispatch}}>

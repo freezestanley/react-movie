@@ -26,9 +26,9 @@ const useDragger = (target,
         re_pageY = 0,
         re_size  = 1,
         distance = 0;
-        
+
     let touchStartHandler = function (e) {
-        e.preventDefault()
+        // e.preventDefault()
         if (zoom && e.touches[1]) {
                 pageX = Math.floor(e.touches[0].pageX) // 手指1
                 pageY = Math.floor(e.touches[0].pageY) 
@@ -46,7 +46,7 @@ const useDragger = (target,
         }
     }
     let touchMoveHandler = function (e) {
-        e.preventDefault()
+        // e.preventDefault()
         if (zoom && e.touches[1]) {
                 pageX = Math.floor(e.touches[0].pageX) // 手指1
                 pageY = Math.floor(e.touches[0].pageY) 
@@ -73,7 +73,7 @@ const useDragger = (target,
         }
     }
     let touchEndHandler = function (e) {
-        e.preventDefault()
+        // e.preventDefault()
         if (zoom && e.touches[1]) {
             re_size = target.current.style.getPropertyValue('--scale')
             re_size = re_size >= 1.5 ? 1.5 : re_size <= .7 ? .7 : re_size
