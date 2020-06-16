@@ -37,7 +37,7 @@ const useDragger = (target,
                 // re_pageX = 10
                 // re_pageY = 10
                 distance = Math.floor(Math.sqrt(Math.pow((re_pageX - pageX ), 2) + Math.pow((re_pageY - pageY ), 2)))
-                re_size = target.current.style.getPropertyValue('--scale')
+                re_size = target.current.style.getPropertyValue('--scale') || 1
         } else {
             pageX = Math.floor(e.touches[0].pageX)
             pageY = Math.floor(e.touches[0].pageY)
@@ -58,8 +58,9 @@ const useDragger = (target,
                 let m_distance = Math.floor(Math.sqrt(Math.pow((re_pageX - pageX ), 2) + Math.pow((re_pageY - pageY ), 2)))
                 let result = (Math.floor(m_distance) / distance) * re_size
                 result = result >= 1.85 ? 1.85 : result <= .8 ? .8 : result
-                target.current.style.setProperty('--scale', `${Math.floor(result*100)/100}`);
                 re_size = Math.floor(result*100)/100
+                target.current.style.setProperty('--scale', `${re_size}`);
+                
         } else {
             currX = Math.floor(parseInt(target.current.style.getPropertyValue('--transformX'))) || 0;
             currY = Math.floor(parseInt(target.current.style.getPropertyValue('--transformY'))) || 0;
