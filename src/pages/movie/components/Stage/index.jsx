@@ -130,7 +130,7 @@ const Stage = (props) => {
     let clickHandler = (e) => { // 点击后座位放大
         debugger
         if(zoom) return
-        let rate = 1.8
+        let rate = 1.4
         screenRef.current.style.setProperty('--scale', `${rate}`);
         siteLine.current.style.setProperty('--scale', `${rate}`);
         setZoom(true)

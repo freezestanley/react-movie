@@ -56,7 +56,7 @@ const useDragger = (target,
                 re_pageY = 10
                 let m_distance = Math.floor(Math.sqrt(Math.pow((re_pageX - pageX ), 2) + Math.pow((re_pageY - pageY ), 2)))
                 let result = (Math.floor(m_distance) / distance) * re_size
-                result = result >= 1.6 ? 1.6 : result <= .8 ? .8 : result
+                result = result >= 1.85 ? 1.85 : result <= .8 ? .8 : result
                 target.current.style.setProperty('--scale', `${result}`);
                 re_size = result
         } else {
@@ -76,7 +76,7 @@ const useDragger = (target,
         // e.preventDefault()
         if (zoom && e.touches[1]) {
             re_size = target.current.style.getPropertyValue('--scale')
-            re_size = re_size >= 1.5 ? 1.5 : re_size <= .7 ? .7 : re_size
+            re_size = re_size >= 1.8 ? 1.8 : re_size <= .7 ? .7 : re_size
             target.current.style.setProperty('--scale', `${re_size}`);
         } else {
             currX = Math.floor(parseInt(target.current.style.getPropertyValue('--transformX'))) || 0;
