@@ -10,7 +10,7 @@ module.exports = [
       // isNeedLogin: 路由是否需要登陆
       // fullsize: 是否需要占用整个视窗
       { path: '/', component: '../pages/movie', backgroundColor:'',title: 'movie', footer:false  },
-      { path: '/test', component: '../pages/test', backgroundColor:'',title: 'test', footer:false  }
+      // { path: '/test', component: '../pages/test', backgroundColor:'',title: 'test', footer:false  }
     ],
   }
 ]
