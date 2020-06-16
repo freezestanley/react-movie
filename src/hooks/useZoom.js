@@ -52,6 +52,7 @@ const useZoom = (target,
                 result = (m_distance / distance) * re_size
                 // result = result >= 1.85 ? 1.85 : result <= .8 ? .8 : result
                 // re_size = Math.floor(result*100)/100
+                result = Math.floor(result * 100) / 100
         } 
         moveEvent(e, {size: re_size, s: `${m_distance} || ${distance} || ${result} || ${re_size}`})
     }
