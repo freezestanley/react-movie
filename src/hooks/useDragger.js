@@ -60,6 +60,7 @@ const useDragger = (target,
         startEvent(e, {size: re_size, x: currX, y: currY})
     }
     let touchMoveHandler = function (e) {
+        debugger
         if (zoom && e.touches[1]) {
                 e.preventDefault()
                 pageX = Math.floor(e.touches[0].pageX) // 手指1
@@ -89,22 +90,24 @@ const useDragger = (target,
         moveEvent(e, {size: re_size, x: currX, y: currY})
     }
     let touchEndHandler = function (e) {
+        debugger
+        re_size = target.current.style.getPropertyValue('--scale')
+        re_size = re_size >= 1.8 ? 1.8 : re_size <= .7 ? .7 : re_size
         if (zoom && e.touches[1]) {
             e.preventDefault()
-            re_size = target.current.style.getPropertyValue('--scale')
-            re_size = re_size >= 1.8 ? 1.8 : re_size <= .7 ? .7 : re_size
             target.current.style.setProperty('--scale', `${re_size}`);
-        } else {
-            currX = Math.floor(parseInt(target.current.style.getPropertyValue('--transformX'))) || 0;
-            currY = Math.floor(parseInt(target.current.style.getPropertyValue('--transformY'))) || 0;
-            if (limit) {
-                let rage = limit()
-                currX = (currX >= rage.maxX) ? rage.maxX : (currX <= rage.minX) ? rage.minX : currX
-                currY = (currY >= rage.maxY) ? rage.maxY : (currY <= rage.minY) ? rage.minY : currY
-            }
-            target.current.style.setProperty('--transformX', `${currX}px`);
-            target.current.style.setProperty('--transformY', `${currY}px`);
+        } 
+        
+        currX = Math.floor(parseInt(target.current.style.getPropertyValue('--transformX'))) || 0;
+        currY = Math.floor(parseInt(target.current.style.getPropertyValue('--transformY'))) || 0;
+        if (limit) {
+            let rage = limit()
+            currX = (currX >= rage.maxX) ? rage.maxX : (currX <= rage.minX) ? rage.minX : currX
+            currY = (currY >= rage.maxY) ? rage.maxY : (currY <= rage.minY) ? rage.minY : currY
         }
+        target.current.style.setProperty('--transformX', `${currX}px`);
+        target.current.style.setProperty('--transformY', `${currY}px`);
+        
         endEvent(e, {size: re_size, x: currX, y: currY})
     }
 
@@ -124,9 +127,22 @@ const useDragger = (target,
     }, [])
 
     useEffect(()=>{ 
-        target.current.style.setProperty('--scale', `${deps[0]}`);
-        target.current.style.setProperty('--transformX', `${deps[1]}px`);
-        target.current.style.setProperty('--transformY', `${deps[2]}px`);
+        debugger
+        currX = deps[1]
+        currY = deps[2]
+        re_size = deps[0]
+
+        if (limit) {
+            let rage = limit()
+            currX = (currX >= rage.maxX) ? rage.maxX : (currX <= rage.minX) ? rage.minX : currX
+            currY = (currY >= rage.maxY) ? rage.maxY : (currY <= rage.minY) ? rage.minY : currY
+        }
+        re_size = re_size >= 1.8 ? 1.8 : re_size <= .7 ? .7 : re_size
+
+        target.current.style.setProperty('--transformX', `${currX}px`);
+        target.current.style.setProperty('--transformY', `${currY}px`);
+        target.current.style.setProperty('--scale', `${re_size}`);
+
     }, [...deps])
 
 

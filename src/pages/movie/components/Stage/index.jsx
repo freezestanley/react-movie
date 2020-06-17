@@ -36,7 +36,9 @@ const Stage = (props) => {
         [state, dispatch] = useReducer(reducer, defaultState), // stage 私有reducer
         [isTouch, setTouch] = useState(false),  // 是否触摸
         [isFollow, setFollow] = useState(true)  // 点击放大时的跟随
-
+    const [ size, setSize] = useState(1)
+    const [ X, setX ] = useState(0)
+    const [ Y, setY ] = useState(0)
     const showPre = () => {
         setTouch(true) 
         window.clearTimeout(time)         // preview 显示
@@ -46,18 +48,38 @@ const Stage = (props) => {
     }
     useEffect(()=>{
         siteEvent(state.value)  // 获取选中的座位信息
-        if (isFollow) {
-            // screenFollow()      // 第一次放大时的跟踪
-        }
         showPre()
+        debugger
+        if (isFollow) {
+            if( state.currentDom && state.currentDom.dom && state.currentDom.dom.getClientRects()[0]) {
+                let currentRect = state.currentDom.dom.getClientRects()[0]
+                let followX = -(currentRect.left  - content.current.getClientRects()[0].width/2)
+                // screenRef.current.style.setProperty('--transformX', `${currX}px`);
+                let followY = -(currentRect.top - content.current.getClientRects()[0].top) + 30
+                // screenRef.current.style.setProperty('--transformY', `${currY}px`);
+                setX(followX)
+                setY(followY)
+                setFollow(false)
+            }
+        }
     }, [state, siteEvent])
 
-    const [ size, setSize] = useState(1)
-    const [ X, setX ] = useState(0)
-    const [ Y, setY ] = useState(0)
+
+    // let screenFollow = () => {  // 获取当前选中的座位并在舞台上现实
+    //     if( state.currentDom && state.currentDom.dom && state.currentDom.dom.getClientRects()[0]) {
+    //         let currentRect = state.currentDom.dom.getClientRects()[0]
+    //         currX = -(currentRect.left  - content.current.getClientRects()[0].width/2)
+    //         screenRef.current.style.setProperty('--transformX', `${currX}px`);
+    //         currY = -(currentRect.top - content.current.getClientRects()[0].top) + 30
+    //         screenRef.current.style.setProperty('--transformY', `${currY}px`);
+    //         touchEndHandler()   // 防止在舞台上坐标 超过最大的可移动范围
+    //         setFollow(false)
+    //     }
+    // }
+
+    
 
     useEffect(()=>{ // 渲染后屏幕缩放
-
         let rateW = (content.current.getClientRects()[0].width < innerStage.current.getClientRects()[0].width) ? (content.current.getClientRects()[0].width / (innerStage.current.getClientRects()[0].width+100)) : 1
         let rateH = (content.current.getClientRects()[0].height < innerStage.current.getClientRects()[0].height) ? (content.current.getClientRects()[0].height / (innerStage.current.getClientRects()[0].height+100)) : 1
         let rate = rateW <= rateH ? rateW : rateH
@@ -115,6 +137,7 @@ const Stage = (props) => {
         siteLine.current.style.setProperty('--transformY', `${d.y}px`);
     }
     const endHandler = (e, d) => {
+        debugger
         setX(d.x)
         setY(d.y)
         setSize(d.size)
@@ -131,6 +154,7 @@ const Stage = (props) => {
     useTransform(siteLine, [size, 0, Y])
     
     let clickHandler = (e) => { // 点击后座位放大
+        debugger
         if(zoom) return
         let rate = 1.4
         setSize(rate)
