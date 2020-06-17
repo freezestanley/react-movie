@@ -15,24 +15,24 @@ const site = row => {
             {id:`${n}-${n+4}`,state:4,info:`${n}排1座`},
             {id:`${n}-${n+5}`,state:4,info:`${n}排1座`},
             {id:`${n}-${n+6}`,state:1,info:`${n}排1座`},
-            {id:`${n}-${n+7}`,state:1,info:`${n}排1座`},
-            {id:`${n}-${n+8}`,state:1,info:`${n}排1座`},
-            {id:`${n}-${n+9}`,state:1,info:`${n}排1座`},
-            {id:`${n}-${n+10}`,state:1,info:`${n}排1座`},
-            {id:`${n}-${n+11}`,state:1,info:`${n}排1座`},
-            {id:`${n}-${n+12}`,state:4,info:`${n}排1座`},
-            {id:`${n}-${n+13}`,state:4,info:`${n}排1座`},
-            {id:`${n}-${n+14}`,state:1,info:`${n}排1座`},
-            {id:`${n}-${n+15}`,state:1,info:`${n}排1座`},
-            {id:`${n}-${n+16}`,state:1,info:`${n}排1座`},
-            {id:`${n}-${n+17}`,state:1,info:`${n}排1座`},
-            {id:`${n}-${n+18}`,state:1,info:`${n}排1座`},
-            {id:`${n}-${n+19}`,state:1,info:`${n}排1座`},
-            {id:`${n}-${n+20}`,state:4,info:`${n}排1座`},
-            {id:`${n}-${n+21}`,state:4,info:`${n}排1座`},
-            {id:`${n}-${n+22}`,state:1,info:`${n}排1座`},
-            {id:`${n}-${n+23}`,state:1,info:`${n}排1座`},
-            {id:`${n}-${n+24}`,state:1,info:`${n}排1座`},
+            // {id:`${n}-${n+7}`,state:1,info:`${n}排1座`},
+            // {id:`${n}-${n+8}`,state:1,info:`${n}排1座`},
+            // {id:`${n}-${n+9}`,state:1,info:`${n}排1座`},
+            // {id:`${n}-${n+10}`,state:1,info:`${n}排1座`},
+            // {id:`${n}-${n+11}`,state:1,info:`${n}排1座`},
+            // {id:`${n}-${n+12}`,state:4,info:`${n}排1座`},
+            // {id:`${n}-${n+13}`,state:4,info:`${n}排1座`},
+            // {id:`${n}-${n+14}`,state:1,info:`${n}排1座`},
+            // {id:`${n}-${n+15}`,state:1,info:`${n}排1座`},
+            // {id:`${n}-${n+16}`,state:1,info:`${n}排1座`},
+            // {id:`${n}-${n+17}`,state:1,info:`${n}排1座`},
+            // {id:`${n}-${n+18}`,state:1,info:`${n}排1座`},
+            // {id:`${n}-${n+19}`,state:1,info:`${n}排1座`},
+            // {id:`${n}-${n+20}`,state:4,info:`${n}排1座`},
+            // {id:`${n}-${n+21}`,state:4,info:`${n}排1座`},
+            // {id:`${n}-${n+22}`,state:1,info:`${n}排1座`},
+            // {id:`${n}-${n+23}`,state:1,info:`${n}排1座`},
+            // {id:`${n}-${n+24}`,state:1,info:`${n}排1座`},
             
         ]
     })
@@ -47,7 +47,7 @@ const Movie = (props) => {
         // result = e.slice()
     },[])
 
-    const data = site(30);
+    const data = site(5);
     // const data = site
 
     

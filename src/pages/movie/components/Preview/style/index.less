@@ -1,25 +1,42 @@
 :global{
+  :root {
+    --transformX: 65px;
+    --transformY: 5px;
+  }
   @keyframes fadeIn {
       0% { opacity: 1; }
       50% { opacity: 1; }
       100% { opacity: 0; }
   }
 }
+
 .preview {
   position: absolute;
   background: rgba(0, 0, 0, 0.4);
   z-index: 999;
-  transform: scale(0.6);
+  // transform: scale(0.6);
   top: 0;
   left: 0;
   float: left;
   transform-origin: 0 0;
-  min-width: 250px;
-  min-height: 150px;
+  min-width: 180px;
+  min-height: 100px;
   padding: 5px;
+  overflow: hidden;
   // opacity: 0;
   // animation: fadeIn 3s;
   
+  .tips{
+    display: block;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    border: 2px solid #32e81e;
+    transform: translate3d(var(--transformX), var(--transformY), 0);
+    transform-origin: 0% 0%;
+    left: 0%;
+    top: 0;
+  }
 
 
   & > div{
@@ -28,15 +45,15 @@
     position: relative;
     justify-content: center;
     & > div{
-      width:5px;
-      height: 5px;
+      width:3px;
+      height: 3px;
       overflow: hidden;
-      margin: 2px;
+      margin: 1px;
     }
   }
   .loved{
-    width: 14px;
-    height: 5px;
+    width: 6px;
+    height: 3px;
   }
   .white{
     background: #fff;

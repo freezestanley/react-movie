@@ -18,7 +18,7 @@ const throttle = function(func, delay) {
 
 const useDragger = (target, 
                     limit, 
-                    deps = [],  // zoom  X Y 
+                    deps = [1, 0, 0],  // zoom  X Y 
                     zoom = false,
                     startEvent = () => {}, 
                     moveEvent = () => {}, 
@@ -60,7 +60,6 @@ const useDragger = (target,
         startEvent(e, {size: re_size, x: currX, y: currY})
     }
     let touchMoveHandler = function (e) {
-        debugger
         if (zoom && e.touches[1]) {
                 e.preventDefault()
                 pageX = Math.floor(e.touches[0].pageX) // 手指1
@@ -101,6 +100,7 @@ const useDragger = (target,
         currX = Math.floor(parseInt(target.current.style.getPropertyValue('--transformX'))) || 0;
         currY = Math.floor(parseInt(target.current.style.getPropertyValue('--transformY'))) || 0;
         if (limit) {
+            debugger
             let rage = limit()
             currX = (currX >= rage.maxX) ? rage.maxX : (currX <= rage.minX) ? rage.minX : currX
             currY = (currY >= rage.maxY) ? rage.maxY : (currY <= rage.minY) ? rage.minY : currY

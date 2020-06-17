@@ -64,21 +64,6 @@ const Stage = (props) => {
         }
     }, [state, siteEvent])
 
-
-    // let screenFollow = () => {  // 获取当前选中的座位并在舞台上现实
-    //     if( state.currentDom && state.currentDom.dom && state.currentDom.dom.getClientRects()[0]) {
-    //         let currentRect = state.currentDom.dom.getClientRects()[0]
-    //         currX = -(currentRect.left  - content.current.getClientRects()[0].width/2)
-    //         screenRef.current.style.setProperty('--transformX', `${currX}px`);
-    //         currY = -(currentRect.top - content.current.getClientRects()[0].top) + 30
-    //         screenRef.current.style.setProperty('--transformY', `${currY}px`);
-    //         touchEndHandler()   // 防止在舞台上坐标 超过最大的可移动范围
-    //         setFollow(false)
-    //     }
-    // }
-
-    
-
     useEffect(()=>{ // 渲染后屏幕缩放
         let rateW = (content.current.getClientRects()[0].width < innerStage.current.getClientRects()[0].width) ? (content.current.getClientRects()[0].width / (innerStage.current.getClientRects()[0].width+100)) : 1
         let rateH = (content.current.getClientRects()[0].height < innerStage.current.getClientRects()[0].height) ? (content.current.getClientRects()[0].height / (innerStage.current.getClientRects()[0].height+100)) : 1
