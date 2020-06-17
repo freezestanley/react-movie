@@ -55,7 +55,11 @@ const Stage = (props) => {
     const [ Y, setY ] = useState(0)
 
     useEffect(()=>{ // 渲染后屏幕缩放
-        let rate = (content.current.getClientRects()[0].width < innerStage.current.getClientRects()[0].width) ? (content.current.getClientRects()[0].width / (innerStage.current.getClientRects()[0].width+50)) : 1
+
+        let rateW = (content.current.getClientRects()[0].width < innerStage.current.getClientRects()[0].width) ? (content.current.getClientRects()[0].width / (innerStage.current.getClientRects()[0].width+100)) : 1
+        let rateH = (content.current.getClientRects()[0].height < innerStage.current.getClientRects()[0].height) ? (content.current.getClientRects()[0].height / (innerStage.current.getClientRects()[0].height+100)) : 1
+        let rate = rateW <= rateH ? rateW : rateH
+        console.log(rate)
         setSize(rate)
         stageRef.current.addEventListener('touchmove', (e)=>{
             e.preventDefault()
@@ -111,8 +115,8 @@ const Stage = (props) => {
         setX(d.x)
         setY(d.y)
         setSize(d.size)
-        // siteLine.current.style.setProperty('--scale', `${d.size}`);
-        // siteLine.current.style.setProperty('--transformY', `${d.y}px`);
+        siteLine.current.style.setProperty('--scale', `${d.size}`);
+        siteLine.current.style.setProperty('--transformY', `${d.y}px`);
     }
 
     const [stop] = useDragger(screenRef, limitRage, [size, X, Y], true, startHandler, moveHandler, endHandler)
