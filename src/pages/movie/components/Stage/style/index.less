@@ -71,12 +71,15 @@
         backface-visibility: hidden;
         perspective: 1000;
         opacity: 1;
+        scroll-behavior:smooth;
 
         .siteTable{
             display: flex;
             justify-items: center;
             flex-direction: column;
             position: relative;
+            scroll-behavior:smooth;
+
             &:before{
                 content: " ";
                 border-right: 0.14286rem dashed #ccc;
@@ -110,10 +113,12 @@
         .innerStage{
             transform: scale(var(--scale)) translateX(0%);
             left: 0%;
+            scroll-behavior:smooth;
         }
         .innerBigStage{
             transform: scale(var(--scale)) translateX(-50%);
             left: 50%;
+            scroll-behavior:smooth;
         }
         .innerStage,.innerBigStage{
             position: relative;
