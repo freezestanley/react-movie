@@ -175,7 +175,7 @@ const Stage = (props) => {
     return (
             <div className={styles.stage} ref={stageRef}>
                 {/* <div>{bb} ||0000 {size}</div> */}
-                <div>size: {s} x: {x} y: {y}</div>
+                <div>size: {s} x: {x} y: {y}===</div>
                 <Detail />
                 <div className={styles.stageBox}>
                     <Preview data={sitFilter} choose={state} show={isTouch} />
