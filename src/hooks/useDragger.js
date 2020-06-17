@@ -18,13 +18,13 @@ const throttle = function(func, delay) {
 
 const useDragger = (target, 
                     limit, 
-                    deps = [1, 0, 0],  // zoom  X Y 
-                    zoom = false,
+                    deps = [1, 0, 0],  // zoom  moveLimit
+                    op = {},
                     startEvent = () => {}, 
                     moveEvent = () => {}, 
                     endEvent = () => {}, 
                     ) => {
-
+    let options = { zoom: false,  moveLimit:false, ...op }
     let start = useRef(), 
         move = useRef(), 
         end = useRef()
@@ -41,7 +41,7 @@ const useDragger = (target,
         distance = 0;
 
     let touchStartHandler = function (e) {
-        if (zoom && e.touches[1]) {
+        if (options.zoom && e.touches[1]) {
                 e.preventDefault()
                 pageX = Math.floor(e.touches[0].pageX) // 手指1
                 pageY = Math.floor(e.touches[0].pageY) 
@@ -60,7 +60,7 @@ const useDragger = (target,
         startEvent(e, {size: re_size, x: currX, y: currY})
     }
     let touchMoveHandler = function (e) {
-        if (zoom && e.touches[1]) {
+        if (options.zoom && e.touches[1]) {
                 e.preventDefault()
                 pageX = Math.floor(e.touches[0].pageX) // 手指1
                 pageY = Math.floor(e.touches[0].pageY) 
@@ -83,6 +83,14 @@ const useDragger = (target,
             pageY = Math.floor(e.touches[0].pageY)
             currX += Math.floor(moveX);
             currY += Math.floor(moveY);
+
+            if (limit && options.moveLimit) {
+                debugger
+                let rage = limit()
+                currX = (currX >= rage.maxX) ? rage.maxX : (currX <= rage.minX) ? rage.minX : currX
+                currY = (currY >= rage.maxY) ? rage.maxY : (currY <= rage.minY) ? rage.minY : currY
+            }
+
             target.current.style.setProperty('--transformX', `${currX}px`);
             target.current.style.setProperty('--transformY', `${currY}px`);
         }
@@ -92,7 +100,7 @@ const useDragger = (target,
         debugger
         re_size = target.current.style.getPropertyValue('--scale')
         re_size = re_size >= 1.8 ? 1.8 : re_size <= .7 ? .7 : re_size
-        if (zoom && e.touches[1]) {
+        if (options.zoom && e.touches[1]) {
             e.preventDefault()
             target.current.style.setProperty('--scale', `${re_size}`);
         } 

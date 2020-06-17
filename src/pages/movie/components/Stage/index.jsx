@@ -134,7 +134,7 @@ const Stage = (props) => {
         }, 2000)
     }
 
-    const [stop] = useDragger(screenRef, limitRage, [size, X, Y], true, startHandler, moveHandler, endHandler)
+    const [stop] = useDragger(screenRef, limitRage, [size, X, Y], {zoom: true}, startHandler, moveHandler, endHandler)
 
     useTransform(siteLine, [size, 0, Y])
     

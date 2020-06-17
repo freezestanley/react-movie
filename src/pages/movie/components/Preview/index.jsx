@@ -52,7 +52,7 @@ export default function Preview(props) {
         minX: 0,
     }
   }
-  const [stop] = useDragger(tips, () => limitRage(preview, tips), [1,0,0])
+  const [stop] = useDragger(tips, () => limitRage(preview, tips), [1,0,0], {moveLimit: true})
 
   return (
     <div className={` ${styles.preview} `} style={{display: show ? 'block' : 'none' }}
