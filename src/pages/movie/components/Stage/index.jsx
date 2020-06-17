@@ -146,9 +146,7 @@ const Stage = (props) => {
         // x = d.x
         // y = d.y
         // s = d.size
-        setSize(d.size)
-        setX(d.x)
-        setY(d.y)
+        siteLine.current.style.setProperty('--scale', `${d.size}`);
         siteLine.current.style.setProperty('--transformY', `${d.y}px`);
     }
     const endHandler = (e, d) => {
@@ -158,9 +156,7 @@ const Stage = (props) => {
         // console.log('end:' + d.y)
         // setY(d.y)
         // setSize(d.size)
-        setSize(d.size)
-        setX(d.x)
-        setY(d.y)
+        siteLine.current.style.setProperty('--scale', `${d.size}`);
         siteLine.current.style.setProperty('--transformY', `${d.y}px`);
     }
 
