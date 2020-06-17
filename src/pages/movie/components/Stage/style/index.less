@@ -66,22 +66,11 @@
         }
     }
     .viewStage{
-
-        // &:before{
-        //     content: ' ';
-        //     border-right: 2px dashed #ddd;
-        //     // transform: translateX(50%);
-        //     position: absolute;
-        //     width: 0px;
-        //     height: 150%;
-        //     left: 50%;
-        //     z-index: 1;
-        //     margin: -25PX 0 0 0;
-        //     // margin: -30px 0;
-        // }
         transform-origin:50% 0;
-        transform: translate(var(--transformX), var(--transformY)) scale(var(--scale));
-
+        transform: translate3d(var(--transformX), var(--transformY), 0) scale(var(--scale));
+        backface-visibility: hidden;
+        perspective: 1000;
+        
         .siteTable{
             display: flex;
             justify-items: center;
