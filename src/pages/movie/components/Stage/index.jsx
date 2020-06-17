@@ -154,8 +154,9 @@ const Stage = (props) => {
         // setX(d.x)
         // setTimeout(() => setY(d.y), 10)
         // console.log('end:' + d.y)
-        // setY(d.y)
-        // setSize(d.size)
+        setX(d.x)
+        setY(d.y)
+        setSize(d.size)
         siteLine.current.style.setProperty('--scale', `${d.size}`);
         siteLine.current.style.setProperty('--transformY', `${d.y}px`);
     }
