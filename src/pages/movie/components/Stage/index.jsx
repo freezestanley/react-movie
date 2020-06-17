@@ -24,11 +24,8 @@ import useTransform from '@/hooks/useTransform'
 import useZoom from '@/hooks/useZoom'
 
 export const Context = createContext(null) // 私有state
-let x,y,s=0
 let time = null
-let pageX = 0,pageY = 0
 const Stage = (props) => {
-    let moveX = 0,moveY = 0,currX = 0, currY =0;
     
     const { site, siteEvent } = props,
         siteLine = useRef(null),    // 侧边座位排数
