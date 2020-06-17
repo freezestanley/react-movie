@@ -21,7 +21,6 @@ import Preview from '../Preview'
 import { reducer, defaultState } from '../context'
 import useDragger from '@/hooks/useDragger'
 import useTransform from '@/hooks/useTransform'
-import useZoom from '@/hooks/useZoom'
 
 export const Context = createContext(null) // 私有state
 let time = null
@@ -38,16 +37,19 @@ const Stage = (props) => {
         [isTouch, setTouch] = useState(false),  // 是否触摸
         [isFollow, setFollow] = useState(true)  // 点击放大时的跟随
 
-    useEffect(()=>{
-        siteEvent(state.value)  // 获取选中的座位信息
-        if (isFollow) {
-            // screenFollow()      // 第一次放大时的跟踪
-        }
+    const showPre = () => {
         setTouch(true) 
         window.clearTimeout(time)         // preview 显示
         time = setTimeout(()=>{
             setTouch(false)     // 4秒后preview 隐藏
         }, 2000)
+    }
+    useEffect(()=>{
+        siteEvent(state.value)  // 获取选中的座位信息
+        if (isFollow) {
+            // screenFollow()      // 第一次放大时的跟踪
+        }
+        showPre()
     }, [state, siteEvent])
 
     const [ size, setSize] = useState(1)
@@ -106,6 +108,7 @@ const Stage = (props) => {
     
     const startHandler = (e, d) => {
         siteLine.current.style.setProperty('--transformY', `${d.y}px`);
+        setTouch(true) 
     }
     const moveHandler = (e, d) => {
         siteLine.current.style.setProperty('--scale', `${d.size}`);
@@ -117,6 +120,10 @@ const Stage = (props) => {
         setSize(d.size)
         siteLine.current.style.setProperty('--scale', `${d.size}`);
         siteLine.current.style.setProperty('--transformY', `${d.y}px`);
+        window.clearTimeout(time)         // preview 显示
+        time = setTimeout(()=>{
+            setTouch(false)     // 4秒后preview 隐藏
+        }, 2000)
     }
 
     const [stop] = useDragger(screenRef, limitRage, [size, X, Y], true, startHandler, moveHandler, endHandler)
