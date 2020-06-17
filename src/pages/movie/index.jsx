@@ -10,13 +10,14 @@ const site = row => {
         const n = idx + 1;
         return [
             {id:`${n}-${n+1}`,state:1,info:`${n}排1座`},
-            {id:`${n}-${n+1}`,state:1,info:`${n}排1座`},
-            {id:`${n}-${n+1}`,state:1,info:`${n}排1座`},
-            {id:`${n}-${n+1}`,state:4,info:`${n}排1座`},
-            {id:`${n}-${n+1}`,state:4,info:`${n}排1座`},
-            {id:`${n}-${n+1}`,state:1,info:`${n}排1座`},
-            {id:`${n}-${n+1}`,state:1,info:`${n}排1座`},
-            {id:`${n}-${n+1}`,state:1,info:`${n}排1座`},
+            {id:`${n}-${n+2}`,state:1,info:`${n}排1座`},
+            {id:`${n}-${n+3}`,state:1,info:`${n}排1座`},
+            {id:`${n}-${n+4}`,state:4,info:`${n}排1座`},
+            {id:`${n}-${n+5}`,state:4,info:`${n}排1座`},
+            {id:`${n}-${n+6}`,state:1,info:`${n}排1座`},
+            {id:`${n}-${n+7}`,state:1,info:`${n}排1座`},
+            {id:`${n}-${n+8}`,state:1,info:`${n}排1座`},
+            
         ]
     })
 }
@@ -30,7 +31,7 @@ const Movie = (props) => {
         // result = e.slice()
     },[])
 
-    const data = site(20);
+    const data = site(10);
     // const data = site
 
     

@@ -23,8 +23,6 @@ const Single = (props) => {
     const { state } = props.data
     const [type, setType] = useState(state)     // 座位状态
     const clickHandler = (e) => {
-        debugger
-        setType(type === 1 ? 2 : 1)             // 座位状态 1 空座位 2 已选座位
         stageContext.dispatch({                 // 出发reducer dispatch CHANG_SIT
             type: "CHANG_SIT",
             payload: {
@@ -32,15 +30,18 @@ const Single = (props) => {
                 current: domRef.current         // 座位dom引用
             }
         }) 
+        setType(type === 1 ? 2 : 1)             // 座位状态 1 空座位 2 已选座位
     }
+
     let disabled = [0, 3, 5, 7].includes(state) // 当 0 3 5 7时不能被点击
+    
     return (
         <div 
             ref = {domRef}
             className={SITETYPE[type]}
             onClick = {disabled ? null : clickHandler}
-        ></div>
+    ></div>
     )
 }
 
-export default Single;
+export default Single

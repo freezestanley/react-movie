@@ -25,11 +25,11 @@ import useZoom from '@/hooks/useZoom'
 
 export const Context = createContext(null) // 私有state
 let x,y,s=0
-
+let time = null
 let pageX = 0,pageY = 0
 const Stage = (props) => {
     let moveX = 0,moveY = 0,currX = 0, currY =0;
-    let time = null
+    
     const { site, siteEvent } = props,
         siteLine = useRef(null),    // 侧边座位排数
         screenRef = useRef(null),   
@@ -40,17 +40,6 @@ const Stage = (props) => {
         [state, dispatch] = useReducer(reducer, defaultState), // stage 私有reducer
         [isTouch, setTouch] = useState(false),  // 是否触摸
         [isFollow, setFollow] = useState(true)  // 点击放大时的跟随
-    
-    // useEffect(()=>{ // 渲染后屏幕缩放
-    //     let rate = (content.current.getClientRects()[0].width < innerStage.current.getClientRects()[0].width) ? (content.current.getClientRects()[0].width / (innerStage.current.getClientRects()[0].width+50)) : 1
-    //     screenRef.current.style.setProperty('--scale', `${rate}`);
-    //     siteLine.current.style.setProperty('--scale', `${rate}`);
-    //     stageRef.current.addEventListener('touchmove', (e)=>{
-    //         e.preventDefault()
-    //     }, {
-    //         passive: false
-    //     })
-    // }, [])
 
     useEffect(()=>{
         siteEvent(state.value)  // 获取选中的座位信息
@@ -61,25 +50,12 @@ const Stage = (props) => {
         window.clearTimeout(time)         // preview 显示
         time = setTimeout(()=>{
             setTouch(false)     // 4秒后preview 隐藏
-        }, 4000)
+        }, 2000)
     }, [state, siteEvent])
-
-
 
     const [ size, setSize] = useState(1)
     const [ X, setX ] = useState(0)
     const [ Y, setY ] = useState(0)
-    const [ bb, setBb] = useState(1)
-
-    // useZoom(content,  (e, d) => {}, (e, d) => {
-    //     setBb(d.size)
-    //     console.log(d)
-    // }, (e, d) => {
-    //     setBb(d.size)
-    //     console.log(d)
-    // })
-
-    
 
     useEffect(()=>{ // 渲染后屏幕缩放
         let rate = (content.current.getClientRects()[0].width < innerStage.current.getClientRects()[0].width) ? (content.current.getClientRects()[0].width / (innerStage.current.getClientRects()[0].width+50)) : 1
@@ -128,32 +104,13 @@ const Stage = (props) => {
     }
     
     const startHandler = (e, d) => {
-        // setSize(d.size)
-        // setX(d.x)
-        // setY(d.y)
-        // setSize(d.size)
         siteLine.current.style.setProperty('--transformY', `${d.y}px`);
     }
     const moveHandler = (e, d) => {
-        // setSize(d.size)
-        // setX(d.x)
-        // setY(d.y)
-        // debugger
-        // setTimeout(() => setY(d.y), 10)
-        // console.log('move:' + d.y)
-        // setY(d.y)
-        // setSize(d.size)
-        // x = d.x
-        // y = d.y
-        // s = d.size
         siteLine.current.style.setProperty('--scale', `${d.size}`);
         siteLine.current.style.setProperty('--transformY', `${d.y}px`);
     }
     const endHandler = (e, d) => {
-        // setSize(d.size)
-        // setX(d.x)
-        // setTimeout(() => setY(d.y), 10)
-        // console.log('end:' + d.y)
         setX(d.x)
         setY(d.y)
         setSize(d.size)
@@ -161,9 +118,9 @@ const Stage = (props) => {
         siteLine.current.style.setProperty('--transformY', `${d.y}px`);
     }
 
-    const [stop] = useDragger(screenRef, limitRage, [bb, 0, 0], true, startHandler, moveHandler, endHandler)
+    const [stop] = useDragger(screenRef, limitRage, [size, 0, 0], true, startHandler, moveHandler, endHandler)
 
-    useTransform(siteLine, [bb, 0, 0])
+    useTransform(siteLine, [size, 0, 0])
     
     let clickHandler = (e) => { // 点击后座位放大
         if(zoom) return
@@ -174,8 +131,6 @@ const Stage = (props) => {
 
     return (
             <div className={styles.stage} ref={stageRef}>
-                {/* <div>{bb} ||0000 {size}</div> */}
-                <div>size: {s} x: {x} y: {y}===</div>
                 <Detail />
                 <div className={styles.stageBox}>
                     <Preview data={sitFilter} choose={state} show={isTouch} />
@@ -199,7 +154,7 @@ const Stage = (props) => {
                             {
                                 sitFilter.map((ele,idx,arr) => {
                                     return (
-                                        <div  key={`${idx}${Math.random()}`}>
+                                        <div  key={`${idx}000000`}>
                                             {ele.map((e,i,ar) => {
                                                 if (e.state === 4 || e.state === 7 ) {
                                                     return (<Multi  key={`${i}b`} data={e}/>)

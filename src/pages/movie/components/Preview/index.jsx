@@ -26,7 +26,7 @@ export default function Preview(props) {
   }
 
   return (
-    <div className={` ${show ? styles.preview : null} `}>
+    <div className={` ${styles.preview} `} style={{display: show ? 'block' : 'none' }}>
         {
           data.map((element, idx) => {
             return (
