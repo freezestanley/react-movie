@@ -120,7 +120,7 @@ const SitCanvas = (props) => {
     }, [data])
 
     const clickHandler = (e) => {
-        // e.preventDefault()
+        e.preventDefault()
         let offset = canvas.current.getBoundingClientRect()
         let pageX = Math.floor((e.pageX - offset.left)/SET_WIDTH*2)
         let pageY = Math.floor((e.pageY - offset.top)/SET_HEIGHT*2)
@@ -139,7 +139,7 @@ const SitCanvas = (props) => {
     }
 
     return (<div>
-        <canvas ref={canvas} onClick={clickHandler}/>
+        <canvas ref={canvas} />
     </div>)
  }
 
