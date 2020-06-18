@@ -114,7 +114,7 @@ const Stage = (props) => {
         }, 2000)
     }
 
-    const [stop] = useDragger(screenRef, () => limitRage(content, innerStage), [size, X, Y], {zoom: true}, startHandler, moveHandler, endHandler)
+    const [stop] = useDragger(screenRef, () => limitRage(content, innerStage), [size, X, Y], {zoom: false}, startHandler, moveHandler, endHandler)
 
     
     let clickHandler = (e) => { // 第一次点击后座位放大
@@ -138,9 +138,7 @@ const Stage = (props) => {
                             })
                         }
                     </ul>
-                    <div className={styles.viewStage} ref={screenRef}
-                        // onClick={(e)=>clickHandler(e)}
-                    >
+                    <div className={styles.viewStage} ref={screenRef} >
                         <Context.Provider value={{state, dispatch: dispatch}}>
                             <div ref = {innerStage}
                                 className={styles.siteTable}>
