@@ -24,7 +24,7 @@ const useDragger = (target,
                     moveEvent = () => {}, 
                     endEvent = () => {}, 
                     ) => {
-    let options = { zoom: false,  moveLimit:false, ...op }
+    let options = { zoom: false, move: true,  moveLimit:false, ...op }
     let start = useRef(), 
         move = useRef(), 
         end = useRef()
@@ -51,7 +51,7 @@ const useDragger = (target,
                 // re_pageY = 10
                 distance = Math.floor(Math.sqrt(Math.pow((re_pageX - pageX ), 2) + Math.pow((re_pageY - pageY ), 2)))
                 re_size = target.current.style.getPropertyValue('--scale') || 1
-        } else {
+        } else if (options.move) {
             pageX = Math.floor(e.touches[0].pageX)
             pageY = Math.floor(e.touches[0].pageY)
             currX = Math.floor(parseInt(target.current.style.getPropertyValue('--transformX'))) || 0;
@@ -74,7 +74,7 @@ const useDragger = (target,
                 re_size = Math.floor(result*100)/100
                 target.current.style.setProperty('--scale', `${re_size}`);
                 
-        } else {
+        } else if (options.move) {
             currX = Math.floor(parseInt(target.current.style.getPropertyValue('--transformX'))) || 0;
             currY = Math.floor(parseInt(target.current.style.getPropertyValue('--transformY'))) || 0;
             moveX = Math.floor(e.touches[0].pageX - pageX)

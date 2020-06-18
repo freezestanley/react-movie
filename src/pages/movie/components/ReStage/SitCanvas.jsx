@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef, useReducer, createContext, useMemo } from 'react';
+import useZoom from '@/hooks/useZoom'
 import styles from './style/index.less';
 
 import singleSite from './images/1.png'
@@ -54,14 +55,27 @@ const MULT = {
 
 
 
-const SET_WIDTH = 40
-const SET_HEIGHT = 40
+let SET_WIDTH = 40
+let SET_HEIGHT = 40
 const SitCanvas = (props) => {
     const {data} = props
     const canvas = useRef(null)
     const ctx = useRef()
     const [seledSit, setSeledSit] = useState([])
     let isMult = true
+    const [aa, setAa] = useState()
+    const [stop] = useZoom(canvas, 
+    (e, {size}) => {
+        debugger
+        setAa(size)
+    },(e, {size}) => {
+        debugger
+        setAa(size)
+    },(e, {size}) => {
+        debugger
+        setAa(size)
+    })
+
     useEffect(() => {
         canvas.current.addEventListener('click', clickHandler, {
             passive: false
@@ -117,7 +131,7 @@ const SitCanvas = (props) => {
                 ctx.current.drawImage(img,idx * SET_WIDTH,index * SET_HEIGHT,  SET_WIDTH, SET_HEIGHT);
             })
         })
-    }, [data])
+    }, [data, SET_WIDTH, SET_HEIGHT])
 
     const clickHandler = (e) => {
         e.preventDefault()
@@ -125,24 +139,27 @@ const SitCanvas = (props) => {
         let pageX = Math.floor((e.pageX - offset.left)/SET_WIDTH*2)
         let pageY = Math.floor((e.pageY - offset.top)/SET_HEIGHT*2)
         let currentSit = data[pageY][pageX]
-        let idx = seledSit.findIndex(ele => currentSit.id === ele.id) // 判断提交的座位是否已被选中
-        let img = null
-        if (idx >= 0) {
-            seledSit.splice(idx, 1)  // 选中删除
-            img = currentSit.state === 1 ? SINGLE.UNSELED : currentSit.state === 5 ? SINGLE.UNSELED : null
-        } else {
-            seledSit.push({...currentSit}) // 没选中则加入选中array
-            img = currentSit.state === 1 ? SINGLE.SELED : currentSit.state === 5 ? SINGLE.UNSELED : null
+        if (currentSit) {
+            let idx = seledSit.findIndex(ele => currentSit.id === ele.id) // 判断提交的座位是否已被选中
+            let img = null
+            if (idx >= 0) {
+                seledSit.splice(idx, 1)  // 选中删除
+                img = currentSit.state === 1 ? SINGLE.UNSELED : currentSit.state === 5 ? SINGLE.UNSELED : null
+            } else {
+                seledSit.push({...currentSit}) // 没选中则加入选中array
+                img = currentSit.state === 1 ? SINGLE.SELED : currentSit.state === 5 ? SINGLE.UNSELED : null
+            }
+            setSeledSit([...seledSit])
+            if (img) {
+                ctx.current.clearRect(pageX * SET_WIDTH, pageY * SET_HEIGHT, SET_WIDTH, SET_HEIGHT);
+                ctx.current.drawImage(img, pageX * SET_WIDTH, pageY * SET_HEIGHT, SET_WIDTH, SET_HEIGHT);
+            }
         }
-        if (img) {
-            ctx.current.clearRect(pageX * SET_WIDTH, pageY * SET_HEIGHT, SET_WIDTH, SET_HEIGHT);
-            ctx.current.drawImage(img, pageX * SET_WIDTH, pageY * SET_HEIGHT, SET_WIDTH, SET_HEIGHT);
-        }
-        
     }
 
     return (<div>
         <canvas ref={canvas} />
+        <div>{aa}</div>
     </div>)
  }
 
