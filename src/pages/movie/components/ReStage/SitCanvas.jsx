@@ -163,8 +163,8 @@ const SitCanvas = (props) => {
     }
 
     return (<div>
-        <canvas ref={canvas} />
-        <div>{aa}</div>
+        <div style={{position: 'absolute', zIndex: 9999, top: 0, left: 0}}>aaa:{aa}</div>
+        <div><canvas ref={canvas} /></div>
     </div>)
  }
 
