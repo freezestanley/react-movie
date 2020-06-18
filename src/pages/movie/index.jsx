@@ -57,7 +57,7 @@ const Movie = (props) => {
 
     return (
         <div className={styles.movie}>
-            <div className={styles.title}>3D MAX 最新电影55</div>
+            <div className={styles.title}>3D MAX 最新电影66</div>
             <div className={styles.movieDetail}>
                 <div>2019-03-06(周五)</div>
                 <div>16:50</div>
