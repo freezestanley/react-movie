@@ -66,12 +66,14 @@ const useZoom = (   target,
                 let result = (Math.floor(m_distance) / distance) * re_size
                 result = result >= 1.85 ? 1.85 : result <= .8 ? .8 : result
                 re_size = Math.floor(result*100)/100
+                target.current.style.setProperty('--scale', `${re_size}`);
         } 
         moveEvent(e, {size: re_size})
     }
     let touchEndHandler = function (e) {
         // e.preventDefault()
         re_size = re_size >= 1.8 ? 1.8 : re_size <= .7 ? .7 : re_size
+        target.current.style.setProperty('--scale', `${re_size}`);
         endEvent(e, {size: re_size })
     }
 
