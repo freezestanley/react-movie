@@ -119,13 +119,14 @@ const Stage = (props) => {
     
     let clickHandler = (e) => { // 第一次点击后座位放大
         debugger
+
     }
 
     return (
             <div className={styles.stage} ref={stageRef}>
                 <Detail />
                 <div className={styles.stageBox}>
-                    <Preview data={sitFilter} choose={state} show={isTouch} />
+                    {/* <Preview data={sitFilter} choose={state} show={isTouch} /> */}
                     <div className={styles.screen} alt="屏幕方向"></div>
                     <div className={styles.content} ref={content}>
                     <ul className={styles.lineLeft} ref={siteLine}>
@@ -138,7 +139,7 @@ const Stage = (props) => {
                         }
                     </ul>
                     <div className={styles.viewStage} ref={screenRef}
-                        onClick={(e)=>clickHandler(e)}
+                        // onClick={(e)=>clickHandler(e)}
                     >
                         <Context.Provider value={{state, dispatch: dispatch}}>
                             <div ref = {innerStage}

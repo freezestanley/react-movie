@@ -97,7 +97,6 @@ const useDragger = (target,
         moveEvent(e, {size: re_size, x: currX, y: currY})
     }
     let touchEndHandler = function (e) {
-        debugger
         re_size = target.current.style.getPropertyValue('--scale')
         re_size = re_size >= 1.8 ? 1.8 : re_size <= .7 ? .7 : re_size
         if (options.zoom && e.touches[1]) {
@@ -135,7 +134,6 @@ const useDragger = (target,
     }, [])
 
     useEffect(()=>{ 
-        debugger
         currX = deps[1]
         currY = deps[2]
         re_size = deps[0]
