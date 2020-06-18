@@ -64,15 +64,20 @@ const SitCanvas = (props) => {
     const [seledSit, setSeledSit] = useState([])
     let isMult = true
     const [aa, setAa] = useState()
+    // const [WIDTH, Set] = useState(SET_WIDTH)
+
     const [stop] = useZoom(canvas, 
     (e, {size}) => {
         debugger
+        console.log(size)
         setAa(size)
     },(e, {size}) => {
         debugger
+        console.log(size)
         setAa(size)
     },(e, {size}) => {
         debugger
+        console.log(size)
         setAa(size)
     })
 
