@@ -42,10 +42,10 @@ const useZoom = (   target,
             e.preventDefault()
             pageX = Math.floor(e.touches[0].pageX) // 手指1
             pageY = Math.floor(e.touches[0].pageY) 
-            // re_pageX = Math.floor(e.touches[1].pageX) // 手指2
-            // re_pageY = Math.floor(e.touches[1].pageY)
-            re_pageX = 0
-            re_pageY = 0
+            re_pageX = Math.floor(e.touches[1].pageX) // 手指2
+            re_pageY = Math.floor(e.touches[1].pageY)
+            // re_pageX = 0
+            // re_pageY = 0
             distance = Math.floor(Math.sqrt(Math.pow((re_pageX - pageX ), 2) + Math.pow((re_pageY - pageY ), 2)))
             re_size = 1
         // }
@@ -56,11 +56,11 @@ const useZoom = (   target,
                 e.preventDefault()
                 pageX = Math.floor(e.touches[0].pageX) // 手指1
                 pageY = Math.floor(e.touches[0].pageY) 
-                // re_pageX = Math.floor(e.touches[1].pageX) // 手指2
-                // re_pageY = Math.floor(e.touches[1].pageY)
+                re_pageX = Math.floor(e.touches[1].pageX) // 手指2
+                re_pageY = Math.floor(e.touches[1].pageY)
 
-                re_pageX = 0
-                re_pageY = 0
+                // re_pageX = 0
+                // re_pageY = 0
 
                 let m_distance = Math.floor(Math.sqrt(Math.pow((re_pageX - pageX ), 2) + Math.pow((re_pageY - pageY ), 2)))
                 let result = (Math.floor(m_distance) / distance) * re_size
