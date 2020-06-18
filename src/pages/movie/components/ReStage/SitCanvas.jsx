@@ -63,6 +63,11 @@ const SitCanvas = (props) => {
     const [seledSit, setSeledSit] = useState([])
     let isMult = true
     useEffect(() => {
+        canvas.current.addEventListener('click', clickHandler, {
+            passive: false
+        })
+    }, [])
+    useEffect(() => {
         debugger
         ctx.current = canvas.current.getContext('2d')
         canvas.current.width = (SET_WIDTH * data[0].length)
@@ -115,6 +120,7 @@ const SitCanvas = (props) => {
     }, [data])
 
     const clickHandler = (e) => {
+        e.preventDefault()
         let offset = canvas.current.getBoundingClientRect()
         let pageX = Math.floor((e.pageX - offset.left)/SET_WIDTH*2)
         let pageY = Math.floor((e.pageY - offset.top)/SET_HEIGHT*2)
