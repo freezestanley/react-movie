@@ -2,6 +2,7 @@ import React, { useState, useCallback, useRef } from 'react';
 import { connect } from 'dva';
 import styles from './style/index.less';
 import Stage from './components/Stage';
+import ReStage from './components/ReStage'
 import SiteList from './components/SiteList'
 import useDragger from '../../hooks/useDragger'
 
@@ -10,12 +11,12 @@ const site = row => {
         const n = idx + 1;
         return [
             {id:`${n}-${n+1}`,state:1,info:`${n}排1座`},
-            {id:`${n}-${n+2}`,state:1,info:`${n}排1座`},
+            {id:`${n}-${n+2}`,state:0,info:`${n}排1座`},
             {id:`${n}-${n+3}`,state:1,info:`${n}排1座`},
             {id:`${n}-${n+4}`,state:4,info:`${n}排1座`},
             {id:`${n}-${n+5}`,state:4,info:`${n}排1座`},
-            {id:`${n}-${n+6}`,state:1,info:`${n}排1座`},
-            {id:`${n}-${n+7}`,state:1,info:`${n}排1座`},
+            {id:`${n}-${n+6}`,state:5,info:`${n}排1座`},
+            {id:`${n}-${n+7}`,state:5,info:`${n}排1座`},
             {id:`${n}-${n+8}`,state:1,info:`${n}排1座`},
             {id:`${n}-${n+9}`,state:1,info:`${n}排1座`},
             {id:`${n}-${n+10}`,state:1,info:`${n}排1座`},
@@ -31,9 +32,11 @@ const site = row => {
             {id:`${n}-${n+20}`,state:4,info:`${n}排1座`},
             {id:`${n}-${n+21}`,state:4,info:`${n}排1座`},
             {id:`${n}-${n+22}`,state:1,info:`${n}排1座`},
-            {id:`${n}-${n+23}`,state:1,info:`${n}排1座`},
-            {id:`${n}-${n+24}`,state:1,info:`${n}排1座`},
-            
+            {id:`${n}-${n+23}`,state:7,info:`${n}排1座`},
+            {id:`${n}-${n+24}`,state:7,info:`${n}排1座`},
+            {id:`${n}-${n+25}`,state:1,info:`${n}排1座`},
+            {id:`${n}-${n+26}`,state:2,info:`${n}排1座`},
+            {id:`${n}-${n+27}`,state:2,info:`${n}排1座`},
         ]
     })
 }
@@ -47,7 +50,7 @@ const Movie = (props) => {
         // result = e.slice()
     },[])
 
-    const data = site(50);
+    const data = site(5);
     // const data = site
 
     
@@ -60,8 +63,8 @@ const Movie = (props) => {
                 <div>16:50</div>
                 <div>4号厅</div>
             </div>
-            <Stage site={data} siteEvent = {getSiteHandler}/>
-            
+            <ReStage site={data} siteEvent = {getSiteHandler}/>
+            {/* <Stage site={data} siteEvent = {getSiteHandler}/> */}
             <SiteList data = {num} />
             <div className={styles.btn}>确定选座</div>
         </div>
