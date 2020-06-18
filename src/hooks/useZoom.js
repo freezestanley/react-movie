@@ -70,7 +70,7 @@ const useZoom = (   target,
         moveEvent(e, {size: re_size})
     }
     let touchEndHandler = function (e) {
-        e.preventDefault()
+        // e.preventDefault()
         re_size = re_size >= 1.8 ? 1.8 : re_size <= .7 ? .7 : re_size
         endEvent(e, {size: re_size })
     }
