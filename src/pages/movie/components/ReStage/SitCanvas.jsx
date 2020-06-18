@@ -129,13 +129,16 @@ const SitCanvas = (props) => {
         let img = null
         if (idx >= 0) {
             seledSit.splice(idx, 1)  // 选中删除
-            ctx.current.clearRect(pageX * SET_WIDTH, pageY * SET_HEIGHT, SET_WIDTH, SET_HEIGHT);
             img = currentSit.state === 1 ? SINGLE.UNSELED : currentSit.state === 5 ? SINGLE.UNSELED : null
         } else {
             seledSit.push({...currentSit}) // 没选中则加入选中array
             img = currentSit.state === 1 ? SINGLE.SELED : currentSit.state === 5 ? SINGLE.UNSELED : null
         }
-        if (img) ctx.current.drawImage(img, pageX * SET_WIDTH, pageY * SET_HEIGHT, SET_WIDTH, SET_HEIGHT);
+        if (img) {
+            ctx.current.clearRect(pageX * SET_WIDTH, pageY * SET_HEIGHT, SET_WIDTH, SET_HEIGHT);
+            ctx.current.drawImage(img, pageX * SET_WIDTH, pageY * SET_HEIGHT, SET_WIDTH, SET_HEIGHT);
+        }
+        
     }
 
     return (<div>
