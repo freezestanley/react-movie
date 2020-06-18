@@ -64,20 +64,23 @@ const SitCanvas = (props) => {
     const [seledSit, setSeledSit] = useState([])
     let isMult = true
     const [aa, setAa] = useState()
-    // const [WIDTH, Set] = useState(SET_WIDTH)
+    // const [WIDTH, SetWidth] = useState(SET_WIDTH)
 
     const [stop] = useZoom(canvas, 
     (e, {size}) => {
-        debugger
         console.log(size)
         setAa(size)
     },(e, {size}) => {
         debugger
         console.log(size)
+        SET_WIDTH = Math.floor(SET_WIDTH * size)
+        SET_HEIGHT = Math.floor(SET_HEIGHT * size)
         setAa(size)
     },(e, {size}) => {
         debugger
         console.log(size)
+        SET_WIDTH = Math.floor(SET_WIDTH * size)
+        SET_HEIGHT = Math.floor(SET_HEIGHT * size)
         setAa(size)
     })
 
@@ -162,10 +165,7 @@ const SitCanvas = (props) => {
         }
     }
 
-    return (<div>
-        <div style={{position: 'absolute', zIndex: 9999, top: 0, left: 0}}>aaa:{aa}</div>
-        <div><canvas ref={canvas} /></div>
-    </div>)
+    return (<canvas ref={canvas} />)
  }
 
  export default SitCanvas
