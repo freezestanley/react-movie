@@ -48,20 +48,7 @@ const Stage = (props) => {
     }
     useEffect(()=>{
         siteEvent(state.value)  // 获取选中的座位信息
-        showPre()
-        debugger
-        if (isFollow) {
-            if( state.currentDom && state.currentDom.dom && state.currentDom.dom.getClientRects()[0]) {
-                let currentRect = state.currentDom.dom.getClientRects()[0]
-                let followX = -(currentRect.left  - content.current.getClientRects()[0].width/2)
-                // screenRef.current.style.setProperty('--transformX', `${currX}px`);
-                let followY = -(currentRect.top - content.current.getClientRects()[0].top) + 30
-                // screenRef.current.style.setProperty('--transformY', `${currY}px`);
-                setX(followX)
-                setY(followY)
-                setFollow(false)
-            }
-        }
+        // showPre()
     }, [state, siteEvent])
 
     useEffect(()=>{ // 渲染后屏幕缩放
@@ -138,7 +125,7 @@ const Stage = (props) => {
 
     useTransform(siteLine, [size, 0, Y])
     
-    let clickHandler = (e) => { // 点击后座位放大
+    let clickHandler = (e) => { // 第一次点击后座位放大
         debugger
         if(zoom) return
         let rate = 1.4

@@ -145,7 +145,7 @@ const useDragger = (target,
             currX = (currX >= rage.maxX) ? rage.maxX : (currX <= rage.minX) ? rage.minX : currX
             currY = (currY >= rage.maxY) ? rage.maxY : (currY <= rage.minY) ? rage.minY : currY
         }
-        re_size = re_size >= 1.8 ? 1.8 : re_size <= .7 ? .7 : re_size
+        // re_size = re_size >= 1.8 ? 1.8 : re_size <= .7 ? .7 : re_size
 
         target.current.style.setProperty('--transformX', `${currX}px`);
         target.current.style.setProperty('--transformY', `${currY}px`);
