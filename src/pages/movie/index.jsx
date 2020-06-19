@@ -12,7 +12,7 @@ const site = row => {
         return [
             {id:`${n}-${n+1}`,state:5,info:`${n}排1座`},
             {id:`${n}-${n+2}`,state:5,info:`${n}排1座`},
-            // {id:`${n}-${n+3}`,state:1,info:`${n}排1座`},
+            {id:`${n}-${n+3}`,state:1,info:`${n}排1座`},
             // {id:`${n}-${n+4}`,state:4,info:`${n}排1座`},
             // {id:`${n}-${n+5}`,state:4,info:`${n}排1座`},
             // {id:`${n}-${n+6}`,state:5,info:`${n}排1座`},
@@ -47,7 +47,6 @@ const Movie = (props) => {
     
     const getSiteHandler = useCallback((e) => {
         setNum(e.slice())
-        // result = e.slice()
     },[])
 
     const data = site(5);

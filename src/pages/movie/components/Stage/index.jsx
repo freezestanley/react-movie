@@ -109,7 +109,6 @@ const Stage = (props) => {
         siteLine.current.style.setProperty('--transformY', `${d.y}px`);
     }
     const endHandler = (e, d) => {
-        debugger
         setX(d.x)
         setY(d.y)
         setSize(d.size)
@@ -126,7 +125,6 @@ const Stage = (props) => {
     useTransform(siteLine, [size, 0, Y])
     
     let clickHandler = (e) => { // 第一次点击后座位放大
-        debugger
         if(zoom) return
         let rate = 1.4
         setSize(rate)

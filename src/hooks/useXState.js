@@ -3,7 +3,9 @@ import { useEffect, useRef, useState} from 'react'
 const useXState = (initState) => {
     const [state, setState] = useState(initState)
     let isUpdate = useRef()
+    
     const setXState = (state, cb) => {
+        debugger
         setState(prev => {
             isUpdate.current = cb
             return typeof state === 'function' ? state(prev) : state
@@ -13,7 +15,7 @@ const useXState = (initState) => {
         if(isUpdate.current) {
             isUpdate.current()
         }
-    })
+    }, [state])
     return [state, setXState]
 }
 export default useXState

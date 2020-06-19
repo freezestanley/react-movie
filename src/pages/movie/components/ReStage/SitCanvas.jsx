@@ -1,5 +1,6 @@
-import React, { useEffect, useState, useRef, useReducer, createContext, useMemo } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import useZoom from '@/hooks/useZoom'
+import useXState from '@/hooks/useXState'
 import styles from './style/index.less';
 
 import singleSite from './images/1.png'
@@ -59,12 +60,12 @@ const HEIGHT = 40
 let SET_WIDTH = 40
 let SET_HEIGHT = 40
 const SitCanvas = (props) => {
-    const {data, getZoom} = props
+    const {data, getZoom, getSeledSit} = props
     const canvas = useRef(null)
     const ctx = useRef()
-    const [seledSit, setSeledSit] = useState([])
-    let isMult = true
+    const [seledSit, setSeledSit] = useXState([])
     const [sitData, setSitData] = useState(data)
+    let isMult = true
 
     const [stop] = useZoom(canvas, 
     (e, {size}) => {
@@ -86,9 +87,9 @@ const SitCanvas = (props) => {
         })
     }, [])
 
-    useEffect(() => {
-        setSitData([...data])
-    }, [data])
+    // useEffect(() => {
+    //     setSitData([...data])
+    // }, [data])
 
     useEffect(() => {
         ctx.current = canvas.current.getContext('2d')
@@ -167,10 +168,8 @@ const SitCanvas = (props) => {
                         sitData[pageY][pageX-1].state = 5
                     }
                 }
-                // img = currentSit.state === 1 ? SINGLE.UNSELED : currentSit.state === 5 ? MULT.UNSELED[0] : null
             } else {
                 seledSit.push({...currentSit}) // 没选中则加入选中array
-                // img = currentSit.state === 1 ? SINGLE.SELED : currentSit.state === 5 ? MULT.SELED[0] : null
                 if (currentSit.state === 1) {
                     currentSit.state = 2
                 } else if (currentSit.state === 5) {
@@ -182,12 +181,11 @@ const SitCanvas = (props) => {
                     }
                 }
             }
-            setSeledSit([...seledSit])
+            setSeledSit([...seledSit], ()=>{
+                debugger
+                getSeledSit(seledSit, sitData)
+            })
             setSitData([...sitData])
-            // if (img) {
-            //     ctx.current.clearRect(pageX * SET_WIDTH, pageY * SET_HEIGHT, SET_WIDTH, SET_HEIGHT);
-            //     ctx.current.drawImage(img, pageX * SET_WIDTH, pageY * SET_HEIGHT, SET_WIDTH, SET_HEIGHT);
-            // }
         }
     }
 

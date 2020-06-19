@@ -5,7 +5,7 @@
  *  choose: 获取选中的座位
  *    show: 控制Preview是否现实
  */
-import React, { useRef } from 'react';
+import React, { useRef, useMemo } from 'react';
 import styles from './style/index.less';
 import useDragger from '@/hooks/useDragger'
 
@@ -15,19 +15,51 @@ export default function Preview(props) {
   const preview = useRef(null)
   const tips = useRef(null)
 
+
+// const SINGLE = {
+//     EMPTY: new Image(),     // 0
+//     UNSELED: singleUnSeled, // 1
+//     SELED: singleSeled, // 2
+//     FIX: singlefixSite, // 3
+//     SALED: singleSaled // 4
+// }
+// const MULT = {
+//     UNSELED: [ muUnseledLeft, muUnseledRight], // 5
+//     SELED: [muSeledLeft, muSeledRight], // 6
+//     SALED: [muSaledLeft, muSaledRight] // 7
+// }
   const sitType = (e) => {  // 根据状态来现实座位的状态
     let type = null         // 默认是空
-    if (e === 7 || e === 3 || e === 6) {
+    if (e === 3 || e === 4 || e === 7) {
       type = styles.red
     }
-    if (e === 2 || e === 5) {
+    if (e === 2 || e === 6) {
       type = styles.green
     }
-    if (e === 1 || e === 4) {
+    if (e === 1 || e === 5) {
       type = styles.white
     }
     return type
   }
+
+  let sitFilter = useMemo(() => { // data数据过滤 过滤 情人座位。连续4，4 =》 4
+    let state = false
+    let result = []
+    data.map((element, idx, arr) => {
+        let row = []
+        element.map((ele,i, ar) => {
+            if (state && ele.state >= 5) {
+                state = false
+            } else {
+                state = true
+                row.push(ele)
+            }
+        })
+        result.push(row)
+    })
+    return result
+}, [data])
+
 
   const clickHandler = (e) => {
     let preXY = preview.current.getBoundingClientRect()
@@ -61,23 +93,14 @@ export default function Preview(props) {
     >
       <b className={`${styles.tips}`} ref = {tips}></b>
         {
-          data.map((element, idx) => {
+          sitFilter.map((element, idx) => {
             return (
             <div key={`${idx}${Math.random()}`}>
               {element.map((ele) => {
                 let block = sitType(ele.state)
-                if (choose && choose.value.length > 0 ) {
-                  let state = choose.value.findIndex((e) => {
-                    return e.id === ele.id      // 判断选中的座位的ID
-                  })
-                  if (state >= 0) {
-                    block = sitType(2)
-                  }
-                }
-                
                 return (
                   <div key={`${ele.id}${Math.random()}`}
-                    className = {`${block} ${ele.state === 4 ? styles.loved : null}`}
+                    className = {`${block} ${ele.state >= 5 ? styles.loved : styles.single}`}
                   >
                   </div>
                 )
