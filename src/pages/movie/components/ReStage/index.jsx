@@ -18,6 +18,7 @@ import Detail from '../Site/Detail'
 import Preview from '../Preview'
 import { reducer, defaultState } from '../context'
 import useDragger from '@/hooks/useDragger'
+import useXState from '@/hooks/useXState'
 import SitCanvas from './SitCanvas'
 
 export const Context = createContext(null) // 私有state
@@ -31,7 +32,7 @@ const Stage = (props) => {
         innerStage = useRef(null),  // 座位引用
         content = useRef(null),     // 容器引用
         [state, dispatch] = useReducer(reducer, defaultState), // stage 私有reducer
-        [isTouch, setTouch] = useState(false),  // 是否触摸
+        [isTouch, setTouch] = useXState(false),  // 是否触摸
         [reSitData, setReSiteData] = useState([...site])
         
     const [ size, setSize] = useState(1)
@@ -90,16 +91,20 @@ const Stage = (props) => {
     const startHandler = (e, d) => {
         siteLine.current.style.setProperty('--transformY', `${d.y}px`);
     }
+    const showPreview = () => {
+        setTouch(true) 
+        window.clearTimeout(time)         // preview 显示
+            time = setTimeout(()=>{
+                setTouch(false)     // 4秒后preview 隐藏
+            }, 1000)
+    }
     const moveHandler = (e, d) => {
         siteLine.current.style.setProperty('--transformY', `${d.y}px`);
-        setTouch(true) 
+        showPreview()
     }
     const endHandler = (e, d) => {
         siteLine.current.style.setProperty('--transformY', `${d.y}px`);
-        window.clearTimeout(time)         // preview 显示
-        time = setTimeout(()=>{
-            setTouch(false)     // 4秒后preview 隐藏
-        }, 1000)
+        
     }
 
     const [stop] = useDragger(screenRef, () => limitRage(content, innerStage), [1, 0, 0], {zoom: false, moveLimit: true}, startHandler, moveHandler, endHandler)
@@ -113,7 +118,11 @@ const Stage = (props) => {
     const getSeledSit = (sit, sitdata) => {
         siteEvent(sit)
         setReSiteData(sitdata)
-        setTouch(true)
+        showPreview()
+    }
+    const clickHandler = (e) => {
+        debugger
+        showPreview()
     }
    
     return (
@@ -123,7 +132,8 @@ const Stage = (props) => {
 
                     <Preview 
                         data = {reSitData}
-                        show = {isTouch} 
+                        show = {isTouch}
+                        Click = {clickHandler} 
                     />
 
                     <div className={styles.screen} alt="屏幕方向"></div>

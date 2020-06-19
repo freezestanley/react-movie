@@ -9,8 +9,9 @@ import React, { useRef, useMemo } from 'react';
 import styles from './style/index.less';
 import useDragger from '@/hooks/useDragger'
 
+
 export default function Preview(props) {
-  const {data, choose, show } = props
+  const {data, choose, show, Click } = props
 
   const preview = useRef(null)
   const tips = useRef(null)
@@ -61,35 +62,35 @@ export default function Preview(props) {
 }, [data])
 
 
-  const clickHandler = (e) => {
-    let preXY = preview.current.getBoundingClientRect()
-    let localPointXY = {
-      x: e.clientX - preXY.x - 25,
-      y: e.clientY - preXY.y - 25
-    }
-    tips.current.style.setProperty('--tipsX', `${localPointXY.x}px`);
-    tips.current.style.setProperty('--tipsY', `${localPointXY.y}px`);
-  }
+  // const clickHandler = (e) => {
+  //   let preXY = preview.current.getBoundingClientRect()
+  //   let localPointXY = {
+  //     x: e.clientX - preXY.x - 25,
+  //     y: e.clientY - preXY.y - 25
+  //   }
+  //   tips.current.style.setProperty('--tipsX', `${localPointXY.x}px`);
+  //   tips.current.style.setProperty('--tipsY', `${localPointXY.y}px`);
+  // }
 
-  let limitRage = (content, innerStage, limit = 10) => {    // 获取容器拖动的最大区域
-    let contentRect = content.current.getClientRects()
-    let innerRect = innerStage.current.getClientRects()
-    if (contentRect.length <= 0 || innerRect.length <= 0) return {}
-    return {
-        width: innerRect[0].width + limit * 2,
-        height: innerRect[0].height + limit * 2,
-        maxY: contentRect[0].height - innerRect[0].height,
-        minY: 0,
-        maxX: contentRect[0].width - innerRect[0].width,
-        minX: 0,
-    }
-  }
-  const [stop] = useDragger(tips, () => limitRage(preview, tips), [1,0,0], {moveLimit: true})
+  // let limitRage = (content, innerStage, limit = 10) => {    // 获取容器拖动的最大区域
+  //   let contentRect = content.current.getClientRects()
+  //   let innerRect = innerStage.current.getClientRects()
+  //   if (contentRect.length <= 0 || innerRect.length <= 0) return {}
+  //   return {
+  //       width: innerRect[0].width + limit * 2,
+  //       height: innerRect[0].height + limit * 2,
+  //       maxY: contentRect[0].height - innerRect[0].height,
+  //       minY: 0,
+  //       maxX: contentRect[0].width - innerRect[0].width,
+  //       minX: 0,
+  //   }
+  // }
+  // const [stop] = useDragger(tips, () => limitRage(preview, tips), [1,0,0], {moveLimit: true})
 
   return (
     <div className={` ${styles.preview} `} style={{display: show ? 'block' : 'none' }}
       ref = {preview}
-      onClick = {clickHandler}
+      onClick = {Click}
     >
       <b className={`${styles.tips}`} ref = {tips}></b>
         {
