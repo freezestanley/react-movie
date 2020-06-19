@@ -38,37 +38,37 @@ const useZoom = (   target,
         distance = 0;
 
     let touchStartHandler = function (e) {
-        // if (options.zoom && e.touches[1]) {
-        //     e.preventDefault()
+        if (options.zoom && e.touches[1]) {
+            e.preventDefault()
             pageX = Math.floor(e.touches[0].pageX) // 手指1
             pageY = Math.floor(e.touches[0].pageY) 
-            // re_pageX = Math.floor(e.touches[1].pageX) // 手指2
-            // re_pageY = Math.floor(e.touches[1].pageY)
-            re_pageX = 100
-            re_pageY = 100
+            re_pageX = Math.floor(e.touches[1].pageX) // 手指2
+            re_pageY = Math.floor(e.touches[1].pageY)
+            // re_pageX = 100
+            // re_pageY = 100
             distance = Math.floor(Math.sqrt(Math.pow((re_pageX - pageX ), 2) + Math.pow((re_pageY - pageY ), 2)))
             re_size = target.current.style.getPropertyValue('--scale') || 1
-        // }
+        }
         startEvent(e, {size: re_size})
     }
     let touchMoveHandler = function (e) {
         // debugger
-        // if (options.zoom && e.touches[1]) {
-        //         e.preventDefault()
+        if (options.zoom && e.touches[1]) {
+                e.preventDefault()
                 pageX = Math.floor(e.touches[0].pageX) // 手指1
                 pageY = Math.floor(e.touches[0].pageY) 
-                // re_pageX = Math.floor(e.touches[1].pageX) // 手指2
-                // re_pageY = Math.floor(e.touches[1].pageY)
+                re_pageX = Math.floor(e.touches[1].pageX) // 手指2
+                re_pageY = Math.floor(e.touches[1].pageY)
 
-                re_pageX = 100
-                re_pageY = 100
+                // re_pageX = 100
+                // re_pageY = 100
 
                 let m_distance = Math.sqrt(Math.pow((re_pageX - pageX ), 2) + Math.pow((re_pageY - pageY ), 2))
                 let result = (m_distance / distance) * re_size
                 re_size = Math.floor(result*1000)/1000
                 re_size = re_size >= 1.6 ? 1.6 : re_size <= .8 ? .8 : re_size
                 target.current.style.setProperty('--scale', `${re_size}`);
-        // } 
+        } 
         moveEvent(e, {size: re_size})
     }
     let touchEndHandler = function (e) {
