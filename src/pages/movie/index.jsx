@@ -43,6 +43,7 @@ const site = row => {
 
 
 const Movie = (props) => {
+    navigator.vibrate(4000)
     const [ num, setNum ] = useState([])
     
     const getSiteHandler = useCallback((e) => {
