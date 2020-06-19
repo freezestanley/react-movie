@@ -98,15 +98,11 @@ const Stage = (props) => {
         setTouch(true) 
     }
     const moveHandler = (e, d) => {
-        siteLine.current.style.setProperty('--scale', `${d.size}`);
         siteLine.current.style.setProperty('--transformY', `${d.y}px`);
     }
     const endHandler = (e, d) => {
-        debugger
         setX(d.x)
         setY(d.y)
-        setSize(d.size)
-        siteLine.current.style.setProperty('--scale', `${d.size}`);
         siteLine.current.style.setProperty('--transformY', `${d.y}px`);
         window.clearTimeout(time)         // preview 显示
         time = setTimeout(()=>{
@@ -119,6 +115,7 @@ const Stage = (props) => {
     
     const getCanvasZoom = (size) => {
         siteLine.current.style.setProperty('--scale', `${size}`);
+        setSize(size)
     }
 
     return (
