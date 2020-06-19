@@ -157,20 +157,6 @@ const SitCanvas = (props) => {
             let img = null
             if (idx >= 0) {
                 seledSit.splice(idx, 1)  // 选中删除
-                if (currentSit.state === 1) {
-                    currentSit.state = 2
-                } else if (currentSit.state === 5) {
-                    currentSit.state = 6
-                    if(currentSit.position === 0) {
-                        sitData[pageY][pageX+1].state = 6
-                    } else {
-                        sitData[pageY][pageX-1].state = 6
-                    }
-                }
-                // img = currentSit.state === 1 ? SINGLE.UNSELED : currentSit.state === 5 ? MULT.UNSELED[0] : null
-            } else {
-                seledSit.push({...currentSit}) // 没选中则加入选中array
-                // img = currentSit.state === 1 ? SINGLE.SELED : currentSit.state === 5 ? MULT.SELED[0] : null
                 if (currentSit.state === 2) {
                     currentSit.state = 1
                 } else if (currentSit.state === 6) {
@@ -179,6 +165,20 @@ const SitCanvas = (props) => {
                         sitData[pageY][pageX+1].state = 5
                     } else {
                         sitData[pageY][pageX-1].state = 5
+                    }
+                }
+                // img = currentSit.state === 1 ? SINGLE.UNSELED : currentSit.state === 5 ? MULT.UNSELED[0] : null
+            } else {
+                seledSit.push({...currentSit}) // 没选中则加入选中array
+                // img = currentSit.state === 1 ? SINGLE.SELED : currentSit.state === 5 ? MULT.SELED[0] : null
+                if (currentSit.state === 1) {
+                    currentSit.state = 2
+                } else if (currentSit.state === 5) {
+                    currentSit.state = 6
+                    if(currentSit.position === 0) {
+                        sitData[pageY][pageX+1].state = 6
+                    } else {
+                        sitData[pageY][pageX-1].state = 6
                     }
                 }
             }
