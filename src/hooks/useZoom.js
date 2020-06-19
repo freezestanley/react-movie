@@ -66,14 +66,14 @@ const useZoom = (   target,
                 let m_distance = Math.sqrt(Math.pow((re_pageX - pageX ), 2) + Math.pow((re_pageY - pageY ), 2))
                 let result = (m_distance / distance) * re_size
                 re_size = Math.floor(result*1000)/1000
-                re_size = re_size >= 1.3 ? 1.3 : re_size <= .9 ? .9 : re_size
+                re_size = re_size >= 1.6 ? 1.6 : re_size <= .8 ? .8 : re_size
                 target.current.style.setProperty('--scale', `${re_size}`);
         } 
         moveEvent(e, {size: re_size})
     }
     let touchEndHandler = function (e) {
         // e.preventDefault()
-        re_size = re_size >= 1.3 ? 1.3 : re_size <= .9 ? .9 : re_size
+        re_size = re_size >= 1.6 ? 1.6 : re_size <= .8 ? .8 : re_size
         target.current.style.setProperty('--scale', `${re_size}`);
         endEvent(e, {size: re_size })
     }
