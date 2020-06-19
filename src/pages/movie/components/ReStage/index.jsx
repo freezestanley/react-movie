@@ -101,8 +101,8 @@ const Stage = (props) => {
         siteLine.current.style.setProperty('--transformY', `${d.y}px`);
     }
     const endHandler = (e, d) => {
-        setX(d.x)
-        setY(d.y)
+        // setX(d.x)
+        // setY(d.y)
         siteLine.current.style.setProperty('--transformY', `${d.y}px`);
         window.clearTimeout(time)         // preview 显示
         time = setTimeout(()=>{
@@ -110,7 +110,7 @@ const Stage = (props) => {
         }, 2000)
     }
 
-    const [stop] = useDragger(screenRef, () => limitRage(content, innerStage), [size, X, Y], {zoom: false}, startHandler, moveHandler, endHandler)
+    const [stop] = useDragger(screenRef, () => limitRage(content, innerStage), [size, X, Y], {zoom: false, moveLimit: true}, startHandler, moveHandler, endHandler)
 
     
     const getCanvasZoom = (size) => {
