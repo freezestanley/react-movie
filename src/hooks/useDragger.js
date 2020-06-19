@@ -85,7 +85,6 @@ const useDragger = (target,
             currY += Math.floor(moveY);
 
             if (limit && options.moveLimit) {
-                debugger
                 let rage = limit()
                 currX = (currX >= rage.maxX) ? rage.maxX : (currX <= rage.minX) ? rage.minX : currX
                 currY = (currY >= rage.maxY) ? rage.maxY : (currY <= rage.minY) ? rage.minY : currY
@@ -107,7 +106,6 @@ const useDragger = (target,
         currX = Math.floor(parseInt(target.current.style.getPropertyValue('--transformX'))) || 0;
         currY = Math.floor(parseInt(target.current.style.getPropertyValue('--transformY'))) || 0;
         if (limit) {
-            debugger
             let rage = limit()
             currX = (currX >= rage.maxX) ? rage.maxX : (currX <= rage.minX) ? rage.minX : currX
             currY = (currY >= rage.maxY) ? rage.maxY : (currY <= rage.minY) ? rage.minY : currY

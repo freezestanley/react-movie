@@ -110,7 +110,7 @@ const Stage = (props) => {
         }, 2000)
     }
 
-    const [stop] = useDragger(screenRef, () => limitRage(content, innerStage), [size, X, Y], {zoom: false, moveLimit: true}, startHandler, moveHandler, endHandler)
+    const [stop] = useDragger(screenRef, () => limitRage(content, innerStage), [1, X, Y], {zoom: false, moveLimit: true}, startHandler, moveHandler, endHandler)
 
     
     const getCanvasZoom = (size) => {
