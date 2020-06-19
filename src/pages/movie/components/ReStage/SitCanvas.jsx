@@ -59,33 +59,24 @@ const HEIGHT = 40
 let SET_WIDTH = 40
 let SET_HEIGHT = 40
 const SitCanvas = (props) => {
-    const {data} = props
+    const {data, getZoom} = props
     const canvas = useRef(null)
     const ctx = useRef()
     const [seledSit, setSeledSit] = useState([])
     let isMult = true
-    const [aa, setAa] = useState()
-    // const [WIDTH, SetWidth] = useState(SET_WIDTH)
 
     const [stop] = useZoom(canvas, 
     (e, {size}) => {
         console.log(size)
-        setAa(size)
+        getZoom(size)
     },(e, {size}) => {
-        // debugger
-        console.log("===========================")
-        console.log(size + '+' + SET_WIDTH + '+' + SET_HEIGHT)
         SET_WIDTH = WIDTH * size <= 5 ? 5 : WIDTH * size
         SET_HEIGHT = HEIGHT * size <= 5 ? 5 : HEIGHT * size
-        console.log(size + '+' + SET_WIDTH + '+' + SET_HEIGHT)
-        console.log("===========================")
-        setAa(size)
+        getZoom(size)
     },(e, {size}) => {
-        debugger
-        console.log(size)
         SET_WIDTH = WIDTH * size <= 5 ? 5 : WIDTH * size
         SET_HEIGHT = HEIGHT * size <= 5 ? 5 : HEIGHT * size
-        setAa(size)
+        getZoom(size)
     })
 
     useEffect(() => {
@@ -93,6 +84,7 @@ const SitCanvas = (props) => {
             passive: false
         })
     }, [])
+
     useEffect(() => {
         ctx.current = canvas.current.getContext('2d')
         canvas.current.width = (SET_WIDTH * data[0].length)

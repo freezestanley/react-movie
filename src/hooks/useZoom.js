@@ -47,7 +47,7 @@ const useZoom = (   target,
             // re_pageX = 100
             // re_pageY = 100
             distance = Math.floor(Math.sqrt(Math.pow((re_pageX - pageX ), 2) + Math.pow((re_pageY - pageY ), 2)))
-            re_size = 1
+            re_size = target.current.style.getPropertyValue('--scale') || 1
         }
         startEvent(e, {size: re_size})
     }

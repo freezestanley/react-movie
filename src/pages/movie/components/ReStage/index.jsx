@@ -117,9 +117,8 @@ const Stage = (props) => {
     const [stop] = useDragger(screenRef, () => limitRage(content, innerStage), [size, X, Y], {zoom: false}, startHandler, moveHandler, endHandler)
 
     
-    let clickHandler = (e) => { // 第一次点击后座位放大
-        debugger
-
+    const getCanvasZoom = (size) => {
+        siteLine.current.style.setProperty('--scale', `${size}`);
     }
 
     return (
@@ -142,7 +141,7 @@ const Stage = (props) => {
                         <Context.Provider value={{state, dispatch: dispatch}}>
                             <div ref = {innerStage}
                                 className={styles.siteTable}>
-                                    <SitCanvas data={site}/>
+                                    <SitCanvas data={site} getZoom = {getCanvasZoom}/>
                             </div>
                         </Context.Provider>
                     </div>
