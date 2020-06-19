@@ -138,11 +138,8 @@ const SitCanvas = (props) => {
     const clickHandler = (e) => {
         e.preventDefault()
         let offset = canvas.current.getBoundingClientRect()
-        // let pageX = Math.floor(((e.pageX - offset.left)*2)/SET_WIDTH)/2
-        // let pageY = Math.floor(((e.pageY - offset.top)*2)/SET_HEIGHT)/2
         let pageX = Math.floor((e.pageX - offset.left) / (SET_WIDTH / 2))
         let pageY = Math.floor((e.pageY - offset.top) / (SET_HEIGHT / 2))
-        // return
         let currentSit = data[pageY][pageX]
         if (currentSit) {
             let idx = seledSit.findIndex(ele => currentSit.id === ele.id) // 判断提交的座位是否已被选中

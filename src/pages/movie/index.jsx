@@ -51,18 +51,15 @@ const Movie = (props) => {
     },[])
 
     const data = site(10);
-    // const data = site
-
     
-
     return (
         <div className={styles.movie}>
-            {/* <div className={styles.title}>3D MAX 最新电影8888</div> */}
-            {/* <div className={styles.movieDetail}>
+            <div className={styles.title}>3D MAX 最新电影111</div>
+            <div className={styles.movieDetail}>
                 <div>2019-03-06(周五)</div>
                 <div>16:50</div>
                 <div>4号厅</div>
-            </div> */}
+            </div>
             <ReStage site={data} siteEvent = {getSiteHandler}/>
             {/* <Stage site={data} siteEvent = {getSiteHandler}/> */}
             <SiteList data = {num} />
