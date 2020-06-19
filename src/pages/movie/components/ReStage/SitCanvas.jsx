@@ -75,16 +75,16 @@ const SitCanvas = (props) => {
         // debugger
         console.log("===========================")
         console.log(size + '+' + SET_WIDTH + '+' + SET_HEIGHT)
-        SET_WIDTH = WIDTH * size <= 5 ? 5 : WIDTH * size
-        SET_HEIGHT = HEIGHT * size <= 5 ? 5 : HEIGHT * size
+        // SET_WIDTH = WIDTH * size <= 5 ? 5 : WIDTH * size
+        // SET_HEIGHT = HEIGHT * size <= 5 ? 5 : HEIGHT * size
         console.log(size + '+' + SET_WIDTH + '+' + SET_HEIGHT)
         console.log("===========================")
         setAa(size)
     },(e, {size}) => {
         debugger
         console.log(size)
-        SET_WIDTH = WIDTH * size <= 5 ? 5 : WIDTH * size
-        SET_HEIGHT = HEIGHT * size <= 5 ? 5 : HEIGHT * size
+        // SET_WIDTH = WIDTH * size <= 5 ? 5 : WIDTH * size
+        // SET_HEIGHT = HEIGHT * size <= 5 ? 5 : HEIGHT * size
         setAa(size)
     })
 
