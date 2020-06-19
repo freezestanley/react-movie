@@ -64,6 +64,7 @@ const SitCanvas = (props) => {
     const ctx = useRef()
     const [seledSit, setSeledSit] = useState([])
     let isMult = true
+    const [sitData, setSitData] = useState(data)
 
     const [stop] = useZoom(canvas, 
     (e, {size}) => {
@@ -86,12 +87,16 @@ const SitCanvas = (props) => {
     }, [])
 
     useEffect(() => {
+        setSitData([...data])
+    }, [data])
+
+    useEffect(() => {
         ctx.current = canvas.current.getContext('2d')
         canvas.current.width = (SET_WIDTH * data[0].length)
         canvas.current.height = (SET_HEIGHT * data.length)
         canvas.current.style.width = `${canvas.current.width / 2}px`
         canvas.current.style.height = `${canvas.current.height / 2}px`
-        data.map((coloum, index, arr)=> {
+        sitData.map((coloum, index, arr)=> {
             coloum.map((ele, idx, ar) =>{
                 let img = null
                 if (ele.state === 0) {
@@ -108,54 +113,81 @@ const SitCanvas = (props) => {
                     if (isMult) {
                         img = MULT.UNSELED[0]
                         isMult = false
+                        ele.position = 0
                     } else {
                         img = MULT.UNSELED[1]
                         isMult = true
+                        ele.position = 1
                     }
                 } else if (ele.state === 6) {
                     if (isMult) {
                         img = MULT.SELED[0]
                         isMult = false
+                        ele.position = 0
                     } else {
                         img = MULT.SELED[1]
                         isMult = true
+                        ele.position = 1
                     }
                 } else if (ele.state === 7) {
                     if (isMult) {
                         img = MULT.SALED[0]
-                            isMult = false
+                        isMult = false
+                        ele.position = 0
                     } else {
                         img = MULT.SALED[1]
                         isMult = true
+                        ele.position = 1
                     }
                 }
 
                 ctx.current.drawImage(img,idx * SET_WIDTH,index * SET_HEIGHT,  SET_WIDTH, SET_HEIGHT);
             })
         })
-    }, [data, SET_WIDTH, SET_HEIGHT])
+    }, [sitData, SET_WIDTH, SET_HEIGHT])
 
     const clickHandler = (e) => {
         e.preventDefault()
         let offset = canvas.current.getBoundingClientRect()
         let pageX = Math.floor((e.pageX - offset.left) / (SET_WIDTH / 2))
         let pageY = Math.floor((e.pageY - offset.top) / (SET_HEIGHT / 2))
-        let currentSit = data[pageY][pageX]
+        let currentSit = sitData[pageY][pageX]
         if (currentSit) {
             let idx = seledSit.findIndex(ele => currentSit.id === ele.id) // 判断提交的座位是否已被选中
             let img = null
             if (idx >= 0) {
                 seledSit.splice(idx, 1)  // 选中删除
-                img = currentSit.state === 1 ? SINGLE.UNSELED : currentSit.state === 5 ? SINGLE.UNSELED : null
+                if (currentSit.state === 1) {
+                    currentSit.state = 2
+                } else if (currentSit.state === 5) {
+                    currentSit.state = 6
+                    if(currentSit.position === 0) {
+                        sitData[pageY][pageX+1].state = 6
+                    } else {
+                        sitData[pageY][pageX-1].state = 6
+                    }
+                }
+                // img = currentSit.state === 1 ? SINGLE.UNSELED : currentSit.state === 5 ? MULT.UNSELED[0] : null
             } else {
                 seledSit.push({...currentSit}) // 没选中则加入选中array
-                img = currentSit.state === 1 ? SINGLE.SELED : currentSit.state === 5 ? SINGLE.UNSELED : null
+                // img = currentSit.state === 1 ? SINGLE.SELED : currentSit.state === 5 ? MULT.SELED[0] : null
+                if (currentSit.state === 2) {
+                    currentSit.state = 1
+                } else if (currentSit.state === 6) {
+                    currentSit.state = 5
+                    if(currentSit.position === 0) {
+                        sitData[pageY][pageX+1].state = 5
+                    } else {
+                        sitData[pageY][pageX-1].state = 5
+                    }
+                }
             }
             setSeledSit([...seledSit])
-            if (img) {
-                ctx.current.clearRect(pageX * SET_WIDTH, pageY * SET_HEIGHT, SET_WIDTH, SET_HEIGHT);
-                ctx.current.drawImage(img, pageX * SET_WIDTH, pageY * SET_HEIGHT, SET_WIDTH, SET_HEIGHT);
-            }
+            setSitData([...sitData])
+            // if (img) {
+            //     ctx.current.clearRect(pageX * SET_WIDTH, pageY * SET_HEIGHT, SET_WIDTH, SET_HEIGHT);
+            //     ctx.current.drawImage(img, pageX * SET_WIDTH, pageY * SET_HEIGHT, SET_WIDTH, SET_HEIGHT);
+            // }
         }
     }
 
