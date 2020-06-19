@@ -54,7 +54,8 @@ const MULT = {
 }
 
 
-
+const WIDTH = 40
+const HEIGHT = 40
 let SET_WIDTH = 40
 let SET_HEIGHT = 40
 const SitCanvas = (props) => {
@@ -71,16 +72,19 @@ const SitCanvas = (props) => {
         console.log(size)
         setAa(size)
     },(e, {size}) => {
-        debugger
-        console.log(size)
-        SET_WIDTH = Math.floor(SET_WIDTH * size)
-        SET_HEIGHT = Math.floor(SET_HEIGHT * size)
+        // debugger
+        console.log("===========================")
+        console.log(size + '+' + SET_WIDTH + '+' + SET_HEIGHT)
+        SET_WIDTH = WIDTH * size <= 5 ? 5 : WIDTH * size
+        SET_HEIGHT = HEIGHT * size <= 5 ? 5 : HEIGHT * size
+        console.log(size + '+' + SET_WIDTH + '+' + SET_HEIGHT)
+        console.log("===========================")
         setAa(size)
     },(e, {size}) => {
         debugger
         console.log(size)
-        SET_WIDTH = Math.floor(SET_WIDTH * size)
-        SET_HEIGHT = Math.floor(SET_HEIGHT * size)
+        SET_WIDTH = WIDTH * size <= 5 ? 5 : WIDTH * size
+        SET_HEIGHT = HEIGHT * size <= 5 ? 5 : HEIGHT * size
         setAa(size)
     })
 
@@ -90,7 +94,6 @@ const SitCanvas = (props) => {
         })
     }, [])
     useEffect(() => {
-        debugger
         ctx.current = canvas.current.getContext('2d')
         canvas.current.width = (SET_WIDTH * data[0].length)
         canvas.current.height = (SET_HEIGHT * data.length)
@@ -98,7 +101,6 @@ const SitCanvas = (props) => {
         canvas.current.style.height = `${canvas.current.height / 2}px`
         data.map((coloum, index, arr)=> {
             coloum.map((ele, idx, ar) =>{
-                debugger
                 let img = null
                 if (ele.state === 0) {
                     img = SINGLE.EMPTY
