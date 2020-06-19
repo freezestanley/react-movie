@@ -28,9 +28,7 @@ const useZoom = (   target,
         move = useRef(), 
         end = useRef()
     let pageX = 0, 
-        pageY = 0,
-        currX = 0,
-        currY = 0;
+        pageY = 0;
 
     let re_pageX = 0,
         re_pageY = 0,
