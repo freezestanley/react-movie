@@ -43,7 +43,6 @@ const site = row => {
 
 
 const Movie = (props) => {
-    navigator.vibrate(4000)
     const [ num, setNum ] = useState([])
     
     const getSiteHandler = useCallback((e) => {
@@ -55,7 +54,7 @@ const Movie = (props) => {
     
     return (
         <div className={styles.movie}>
-            <div className={styles.title}>3D MAX 最新电影444</div>
+            <div className={styles.title}>3D MAX 最新电影666</div>
             <div className={styles.movieDetail}>
                 <div>2019-03-06(周五)</div>
                 <div>16:50</div>
