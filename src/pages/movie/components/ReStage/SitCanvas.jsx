@@ -16,6 +16,7 @@ import muliSeledRight from './images/7.png'
 
 import muliSaledLeft from './images/12.png'
 import muliSaledRight from './images/13.png'
+import Hammer from 'react-hammerjs'
 
 const singleSeled = new Image()
 singleSeled.src = singleSite
@@ -49,7 +50,7 @@ const SINGLE = {
     SALED: singleSaled // 4
 }
 const MULT = {
-    UNSELED: [ muUnseledLeft, muUnseledRight], // 5
+    UNSELED: [muUnseledLeft, muUnseledRight], // 5
     SELED: [muSeledLeft, muSeledRight], // 6
     SALED: [muSaledLeft, muSaledRight] // 7
 }
@@ -60,26 +61,26 @@ const HEIGHT = 40
 let SET_WIDTH = 40
 let SET_HEIGHT = 40
 const SitCanvas = (props) => {
-    const {data, getZoom, getSeledSit} = props
+    const { data, getZoom, getSeledSit } = props
     const canvas = useRef(null)
     const ctx = useRef()
     const [seledSit, setSeledSit] = useXState([])
     const [sitData, setSitData] = useState(data)
     let isMult = true
 
-    const [stop] = useZoom(canvas, 
-    (e, {size}) => {
-        console.log(size)
-        getZoom(size)
-    },(e, {size}) => {
-        SET_WIDTH = Math.floor(WIDTH * size <= 5 ? 5 : WIDTH * size)
-        SET_HEIGHT = Math.floor(HEIGHT * size <= 5 ? 5 : HEIGHT * size)
-        getZoom(size)
-    },(e, {size}) => {
-        SET_WIDTH = Math.floor(WIDTH * size <= 5 ? 5 : WIDTH * size)
-        SET_HEIGHT = Math.floor(HEIGHT * size <= 5 ? 5 : HEIGHT * size)
-        getZoom(size)
-    })
+    // const [stop] = useZoom(canvas,
+    //     (e, { size }) => {
+    //         console.log(size)
+    //         getZoom(size)
+    //     }, (e, { size }) => {
+    //         SET_WIDTH = Math.floor(WIDTH * size <= 5 ? 5 : WIDTH * size)
+    //         SET_HEIGHT = Math.floor(HEIGHT * size <= 5 ? 5 : HEIGHT * size)
+    //         getZoom(size)
+    //     }, (e, { size }) => {
+    //         SET_WIDTH = Math.floor(WIDTH * size <= 5 ? 5 : WIDTH * size)
+    //         SET_HEIGHT = Math.floor(HEIGHT * size <= 5 ? 5 : HEIGHT * size)
+    //         getZoom(size)
+    //     })
 
     useEffect(() => {
         canvas.current.addEventListener('click', clickHandler, {
@@ -97,8 +98,8 @@ const SitCanvas = (props) => {
         canvas.current.height = (SET_HEIGHT * data.length)
         canvas.current.style.width = `${canvas.current.width / 2}px`
         canvas.current.style.height = `${canvas.current.height / 2}px`
-        sitData.map((coloum, index, arr)=> {
-            coloum.map((ele, idx, ar) =>{
+        sitData.map((coloum, index, arr) => {
+            coloum.map((ele, idx, ar) => {
                 let img = null
                 if (ele.state === 0) {
                     img = SINGLE.EMPTY
@@ -142,7 +143,7 @@ const SitCanvas = (props) => {
                     }
                 }
 
-                ctx.current.drawImage(img,idx * SET_WIDTH,index * SET_HEIGHT,  SET_WIDTH, SET_HEIGHT);
+                ctx.current.drawImage(img, idx * SET_WIDTH, index * SET_HEIGHT, SET_WIDTH, SET_HEIGHT);
             })
         })
     }, [sitData, SET_WIDTH, SET_HEIGHT])
@@ -162,34 +163,68 @@ const SitCanvas = (props) => {
                     currentSit.state = 1
                 } else if (currentSit.state === 6) {
                     currentSit.state = 5
-                    if(currentSit.position === 0) {
-                        sitData[pageY][pageX+1].state = 5
+                    if (currentSit.position === 0) {
+                        sitData[pageY][pageX + 1].state = 5
                     } else {
-                        sitData[pageY][pageX-1].state = 5
+                        sitData[pageY][pageX - 1].state = 5
                     }
                 }
             } else {
-                seledSit.push({...currentSit}) // 没选中则加入选中array
+                seledSit.push({ ...currentSit }) // 没选中则加入选中array
                 if (currentSit.state === 1) {
                     currentSit.state = 2
                 } else if (currentSit.state === 5) {
                     currentSit.state = 6
-                    if(currentSit.position === 0) {
-                        sitData[pageY][pageX+1].state = 6
+                    if (currentSit.position === 0) {
+                        sitData[pageY][pageX + 1].state = 6
                     } else {
-                        sitData[pageY][pageX-1].state = 6
+                        sitData[pageY][pageX - 1].state = 6
                     }
                 }
             }
-            setSeledSit([...seledSit], ()=>{
+            setSeledSit([...seledSit], () => {
                 debugger
                 getSeledSit(seledSit, sitData)
             })
             setSitData([...sitData])
         }
     }
+    let pinout = (e) => {
+        let scale = (parseFloat(canvas.current.style.getPropertyValue('--scale')) || 1)
+        if (scale < 1.8) {
+            scale += 0.1;
+            canvas.current.style.setProperty('--scale', `${scale}`)
+            SET_WIDTH = Math.floor(WIDTH * scale <= 5 ? 5 : WIDTH * scale)
+            SET_HEIGHT = Math.floor(HEIGHT * scale <= 5 ? 5 : HEIGHT * scale)
+            getZoom(scale)
+        }
+    }
+    let pinin = (e) => {
+        let scale = (parseFloat(canvas.current.style.getPropertyValue('--scale')) || 1)
+        if (scale > 1) {
+            scale -= 0.1
+            canvas.current.style.setProperty('--scale', `${scale}`)
+            SET_WIDTH = Math.floor(WIDTH * scale <= 5 ? 5 : WIDTH * scale)
+            SET_HEIGHT = Math.floor(HEIGHT * scale <= 5 ? 5 : HEIGHT * scale)
+            getZoom(scale)
+        }
+    }
+    return (
+        <Hammer
+            onPinchIn={pinin}
+            onPinchOut={pinout}
+            options=
+            {{
+                recognizers: {
+                    pinch: { enable: true }
+                }
+            }}
+        >
+            <ul>
+                <canvas ref={canvas} />
+            </ul >
+        </Hammer >
+    )
+}
 
-    return (<canvas ref={canvas} />)
- }
-
- export default SitCanvas
+export default SitCanvas
