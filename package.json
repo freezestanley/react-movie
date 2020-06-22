@@ -1,6 +1,5 @@
 {
   "name": "react-movie",
-  "private": false,
   "scripts": {
     "start": "PORT=10087 umi dev",
     "mock": "MOCK=true PORT=10087 umi dev",
