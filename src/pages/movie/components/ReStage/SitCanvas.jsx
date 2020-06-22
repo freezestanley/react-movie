@@ -61,7 +61,7 @@ const HEIGHT = 40
 let SET_WIDTH = 40
 let SET_HEIGHT = 40
 const SitCanvas = (props) => {
-    const { data, getZoom, getSeledSit } = props
+    const { data, getZoom, getSeledSit, getCanvasSize } = props
     const canvas = useRef(null)
     const ctx = useRef()
     const [seledSit, setSeledSit] = useXState([])
@@ -142,7 +142,8 @@ const SitCanvas = (props) => {
                         ele.position = 1
                     }
                 }
-
+                getCanvasSize({ width: canvas.current.width / 2, height: canvas.current.height / 2 })
+                console.log(canvas.current.height / 2, canvas.current.width / 2)
                 ctx.current.drawImage(img, idx * SET_WIDTH, index * SET_HEIGHT, SET_WIDTH, SET_HEIGHT);
             })
         })
@@ -221,7 +222,7 @@ const SitCanvas = (props) => {
             }}
         >
             <ul>
-                <canvas ref={canvas} />
+                <canvas ref={canvas} id='siteCanvas' />
             </ul >
         </Hammer >
     )

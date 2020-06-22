@@ -5,30 +5,30 @@
  *  choose: 获取选中的座位
  *    show: 控制Preview是否现实
  */
-import React, { useRef, useMemo } from 'react';
+import React, { useRef, useMemo, useEffect } from 'react';
 import styles from './style/index.less';
 import useDragger from '@/hooks/useDragger'
 
 
 export default function Preview(props) {
-  const {data, choose, show, Click } = props
+  const { data, choose, show, Click, offset, stageWidth, stageHeight, scale, canvasSize } = props
 
   const preview = useRef(null)
   const tips = useRef(null)
+  // console.log(screenRef && screenRef.current && screenRef.current.offsetWidth)
 
-
-// const SINGLE = {
-//     EMPTY: new Image(),     // 0
-//     UNSELED: singleUnSeled, // 1
-//     SELED: singleSeled, // 2
-//     FIX: singlefixSite, // 3
-//     SALED: singleSaled // 4
-// }
-// const MULT = {
-//     UNSELED: [ muUnseledLeft, muUnseledRight], // 5
-//     SELED: [muSeledLeft, muSeledRight], // 6
-//     SALED: [muSaledLeft, muSaledRight] // 7
-// }
+  // const SINGLE = {
+  //     EMPTY: new Image(),     // 0
+  //     UNSELED: singleUnSeled, // 1
+  //     SELED: singleSeled, // 2
+  //     FIX: singlefixSite, // 3
+  //     SALED: singleSaled // 4
+  // }
+  // const MULT = {
+  //     UNSELED: [ muUnseledLeft, muUnseledRight], // 5
+  //     SELED: [muSeledLeft, muSeledRight], // 6
+  //     SALED: [muSaledLeft, muSaledRight] // 7
+  // }
   const sitType = (e) => {  // 根据状态来现实座位的状态
     let type = null         // 默认是空
     if (e === 3 || e === 4 || e === 7) {
@@ -47,19 +47,19 @@ export default function Preview(props) {
     let state = false
     let result = []
     data.map((element, idx, arr) => {
-        let row = []
-        element.map((ele,i, ar) => {
-            if (state && ele.state >= 5) {
-                state = false
-            } else {
-                state = true
-                row.push(ele)
-            }
-        })
-        result.push(row)
+      let row = []
+      element.map((ele, i, ar) => {
+        if (state && ele.state >= 5) {
+          state = false
+        } else {
+          state = true
+          row.push(ele)
+        }
+      })
+      result.push(row)
     })
     return result
-}, [data])
+  }, [data])
 
 
   // const clickHandler = (e) => {
@@ -86,30 +86,44 @@ export default function Preview(props) {
   //   }
   // }
   // const [stop] = useDragger(tips, () => limitRage(preview, tips), [1,0,0], {moveLimit: true})
+  useEffect(() => {
+
+    if (offset) {
+      let heightRate = preview.current.offsetHeight / canvasSize.height;
+      let widthRate = preview.current.offsetWidth / canvasSize.width;
+      // console.log(canvasSize.width, canvasSize.height)
+      console.log(-offset.x * widthRate, -offset.y * heightRate)
+
+      tips.current.style.setProperty('left',
+        `${-offset.x * widthRate > 0 ? (-offset.x * widthRate + 50) : ((-offset.x + 50) * widthRate)}px`);
+      tips.current.style.setProperty('top',
+        `${-offset.y * heightRate > 0 ? (-offset.y * heightRate + 50) : ((-offset.y + 50) * heightRate)}px`);
+    }
+  }, [offset])
 
   return (
-    <div className={` ${styles.preview} `} style={{display: show ? 'block' : 'none' }}
-      ref = {preview}
-      onClick = {Click}
+    <div className={` ${styles.preview} `} style={{ display: show ? 'block' : 'none' }}
+      ref={preview}
+      onClick={Click}
     >
-      <b className={`${styles.tips}`} ref = {tips}></b>
-        {
-          sitFilter.map((element, idx) => {
-            return (
+      <b className={`${styles.tips}`} ref={tips}></b>
+      {
+        sitFilter.map((element, idx) => {
+          return (
             <div key={`${idx}${Math.random()}`}>
               {element.map((ele) => {
                 let block = sitType(ele.state)
                 return (
                   <div key={`${ele.id}${Math.random()}`}
-                    className = {`${block} ${ele.state >= 5 ? styles.loved : styles.single}`}
+                    className={`${block} ${ele.state >= 5 ? styles.loved : styles.single}`}
                   >
                   </div>
                 )
 
               })}
             </div>)
-          })
-        }
+        })
+      }
     </div>
   )
 }

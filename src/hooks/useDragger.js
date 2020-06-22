@@ -69,7 +69,7 @@ const useDragger = (target,
 
             target.current.style.setProperty('--transformX', `${currX}px`);
             target.current.style.setProperty('--transformY', `${currY}px`);
-            moveEvent(e, { size: re_size, x: currX, y: currY })
+            moveEvent(e, { size: re_size, x: currX, y: currY, moveX: moveX, moveY: moveY })
 
         }
     }
@@ -88,7 +88,7 @@ const useDragger = (target,
             }
             target.current.style.setProperty('--transformX', `${currX}px`);
             target.current.style.setProperty('--transformY', `${currY}px`);
-
+            console.log(currX, currY)
             endEvent(e, { size: re_size, x: currX, y: currY })
         }
     }

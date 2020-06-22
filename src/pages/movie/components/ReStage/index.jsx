@@ -33,6 +33,8 @@ const Stage = (props) => {
         content = useRef(null),     // 容器引用
         [state, dispatch] = useReducer(reducer, defaultState), // stage 私有reducer
         [isTouch, setTouch] = useXState(false),  // 是否触摸
+        [offset, setOffset] = useState(null),
+        [canvasSize, setCanvasSize] = useState(null),
         [reSitData, setReSiteData] = useState([...site])
 
     const [size, setSize] = useState(1)
@@ -94,16 +96,19 @@ const Stage = (props) => {
     const showPreview = () => {
         setTouch(true)
         window.clearTimeout(time)         // preview 显示
-        time = setTimeout(() => {
-            setTouch(false)     // 4秒后preview 隐藏
-        }, 1000)
+        // time = setTimeout(() => {
+        //     setTouch(false)     // 4秒后preview 隐藏
+        // }, 1000)
     }
     const moveHandler = (e, d) => {
         siteLine.current.style.setProperty('--transformY', `${d.y}px`);
         showPreview()
+        setOffset(d)
     }
     const endHandler = (e, d) => {
         siteLine.current.style.setProperty('--transformY', `${d.y}px`);
+        setOffset(d)
+
     }
 
     const [stop] = useDragger(screenRef, () => limitRage(content, innerStage), [1, 0, 0], { zoom: false, moveLimit: true }, startHandler, moveHandler, endHandler)
@@ -119,6 +124,10 @@ const Stage = (props) => {
         setReSiteData(sitdata)
         showPreview()
     }
+    const getCanvasSize = (canvasSize) => {
+        setCanvasSize(canvasSize)
+    }
+
     const clickHandler = (e) => {
         debugger
         showPreview()
@@ -131,8 +140,14 @@ const Stage = (props) => {
 
                 <Preview
                     data={reSitData}
-                    show={isTouch}
+                    show={true}
                     Click={clickHandler}
+                    rate={1.3}
+                    scale={size}
+                    offset={offset}
+                    canvasSize={canvasSize}
+                    stageWidth={screenRef && screenRef.current && screenRef.current.offsetWidth}
+                    stageHeight={screenRef && screenRef.current && screenRef.current.offsetHeight}
                 />
 
                 <div className={styles.screen} alt="屏幕方向"></div>
@@ -150,7 +165,7 @@ const Stage = (props) => {
                         <Context.Provider value={{ state, dispatch: dispatch }}>
                             <div ref={innerStage}
                                 className={styles.siteTable}>
-                                <SitCanvas data={site} getZoom={getCanvasZoom} getSeledSit={getSeledSit} />
+                                <SitCanvas data={site} getZoom={getCanvasZoom} getSeledSit={getSeledSit} getCanvasSize={getCanvasSize} />
                             </div>
                         </Context.Provider>
                     </div>
