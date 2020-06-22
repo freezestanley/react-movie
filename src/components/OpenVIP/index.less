@@ -1,0 +1,93 @@
+@vipBg: 106 / 356 * 100%;
+
+:global {
+  .open-vip {
+    position: relative;
+    margin: 20px 0;
+    padding-top: calc(@vipBg);
+    background: url('./img/vip-bg.png');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    .open-vip-cont {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      .t1 {
+        position: absolute;
+        font-size: 12px;
+        top: 5px;
+        right: 23%;
+
+        .vip-tip {
+          width: 16px;
+          height: 16px;
+          vertical-align: -3px;
+          margin-left: 5px;
+        }
+      }
+      .t-cont {
+        display: flex;
+        height: 100%;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px;
+        >div {
+          display: block;
+        }
+      }
+      .t2 {
+        display: inline-block;
+        background: var(--btn-bg);
+        margin-top: 8px;
+        padding: 3px 8px;
+        font-size: 13px;
+        border-top-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        color: #4D5369;
+      }
+      .t3 {
+        font-size: 16px;
+        font-weight: 500;
+        margin-top: 5px;
+      }
+      .t4 {
+        position: relative;
+        margin-top: 32px;
+        .t4-1 {
+          i {
+            font-size: 12px;
+          }
+        }
+        .time-limit {
+          position: absolute;
+          top: -22px;
+          left: 26px;
+        }
+        .open-vip-check {
+          margin-left: 10px;
+          vertical-align: 2px;
+          .za-checkbox__inner {
+            border-radius: 50%;
+            border-color: transparent;
+            border: none;
+            // border: solid 1px var(--dark);
+          }
+
+          &.za-checkbox--checked {
+            .za-checkbox__inner {
+              background: var(--btn-bg);
+              border-radius: 50%;
+              border-color: transparent;
+              &::before {
+                transition: all .1s cubic-bezier(.12,.4,.29,1.46) .05s
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

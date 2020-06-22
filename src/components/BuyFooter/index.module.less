@@ -1,0 +1,221 @@
+@import '~@/less/variable.less';
+.buyFooter{
+  z-index: 1001;
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  z-index: 2;
+  height: 67px;  
+  width: 100%;
+  background-color: @white;
+  padding-right: 162px;
+  box-shadow:0px -4px 12px 0px rgba(0,0,0,0.16),0px -4px 16px 0px rgba(0,33,69,0.16);
+  .btn{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width:162px;
+    height:77px;
+    background:linear-gradient(315deg,rgba(130,128,124,1) 0%,rgba(218,215,208,1) 100%);
+    box-shadow:0px -4px 12px 0px rgba(0,0,0,0.16),0px -4px 16px 0px rgba(0,33,69,0.16);
+    border-radius:24px 0px 0px 0px;
+    font-size: 19px;
+    text-align: center;
+    line-height: 67px;
+    color: @black;
+    &.active{
+      background:linear-gradient(322deg,rgba(166,124,56,1) 0%,rgba(234,209,149,1) 100%);
+      box-shadow:0px -4px 12px 0px rgba(0,0,0,0.16),0px -4px 16px 0px rgba(0,33,69,0.16);
+    }
+    .question{
+      margin-left: 2px;
+      width: 14px;
+      height: 14px;
+      position: relative;
+      top: -2px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+  .content{
+    padding: 15px;
+    text-align: right;
+    .total{
+      font-size: 12px;
+      line-height: 23px;
+      color: fade(@black, 40);
+      text-shadow:0px -4px 12px fade(@black, 16);
+      >i{
+        margin-left: 5px;
+        vertical-align: bottom;
+        color: @black;
+        font-style: normal;
+      }
+      >span{
+        margin-left: 5px;
+        font-size: 23px;
+        color: @black;
+        vertical-align: bottom;
+      }
+    }
+    .saleDetail{
+      margin-top: 2px;
+      height:12px;
+      font-size:10px;
+      font-weight:400;
+      color:rgba(18,24,43,1);
+      line-height:14px;
+      text-shadow:0px -4px 12px rgba(0,0,0,0.16);
+      .questionIcon{
+        position: relative;
+        top: -1.5px;
+        display: inline-block;
+        vertical-align: bottom;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        margin: 0 5px;
+      }
+    }
+  }
+  .home{
+    position: absolute;
+    left: 15px;
+    top: -9px;
+    width: 40px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    background-color: @white;
+    .homeIcon{
+      >svg{
+        position: relative;
+        top: -5px;
+        display: block;
+        width: 40px;
+        height: 40px;
+      }
+    }
+    >dd{
+      font-size: 12px;
+      color: @golden;
+      text-align: center;
+    }
+
+  }
+  .vipTip{
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    padding: 10px 13px;
+    border-radius: 4px;
+    font-size: 12px;
+    color: @white;
+    background-color: fade(@black, 80);
+    white-space: nowrap;
+    .anchor{
+      margin-left: 3px;
+    }
+    &:after{
+      position: absolute;
+      content: "";
+      display: block;
+      border: 6px solid fade(@black, 80);
+      border-bottom-color: transparent;
+      border-left-color: transparent;
+      border-right-color: transparent;
+      bottom: 0;
+      left: 50%;
+      transform: translate(-50%, 100%);
+    }
+  }
+}
+.payInfoBox{
+  position: relative;
+  padding: 0 15px 91px 15px;
+  background-color: @white;
+  font-weight:400;
+  border-radius:5px 5px 0px 0px;
+  .closeIcon{
+    top: 15px;
+    right: 15px;
+    position: absolute;
+    display: block;
+    width: 17px;
+    height: 17px;
+  }
+  >h2{
+    padding: 19px 0;
+    font-size: 17px;
+    font-weight: 500;
+    text-align: center;
+  }
+  .infoItem{
+    padding: 4px 0;
+    font-size:15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    .label{
+      color:fade(@black, 50);
+      line-height:21px;
+      white-space: nowrap;
+    }
+    .valueBox{
+      padding-left: 10px;
+      color:fade(@black, 100);
+      line-height:21px;
+      .prompt{
+        display: inline-block;
+        height: 13px;
+        line-height: 13px;
+        vertical-align: middle;
+        font-size: 10px;
+        color: @golden-4f;
+        background-color: fade(@golden-4f, 10);
+        border-radius: 9px;
+        margin-right: 9px;
+        padding: 0 6px;
+      }
+      .value{
+        display: inline-block;
+        vertical-align: middle;
+        >i{
+          font-size: 10px;
+          margin-right: 2px;
+        }
+        font-size: 15px;
+        word-break: break-all;
+        white-space: wrap;
+      }
+    }
+  }
+  .reminderTip{
+    margin: 20px 0;
+    background-color: fade(@golden-4f, 10);
+    height: 26px;
+    border-radius: 15px;
+    line-height: 26px;
+    font-size: 11px;
+    color: @grey-99;
+    text-align: center;
+    .small{
+      position: relative;
+      margin-right: 2px;
+      top: -1px;
+      display: inline-block;
+      width: 13px;
+      height: 13px;
+      vertical-align: middle;
+    }
+    .logo{
+      position: relative;
+      top: -1.5px;
+      display: inline-block;
+      height: 12px;
+      vertical-align: middle;
+      margin: 0 2px;
+    }
+  }
+}

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="40px" height="42px" viewBox="0 0 40 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 64 (93537) - https://sketch.com -->
+    <title>路径备份 3</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <filter x="-8.2%" y="-66.2%" width="120.7%" height="222.1%" filterUnits="objectBoundingBox" id="filter-1">
+            <feOffset dx="0" dy="-4" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="6" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.16 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+        <radialGradient cx="76.3014809%" cy="11.0896014%" fx="76.3014809%" fy="11.0896014%" r="109.924461%" id="radialGradient-2">
+            <stop stop-color="#EAD195" offset="0%"></stop>
+            <stop stop-color="#A67C38" offset="100%"></stop>
+        </radialGradient>
+    </defs>
+    <g id="5.12" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="商详-优惠明细" transform="translate(-15.000000, -727.000000)" fill="url(#radialGradient-2)" fill-rule="nonzero">
+            <g id="编组-5备份" filter="url(#filter-1)" transform="translate(0.000000, 735.000000)">
+                <g id="编组-2">
+                    <path d="M34.0789267,7.87433262 L26.2340531,15.321804 C25.9417076,15.5903648 25.9203538,16.0442628 26.1861953,16.3390728 C26.4520367,16.6338827 26.9058074,16.6595217 27.2031787,16.3965343 L27.3279221,16.2781204 L27.3279221,24.0511176 C27.3274439,24.4352194 27.4797246,24.803753 27.7512136,25.0755231 C28.0227025,25.3472931 28.3911234,25.5 28.7753058,25.5 L32.9873094,25.5 L32.9873094,21.1434475 C32.9869507,20.8729064 33.0942246,20.6133297 33.2854817,20.4219436 C33.4767388,20.2305576 33.736275,20.1230768 34.0068728,20.1231966 L35.9888067,20.1231966 C36.2594046,20.1230768 36.5189407,20.2305576 36.7101978,20.4219436 C36.9014549,20.6133297 37.0087289,20.8729064 37.0083701,21.1434475 L37.0083701,25.5 L41.3203486,25.5 C41.704609,25.5 42.0731457,25.3474654 42.3447321,25.0756824 C42.6163184,24.8038994 42.7686609,24.4352974 42.7681826,24.0511176 L42.7681826,16.3731217 C43.0897234,16.6639788 43.5459149,16.6419168 43.8134152,16.3438559 C43.9420744,16.2014095 44.0088532,16.0136912 43.999056,15.822011 C43.9892589,15.6303308 43.9036886,15.4503961 43.7611761,15.321804 L36.0189793,7.87478286 C35.4686385,7.37522246 34.6292675,7.37522246 34.0789267,7.87433262 Z" id="路径备份-3" transform="translate(35.000000, 16.500028) scale(-1, 1) translate(-35.000000, -16.500028) "></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

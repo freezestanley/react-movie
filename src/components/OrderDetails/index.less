@@ -1,0 +1,111 @@
+.orderdetail{
+  margin: 5px 10px 5px 10px ;
+  // padding-bottom: 30px;
+  height: 100%;;
+  background:rgba(255,255,255,1);
+  border-radius:8px;
+  overflow: hidden;
+  .orderdetail_title {
+    overflow:hidden;  
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    margin-top: 20px;
+    margin-left: 15px;
+    width:220px;
+    height:20px;
+    font-size:15px;
+    font-family:PingFangSC-Medium,PingFang SC;
+    font-weight:500;
+    color:rgba(0,0,0,1);
+    line-height:20px;
+  }
+  .orderdetail_container{
+    margin-top: 15px;
+    margin-right: 15px;
+    display: flex;
+    flex-flow: row wrap;
+    align-content: flex-start;
+    margin-left: 15px;
+    padding-bottom: 20px;
+    // padding-right: 15px;;
+    >div{
+      flex :0 ,0, 100%;
+      display: flex;
+      width:100%;
+      justify-content: space-between;
+      height: 30px;
+      font-size:15px;
+      font-family:PingFangSC-Regular,PingFang SC;
+      font-weight:400;
+      color:rgba(0,0,0,0.5);
+      line-height:30px;
+      span:first-child{
+        width: 100px;
+      }
+      span:last-child{
+        overflow:hidden;  
+        text-overflow:ellipsis;
+        white-space:wrap;
+        font-size:15px;
+        font-family:PingFangSC-Regular,PingFang SC;
+        font-weight:400;
+        color:rgba(0,0,0,1);
+        line-height:30px;
+      }
+    }
+  }
+  .ShowMore{
+    height: 82px;
+    >span{
+     display: block;
+     width: 100%;
+      height:17px;
+      font-size:12px;
+      font-family:PingFangSC-Regular,PingFang SC;
+      font-weight:400;
+      color:rgba(0,0,0,0.5);
+      line-height:17px;
+     text-align: center;
+     >img{
+       margin-left: 2px;
+       margin-bottom: 1px;
+
+     }
+    }
+    >div{
+      margin: 12px 10px 5px 10px;
+      height:40px;
+      background:linear-gradient(322deg,rgba(166,124,56,1) 0%,rgba(234,209,149,1) 100%);
+      border-radius:4px;
+      text-align: center;
+      font-size:17px;
+      font-family:PingFangSC-Medium,PingFang SC;
+      font-weight:500;
+      color:rgba(0,0,0,1);
+      line-height:40px;
+    }
+
+  }
+  .concat{
+    margin-top: 10px;
+    border-top:1px #E1E1E1 solid;
+    line-height: 40px;
+    height:57px;
+    font-size:15px;
+    font-family:PingFangSC-Medium,PingFang SC;
+    font-weight:500;
+    color:rgba(0,0,0,1);
+    line-height:15px;
+    text-align:center;
+    padding-top: 15px;
+    overflow: hidden;
+    >img{
+      display: inline-block;
+      vertical-align: middle;
+    }
+    >span{
+
+      margin-left: 10px;
+    }
+  }
+}

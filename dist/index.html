@@ -1,0 +1,37 @@
+<!DOCTYPE html><html><head><link rel="manifest" href="/manifest.json"><link rel="stylesheet" href="/umi.css"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"><title>盎司一起</title><script>(window.onresize = window.__setFontSize__  = function(){
+    document.documentElement.style.fontSize = Math.min(750, Math.max(document.documentElement.clientWidth, 320) ) / 375 * 14 + 'px'}
+  )()</script><!-- <link rel="stylesheet" href="https://nstatic.zhongan.com/za-infernal-wall/1.0.9/superCode.css" />
+  <script type="text/javascript" src="https://nstatic.zhongan.com/za-infernal-wall/1.0.9/superCode.js"></script> --><link rel="stylesheet" href="https://staticdaily.zhongan.com/website/paas/public/supercode/1.0.4/supercode.css"><script type="text/javascript" src="https://staticdaily.zhongan.com/website/paas/public/supercode/1.0.4/supercode.js"></script><script type="text/javascript" src="https://res2.wx.qq.com/open/js/jweixin-1.6.0.js"></script><script>function loadScript(url, callback) {
+      var head = document.getElementsByTagName('head')[0];
+      var script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.src = url;
+      script.crossorigin = 'anonymous';
+      script.onload = callback;
+      head.appendChild(script);
+    }
+    function initMonitorJS() {
+      window._SERAPH_ = MonitorJS && new MonitorJS({
+        siteId: "f1ded8ba627cc297", //站点ID，六翼分配
+        jsError: true, //默认开启js 错误信息
+        promiseError: true, // 默认开启promise 错误信息
+        resourceError: true, // 默认开启 资源加载失败信息
+        ajaxError: true, // 默认开启ajax 等请求加载失败信息  但无法收集跨域信息错误 如收集跨域相关需开启ajaxCross:true
+        extendsInfo: {
+          //扩展信息 可选
+          pageInfo: "盎司会员",
+          getDynamic: () => {
+            //动态获取相关信息
+            return {
+              title: document.title
+            };
+          }
+        }
+      });
+    }
+    if (/vip-(test|pre).zhongan.io$/.test(window.location.origin)) {
+      loadScript('https://seraph-js-sdk-test.zhongan.io/js/monitor.1.0.0.js', initMonitorJS)
+    }
+    if (/vip.zhongan.io$/.test(window.location.origin)) {
+      loadScript('https://seraph-js-sdk.zhongan.io/js/monitor.1.0.0.js', initMonitorJS)
+    }</script><script>window.routerBase = "/";</script><script async src="/pwacompat.min.js"></script></head><body><div id="root"></div><script src="/umi.js"></script></body></html>

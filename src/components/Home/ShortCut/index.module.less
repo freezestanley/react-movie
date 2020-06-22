@@ -1,0 +1,52 @@
+@import '~@/less/variable.less';
+.shortCut{
+  padding: 15px 0px;
+  overflow: hidden;
+  overflow-y: auto;
+  font-size: 0;
+  .inner{
+    margin: 0 -5px;
+  }
+  dl.item{
+    margin-bottom: 10px;
+    width: 20%;
+    display: inline-block;
+    vertical-align: top;
+    dt{
+      margin: 0 auto;
+      position: relative;
+      width: 43px;
+      height: 43px;
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      .cornerBox{
+        position: absolute;
+        right: 0;
+        top: 30%;
+        transform: translate(90%, -100%);
+      }
+    }
+    dd{
+      h2{
+        margin-top: 7px;
+        height:13px;
+        font-size:12px;
+        font-family:PingFangSC-Regular,PingFang SC;
+        font-weight:400;
+        color:@black-2b;
+        line-height:13px;
+        text-align: center;
+      }
+      .subTitle{
+        margin-top: 3px;
+        height:13px;
+        font-size:10px;
+        font-family:PingFangSC-Regular,PingFang SC;
+        font-weight:400;
+        color: fade(@black, 40);
+        line-height:13px;
+        text-align: center;
+      }
+    }
+  }
+}

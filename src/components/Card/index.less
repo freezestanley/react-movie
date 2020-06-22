@@ -1,0 +1,38 @@
+:global {
+  .z_card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 16px 18px;
+    margin: 6px 0;
+
+    .z_card_head {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .z_card_title {
+      font-size: 16px;
+      font-weight: 500;
+    }
+  }
+
+  * {
+    >.z_card:nth-child(1) {
+      margin-top: 0;
+    }
+  }
+  .topup__note {
+    p {
+      display: flex;
+      color: rgba(0, 0, 0, 0.5);
+      margin-bottom: 8px;
+      font-size: 14px;
+      i {
+        width: 24px;
+        min-width: 24px;
+        font-style: normal;
+      }
+    }
+  }
+}

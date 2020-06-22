@@ -1,0 +1,59 @@
+{
+  "name": "react-movie",
+  "private": true,
+  "scripts": {
+    "start": "PORT=10087 umi dev",
+    "mock": "MOCK=true PORT=10087 umi dev",
+    "build": "umi build",
+    "test": "umi test",
+    "lint": "eslint {src,mock,tests}/**/*.{js,jsx} --fix",
+    "precommit": "lint-staged"
+  },
+  "dependencies": {
+    "classnames": "^2.2.6",
+    "copy-to-clipboard": "^3.3.1",
+    "dayjs": "^1.8.27",
+    "dva": "^2.6.0-beta.6",
+    "jquery": "^3.5.1",
+    "numeral": "^2.0.6",
+    "pad": "^3.2.0",
+    "react": "^16.8.6",
+    "react-copy-to-clipboard": "^5.0.2",
+    "react-countdown": "^2.2.1",
+    "react-dom": "^16.8.6",
+    "react-draggable": "^4.4.2",
+    "react-helmet": "^6.0.0",
+    "react-slick": "^0.26.1",
+    "slick-carousel": "^1.8.1",
+    "vconsole": "^3.3.4",
+    "zarm": "^2.2.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^9.0.0",
+    "eslint": "^5.4.0",
+    "eslint-config-umi": "^1.4.0",
+    "eslint-plugin-flowtype": "^2.50.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-react": "^7.11.1",
+    "husky": "^0.14.3",
+    "lint-staged": "^7.2.2",
+    "react-test-renderer": "^16.7.0",
+    "umi": "^2.7.7",
+    "umi-plugin-react": "^1.15.2"
+  },
+  "lint-staged": {
+    "linters": {
+      "*.{js,jsx}": [
+        "eslint --fix",
+        "git add"
+      ]
+    },
+    "ignore": [
+      "dist/**/*.js"
+    ]
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  }
+}

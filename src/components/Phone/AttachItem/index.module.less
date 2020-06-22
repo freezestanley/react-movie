@@ -1,0 +1,73 @@
+@import '~@/less/variable.less';
+.attachItem{
+  position: relative;
+  height: 72px;
+  overflow-y: hidden;
+  background-color: fade(@grey-bc, 12);
+  border-radius: 4px;
+  margin-top: 10px;
+  .priceBox{
+    position: relative;
+    float: left;
+    width: 104px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    >h2{
+      margin-top: -3px;
+      font-size:20px;
+      font-weight:500;
+      color:@golden-42;
+    }
+    .originPrice{
+      margin-top: 4px;
+      font-size: 10px;
+      color: fade(@black, 40);
+      >i{
+        margin: 0 2px;
+      }
+    }
+    &:after{
+      display: block;
+      content: "";
+      width: 1PX;
+      position: absolute;
+      top: 12px;
+      bottom: 9px;
+      right: 0;
+      background-color: @grey-e1;
+    }
+  }
+  .infoBox{
+    margin-left: 104px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 0 15px;
+    >h2{
+      font-size:15px;
+      font-weight:500;
+      color:@black;
+    }
+    .productItemName{
+      margin-top: 7px;
+      font-size: 10px;
+      color: fade(@black, 40);
+    }
+
+  }
+  &.active {
+    background: linear-gradient(180deg,rgba(243,202,135,0.12) 0%,rgba(226,154,79,0.12) 100%);
+    border: 1px solid var(--dark);
+    .checkIcon {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 23px;
+    }
+  }
+}

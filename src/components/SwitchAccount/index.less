@@ -1,0 +1,62 @@
+:global {
+  .z_switch_account {
+    position: relative;
+    margin-bottom: 30px;
+    .z_switch_head {
+      margin-bottom: 5px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .z_switch_account_input {
+      background: var(--gray3);
+      border-radius: 4px;
+      height: 44px;
+      line-height: 44px;
+      padding: 0 10px;
+      &.w100 {
+        .za-input {
+          width: 100%;
+        }
+      }
+      .za-input {
+        display: inline-block;
+        width: calc(100% - 85px);
+        height: 44px;
+        // background: #aaa;
+      }
+      .z_switch {
+        display: inline-block;
+        width: 85px;
+        height: 100%;
+        text-align: right;
+        img {
+          width: 16px;
+          vertical-align: -2px;
+          margin-right: 4px;
+        }
+        span {
+          vertical-align: 1px;
+          font-size: 12px;
+        }
+      }
+    }
+    .z_tip {
+      position: absolute;
+      width: 100%;
+      font-size: 12px;
+      text-align: right;
+      color: var(--gray2);
+      margin-top: 3px;
+    }
+    .z_qq_info {
+      img {
+        width: 16px;
+        vertical-align: -3px;
+      }
+      span {
+        margin-left: 5px;
+        font-size: 12px;
+      }
+    }
+  }
+}

@@ -1,0 +1,72 @@
+.site{
+    background: url('../images/1.png') no-repeat;
+    background-size: 100% 100%;
+}
+.sited{
+    background: url('../images/11.png') no-repeat;
+    background-size: 100% 100%;
+}
+.empty {
+    background: url('../images/2.png') no-repeat;
+    background-size: 100% 100%;
+}
+.fixed {
+    background: url('../images/3.png') no-repeat;
+    background-size: 100% 100%;
+}
+
+.loveleft{
+    background: url('../images/4.png') no-repeat;
+    background-size: 100% 100%;
+}
+.loveright{
+    background: url('../images/5.png') no-repeat;
+    background-size: 100% 100%;
+}
+.lovedleft{
+    background: url('../images/6.png') no-repeat;
+    background-size: 100% 100%;
+}
+.lovedright{
+    background: url('../images/7.png') no-repeat;
+    background-size: 100% 100%;
+}
+.unlovedleft{
+    background: url('../images/12.png') no-repeat;
+    background-size: 100% 100%;
+}
+.unlovedright{
+    background: url('../images/13.png') no-repeat;
+    background-size: 100% 100%;
+}
+.detail{
+    display: flex;
+    font-size: 12px;
+    justify-content: center;
+    padding: 8px 10px;
+    
+    & > div{
+        line-height: 30px;
+        vertical-align: middle;
+        height: 30px;
+        margin-right: 15px;
+        color: #999;
+    }
+    .empty,.sited,.site,.fixed{
+        display: inline-block;
+        width: 20PX;
+        height: 20PX;
+    }
+    .love{
+        width: 40PX;
+        height: 20PX;
+        display: inline-block;
+        background: url('../images/4.png') no-repeat,url('../images/5.png') no-repeat;
+        background-position: top left,top right;
+        background-size: 50%;
+    }
+    .empty,.sited,.site,.fixed,.love{
+        margin-right: 2px;
+        vertical-align: text-bottom;
+    }
+}
