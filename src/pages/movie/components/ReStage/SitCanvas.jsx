@@ -68,29 +68,11 @@ const SitCanvas = (props) => {
     const [sitData, setSitData] = useState(data)
     let isMult = true
 
-    // const [stop] = useZoom(canvas,
-    //     (e, { size }) => {
-    //         console.log(size)
-    //         getZoom(size)
-    //     }, (e, { size }) => {
-    //         SET_WIDTH = Math.floor(WIDTH * size <= 5 ? 5 : WIDTH * size)
-    //         SET_HEIGHT = Math.floor(HEIGHT * size <= 5 ? 5 : HEIGHT * size)
-    //         getZoom(size)
-    //     }, (e, { size }) => {
-    //         SET_WIDTH = Math.floor(WIDTH * size <= 5 ? 5 : WIDTH * size)
-    //         SET_HEIGHT = Math.floor(HEIGHT * size <= 5 ? 5 : HEIGHT * size)
-    //         getZoom(size)
-    //     })
-
     useEffect(() => {
         canvas.current.addEventListener('click', clickHandler, {
             passive: false
         })
-    }, [])
-
-    // useEffect(() => {
-    //     setSitData([...data])
-    // }, [data])
+    }, [clickHandler])
 
     useEffect(() => {
         ctx.current = canvas.current.getContext('2d')
