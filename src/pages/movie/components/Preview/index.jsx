@@ -91,14 +91,14 @@ export default function Preview(props) {
     if (offset) {
       let heightRate = preview.current.offsetHeight / canvasSize.height;
       let widthRate = preview.current.offsetWidth / canvasSize.width;
-      console.log(-offset.x * widthRate, -offset.y * heightRate)
+      // console.log(-offset.x * widthRate, -offset.y * heightRate)
 
       tips.current.style.setProperty('left',
         `${-offset.x * widthRate}px`);
       tips.current.style.setProperty('top',
         `${-offset.y * heightRate}px`);
     }
-  }, [offset, scale])
+  }, [canvasSize.height, canvasSize.width, offset, scale])
 
   return (
     <div className={` ${styles.preview} `} style={{ display: show ? 'block' : 'none' }}

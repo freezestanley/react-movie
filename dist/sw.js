@@ -15,10 +15,10 @@ importScripts("/workbox-v3.6.3/workbox-sw.js");
 workbox.setConfig({modulePathPrefix: "/workbox-v3.6.3"});
 
 importScripts(
-  "/precache-manifest.cae10e6fae2bf5e9e639cde49846a6ff.js"
+  "/precache-manifest.fa6645bdefc41b889d2c793dfc6395c8.js"
 );
 
-workbox.core.setCacheNameDetails({prefix: "ants-app"});
+workbox.core.setCacheNameDetails({prefix: "react-movie"});
 
 workbox.skipWaiting();
 workbox.clientsClaim();
