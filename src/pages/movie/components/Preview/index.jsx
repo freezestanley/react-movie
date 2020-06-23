@@ -11,7 +11,7 @@ import useDragger from '@/hooks/useDragger'
 
 
 export default function Preview(props) {
-  const { data, choose, show, Click, offset, stageWidth, stageHeight, scale, canvasSize } = props
+  const { data, choose, show, Click, offset, scale, canvasSize } = props
 
   const preview = useRef(null)
   const tips = useRef(null)
@@ -87,19 +87,18 @@ export default function Preview(props) {
   // }
   // const [stop] = useDragger(tips, () => limitRage(preview, tips), [1,0,0], {moveLimit: true})
   useEffect(() => {
-
+    tips.current.style.setProperty('transform', `scale(${1 / scale})`)
     if (offset) {
       let heightRate = preview.current.offsetHeight / canvasSize.height;
       let widthRate = preview.current.offsetWidth / canvasSize.width;
-      // console.log(canvasSize.width, canvasSize.height)
       console.log(-offset.x * widthRate, -offset.y * heightRate)
 
       tips.current.style.setProperty('left',
-        `${-offset.x * widthRate > 0 ? (-offset.x * widthRate + 50) : ((-offset.x + 50) * widthRate)}px`);
+        `${-offset.x * widthRate}px`);
       tips.current.style.setProperty('top',
-        `${-offset.y * heightRate > 0 ? (-offset.y * heightRate + 50) : ((-offset.y + 50) * heightRate)}px`);
+        `${-offset.y * heightRate}px`);
     }
-  }, [offset])
+  }, [offset, scale])
 
   return (
     <div className={` ${styles.preview} `} style={{ display: show ? 'block' : 'none' }}

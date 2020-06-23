@@ -44,16 +44,16 @@ const useDragger = (target,
         if (!e.touches[1]) {
             pageX = Math.floor(e.touches[0].pageX)
             pageY = Math.floor(e.touches[0].pageY)
-            currX = Math.floor(parseInt(target.current.style.getPropertyValue('--transformX'))) || 0;
-            currY = Math.floor(parseInt(target.current.style.getPropertyValue('--transformY'))) || 0;
+            currX = Math.floor(parseFloat(target.current.style.getPropertyValue('--transformX'))) || 0;
+            currY = Math.floor(parseFloat(target.current.style.getPropertyValue('--transformY'))) || 0;
             startEvent(e, { size: re_size, x: currX, y: currY })
 
         }
     }
     let touchMoveHandler = function (e) {
         if (!e.touches[1]) {
-            currX = Math.floor(parseInt(target.current.style.getPropertyValue('--transformX'))) || 0;
-            currY = Math.floor(parseInt(target.current.style.getPropertyValue('--transformY'))) || 0;
+            currX = Math.floor(parseFloat(target.current.style.getPropertyValue('--transformX'))) || 0;
+            currY = Math.floor(parseFloat(target.current.style.getPropertyValue('--transformY'))) || 0;
             moveX = Math.floor(e.touches[0].pageX - pageX)
             moveY = Math.floor(e.touches[0].pageY - pageY)
             pageX = Math.floor(e.touches[0].pageX)
@@ -79,8 +79,8 @@ const useDragger = (target,
             re_size = target.current.style.getPropertyValue('--scale')
             re_size = re_size >= 1.8 ? 1.8 : re_size <= .7 ? .7 : re_size
 
-            currX = Math.floor(parseInt(target.current.style.getPropertyValue('--transformX'))) || 0;
-            currY = Math.floor(parseInt(target.current.style.getPropertyValue('--transformY'))) || 0;
+            currX = Math.floor(parseFloat(target.current.style.getPropertyValue('--transformX'))) || 0;
+            currY = Math.floor(parseFloat(target.current.style.getPropertyValue('--transformY'))) || 0;
             if (limit) {
                 let rage = limit()
                 currX = (currX >= rage.maxX) ? rage.maxX : (currX <= rage.minX) ? rage.minX : currX

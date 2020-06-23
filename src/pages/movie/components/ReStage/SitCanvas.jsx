@@ -184,9 +184,13 @@ const SitCanvas = (props) => {
                 }
             }
             setSeledSit([...seledSit], () => {
-                debugger
                 getSeledSit(seledSit, sitData)
             })
+            let scale = (parseFloat(canvas.current.style.getPropertyValue('--scale')) || 1)
+            scale = 1.8;
+            canvas.current.style.setProperty('--scale', `${scale}`)
+            SET_WIDTH = Math.floor(WIDTH * scale <= 5 ? 5 : WIDTH * scale)
+            SET_HEIGHT = Math.floor(HEIGHT * scale <= 5 ? 5 : HEIGHT * scale)
             setSitData([...sitData])
         }
     }

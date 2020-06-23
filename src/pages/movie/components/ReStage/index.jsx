@@ -74,7 +74,7 @@ const Stage = (props) => {
     // }, [site])
 
 
-    let limitRage = (content, substance, limit = 80) => {    // 获取容器拖动的最大区域
+    let limitRage = (content, substance, limit = 0) => {    // 获取容器拖动的最大区域
         let contentRect = content.current.getClientRects()
         let innerRect = substance.current.getClientRects()
         return {
@@ -120,6 +120,7 @@ const Stage = (props) => {
     }
 
     const getSeledSit = (sit, sitdata) => {
+        setSize(1.8)
         siteEvent(sit)
         setReSiteData(sitdata)
         showPreview()
@@ -129,7 +130,7 @@ const Stage = (props) => {
     }
 
     const clickHandler = (e) => {
-        debugger
+        setSize(1.8)
         showPreview()
     }
 
@@ -142,12 +143,9 @@ const Stage = (props) => {
                     data={reSitData}
                     show={true}
                     Click={clickHandler}
-                    rate={1.3}
                     scale={size}
                     offset={offset}
                     canvasSize={canvasSize}
-                    stageWidth={screenRef && screenRef.current && screenRef.current.offsetWidth}
-                    stageHeight={screenRef && screenRef.current && screenRef.current.offsetHeight}
                 />
 
                 <div className={styles.screen} alt="屏幕方向"></div>
