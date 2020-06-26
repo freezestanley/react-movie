@@ -19,9 +19,8 @@ export default function Preview(props) {
   useEffect(()=>{
     // console.log(move)
     if(!move) return
-    let rate = preview.current.getClientRects()[0].width / tips.current.getClientRects()[0].width
-    tips.current.style.setProperty('--transformX', `${-move.x/rate}px`);
-    tips.current.style.setProperty('--transformY', `${-move.y/rate}px`);
+    tips.current.style.setProperty('--transformX', `${-move.x/3.5}px`);
+    tips.current.style.setProperty('--transformY', `${-move.y/3.5}px`);
   }, [move])
 
   return (
