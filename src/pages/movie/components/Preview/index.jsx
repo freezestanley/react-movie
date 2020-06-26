@@ -19,8 +19,10 @@ export default function Preview(props) {
   useEffect(()=>{
     // console.log(move)
     if(!move) return
-    tips.current.style.setProperty('--transformX', `${-move.x/3.5}px`);
-    tips.current.style.setProperty('--transformY', `${-move.y/3.5}px`);
+    let x = 
+    let y = 
+    tips.current.style.setProperty('--transformX', `${-move.x/3.8}px`);
+    tips.current.style.setProperty('--transformY', `${-move.y/3.8}px`);
   }, [move])
 
   return (
