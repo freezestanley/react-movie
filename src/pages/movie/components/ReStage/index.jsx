@@ -21,6 +21,64 @@ import useDragger from '@/hooks/useDragger'
 import useXState from '@/hooks/useXState'
 import SitCanvas from './SitCanvas'
 
+import SeaCanvas from '@/pages/movie/components/Preview/seaCanvas'
+
+
+
+import singleSite from './images/1.png'
+import singleEmptySite from './images/2.png'
+import fixSingleSite from './images/3.png'
+import saledSite from './images/11.png'
+
+import muliUnseledLeft from './images/4.png'
+import muliUnseledRight from './images/5.png'
+
+import muliSeledLeft from './images/6.png'
+import muliSeledRight from './images/7.png'
+
+import muliSaledLeft from './images/12.png'
+import muliSaledRight from './images/13.png'
+
+const singleSeled = new Image()
+singleSeled.src = singleSite
+const singleUnSeled = new Image()
+singleUnSeled.src = singleEmptySite
+const singlefixSite = new Image()
+singlefixSite.src = fixSingleSite
+const singleSaled = new Image()
+singleSaled.src = saledSite
+
+const muUnseledLeft = new Image()
+muUnseledLeft.src = muliUnseledLeft
+const muUnseledRight = new Image()
+muUnseledRight.src = muliUnseledRight
+
+const muSeledLeft = new Image()
+muSeledLeft.src = muliSeledLeft
+const muSeledRight = new Image()
+muSeledRight.src = muliSeledRight
+
+const muSaledLeft = new Image()
+muSaledLeft.src = muliSaledLeft
+const muSaledRight = new Image()
+muSaledRight.src = muliSaledRight
+
+const SINGLE = {
+    EMPTY: new Image(),     // 0
+    UNSELED: singleUnSeled, // 1
+    SELED: singleSeled, // 2
+    FIX: singlefixSite, // 3
+    SALED: singleSaled // 4
+}
+const MULT = {
+    UNSELED: [ muUnseledLeft, muUnseledRight], // 5
+    SELED: [muSeledLeft, muSeledRight], // 6
+    SALED: [muSaledLeft, muSaledRight] // 7
+}
+
+
+
+
 export const Context = createContext(null) // 私有state
 let time = null
 const Stage = (props) => {
@@ -36,16 +94,13 @@ const Stage = (props) => {
         [reSitData, setReSiteData] = useState([...site])
         
     const [ size, setSize] = useState(1)
-    
+    const [move, setMove] = useState()
     
     useEffect(()=>{
         siteEvent(state.value)  // 获取选中的座位信息
     }, [state, siteEvent])
 
     useEffect(()=>{ // 渲染后屏幕缩放
-        // let rateW = (content.current.getClientRects()[0].width < innerStage.current.getClientRects()[0].width) ? (content.current.getClientRects()[0].width / (innerStage.current.getClientRects()[0].width+100)) : 1
-        // let rateH = (content.current.getClientRects()[0].height < innerStage.current.getClientRects()[0].height) ? (content.current.getClientRects()[0].height / (innerStage.current.getClientRects()[0].height+100)) : 1
-        // let rate = rateW <= rateH ? rateW : rateH
         stageRef.current.addEventListener('touchmove', (e)=>{
             e.preventDefault()
         }, {
@@ -53,25 +108,6 @@ const Stage = (props) => {
         })
     }, [])
 
-    // let sitFilter = useMemo(() => { // data数据过滤 过滤 情人座位。连续4，4 =》 4
-    //     let state = false
-    //     let result = []
-    //     site.map((element, idx, arr) => {
-    //         let row = []
-    //         element.map((ele,i, ar) => {
-    //             if (state && ele.state === 4) {
-    //                 state = false
-    //             } else {
-    //                 state = true
-    //                 row.push(ele)
-    //             }
-    //         })
-    //         result.push(row)
-    //     })
-    //     return result
-    // }, [site])
-
-    
     let limitRage = (content, substance, limit = 80) => {    // 获取容器拖动的最大区域
         let contentRect = content.current.getClientRects()
         let innerRect = substance.current.getClientRects()
@@ -101,6 +137,7 @@ const Stage = (props) => {
     const moveHandler = (e, d) => {
         siteLine.current.style.setProperty('--transformY', `${d.y}px`);
         showPreview()
+        setMove({...d})
     }
     const endHandler = (e, d) => {
         siteLine.current.style.setProperty('--transformY', `${d.y}px`);
@@ -117,11 +154,10 @@ const Stage = (props) => {
 
     const getSeledSit = (sit, sitdata) => {
         siteEvent(sit)
-        setReSiteData(sitdata)
+        setReSiteData([...sitdata])
         showPreview()
     }
     const clickHandler = (e) => {
-        debugger
         showPreview()
     }
    
@@ -134,6 +170,7 @@ const Stage = (props) => {
                         data = {reSitData}
                         show = {isTouch}
                         Click = {clickHandler} 
+                        move = {move}
                     />
 
                     <div className={styles.screen} alt="屏幕方向"></div>
@@ -151,7 +188,12 @@ const Stage = (props) => {
                         <Context.Provider value={{state, dispatch: dispatch}}>
                             <div ref = {innerStage}
                                 className={styles.siteTable}>
-                                    <SitCanvas data={site} getZoom = {getCanvasZoom} getSeledSit = {getSeledSit}/>
+                           
+                                    <SitCanvas 
+                                        data={site} 
+                                        getZoom = {getCanvasZoom} 
+                                        getSeledSit = {getSeledSit}
+                                    />
                             </div>
                         </Context.Provider>
                     </div>

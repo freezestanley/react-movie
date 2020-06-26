@@ -87,9 +87,6 @@ const SitCanvas = (props) => {
         })
     }, [])
 
-    // useEffect(() => {
-    //     setSitData([...data])
-    // }, [data])
 
     useEffect(() => {
         ctx.current = canvas.current.getContext('2d')
@@ -97,8 +94,8 @@ const SitCanvas = (props) => {
         canvas.current.height = (SET_HEIGHT * data.length)
         canvas.current.style.width = `${canvas.current.width / 2}px`
         canvas.current.style.height = `${canvas.current.height / 2}px`
-        sitData.map((coloum, index, arr)=> {
-            coloum.map((ele, idx, ar) =>{
+        sitData.map((coloum, index)=> {
+            coloum.map((ele, idx) =>{
                 let img = null
                 if (ele.state === 0) {
                     img = SINGLE.EMPTY
@@ -153,39 +150,48 @@ const SitCanvas = (props) => {
         let pageX = Math.floor((e.pageX - offset.left) / (SET_WIDTH / 2))
         let pageY = Math.floor((e.pageY - offset.top) / (SET_HEIGHT / 2))
         let currentSit = sitData[pageY][pageX]
+
         if (currentSit) {
-            let idx = seledSit.findIndex(ele => currentSit.id === ele.id) // 判断提交的座位是否已被选中
-            let img = null
-            if (idx >= 0) {
-                seledSit.splice(idx, 1)  // 选中删除
-                if (currentSit.state === 2) {
-                    currentSit.state = 1
-                } else if (currentSit.state === 6) {
-                    currentSit.state = 5
-                    if(currentSit.position === 0) {
-                        sitData[pageY][pageX+1].state = 5
-                    } else {
-                        sitData[pageY][pageX-1].state = 5
+            function checkSea (currentNum) {
+                let idx = seledSit.findIndex(ele => currentNum.id === ele.id) // 判断提交的座位是否已被选中
+                if (idx >= 0) {
+                    if (currentNum.state === 2) {
+                        currentNum.state = 1
+                        seledSit.splice(idx, 1)  // 选中删除
+                    } else if (currentNum.state === 6) {
+                        currentNum.state = 5
+                        if(currentNum.position === 0) {
+                            sitData[pageY][pageX+1].state = 5
+                            seledSit.splice(idx, 2)  // 选中删除
+                        } else {
+                            sitData[pageY][pageX-1].state = 5
+                            seledSit.splice(idx-1, 2)  // 选中删除
+                        }
+                    }
+                } else {
+                    
+                    if (currentNum.state === 1) {
+                        currentNum.state = 2
+                        seledSit.push({...currentNum}) // 没选中则加入选中array
+                    } else if (currentNum.state === 5) {
+                        currentNum.state = 6
+                        if(currentNum.position === 0) {
+                            sitData[pageY][pageX+1].state = 6
+                            seledSit.push({...currentNum})
+                            seledSit.push({...sitData[pageY][pageX+1]})
+                        } else {
+                            sitData[pageY][pageX-1].state = 6
+                            seledSit.push({...sitData[pageY][pageX-1]})
+                            seledSit.push({...currentNum})
+                        }
                     }
                 }
-            } else {
-                seledSit.push({...currentSit}) // 没选中则加入选中array
-                if (currentSit.state === 1) {
-                    currentSit.state = 2
-                } else if (currentSit.state === 5) {
-                    currentSit.state = 6
-                    if(currentSit.position === 0) {
-                        sitData[pageY][pageX+1].state = 6
-                    } else {
-                        sitData[pageY][pageX-1].state = 6
-                    }
-                }
+                setSeledSit([...seledSit], ()=>{
+                    getSeledSit(seledSit, sitData)
+                })
+                setSitData([...sitData])
             }
-            setSeledSit([...seledSit], ()=>{
-                debugger
-                getSeledSit(seledSit, sitData)
-            })
-            setSitData([...sitData])
+            checkSea(currentSit)
         }
     }
 
