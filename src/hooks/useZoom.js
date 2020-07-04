@@ -77,13 +77,13 @@ const useZoom = (   target,
     }
 
     useEffect(()=>{ 
-        start.current = target.current.addEventListener('touchstart', throttle(touchStartHandler, 30), {
+        start.current = target.current.addEventListener('touchstart', touchStartHandler, {
             passive: false
         })
-        move.current = target.current.addEventListener('touchmove', throttle(touchMoveHandler, 30), {
+        move.current = target.current.addEventListener('touchmove', touchMoveHandler, {
             passive: false
         })
-        end.current = target.current.addEventListener('touchend', throttle(touchEndHandler, 30), {
+        end.current = target.current.addEventListener('touchend', touchEndHandler, {
             passive: false
         })
     }, [])
